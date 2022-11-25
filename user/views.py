@@ -1,3 +1,4 @@
+from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
@@ -16,15 +17,13 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 scrollTo = ''
-Profile = Profile.objects.all()
 Group = Group.objects.all()
 
 
 def getUser(user):
     list_current_user = []
-    global Profile
     firstName = str(user)
-    current_user = Profile.filter(first_name=firstName)
+    current_user = Profile.objects.filter(first_name=firstName)
     list_current_user = list(current_user)
     list_current_user = serializers.serialize(
         "json", list_current_user)
@@ -34,6 +33,7 @@ def getUser(user):
 @method_decorator(csrf_exempt, name='dispatch')
 class checkUser(View):
     def post(self, request):
+        token_generator = default_token_generator
         userLoggedIN = request.user.is_authenticated
         myuser = object()
         userThatLoginIn = object()
@@ -55,8 +55,7 @@ class checkUser(View):
                 myuser = authenticate(username=myuser, password=password)
                 list_current_user = getUser(myuser)
                 firstName = str(myuser)
-                currentUser = Profile.get(first_name=firstName)
-                breakpoint()
+                currentUser = Profile.objects.get(first_name=firstName)
                 if 'blog' in request.get_full_path():
                     if not str(currentUser.website) in currentUrl:
                         print("nessun autorizzazione concessa !")
@@ -64,11 +63,11 @@ class checkUser(View):
                             "sito Web non autoriazzato o assente in fase di registrazione")
                         authorized = False
                     else:
-                        print("autorizzazione concessa")
+                        auth = str(request.user.is_authenticated)
+                        print("autorizzazione concessa__Login"+auth)
                         authorized = True
                 print("verifico se myuser sta nel gruppo Blog..")
                 if not myuser.groups.filter(name__in=['BlogAdmin']).exists():
-                    breakpoint()
                     group = Group.get(name='BlogAdmin')
                     myuser.groups.add(group)
                     print('myuser aggiunto al gruppo blogadmin ')
@@ -93,8 +92,11 @@ class checkUser(View):
                 "userLoggedIN": userThatLoginIn,
                 "authenticated": request.user.is_authenticated,
                 "user": str(request.user),
+                "token": token_generator.make_token(),
+
             })
         print(str(JsonResponse(data, safe=False)))
+        breakpoint()
         response = JsonResponse(
             data, safe=False
         )
@@ -127,8 +129,7 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    global te, scrollTo
-    userLoggedIN = User
+    global scrollTo
     valuenext = ""
     if 'next' in request.GET:
         valuenext = request.GET.get('next')+scrollTo
@@ -154,8 +155,11 @@ def user_login(request):
             if myuser is not None:
                 if myuser.is_active:
                     login(request, myuser)
-                    # userLoggedIN = myuser
-                    return HttpResponseRedirect(valuenext)
+                    print("AHOOOOOOOOOOOOO"+str(request.user.is_authenticated))
+                    dataDictionary = {'userLoggedIN': str(request.user)}
+                    dataJson = json.dumps(dataDictionary)
+                    template = "static/js/blog.js"
+                    return HttpResponse(template, {'data': dataJson})
                 else:
                     return HttpResponse('Disabled account')
             else:

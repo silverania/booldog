@@ -1,0 +1,17 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+ {% block branding %}
+ {% include '_heads.html'%}
+ <link rel="stylesheet" href="{% static "css/admin_dashboard.css" %}">
+ <link rel="stylesheet" href="{% static "css/all.min.css" %}">
+ <link rel="stylesheet" href="{% static "admin/css/base.css" %}">
+<link rel="stylesheet" href="/static/css/blog.css">
+     <div class="row">
+         <div class="col-12 text-end">
+             <a  href="/booldog" target="_blank "id="a_download"><div class=
+                 "booldog admin"><span class="badgebooldog admin"><i class=" fas fa-comment-dots admin"></i></span><span id="site-name" class="spanbooldog admin">BoolDog</span></div>
+                 <span class="booldoginfo admin">Per i commenti. Usalo sul tuo Sito Web !</span></a>
+             </div>
+             </div>
+ {% endblock %}

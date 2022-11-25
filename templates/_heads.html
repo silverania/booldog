@@ -1,0 +1,11 @@
+{% load static %}
+
+    <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
+    <link rel="stylesheet" href="{% static "css/all.min.css" %}">
+    <script  src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+
+
+    <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
+    <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    {% block otherscripts %} {% endblock %}
