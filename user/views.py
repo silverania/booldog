@@ -1,4 +1,7 @@
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.tokens import default_token_generator
+
 from django.conf import settings
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
@@ -33,7 +36,6 @@ def getUser(user):
 @method_decorator(csrf_exempt, name='dispatch')
 class checkUser(View):
     def post(self, request):
-        token_generator = default_token_generator
         userLoggedIN = request.user.is_authenticated
         myuser = object()
         userThatLoginIn = object()
@@ -53,6 +55,8 @@ class checkUser(View):
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
+                token_generator = default_token_generator
+                token = token_generator.make_token(myuser)
                 list_current_user = getUser(myuser)
                 firstName = str(myuser)
                 currentUser = Profile.objects.get(first_name=firstName)
@@ -92,18 +96,18 @@ class checkUser(View):
                 "userLoggedIN": userThatLoginIn,
                 "authenticated": request.user.is_authenticated,
                 "user": str(request.user),
-                "token": token_generator.make_token(),
+                "token": token,
 
             })
         print(str(JsonResponse(data, safe=False)))
-        breakpoint()
         response = JsonResponse(
             data, safe=False
         )
+        response.set_cookie('crdftoken', token)
         return response
 
     def get(self, request):
-        return HttpResponse("GET")
+        return HttpResponse("OK")
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == 'GET':

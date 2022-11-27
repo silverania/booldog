@@ -294,10 +294,17 @@ margin-top:5%!important;
   float:right;
 }
 
-ul#ul_blog li{
-  /* display:inline; */
+#ul_blog{
+margin-right:0;
 }
 
+#li_login{
+display:inline;
+margin-left:90%;
+}
+#buttonentra{
+    width:50%;
+}
 .post_response{
   margin:50px auto auto 15% !important;
 

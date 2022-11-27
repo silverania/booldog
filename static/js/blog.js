@@ -1,6 +1,6 @@
 /* By Mario , superior code */
 var CURRENT_URL=window.location.href
-const BASE_URL="http://127.0.0.1:8000/" // URL del server
+const BASE_URL="https://127.0.0.1:8000/" // URL del server
 const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 const HIDDENFIELD="?next="+window.location
 const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
@@ -47,7 +47,6 @@ var aBlogReg=document.createElement("A");
 var spanBlogReg=document.createElement("SPAN");
 var liBlogEntra=document.createElement("LI");
 var liBlogCambiaPassword=document.createElement("LI");
-var aBlogEntra=document.createElement("A");
 var aBlogCambiaPassword=document.createElement("A")
 var spanBlogEntra=document.createElement("SPAN");
 var liBlogEsci=document.createElement("LI");
@@ -72,10 +71,17 @@ var inputSubmit=document.createElement("INPUT")
 var logo='<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog blog">BoolDog</span></div></a>';
 $(bIcon).append(logo)
 bIcon.appendChild(H1Welcome)
-$(document).ready(function(){
-var login2=localStorage.getItem("login2")
-console.log("login"+login2)
-});
+
+var stringloginhtml= '<div style="background-color:white;position:fixed;opacity:1;top:0 ;left:0;z-index:999;width:100%;min-width:100%;height:100%;"><head></head><body><div class="row justify-content-center"><div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-4 text-center" style="margin-bottom:5%;margin-top:5%"><span style="width:auto;font-size:1rem;">fai il login qui . Se non hai User E Passsword<a id="a_reg"><span style="color:green;"> Registrati</span></a></span></div></div><div class="row justify-content-center"><div class="col-md-3 col-lg-3 col-xl-2 col-sm-6 col-7"><form id="formlogin" autocomplete="off" method="POST"><div class="mb-3"><label for="insertuser" class="form-label">UserName</label><input type="text" class="form-control" id="insertuser"><div id="emailHelp" class="form-text"></div></div><div class="mb3"><labelfor="userpassword"class="form-label">Password<label><input type="password" class="form-control" id="userpassword"></div><divclass="mb-3 form-check"><input type="checkbox" class="form-check-input" id="exampleCheck1"><label class="form-check-label" for="exampleCheck1">Check me out</label></div><div class="row justify-content-center"><div class="mt-3 col-10 col-sm-8 col-md-5 col-lg-3 col-xl-2 text-center"><button type="submit" id="buttonentra" class="btn btn-primary">Login per commentare</button></div></div></form></form></div></div></body></div>'
+
+function loginHtml(stringloginhtml) {
+    var template = document.createElement('template');
+    stringloginhtml = stringloginhtml.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = stringloginhtml;
+    return template.content.firstChild;
+}
+
+var loginhtml=loginHtml(stringloginhtml)
 
 function createSectionDivSpan(userAdmin,_userThatLogin){
   userThatLogin=_userThatLogin
@@ -98,8 +104,6 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     bIcon.setAttribute("style","text-align:center;font-weight:bold;")
     bIcon.setAttribute("id","blog_icon")
     bSection.setAttribute("id","blog");
-    aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
-    aBlogEntra.setAttribute("id","id_entra")
     aBlogCambiaPassword.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogCambiaPassword.setAttribute("id","id_cambia_password")
     aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
@@ -107,15 +111,12 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     aBlogReg.setAttribute("target","_blank")
     aBlogCambiaPassword.setAttribute("target","_blank")
     aBlogEsci.setAttribute("target","_blank")
-    aBlogEntra.setAttribute("href",XMLHTTPURL_LOGIN)
     aBlogCambiaPassword.setAttribute("href",HTTPURL_CHANGEPASSWORD)
     aBlogCambiaPassword.textContent="Modifica"
     aBlogEsci.textContent="Esci"
-    aBlogEntra.setAttribute("class","nav-link")
     aBlogEsci.setAttribute("href","user/logout/blog"+HIDDENFIELD)
     aBlogEsci.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogEsci.setAttribute("id","aEsci")
-    liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
     liBlogEntra.setAttribute("class" , "nav-item")
     liBlogEntra.setAttribute("id","li_login")
     liBlogCambiaPassword.setAttribute("id","li_cambiaPassword")
@@ -132,13 +133,11 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     spanBlogReg.textContent="Registrati"
     spanBlogEntra.textContent="Entra"
     ulBlogReg.setAttribute("id","ul_blog")
-    ulBlogReg.setAttribute("style","list-style: none;padding: 0;margin: 0;")
     parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
     if(userThatLogin === "None"){
       aBlogReg.appendChild(spanBlogReg)
       liBlogReg.appendChild(aBlogReg)
-      aBlogEntra.appendChild(spanBlogEntra)
-      liBlogEntra.appendChild(aBlogEntra)
+      liBlogEntra.appendChild(spanBlogEntra)
       //ulBlogReg.appendChild(liBlogReg)
       ulBlogReg.appendChild(liBlogEntra)
       divExitLogin.appendChild(ulBlogReg)
@@ -184,7 +183,19 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     }
 return getComment()
 }
+$(document).ready(function(){
+myBody=document.querySelector("body");
+$(liBlogEntra).click(function(){
+    myBody.appendChild(loginhtml);
+    btnEntra=$('#buttonentra')
 
+    $(btnEntra).click(function(){
+        alert("entry buttonentra");
+        newUserLogin=$('#insertuser').val();
+        newUserpassword=$('#userpassword').val();
+})
+    })
+ })
 class Resp{
   constructor(author,body="",publish,post,photo,pk,resptype,respTo,respToType,respToUser){
     this.sent = false
@@ -600,13 +611,15 @@ function initBlogSGang(u,p){
             json=JSON.parse(response)
             jsonLogged=JSON.parse(json)
             userprof=JSON.parse(jsonLogged)
+             const token=userprof.token;
             try {
               userfirstName={"userin" : JSON.parse(userprof.userLogged)}
-              userAuth=userfirstName.userin[0]
+              userAuth=userfirstName.userin[0];
+
             }
             catch (SyntaxError) {
-              userfirstName=userprof.userLogged
-              userAuth=userfirstName
+              userfirstName=userprof.userLogged;
+              userAuth=userfirstName;
             }
             try {
               userThatLoginIn={"userin" : JSON.parse(userprof.userLoggedIN)}
@@ -619,7 +632,7 @@ function initBlogSGang(u,p){
         }
       }
       xhttp2.open('POST', XMLHTTPURL_GETUSER,true);
-      xhttp2.setRequestHeader('Content-Type', 'application/json',"X-CSRFToken", getCookie('csrftoken'));
+      //xhttp2.setRequestHeader('Content-Type', 'application/json',"X-CSRFToken", getCookie('csrftoken'));
       xhttp2.send(data)
     }());
   }
