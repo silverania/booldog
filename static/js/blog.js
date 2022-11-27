@@ -190,7 +190,7 @@ $(liBlogEntra).click(function(){
     btnEntra=$('#buttonentra')
 
     $(btnEntra).click(function(){
-        alert("entry buttonentra");
+        alert(window.token);
         newUserLogin=$('#insertuser').val();
         newUserpassword=$('#userpassword').val();
 })
@@ -611,7 +611,7 @@ function initBlogSGang(u,p){
             json=JSON.parse(response)
             jsonLogged=JSON.parse(json)
             userprof=JSON.parse(jsonLogged)
-             const token=userprof.token;
+            window.token=userprof.token;
             try {
               userfirstName={"userin" : JSON.parse(userprof.userLogged)}
               userAuth=userfirstName.userin[0];
