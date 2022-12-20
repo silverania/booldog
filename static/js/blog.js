@@ -23,7 +23,7 @@ var lastUpdate
 var postAuthor=new Object()
 var userAuth=new Object()
 var userThatLogin=new Object()
-var butcloned
+var butcloned,authenticated,authorized,checkUserToken,csrftoken
 var isChanged=false
 var H1Welcome=document.createElement("H6")
 var bbutton=document.createElement("Button");
@@ -68,20 +68,31 @@ var json_resps
 var re
 var inputHidden=document.createElement("INPUT")
 var inputSubmit=document.createElement("INPUT")
-var logo='<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog blog">BoolDog</span></div></a>';
+var w3butt=document.createElement('LINK')
+w3butt.href="https://www.w3schools.com/w3css/4/w3.css";
+w3butt.rel="stylesheet";
+var headBlog=document.createElement("HEAD")
+headBlog.appendChild(w3butt);
+headBlog.innerHTML+='<script  src="{% static "js/jquery.min.js" %}"></script>'
+headBlog.innerHTML+='<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" ></script>'
+headBlog.innerHTML+='<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>'
+headBlog.innerHtml+='<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>'
+headBlog.innerHtml+='<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>'
+var logo='<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fa-solid fa-comment-dots"></i></span><span class="spanbooldog blog">BoolDog</span></div></a>';
 $(bIcon).append(logo)
 bIcon.appendChild(H1Welcome)
 
-var stringloginhtml= '<div style="background-color:white;position:fixed;opacity:1;top:0 ;left:0;z-index:999;width:100%;min-width:100%;height:100%;"><head></head><body><div class="row justify-content-center"><div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-4 text-center" style="margin-bottom:5%;margin-top:5%"><span style="width:auto;font-size:1rem;">fai il login qui . Se non hai User E Passsword<a id="a_reg"><span style="color:green;"> Registrati</span></a></span></div></div><div class="row justify-content-center"><div class="col-md-3 col-lg-3 col-xl-2 col-sm-6 col-7"><form id="formlogin" autocomplete="off" method="POST"><div class="mb-3"><label for="insertuser" class="form-label">UserName</label><input type="text" class="form-control" id="insertuser"><div id="emailHelp" class="form-text"></div></div><div class="mb3"><labelfor="userpassword"class="form-label">Password<label><input type="password" class="form-control" id="userpassword"></div><divclass="mb-3 form-check"><input type="checkbox" class="form-check-input" id="exampleCheck1"><label class="form-check-label" for="exampleCheck1">Check me out</label></div><div class="row justify-content-center"><div class="mt-3 col-10 col-sm-8 col-md-5 col-lg-3 col-xl-2 text-center"><button type="submit" id="buttonentra" class="btn btn-primary">Login per commentare</button></div></div></form></form></div></div></body></div>'
 
-function loginHtml(stringloginhtml) {
+var stringloginhtml= '<div style="background-color:white;position:fixed;opacity:1;top:0 ;left:0;z-index:999;width:100%;min-width:100%;height:100%;"><head></head><body><div id="blogBackHome" ><i class="fa-solid fa-house"></i><i class="fa-solid fa-arrow-left"></i></div><div class="row justify-content-center"><div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-4 text-center" style="margin-bottom:5%;margin-top:5%"><span style="width:auto;font-size:1rem;">fai il login qui . Se non hai User E Passsword<a id="a_reg"><span style="color:green;"> Registrati</span></a></span></div></div><div class="row justify-content-center"><div class="col-md-3 col-lg-3 col-xl-2 col-sm-6 col-7"><form id="formlogin" autocomplete="off" method="POST"><div class="mb-3"><label for="insertuser" class="form-label">UserName</label><input type="text" class="form-control" id="insertuser"><div id="emailHelp" class="form-text"></div></div><div class="mb3"><label for="userpassword"class="form-label">Password</label><input type="password" class="form-control" id="userpassword"></div><divclass="mb-3 form-check"></div><div class="row justify-content-center"><div class="mt-3 col-10 col-sm-8 col-md-5 col-lg-3 col-xl-2 text-center"><button type="submit" id="buttonentra" class="btn btn-primary">Login per commentare</button></div></div></form></form></div></div></body></div>'
+var authenticatedHtml='<div style="background-color:white;position:fixed;opacity:1;top:0 ;left:0;z-index:999;width:100%;min-width:100%;height:100%;"><head></head><body><div id="blogAlreadyAuth" ><h2 class="text-center">Already Authenticated !</h2></div></div>'
+var stringregisterhtml= '<div style="background-color:white;position:fixed;top:0 ;left:0;z-index:999;width:100%;min-width:100%;height:100%;"><head></head><body><div id="blogBackHome" ><i class="fa-solid fa-house"></i><i class="fa-solid fa-arrow-left"></i></div><div class="row justify-content-center"><div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-4 text-center" style="margin-bottom:5%;margin-top:5%"><div class="row justify-content-center"><div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-4 text-center" style="margin-bottom:5%;margin-top:5%"><span style="width:auto;font-size:1rem;"> Registrati</span></span></div></div><div class="row justify-content-center"><div class="col-md-3 col-lg-3 col-xl-2 col-sm-6 col-7"><form id="formregister" autocomplete="off" method="POST"><div class="mb-3"><label for="insertuser" class="form-label">UserName</label><input type="text" class="form-control" id="insertuser"><div id="emailHelp" class="form-text"></div></div><div class="mb3"><label for="userpassword"class="form-label">Password</label><input type="password" class="form-control" id="userpassword"><label for="userrepeatepassword"class="form-label">Password</label><input type="password" class="form-control" id="userrepeatepassword"></div><div class="mb-3 form-check"></div><div class="row justify-content-center"><div class="mt-3 col-10 col-sm-8 col-md-5 col-lg-3 col-xl-2 text-center"><button type="submit" id="buttonentra" class="btn btn-primary">Login per commentare</button></div></div></form></form></div></div></body></div>'
+
+function showHtml(newHtml) {
     var template = document.createElement('template');
-    stringloginhtml = stringloginhtml.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = stringloginhtml;
+    newHtml = newHtml.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = newHtml;
     return template.content.firstChild;
 }
-
-var loginhtml=loginHtml(stringloginhtml)
 
 function createSectionDivSpan(userAdmin,_userThatLogin){
   userThatLogin=_userThatLogin
@@ -134,7 +145,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     spanBlogEntra.textContent="Entra"
     ulBlogReg.setAttribute("id","ul_blog")
     parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
-    if(userThatLogin === "None"){
+    if(userThatLogin === undefined){
       aBlogReg.appendChild(spanBlogReg)
       liBlogReg.appendChild(aBlogReg)
       liBlogEntra.appendChild(spanBlogEntra)
@@ -157,12 +168,13 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       inputSubmit.setAttribute("type","submit")
       inputSubmit.setAttribute("value","Esci")
       liBlogEsci.setAttribute("id","liBlogEsci")
-        if(userThatLogin.userin[0].fields.first_name!=="None")
+        if(userThatLogin!==undefined){
         H1Welcome.setAttribute("id","H1Welcome")
         H1Welcome.style.display='block'
           $(H1Welcome).append('<span class="spanuser">'
-          +(userThatLogin.userin[0].fields.first_name).charAt(0).toUpperCase()
-          + userThatLogin.userin[0].fields.first_name.slice(1)+"</span>");
+          +userThatLogin.charAt(0).toUpperCase()
+          + userThatLogin.slice(1)+"</span>");
+      }
         }
     //bH5.appendChild(spanUserName)
     bSection.appendChild(bdiv)
@@ -181,21 +193,82 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
   else {
     alert("il blog non puo essere usato !")
     }
-return getComment()
+    bSection.insertBefore(headBlog,divCommentIcon)
+    return getComment()
 }
+
 $(document).ready(function(){
 myBody=document.querySelector("body");
 $(liBlogEntra).click(function(){
-    myBody.appendChild(loginhtml);
+    var loginHtml=showHtml(stringloginhtml)
+    myBody.appendChild(loginHtml);
     btnEntra=$('#buttonentra')
-
-    $(btnEntra).click(function(){
-        alert(window.token);
-        newUserLogin=$('#insertuser').val();
-        newUserpassword=$('#userpassword').val();
-})
+    blogBackHome=$('#blogBackHome')
+    $(blogBackHome).click(function(){
+        window.location.href=CURRENT_URL
     })
- })
+
+$(btnEntra).click(function(){
+    if(authenticated===true){
+        var authHtml=showHtml(authenticatedHtml)
+        myBody.appendChild(authHtml);
+        window.location.href=CURRENT_URL
+        }
+
+    newUserLogin=$('#insertuser').val();
+    newUserpassword=$('#userpassword').val();
+    if (newUserLogin==="" || newUserpassword===""){
+        alert ("Inserisci bene user e password");
+    }
+    else{
+            var response
+              var xhttp2 = new XMLHttpRequest();
+              xhttp2.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                  response = xhttp2.responseText;
+                  if (response){
+                      json=JSON.parse(response)
+                    }
+                }
+            }
+              xhttp2.open('GET', XMLHTTPURL_LOGIN,true);
+              xhttp2.withCredentials=true;
+              //xhttp2.setRequestHeader('Content-Type', 'application/json',"X-CSRFToken", getCookie('csrftoken'));
+              xhttp2.send()
+            if (getCookie('csrftoken')!="undefined"){
+                csrftoken=getCookie('csrftoken')
+                }
+                if (csrftoken!==null) {
+                    let s = {'csrfmiddlewaretoken':csrftoken,'user':newUserLogin,'password':newUserpassword,'requestSite':CURRENT_URL}
+                    const request =
+
+                        {
+                            method: 'POST',
+                            credentials:'include',
+                            headers:{ 'X-CSRFToken' : csrftoken ,'Content-Type':
+                                'application/json;charset=utf-8'},
+                            mode:'cors',// Do not send CSRF token to another domain.
+                            body:JSON.stringify(s)
+                        }
+
+
+                    fetch(XMLHTTPURL_LOGIN,request).then(function(response) {
+                        return response.json();
+                    }).then(function(json) {
+                        console.log(json);
+                        //authenticated=JSON.parse(json)
+                        authenticated=json.authenticated
+                        console.log("aut"+authenticated)
+                    });
+                }
+            }
+        })
+        $('#a_reg').click(function(){
+            var regHtml=showHtml(stringregisterhtml)
+            myBody.appendChild(regHtml);
+        })
+    })
+})
 class Resp{
   constructor(author,body="",publish,post,photo,pk,resptype,respTo,respToType,respToUser){
     this.sent = false
@@ -561,81 +634,78 @@ create(){
   }
 }
 
+ function getCookie(name) {
+     var cookieValue = null;
+     if (document.cookie && document.cookie != '') {
+         var cookies = document.cookie.split(';');
+         for (var i = 0; i < cookies.length; i++) {
+             var cookie = jQuery.trim(cookies[i]);
+             // Does this cookie string begin with the name we want?
+             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                 break;
+             }
+         }
+     }
+     return cookieValue;
+ }
+
 function initBlogSGang(u,p){
-  var p=p
-  var u=u
-
-
-
-           function getCookie(name) {
-               var cookieValue = null;
-               if (document.cookie && document.cookie != '') {
-                   var cookies = document.cookie.split(';');
-                   for (var i = 0; i < cookies.length; i++) {
-                       var cookie = jQuery.trim(cookies[i]);
-                       // Does this cookie string begin with the name we want?
-                       if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                           cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                           break;
-                       }
-                   }
-               }
-               return cookieValue;
+  var p=p;
+  var u=u;
+  var xhttp2 = new XMLHttpRequest();
+  xhttp2.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+         response = xhttp2.responseText;
+         if (response){
+             json=JSON.parse(response)
+             console.log("response GET initBlog...."+response)
            }
-           //if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-               // Only send the token to relative URLs i.e. locally.
+        (function(){
+         document.getElementById('s_blog').remove
+         tagTitle = CLIENT_URL
+         //$('#s_blog').remove()
+         var jsonLogged,jsonLoggedIN
+         var userprof
+         (function(){
+             checkUserToken=getCookie("csrftoken");
+             let s = {'csrfmiddlewaretoken':checkUserToken,'user':u,'password':p,'requestSite':CURRENT_URL}
+             const request =
 
-           //}
+                 {
+                     method: 'POST',
+                     credentials:'include',
+                     headers:{ 'X-CSRFToken' : checkUserToken ,'Content-Type':
+                         'application/json;charset=utf-8'},
+                     mode:'cors',// Do not send CSRF token to another domain.
+                     body:JSON.stringify(s)
+                 }
+              fetch(XMLHTTPURL_GETUSER,request).then(function(response) {
+                 return response.json();
+             }).then(function(json) {
+                 console.log(json.substring(0, 400));
+                   //response=JSON.stringify(json)
+                   json=JSON.parse(json)
+                   authorized=JSON.parse(json.authorized)
+                   authenticated=JSON.parse(json.authenticated)
+                   if(authenticated!=="false"){
+                       jsonLogged=JSON.parse(json.userLogged)
+                       if(json.userLoggedIN!="None")jsonLoggedIN=JSON.parse(json.userLoggedIN)
+                       userprof=jsonLogged[0].fields.first_name
+                    }
+                     userAuth=userprof
+                   return createSectionDivSpan(userprof,jsonLoggedIN)
+             });
 
-
-
-
-
-  sendData()
-  function sendData(){
-    document.getElementById('s_blog').remove
-    tagTitle = CLIENT_URL
-    //$('#s_blog').remove()
-    var jsonLogged,json
-    var userfirstName=[]
-    var userprof
-    var response
-    (function(){
-      var xhttp2 = new XMLHttpRequest();
-      var data = JSON.stringify({"user": u, "password": p,"currentUrl":CURRENT_URL});
-      xhttp2.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          response = xhttp2.responseText;
-          if (response){
-            response=JSON.stringify(response)
-            json=JSON.parse(response)
-            jsonLogged=JSON.parse(json)
-            userprof=JSON.parse(jsonLogged)
-            window.token=userprof.token;
-            try {
-              userfirstName={"userin" : JSON.parse(userprof.userLogged)}
-              userAuth=userfirstName.userin[0];
-
-            }
-            catch (SyntaxError) {
-              userfirstName=userprof.userLogged;
-              userAuth=userfirstName;
-            }
-            try {
-              userThatLoginIn={"userin" : JSON.parse(userprof.userLoggedIN)}
-            }
-            catch(Error){
-              userThatLoginIn=userprof.userLoggedIN
-            }
-            return createSectionDivSpan(userAuth,userThatLoginIn)
-          }
-        }
-      }
-      xhttp2.open('POST', XMLHTTPURL_GETUSER,true);
-      //xhttp2.setRequestHeader('Content-Type', 'application/json',"X-CSRFToken", getCookie('csrftoken'));
-      xhttp2.send(data)
-    }());
-  }
+         }());
+     })()
+    }
+}
+xhttp2.open('GET', XMLHTTPURL_GETUSER,true);
+xhttp2.withCredentials=true;
+//xhttp2.setRequestHeader('X-CSRFToken',checkUserToken)
+var headers =xhttp2.getAllResponseHeaders().toLowerCase();
+xhttp2.send()
 }
 
 function getComment(){
@@ -662,9 +732,15 @@ function getComment(){
 
     $.ajax({
       url: BASE_URL+'post/showposts',
+     type: 'GET',
+    crossDomain: true,
+    beforeSend: function(xhr){
+       xhr.withCredentials = true;
+   },
       data: {
-        'tagTitle' : tagTitle ,'userAuth' : userAuth.fields.first_name
+        'tagTitle' : tagTitle ,'userAuth' : userAuth
       },
+
       dataType: 'json',
       success: function (data) {
         try {
@@ -758,7 +834,7 @@ function getComment(){
   )
 
   function openNewCommentArea(){
-    if(userThatLogin!=="None")
+    if(userThatLogin!==undefined)
     {
       if(isOpen==false) {
         buttonCommentClick()

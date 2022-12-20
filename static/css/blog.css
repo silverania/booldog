@@ -41,6 +41,19 @@
     width: 65%!important;
 }
 
+#blogBackHome:hover{
+    opacity:0.5;
+    cursor:pointer;
+}
+#blogBackHome{
+    display:inline;
+    margin-left:15%;
+}
+div#blogBackHome>span{
+    font-size:100px;
+    font-weight:900;
+}
+
 div.breadcrumbs{
  margin:0 auto!important;
 }
@@ -59,7 +72,6 @@ div.breadcrumbs{
 .fa-comment-dots{
     color:#ffebbf;
 }
-
 
 .spanbooldog.admin{opacity:1;color:white;}
 
@@ -101,6 +113,12 @@ text-decoration: none;
     border:1px solid transparent;
     align-items: start;
 }
+
+.fa-house{
+margin-right:1%;
+margin-top:1%;
+}
+
 .fa-comment-dots{
     margin-top: -3%;
     /* color: #baaa00a6; */
@@ -381,7 +399,11 @@ margin-left:90%;
     width: 33%!important; /* Could be more or less, depending on screen size */
   }
 
-
+@media screen and (min-width: 1024px) {
+.fa-comment-dots,.fa-house,.fa-arrow-left{
+    font-size: 3rem;
+    }
+}
 
 @media screen and (min-width: 1280px) {
     #blog{
@@ -389,9 +411,10 @@ margin-left:90%;
         width: 30%!important;
     }
 
-    .fa-comment-dots{
+    .fa-comment-dots,.fa-house,.fa-arrow-left{
             font-size:3rem;
     }
+
   #p_text{
     width:100%!important;
   }
@@ -432,7 +455,7 @@ textarea {
     font-size:0.9rem;
     /* border: 1px solid; */
 }
-.fa-comment-dots{
+.fa-comment-dots,.fa-house,.fa-arrow-left{
     font-size: 3rem;
     }
 }

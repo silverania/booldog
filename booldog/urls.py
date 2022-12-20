@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from user.views import user_login
+from blog import views
+
 
 urlpatterns = [
+    path('booldog/', views.Booldog.as_view()),
     path('booldog/admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('post/', include('blog.urls', namespace="blog")),

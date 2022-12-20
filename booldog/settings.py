@@ -31,8 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'corsheaders',
+    'django.contrib.admin',
     'sslserver',
     'user',
     'django.contrib.auth',
@@ -51,7 +51,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'booldog.urls'
@@ -111,16 +112,38 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
-
+# CSRF_USE_SESSIONS = True
 LANGUAGE_CODE = 'en-us'
-
+#CSRF_TRUSTED_ORIGINS = ''
 TIME_ZONE = 'Europe/Rome'
-
 USE_I18N = True
-
+CSRF_USE_SESSIONS = True
+#SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_NAME = "booldogcsrftoken"
 USE_TZ = True
-CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1:9000']
+#CSRF_TRUSTED_ORIGINS = [
+#    "https://127.0.0.1:9000"]
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+#SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'crossDomain',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'credentials',
+    'mode',
+]
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 

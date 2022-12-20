@@ -1,7 +1,3 @@
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.tokens import default_token_generator
-
 from django.conf import settings
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
@@ -20,13 +16,15 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 scrollTo = ''
+Profile = Profile.objects.all()
 Group = Group.objects.all()
 
 
 def getUser(user):
     list_current_user = []
+    global Profile
     firstName = str(user)
-    current_user = Profile.objects.filter(first_name=firstName)
+    current_user = Profile.filter(first_name=firstName)
     list_current_user = list(current_user)
     list_current_user = serializers.serialize(
         "json", list_current_user)
@@ -55,22 +53,20 @@ class checkUser(View):
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
-                token_generator = default_token_generator
-                token = token_generator.make_token(myuser)
                 list_current_user = getUser(myuser)
                 firstName = str(myuser)
-                currentUser = Profile.objects.get(first_name=firstName)
+                currentUser = Profile.get(first_name=firstName)
                 if 'blog' in request.get_full_path():
                     if not str(currentUser.website) in currentUrl:
                         print("nessun autorizzazione concessa !")
                         raise Exception(
                             "sito Web non autoriazzato o assente in fase di registrazione")
                         authorized = False
-                    else:
-                        auth = str(request.user.is_authenticated)
-                        print("autorizzazione concessa__Login"+auth)
-                        authorized = True
-                print("verifico se myuser sta nel gruppo Blog..")
+                else:
+                    print("autorizzazione concessa")
+                    authorized = True
+                print("Verifica ... myuser non è di tipo User , ho proceduto"
+                      + "ad authenticazione !! verifico se sta nel gruppo Blog.."+str(myuser))
                 if not myuser.groups.filter(name__in=['BlogAdmin']).exists():
                     group = Group.get(name='BlogAdmin')
                     myuser.groups.add(group)
@@ -96,18 +92,15 @@ class checkUser(View):
                 "userLoggedIN": userThatLoginIn,
                 "authenticated": request.user.is_authenticated,
                 "user": str(request.user),
-                "token": token,
-
             })
         print(str(JsonResponse(data, safe=False)))
         response = JsonResponse(
             data, safe=False
         )
-        response.set_cookie('crdftoken', token)
         return response
 
     def get(self, request):
-        return HttpResponse("OK")
+        return HttpResponse("GET")
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == 'GET':
@@ -133,7 +126,8 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    global scrollTo
+    global te, scrollTo
+    userLoggedIN = User
     valuenext = ""
     if 'next' in request.GET:
         valuenext = request.GET.get('next')+scrollTo
@@ -159,11 +153,8 @@ def user_login(request):
             if myuser is not None:
                 if myuser.is_active:
                     login(request, myuser)
-                    print("AHOOOOOOOOOOOOO"+str(request.user.is_authenticated))
-                    dataDictionary = {'userLoggedIN': str(request.user)}
-                    dataJson = json.dumps(dataDictionary)
-                    template = "static/js/blog.js"
-                    return HttpResponse(template, {'data': dataJson})
+                    # userLoggedIN = myuser
+                    return HttpResponseRedirect(valuenext)
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -223,6 +214,7 @@ def user_register(request):
             user.profile.first_name = username
             user.profile.website = form.cleaned_data.get('website')
             if 'bloguser' in request.path:
+                breakpoint()
                 valuenext = request.GET.get('next')
                 user.save()
                 return redirect('/user/login/blog?next='+valuenext)
@@ -233,9 +225,11 @@ def user_register(request):
                       + "aggiunto al gruppo blogadmin ")
                 user.is_staff = True
                 user.save()
+                breakpoint()
                 # mostra messaggio e esci
                 return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html del tuo sito . </h2>")
             else:
+                breakpoint()
                 if 'next' in request.GET:
                     valuenext = request.GET.get('next')
                     user.save()

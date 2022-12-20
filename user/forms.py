@@ -19,7 +19,17 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'photo', 'website',)
+        fields = ('username', 'email', 'password1', 'password2', 'photo', 'website',)
+
+
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Repeat password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'email')
 
     def clean_password2(self):
         cd = self.cleaned_data
