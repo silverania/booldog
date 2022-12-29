@@ -15,3 +15,10 @@ XMLHTTPURL_LOGIN,
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Hello World!");
 });
+
+// prendi fields di object  in models
+User._meta.get_fields()
+
+// javascript on page load
+document.addEventListener("DOMContentLoaded", () => {
+})

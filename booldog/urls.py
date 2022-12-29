@@ -17,9 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from blog import views
 
-
 urlpatterns = [
-    path('booldog/', views.Booldog.as_view()),
+    path('booldog', views.Booldog.as_view()),
     path('booldog/admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('post/', include('blog.urls', namespace="blog")),

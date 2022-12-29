@@ -1,45 +1,41 @@
-from django.conf import settings
+from django.shortcuts import render
+from django.contrib.auth.tokens import default_token_generator
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import SignUpForm, LoginForm
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from .forms import SignUpForm
+from django.template.context_processors import csrf
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 import json
 from django.core import serializers
 from django.contrib.auth.models import User
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+
 scrollTo = ''
-Profile = Profile.objects.all()
 Group = Group.objects.all()
 
 
 def getUser(user):
     list_current_user = []
-    global Profile
     firstName = str(user)
-    current_user = Profile.filter(first_name=firstName)
+    current_user = Profile.objects.filter(first_name=firstName)
     list_current_user = list(current_user)
     list_current_user = serializers.serialize(
         "json", list_current_user)
     return list_current_user
 
 
-@method_decorator(csrf_exempt, name='dispatch')
 class checkUser(View):
     def post(self, request):
-        userLoggedIN = request.user.is_authenticated
+        login = getUser(request.user) if request.user.is_authenticated else None
         myuser = object()
-        userThatLoginIn = object()
-        list_json_user_data = json.loads(request.body)
         authorized = False
-        print("json : "+str(list_json_user_data))
+        list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
             print(key)
             if 'user' in key:
@@ -48,29 +44,26 @@ class checkUser(View):
                 password = value
             if 'currentUrl' in key:
                 currentUrl = value
-        if not bool(userLoggedIN):
-            print("if userloggedin mi da : " + str(userLoggedIN))
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
-                list_current_user = getUser(myuser)
-                firstName = str(myuser)
-                currentUser = Profile.get(first_name=firstName)
-                if 'blog' in request.get_full_path():
-                    if not str(currentUser.website) in currentUrl:
-                        print("nessun autorizzazione concessa !")
-                        raise Exception(
-                            "sito Web non autoriazzato o assente in fase di registrazione")
-                        authorized = False
+                if myuser is not None:
+                    list_current_user = getUser(myuser)
+                    firstName = str(myuser)
+                    currentUser = Profile.objects.get(first_name=firstName)
+                    if 'blog' in request.get_full_path():
+                        if not str(currentUser.website) in currentUrl:
+                            print("nessun autorizzazione concessa !")
+                            raise Exception(
+                                "sito Web non autoriazzato o assente in fase di registrazione")
+                        else:
+                            authorized = True
                 else:
-                    print("autorizzazione concessa")
-                    authorized = True
-                print("Verifica ... myuser non è di tipo User , ho proceduto"
-                      + "ad authenticazione !! verifico se sta nel gruppo Blog.."+str(myuser))
+                    myuser = "None"
+                    list_current_user = myuser
                 if not myuser.groups.filter(name__in=['BlogAdmin']).exists():
                     group = Group.get(name='BlogAdmin')
                     myuser.groups.add(group)
-                    print('myuser aggiunto al gruppo blogadmin ')
             except Exception:
                 print("Errore nel autenticazione dell user , e/o nella sua assegnazione"
                       + "al gruppo BlogAdmin")
@@ -79,19 +72,12 @@ class checkUser(View):
                 print("77 "+str(list_current_user))
         else:
             list_current_user = getUser(myuser)
-            print("77 "+str(list_current_user))
-        if isinstance(request.user, User):
-            userThatLoginIn = request.user.username
-            userThatLoginIn = getUser(userThatLoginIn)
-        else:
-            userThatLoginIn = "None"
+            print("86 "+str(list_current_user))
         data = json.dumps(
             {
                 "authorized": authorized,
-                "userLogged": list_current_user,
-                "userLoggedIN": userThatLoginIn,
+                "userLoggedIN": list_current_user,
                 "authenticated": request.user.is_authenticated,
-                "user": str(request.user),
             })
         print(str(JsonResponse(data, safe=False)))
         response = JsonResponse(
@@ -100,15 +86,22 @@ class checkUser(View):
         return response
 
     def get(self, request):
-        return HttpResponse("GET")
+        print(request.user.is_authenticated)
+        c = {}
+        c.update(csrf(request))
+        for key, value in c.items():
+            key = str(key)
+            value = str(value)
+        print(str(key)+str(value))
+        return JsonResponse({key: value})
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == 'GET':
             return self.get(request)
         elif request.method == 'POST':
-            cv = request.body
-            print("from dispatch method :"+str(cv))
-            return self.post(request, *args, **kwargs)
+            #cv = request.body
+            #print("from dispatch method :"+str(cv))
+            return self.post(request)
 
 
 def get_client_ip(request):
@@ -126,55 +119,52 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    global te, scrollTo
-    userLoggedIN = User
-    valuenext = ""
-    if 'next' in request.GET:
-        valuenext = request.GET.get('next')+scrollTo
-        print("entry in view user_login....valuenext="+valuenext)
-    password = ''
-    print("login="+str(request.user.is_authenticated))
-    try:
-        if request.user.is_authenticated:
-            return render(request, "seigiaautenticato.html", {'valuenext':
-                                                              valuenext})
-    except Exception:
-        print("userLoggedihn non riesco a sapere lo stato Auth/nonauth")
     if request.method == 'POST':
-        if 'next' in request.POST:
-            valuenext = request.POST.get('next')+scrollTo
-            print("view: user_login , POST method......valuenext="+valuenext)
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            myuser = authenticate(request,
-                                  username=cd['username'],
-                                  password=cd['password'])
-            if myuser is not None:
-                if myuser.is_active:
-                    login(request, myuser)
-                    # userLoggedIN = myuser
-                    return HttpResponseRedirect(valuenext)
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return HttpResponse('Invalid login')
+        print(str(request.user.is_authenticated))
+        if request.user.is_authenticated:
+            print("user autenticato !")
+            print("is POST !!!!!!!!!!!!!")
+            dataJson = ({'authenticated': 'True'})
+            dataJson = dataJson = ({'user': str(request.user)})
+            response = HttpResponse(dataJson)
+        else:
+            thisJson = ''
+            user = ''
+            user_token = ""
+            password = ''
+            token = ''
+            # print('Raw Data: "%s"' % request.body)
+            thisUser = json.loads(request.body)
+            user = thisUser['user']
+            password = thisUser['password']
+            requestSite = thisUser['requestSite']
+            # if 'HTTP_X_CSRFTOKEN' not in request.META:
+            #    return HttpResponse('connessione non permessa')
+            #else:
+            #    token = request.META.get('HTTP_X_CSRFTOKEN')
+            #breakpoint()
+            myuser = authenticate(username=user, password=password)
+            # if type(myuser) is User and myuser.is_authenticated:
+
+            login(request, myuser)
+            user_token = default_token_generator.make_token(myuser)
+            dataJson = ({'user': str(request.user), 'authenticated': request.user.is_authenticated})
+            response = HttpResponse(json.dumps(dataJson))
+            response.set_cookie('t_sacc_gia', user_token)
+            print("Login well done"+str(request.user.is_authenticated))
+            dataDictionary = {'userLoggedIN': str(request.user)}
+            dataJson = json.dumps(dataDictionary)
+            # return HttpResponse(template, {'data': dataJson})
+            return response
     else:
-        form = LoginForm()
-        if request.method == 'GET':
-            if 'blog' in request.get_full_path():
-                scrollTo = "#footer"
-            if 'next' in request.GET:
-                valuenext = request.GET.get('next')+scrollTo
-                subject = 'welcome to GFG world'
-                message = 'Hi mario, thank you for registering in geeksforgeeks.'
-                email_from = settings.EMAIL_HOST_USER
-                recipient_list = ["info.strabbit@gmail.com", ]
-                # send_mail(subject, message, email_from, recipient_list)
-            myuser = None
-            print("view: user_login , GET method......valuenext="+valuenext)
-    return render(request, 'registration/login.html', {'form': form,
-                                                       'next': valuenext, 'user': myuser, 'password': password})
+        if request.user.is_authenticated:
+            print("user autenticato !")
+        c = {}
+        c.update(csrf(request))
+        for key, value in c.items():
+            key = str(key)
+            value = str(value)
+        return JsonResponse({key: value})
 
 
 @login_required
@@ -214,7 +204,6 @@ def user_register(request):
             user.profile.first_name = username
             user.profile.website = form.cleaned_data.get('website')
             if 'bloguser' in request.path:
-                breakpoint()
                 valuenext = request.GET.get('next')
                 user.save()
                 return redirect('/user/login/blog?next='+valuenext)
@@ -225,11 +214,9 @@ def user_register(request):
                       + "aggiunto al gruppo blogadmin ")
                 user.is_staff = True
                 user.save()
-                breakpoint()
                 # mostra messaggio e esci
                 return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html del tuo sito . </h2>")
             else:
-                breakpoint()
                 if 'next' in request.GET:
                     valuenext = request.GET.get('next')
                     user.save()
