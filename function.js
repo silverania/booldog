@@ -22,3 +22,7 @@ User._meta.get_fields()
 // javascript on page load
 document.addEventListener("DOMContentLoaded", () => {
 })
+
+// recuperare url della pagina :
+
+location.href
