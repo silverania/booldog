@@ -644,7 +644,7 @@ function getComment() {
       $('.mybut').css("box-shadow", "10px 10px 10px #719ECE");
     });
   $.ajax({
-    url: BASE_URL + 'post/showposts?tagTitle=' + window.CURRENT_URL,
+    url: BASE_URL + 'post/showposts?tagTitle=' + window.CURRENT_URL.replace(/\/$/, ""),
     data: {
       'userAuth': userAuth
     },
@@ -672,13 +672,13 @@ function getComment() {
           for (z = 0; z <= profiles_json.length - 1; z = z + 1) {
             if (profiles_json[z].pk == comments_json[i].fields.author) {
               profiles.push(new Profile(profiles_json[z].fields.first_name,
-                BASE_PHOTO_DIR + profiles_json[z].fields.photo))
+                BASE_PHOTO_DIR + profiles_json[z].fields.photo));
               mess.push(new Post("post", profiles_json[z].fields.first_name,
                 comments_json[i].fields.title, comments_json[i]
                   .fields.body, getDateFromDjangoDate(comments_json[i].
                     fields.publish), BASE_PHOTO_DIR + profiles_json[z].fields.
-                      photo, comments_json[i].pk))
-              createPostArea(mess[indexX])
+                      photo, comments_json[i].pk));
+              createPostArea(mess[indexX]);
               break;
             }
           }
@@ -687,13 +687,13 @@ function getComment() {
             if (comments_json[i].pk == resps_json[y].fields.commento) {
               for (z2 = 0; z2 <= profiles_json.length - 1; z2 = z2 + 1) {
                 if (profiles_json[z2].pk == resps_json[y].fields.author) {
-                  photoResp = BASE_PHOTO_DIR + profiles_json[z2].fields.photo
+                  photoResp = BASE_PHOTO_DIR + profiles_json[z2].fields.photo;
                   break;
                 }
               }
               for (var z3 = 0; z3 <= profiles_json.length - 1; z3 = z3 + 1) {
                 if (profiles_json[z3].pk == resps_json[y].fields.respToUser) {
-                  respToUser = profiles_json[z3].fields.first_name
+                  respToUser = profiles_json[z3].fields.first_name;
                   break;
                 }
               }

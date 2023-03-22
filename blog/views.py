@@ -67,7 +67,6 @@ def getPost(request):
     profiles = list(Profile.objects.all())
     profiles_list = serializer(profiles)
     t2 = []
-    breakpoint()
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = str(request.GET.get("tagTitle"))
         if comments_in_database.exists():
@@ -122,14 +121,13 @@ def newPost(request):
     myuser.firstname = getLoginName(request)
     tagTitle = request.GET.get('mainurl')
     split_url = urlsplit(tagTitle)
+    breakpoint()
     # check site authorization
     try:
-        breakpoint()
         thisSite = split_url.scheme+"://" + \
-            (split_url.netloc) + (split_url.path)
-        breakpoint()
-        site = Site.objects.get(title=thisSite)
-        breakpoint()
+            (split_url.netloc)+(split_url.path)
+        site = Site(title=thisSite, user=myuser)
+        site.save()
     except Exception:
         raise Exception(
             "errore nell inserimeto del url.")
