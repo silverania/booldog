@@ -5,12 +5,7 @@
 
 {% block content %}
 <div class="container">
-
-  
-  
-
-        <h3 align="center">Entra</h3>
-
+        <h3 align="center">Entra {{ request.user.is_authenticated }}</h3>
              <div class="row justify-content-center">
           <div class=" facebook col-md-1 col-1 col-sm-1 ">
                   <a href="{% url 'social:begin' 'facebook' %}" class="facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
@@ -41,9 +36,9 @@
 
 		<div class="row justify-content-center">
 			<div class="col-md-5 col-lg-4 col-sm-6 col-8">
-			    <form id="formlogin" autocomplete="off" method="POST" action="blog"> 
-              {% csrf_token %}
-					<div class="input-group">
+			    <form id="formlogin" autocomplete="on" method="post" action="" /> 
+					{% csrf_token %}
+          <div class="input-group">
 						<span class="input-group-addon"><span class="fas fa-user"></span></span>
             <label for="{{ form.username.id_for_label }}"></label>
             <input type="input" class="form-control" name="username" id="inputUsername" placeholder="Username" required />
@@ -67,13 +62,13 @@
 
                     <hr />
 					<button id="id_login"  class="btn btn-outline-primary" type="submit">Entra</button>
-				</form>
-
 <script>
             $(document).ready(function(){
               const params = new URLSearchParams(window.location.search);
               var valuenext=params.get('mainurl');
-              var login="{{ request.user.is_authenticated }}"
+              login="{{ request.user.is_authenticated }}"
+              localStorage.setItem("login",login);
+              login=localStorage.getItem('login');
               $('[data-toggle="tooltip"]').tooltip();
               var r=document.getElementById("a_reg");
               var pf=document.getElementById("a_passwordforget");
@@ -92,6 +87,9 @@
                   next=localStorage.getItem("next");
                   window.location.href=window.location.href+"?mainurl="+next;
               }
+              var tokenhtml=document.getElementsByName('csrfmiddlewaretoken');
+              tokenhtml=tokenhtml[0].value;
+              sessionStorage.setItem('csrfmiddlewaretoken',tokenhtml);
             });
           </script>
 			</div>
@@ -116,9 +114,5 @@
 
 
 
-        <script>
-$(document).ready(function(){
-
-})
-</script>
+    
 {% endblock content %}

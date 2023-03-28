@@ -15,7 +15,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 scrollTo = ''
 Group = Group.objects.all()
@@ -33,6 +34,7 @@ def getUser(user):
 
 class checkUser(View):
     def post(self, request):
+        print("user is auth ?"+str(request.user.is_authenticated)+str(request.user))
         login = getUser(
             request.user) if request.user.is_authenticated else "false"
         myuser = object()
@@ -55,7 +57,9 @@ class checkUser(View):
                     currentUser = Profile.objects.get(first_name=firstName)
                     if 'blog' in request.get_full_path():
                         if not str(currentUser.website) in currentUrl:
-                            print("nessun autorizzazione concessa !")
+                            breakpoint()
+                            print("nessun autorizzazione concessa !" +
+                                  str(currentUrl)+"__"+str(currentUser.website))
                             raise Exception(
                                 "sito Web non autoriazzato o assente in fase di registrazione")
                         else:
@@ -88,14 +92,29 @@ class checkUser(View):
         return response
 
     def get(self, request):
-        print(request.user.is_authenticated)
         c = {}
+        list_of_logged_in_users = []
         c.update(csrf(request))
+        print("is AUT IN GET ? "+str(self.request.user.is_authenticated))
         for key, value in c.items():
             key = str(key)
             value = str(value)
-        print(str(key)+str(value))
-        return JsonResponse({key: value})
+        sessions = Session.objects.filter(expire_date__gte=timezone.now())
+        user_id_list = []
+        # build list of user ids from query
+
+        def getLoggedUsers():
+            for session in sessions:
+                data = session.get_decoded()
+                # if the user is authenticated
+                if data.get('_auth_user_id'):
+                    user_id_list.append(data.get('_auth_user_id'))
+                logged_in_users = Profile.objects.filter(id__in=user_id_list)
+            list_of_logged_in_users = [
+                {profile.id: profile.first_name} for profile in logged_in_users]
+            return list_of_logged_in_users
+        print(str(key)+str(value)+str(getLoggedUsers()))
+        return JsonResponse({key: value, 'loggedUsers': getLoggedUsers()})
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == 'GET':
@@ -121,7 +140,10 @@ def getUrlRequest(request):
 
 
 def user_login(request):
+    print("auth ="+str(request.user.is_authenticated))
+    print("token="+str(request.META.get('HTTP_AUTHORIZATION')))
     if request.method == 'POST':
+        breakpoint()
         valuenext = request.POST.get('mainurl')
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -132,12 +154,14 @@ def user_login(request):
                 login(request, user)
                 # return redirect(valuenext)
                 # form is not valid or user is not authenticated
-            return render(request, "booldog.html", {"currentUrl": valuenext})
+                logintoken = request.session.session_key
+            return render(request, "booldog.html")
     elif request.method == 'GET':
         form = LoginForm()
         if 'mainurl' in request.GET:
             valuenext = request.GET.get('mainurl')
-            return render(request, 'registration/login.html', {'form': form, 'valuenext': valuenext})
+            return render(request, 'registration/login.html',
+                          {'form': form, 'valuenext': valuenext})
 
 
 @login_required
@@ -172,7 +196,6 @@ def user_register(request):
             user = form.save()
             user.refresh_from_db()
             username = form.cleaned_data.get('username')
-            breakpoint()
             raw_password = form.cleaned_data.get('password1')
             user.profile.photo = form.cleaned_data.get('photo')
             user.profile.first_name = username
