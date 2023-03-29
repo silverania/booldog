@@ -94,6 +94,8 @@ class checkUser(View):
     def get(self, request):
         c = {}
         list_of_logged_in_users = []
+        print("view checuser get request.user & session is =" +
+              str(request.user.is_authenticated)+"____"+str(request.session))
         c.update(csrf(request))
         print("is AUT IN GET ? "+str(self.request.user.is_authenticated))
         for key, value in c.items():

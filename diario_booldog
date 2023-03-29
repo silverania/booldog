@@ -4,3 +4,4 @@ prendere il valore request.user_is_authenticated all' apertura pagina
 rivedere la gestione csrftoken per capire se l 'user è autenticato;
 user/login/blog non ritorna response dalla view
 prendi il token direttamente nel sessionStorage e usalo per la post nella view checkuser()
+vedi se puoi esportare la request dal client al server e viceversa
