@@ -1,4 +1,6 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
+from django.template import RequestContext
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
@@ -17,7 +19,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.sessions.models import Session
 from django.utils import timezone
-
+from django.utils.decorators import method_decorator
 scrollTo = ''
 Group = Group.objects.all()
 
@@ -32,8 +34,9 @@ def getUser(user):
     return list_current_user
 
 
-class checkUser(View):
-    def post(self, request):
+@csrf_exempt
+def checkUser(request):
+    if request.method == 'POST':
         print("user is auth ?"+str(request.user.is_authenticated)+str(request.user))
         login = getUser(
             request.user) if request.user.is_authenticated else "false"
@@ -90,22 +93,18 @@ class checkUser(View):
             data, safe=False
         )
         return response
-
+    """
     def get(self, request):
-        c = {}
-        list_of_logged_in_users = []
-        print("view checuser get request.user & session is =" +
+        print("view checuser GET request.user & session is =" +
               str(request.user.is_authenticated)+"____"+str(request.session))
-        c.update(csrf(request))
         print("is AUT IN GET ? "+str(self.request.user.is_authenticated))
-        for key, value in c.items():
-            key = str(key)
-            value = str(value)
         sessions = Session.objects.filter(expire_date__gte=timezone.now())
         user_id_list = []
         # build list of user ids from query
+        return HttpResponse("ok get for none ! ")
 
         def getLoggedUsers():
+            print("in dispatch getLoggedUSer request.user is ="+str(request.user))
             for session in sessions:
                 data = session.get_decoded()
                 # if the user is authenticated
@@ -120,11 +119,14 @@ class checkUser(View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.method == 'GET':
+            print("in dispatch GET request.user is ="+str(request.user))
             return self.get(request)
         elif request.method == 'POST':
             #cv = request.body
             #print("from dispatch method :"+str(cv))
-            return self.post(request)
+            print("in dispatch POST request.user is ="+str(request.user))
+            return self.post(self.request)
+    """
 
 
 def get_client_ip(request):
@@ -145,7 +147,6 @@ def user_login(request):
     print("auth ="+str(request.user.is_authenticated))
     print("token="+str(request.META.get('HTTP_AUTHORIZATION')))
     if request.method == 'POST':
-        breakpoint()
         valuenext = request.POST.get('mainurl')
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -156,8 +157,10 @@ def user_login(request):
                 login(request, user)
                 # return redirect(valuenext)
                 # form is not valid or user is not authenticated
-                logintoken = request.session.session_key
-            return render(request, "booldog.html")
+                thissession = request.session.session_key
+                response = render(request, "booldog.html")
+                response.set_cookie('thissess', thissession)
+            return response
     elif request.method == 'GET':
         form = LoginForm()
         if 'mainurl' in request.GET:

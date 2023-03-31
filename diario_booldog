@@ -5,3 +5,4 @@ rivedere la gestione csrftoken per capire se l 'user è autenticato;
 user/login/blog non ritorna response dalla view
 prendi il token direttamente nel sessionStorage e usalo per la post nella view checkuser()
 vedi se puoi esportare la request dal client al server e viceversa
+crea un cookie con i cazzo di dati sessione e inviali al client per recuperare la sessiohne nella view

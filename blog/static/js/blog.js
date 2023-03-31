@@ -660,12 +660,10 @@ function initBlogSGang(u, p, url) {
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
   sessionStorage.getItem("csrfmiddlewaretoken");
   requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
-  function sendTokenPost(requestPostKey) {
+  function sendTokenPost() {
     document.getElementById("s_blog").remove();
     (function () {
-      checkUserToken = requestPostKey;
       let s = {
-        csrfmiddlewaretoken: checkUserToken,
         user: u,
         password: p,
         currentUrl: currentUrl,
@@ -674,7 +672,6 @@ function initBlogSGang(u, p, url) {
         method: "POST",
         credentials: "include",
         headers: {
-          "X-CSRFToken": checkUserToken,
           "Content-Type": "application/json;charset=utf-8",
         },
         mode: "cors", // Do not send CSRF token to another domain.
@@ -717,7 +714,7 @@ function initBlogSGang(u, p, url) {
       }
     };
   }
-  getToken();
+  sendTokenPost();
 }
 
 function getComment() {
