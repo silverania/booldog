@@ -670,11 +670,11 @@ function initBlogSGang(u, p, url) {
       };
       const request = {
         method: "POST",
-        credentials: "include",
+        //credentials: "include",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        mode: "cors", // Do not send CSRF token to another domain.
+        //mode: "cors", // Do not send CSRF token to another domain.
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)

@@ -17,8 +17,9 @@ message = ""
 formatted_datetime = formats.date_format(
     datetime.now(), "SHORT_DATETIME_FORMAT")
 
-
 # @xframe_options_exempt
+
+
 class Booldog(View):
     def get(self, request):
         print("entry in booldog vieew")
