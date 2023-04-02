@@ -40,7 +40,6 @@
             <div class="form-group text-center">
               {% csrf_token %}
               {% for field in form %}
-              {{field.label_tag}}
               {% if 'username' in field.label_tag %}
               <label>Username:</label>
               <p class="mb-3">{{field}}</p>
@@ -62,9 +61,9 @@
                 {% elif 'Password confirmation:' in field.label_tag %}
                 <label>Conferma Password :</label>
                 <p class="mb-3">{{field}}</p>
-                    {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle password ! </p>{% endif %}
+                    {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle password ! </p>
                 <script>setTimeout(() => { window.location.href = {% if 'blog' in request.path %} "/user/register/blog"
-                  {% else %} "/user/register "{% endif %}},5000);</script>
+                  {% else %} "/user/register "{% endif %}},5000);</script>{% endif %}
 
 
 
