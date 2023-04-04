@@ -115,6 +115,7 @@ def getPost(request):
 def newPost(request):
     postType = ""
     post = []
+    site = Site
     getRespOrPostToAssignResp = []
     body = request.GET.get("body")
     author = request.GET.get("username")
@@ -122,7 +123,6 @@ def newPost(request):
     myuser.firstname = getLoginName(request)
     tagTitle = request.GET.get('mainurl')
     split_url = urlsplit(tagTitle)
-    breakpoint()
     # check site authorization
     try:
         thisSite = split_url.scheme+"://" + \
@@ -136,6 +136,7 @@ def newPost(request):
     if "newpost" in postType:
         post = blog.models.Comment()
         post.postType = "post"
+        breakpoint()
     else:
         post = blog.models.Resp()
         respToProfile = request.GET.get("respToUser")
@@ -164,6 +165,7 @@ def newPost(request):
     post.publish = datetime.now()
     post.created = post.publish
     post.body = body
+    breakpoint()
     post.save()
     typeIs = str(type(getRespOrPostToAssignResp))
     if "Resp" in typeIs:

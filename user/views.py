@@ -37,6 +37,7 @@ def getUser(user):
 @csrf_exempt
 def checkUser(request):
     if request.method == 'POST':
+        breakpoint()
         print("user is auth ?"+str(request.user.is_authenticated)+str(request.user))
         login = getUser(
             request.user) if request.user.is_authenticated else "false"
@@ -184,13 +185,13 @@ class Logout(View):
         global userLoggedIN
         logout(request)
         userLoggedIN = None
-        if 'next' in request.GET:
-            print("next in request !")
-            next = request.GET.get('next')
+        if 'mainurl' in request.GET:
+            mainurl = request.GET.get('mainurl')
             template = "registration/logged_out.html"
-            return redirect(next)
+            breakpoint()
+            return redirect(mainurl)
             # return render(request, "seiuscito.html", {'valuenext': next})
-        return render(request, "seiuscito.html", {'valuenext': next})
+        return render(request, "seiuscito.html", {'valuenext': mainurl})
 
 
 def user_register(request):
@@ -206,10 +207,10 @@ def user_register(request):
             user.profile.first_name = username
             user.profile.website = form.cleaned_data.get('website')
             if 'blog' in request.path:
-                valuenext = request.GET.get('next')
+                valuenext = request.GET.get('mainurl')
                 # agiungere i permessi per leggere i propri post dall adminpage
                 user.save()
-                return redirect('/user/login/blog?next='+valuenext)
+                return redirect('/user/login/blog?mainurl='+valuenext)
             elif 'blogadmin' in request.path:
                 group = Group.get(name='BlogAdmin')
                 user.groups.add(group)
@@ -221,9 +222,9 @@ def user_register(request):
                 return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html del tuo sito . </h2>")
             else:
                 if 'next' in request.GET:
-                    valuenext = request.GET.get('next')
+                    valuenext = request.GET.get('mainurl')
                     user.save()
-                    return redirect('/user/login?next='+valuenext)
+                    return redirect('/user/login?mainurl='+valuenext)
                 else:
                     user.save()
                     return redirect('/user/login')
@@ -232,10 +233,10 @@ def user_register(request):
         # in base alla presenza della variabile next capisco
         # se la richiesta di registrazione è per installare il Blog
         # oppure per usarlo
-        if 'next' in request.GET:
-            valuenext = request.GET.get('next')
+        if 'mainurl' in request.GET:
+            valuenext = request.GET.get('mainurl')
         form = SignUpForm()
-    return render(request, 'user/register.html', {'form': form, 'next': valuenext})
+    return render(request, 'user/register.html', {'form': form, 'mainurl': valuenext})
 
 
 def change_password(request):

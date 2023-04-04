@@ -5,13 +5,13 @@
     prendere l' url in cui è inserioto l' iframe non serve,
     èerchè lo stesso è passato nel valore src di iframe
     */
-const BASE_URL = "https://127.0.0.1:8000/"; // URL del server
+const BASE_URL = "https://localhost:8000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
-var XMLHTTPURL_LOGIN; //="user/login/blog"+HIDDENFIELD;
+var XMLHTTPURL_LOGIN; //="user/login/blog" + HIDDENFIELD;
 const XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
-const XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
+var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
 const BASE_PHOTO_DIR = BASE_URL + "media/";
 const HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
@@ -124,7 +124,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     aBlogCambiaPassword.textContent = "Modifica";
     aBlogEsci.textContent = "Esci";
     aBlogEntra.setAttribute("class", "nav-link");
-    aBlogEsci.setAttribute("href", "user/logout/blog" + HIDDENFIELD);
+    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
     aBlogEsci.setAttribute(
       "style",
       "display:block;width:auto;text-align:right;"
@@ -570,7 +570,7 @@ class postArea {
             return -1;
           }
           //form_risposta_post.setAttribute("action",url)
-          url = URL_NEW_POST + "?mainurl=" + window.CURRENT_URL;
+          url = URL_NEW_POST + "?mainurl=" + currentUrl;
           mess.body = txts;
           if (sendToServer(mess, url) == 0) {
             isOpen = false;
@@ -647,16 +647,17 @@ function getCookie(name) {
 }
 
 function initBlogSGang(u, p, url) {
-  currentUrl = url;
+  currentUrl = url.replace(/\/$/, "");
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
-  HIDDENFIELD = "?mainurl=" + currentUrl;
   if (currentUrl != "") {
     localStorage.setItem("next", currentUrl);
   } else {
     currentUrl = localStorage.getItem("next");
   }
+  HIDDENFIELD = "?mainurl=" + currentUrl;
   XMLHTTPURL_LOGIN = "user/login/blog?mainurl=" + localStorage.getItem('next');
+  XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
   sessionStorage.getItem("csrfmiddlewaretoken");
   requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
@@ -741,7 +742,7 @@ function getComment() {
     url:
       BASE_URL +
       "post/showposts?tagTitle=" +
-      currentUrl.replace(/\/$/, ""),
+      currentUrl,
     data: {
       userAuth: userAuth,
     },
