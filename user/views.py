@@ -159,7 +159,10 @@ def user_login(request):
                 thissession = request.session.session_key
                 response = render(request, "booldog.html")
                 response.set_cookie('thissess', thissession)
-            return response
+                return response
+            else:
+                return render(request, 'wrongdati.html', {'valuenext': valuenext})
+
     elif request.method == 'GET':
         form = LoginForm()
         if 'mainurl' in request.GET:
@@ -185,6 +188,7 @@ class Logout(View):
         userLoggedIN = None
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
+            breakpoint()
             template = "registration/logged_out.html"
             return redirect(mainurl)
             # return render(request, "seiuscito.html", {'valuenext': next})
@@ -242,8 +246,9 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            if 'next' in request.GET:
-                valuenext = request.GET.get('next')
+            breakpoint()
+            if 'mainurl' in request.GET:
+                valuenext = request.GET.get('mainurl')
                 return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext})
         else:
             return HttpResponse("errore nei dati inseriti !")

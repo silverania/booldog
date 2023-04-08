@@ -24,7 +24,7 @@ class Booldog(View):
     def get(self, request):
         print("entry in booldog vieew")
         booldogHtml = "booldog.html"
-        currentUrl = request.GET.get('url')
+        currentUrl = request.GET.get('mainurl')
         return render(request, booldogHtml, {'currentUrl': currentUrl})
 
 

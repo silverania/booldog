@@ -8,3 +8,4 @@ vedi se puoi esportare la request dal client al server e viceversa
 crea un cookie con i cazzo di dati sessione e inviali al client per recuperare la sessiohne nella view
 le taextarea hanno la base maggiore in alcune pagine ( quando click su back nella pagina login per es.)
 salvare le informazioni sulle diomensioni di section blog nello storage
+qunado sbaglio user e pass nel login mi reindirizza a una scritta <h1> non centrata e da aggoiustare

@@ -3,15 +3,16 @@
 /* By Mario , superior code */
 
 const BASE_URL = "https://localbooldog:8000/"; // URL del server
+const HOME_PATH = BASE_URL + "booldog";
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
 var XMLHTTPURL_LOGIN; //="user/login/blog" + HIDDENFIELD;
-const XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
+var XMLHTTPURL_REGISTER;
 var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
 const BASE_PHOTO_DIR = BASE_URL + "media/";
-const HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
+var HTTPURL_CHANGEPASSWORD;
 var borderPost = "none";
 var borderResponse = "1px solid grey";
 var paPostOrResp;
@@ -657,6 +658,9 @@ function initBlogSGang(u, p, url) {
   HIDDENFIELD = "?mainurl=" + currentUrl;
   XMLHTTPURL_LOGIN = "user/login/blog?mainurl=" + localStorage.getItem('next');
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
+  XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
+  localStorage.setItem('HOME_PATH', HOME_PATH + HIDDENFIELD);
+  HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
   sessionStorage.getItem("csrfmiddlewaretoken");
   requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
@@ -674,7 +678,7 @@ function initBlogSGang(u, p, url) {
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        //mode: "cors", // Do not send CSRF token to another domain.
+        mode: "no-cors", // Do not send CSRF token to another domain.
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)
