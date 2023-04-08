@@ -29,8 +29,8 @@
 
 
 #blog{
-    margin-top:100px;
-    margin-bottom:1000px;
+    margin:100px auto;
+    /*margin-bottom:1000px;*/
     font-family: 'Montserrat-Regular','roboto','openSans';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -360,7 +360,7 @@ margin-left:90%;
 
 @media screen and (max-width: 1280px) {
     #blog{
-        /* margin:5%; */
+        margin:5%;
         width: 40%!important;
     }
   #p_text{
@@ -373,15 +373,7 @@ margin-left:90%;
 }
 
 
-@media screen and (max-width: 480px) {
-    #blog{
-      width:90%!important;
-  }
-  button{
-    max-width:80%;
-    margin:0 auto;
-  }
-}
+
 
   #s_blog{
     font-size:0.7rem;
@@ -412,7 +404,7 @@ margin-left:90%;
 
 @media screen and (min-width: 1280px) {
     #blog{
-        margin:0;
+        margin: 0 auto;
         width: 30%!important;
     }
 
@@ -445,6 +437,15 @@ textarea {
 }
 }
 
+@media screen and (max-width: 480px) {
+    #blog{
+      width:90%!important;
+  }
+  button{
+    max-width:80%;
+    margin:0 auto;
+  }
+}
 @media screen and (max-width: 414px) {
   .modal-content {
     width: 100%!important; /* Could be more or less, depending on screen size */

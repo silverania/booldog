@@ -16,11 +16,12 @@
 
         <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
         <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
-
-
+        
 
 
   <script  src="{% static 'js/jquery.min.js' %}"></script>
+  <script  src="{% static 'js/login.js' %}"></script>
+
 <script src="{% static "js/getParams.js"%}"></script>
 <script src="{% static "js/all.min.js"%}"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v14.0&appId=810115799892623&autoLogAppEvents=1" nonce="ZQl7gT5l">
@@ -33,12 +34,6 @@
 
 <!--script  src="{% static 'js/aside.js' %}"></script-->
 <body>
-
-  {% block content %}
-  {% endblock %}
-
-
-
-
+  {% block content %} {% endblock content %}
   </body>
   </html>

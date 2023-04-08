@@ -136,7 +136,6 @@ def newPost(request):
     if "newpost" in postType:
         post = blog.models.Comment()
         post.postType = "post"
-        breakpoint()
     else:
         post = blog.models.Resp()
         respToProfile = request.GET.get("respToUser")
@@ -165,7 +164,6 @@ def newPost(request):
     post.publish = datetime.now()
     post.created = post.publish
     post.body = body
-    breakpoint()
     post.save()
     typeIs = str(type(getRespOrPostToAssignResp))
     if "Resp" in typeIs:

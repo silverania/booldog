@@ -1,11 +1,8 @@
 
 
-/* By Mario , superior code
-    var CURRENT_URL=window.location.href
-    prendere l' url in cui è inserioto l' iframe non serve,
-    èerchè lo stesso è passato nel valore src di iframe
-    */
-const BASE_URL = "https://localhost:8000/"; // URL del server
+/* By Mario , superior code */
+
+const BASE_URL = "https://localbooldog:8000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
@@ -18,15 +15,15 @@ const HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
 var borderPost = "none";
 var borderResponse = "1px solid grey";
 var paPostOrResp;
-var postarea = Object();
+var postarea;
 var el;
 var mess;
 var padre;
 var user;
 var lastUpdate;
-var postAuthor = new Object();
-var userAuth = new Object();
-var userThatLogin = new Object();
+var postAuthor;
+var userAuth;
+var userThatLogin;
 var butcloned;
 var isChanged = false;
 var H1Welcome = document.createElement("H6");
@@ -57,7 +54,7 @@ var spanBlogEntra = document.createElement("SPAN");
 var liBlogEsci = document.createElement("LI");
 var aBlogEsci = document.createElement("A");
 var post,
-  post2 = new Object();
+  post2;
 var isOpen = false;
 var bSection = document.createElement("SECTION");
 var bIcon = document.createElement("DIV");
@@ -66,8 +63,8 @@ var bForm = document.createElement("FORM");
 var wait = true;
 var postTitle, login;
 var tutorial;
-var bbutton2 = new Object();
-var exist = new Boolean(false);
+var bbutton2;
+var exist = false;
 var newPostId = 0;
 var elementToAppendPostArea;
 var json_resps;
@@ -470,7 +467,7 @@ class postArea {
     form_risposta_post.appendChild(button_risposta_post);
     var url;
     $(button_risposta_post).click(function (e) {
-      if (userThatLogin !== "false") {
+      if (userThatLogin.toString() !== "false") {
         e.preventDefault();
         e.stopPropagation();
         if (mess.type == "resp" || mess.type == "post") {
@@ -510,6 +507,7 @@ class postArea {
               )),
               elementToAppendPostArea
             );
+            htmlIframeWidthHeight();
             resps.push(r);
           } else if (
             button_risposta_post.textContent == "Rispondi" &&
@@ -519,7 +517,8 @@ class postArea {
           }
         }
       } else {
-        window.open(BASE_URL + "user/login/blog" + window.HIDDENFIELD);
+        window.location.href = ("user/login/blog" + HIDDENFIELD);
+        //window.location.href = XMLHTTPURL_LOGIN;
       }
     });
     $(button_risposta_post).hover(
@@ -786,6 +785,7 @@ function getComment() {
                 )
               );
               createPostArea(mess[indexX]);
+              htmlIframeWidthHeight();
               break;
             }
           }
@@ -838,6 +838,7 @@ function getComment() {
                 break;
               } else {
                 createPostArea(resps.at(-1), elementToAppend);
+                htmlIframeWidthHeight();
               }
             }
           }
@@ -857,11 +858,10 @@ function getComment() {
           )
         );
         createPostArea(mess[0]);
-      } // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
+        htmlIframeWidthHeight();
+      }
     },
   });
-  // HERE
-  //return htmlIframeWidthHeight();
 }
 
 function htmlIframeWidthHeight() {
@@ -931,6 +931,7 @@ function createNewComment(mess) {
     : (mess.photo = BASE_PHOTO_DIR + userThatLogin[0].fields.photo); //la cartella media si trova nel path del progetto :"tutorial"
   mess.pk = newPostId;
   createPostArea(mess);
+  htmlIframeWidthHeight();
   if (exist == false) {
     Boolean(exist);
     return mess;
@@ -1057,7 +1058,6 @@ function createPostArea(messOrResp, elementToAppendArea) {
       isOpen = false;
     }
   }
-  htmlIframeWidthHeight();
   return paPostOrResp;
 }
 

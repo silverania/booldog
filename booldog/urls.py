@@ -24,4 +24,4 @@ urlpatterns = [
     path('booldog/admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('post/', include('blog.urls', namespace="blog")),
-    ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

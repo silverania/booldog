@@ -37,7 +37,6 @@ def getUser(user):
 @csrf_exempt
 def checkUser(request):
     if request.method == 'POST':
-        breakpoint()
         print("user is auth ?"+str(request.user.is_authenticated)+str(request.user))
         login = getUser(
             request.user) if request.user.is_authenticated else "false"
@@ -61,7 +60,6 @@ def checkUser(request):
                     currentUser = Profile.objects.get(first_name=firstName)
                     if 'blog' in request.get_full_path():
                         if not str(currentUser.website) in currentUrl:
-                            breakpoint()
                             print("nessun autorizzazione concessa !" +
                                   str(currentUrl)+"__"+str(currentUser.website))
                             raise Exception(
@@ -188,7 +186,6 @@ class Logout(View):
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
             template = "registration/logged_out.html"
-            breakpoint()
             return redirect(mainurl)
             # return render(request, "seiuscito.html", {'valuenext': next})
         return render(request, "seiuscito.html", {'valuenext': mainurl})
