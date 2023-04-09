@@ -275,7 +275,12 @@ class postArea {
     this.post = post;
     var lines = this.post.body.split("\n");
     this.postarea = document.createElement("TEXTAREA");
-    this.postarea.setAttribute('rows', lines.length.toString());
+    try {
+      this.postarea.setAttribute('rows', lines.length + 1);
+    }
+    catch (TypeError) {
+      this.postarea.setAttribute('rows', 3);
+    }
     this.isActive = false;
     this.isChanged = isChanged;
     this.postarea.onkeyup = function () {
