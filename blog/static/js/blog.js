@@ -273,10 +273,11 @@ class Post {
 class postArea {
   constructor(post) {
     this.post = post;
+    var lines = this.post.body.split("\n");
     this.postarea = document.createElement("TEXTAREA");
+    this.postarea.setAttribute('rows', lines.length.toString());
     this.isActive = false;
     this.isChanged = isChanged;
-
     this.postarea.onkeyup = function () {
       this.setAttribute(
         "style",
@@ -622,7 +623,7 @@ class postArea {
       width: "100%",
     }); // nu second e dui 1,2sec
     //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
-    this.postarea.setAttribute("rows", "3");
+    //this.postarea.setAttribute("rows", "3");
     this.postarea.setAttribute("name", "messaggio");
     $(this.postarea).css("border", borderPost);
     //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
