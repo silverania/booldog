@@ -251,6 +251,7 @@ def user_register(request):
         if 'mainurl' in request.GET:
             valuenext = request.GET.get('mainurl')
         form = SignUpForm()
+        breakpoint()
     return render(request, 'user/register.html', {'form': form, 'mainurl': valuenext})
 
 
