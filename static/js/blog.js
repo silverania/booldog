@@ -3,15 +3,17 @@
 /* By Mario , superior code */
 
 const BASE_URL = "https://localbooldog:8000/"; // URL del server
+sessionStorage.setItem('BASE_URL', BASE_URL);
+const HOME_PATH = BASE_URL + "booldog";
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
 var XMLHTTPURL_LOGIN; //="user/login/blog" + HIDDENFIELD;
-const XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
+var XMLHTTPURL_REGISTER;
 var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
 const BASE_PHOTO_DIR = BASE_URL + "media/";
-const HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
+var HTTPURL_CHANGEPASSWORD;
 var borderPost = "none";
 var borderResponse = "1px solid grey";
 var paPostOrResp;
@@ -114,9 +116,6 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "display:block;width:auto;text-align:right;z-index:200"
     );
     aBlogReg.setAttribute("href", XMLHTTPURL_REGISTER);
-    aBlogReg.setAttribute("target", "_blank");
-    aBlogCambiaPassword.setAttribute("target", "_blank");
-    aBlogEsci.setAttribute("target", "_blank");
     aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD);
     aBlogCambiaPassword.textContent = "Modifica";
     aBlogEsci.textContent = "Esci";
@@ -273,9 +272,15 @@ class postArea {
   constructor(post) {
     this.post = post;
     this.postarea = document.createElement("TEXTAREA");
+    try {
+      var lines = this.post.body.split("\n");
+      this.postarea.setAttribute('rows', lines.length + 1);
+    }
+    catch (TypeError) {
+      this.postarea.setAttribute('rows', 3);
+    }
     this.isActive = false;
     this.isChanged = isChanged;
-
     this.postarea.onkeyup = function () {
       this.setAttribute(
         "style",
@@ -588,7 +593,7 @@ class postArea {
         break;
       case "post":
         var objectToAppendChild = divUserBlog.id;
-        button_risposta_post.textContent = "Rispondi";
+        button_risposta_post.textContent = '{% trans "Rispondi" %}';
         break;
       case "resp":
         var objectToAppendChild = "divuserblog_" + id;
@@ -621,7 +626,7 @@ class postArea {
       width: "100%",
     }); // nu second e dui 1,2sec
     //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
-    this.postarea.setAttribute("rows", "3");
+    //this.postarea.setAttribute("rows", "3");
     this.postarea.setAttribute("name", "messaggio");
     $(this.postarea).css("border", borderPost);
     //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
@@ -655,8 +660,11 @@ function initBlogSGang(u, p, url) {
     currentUrl = localStorage.getItem("next");
   }
   HIDDENFIELD = "?mainurl=" + currentUrl;
-  XMLHTTPURL_LOGIN = "user/login/blog?mainurl=" + localStorage.getItem('next');
+  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + localStorage.getItem('next');
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
+  XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
+  localStorage.setItem('HOME_PATH', HOME_PATH + HIDDENFIELD);
+  HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
   sessionStorage.getItem("csrfmiddlewaretoken");
   requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
@@ -674,7 +682,7 @@ function initBlogSGang(u, p, url) {
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        //mode: "cors", // Do not send CSRF token to another domain.
+        mode: "no-cors", // Do not send CSRF token to another domain.
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)

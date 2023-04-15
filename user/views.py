@@ -170,6 +170,21 @@ def user_login(request):
             return render(request, 'registration/login.html',
                           {'form': form, 'valuenext': valuenext})
 
+    """ per cambiare password """
+    """
+    if 'blog' in request.get_full_path():
+             scrollTo = "#footer"
+            if 'next' in request.GET:
+                valuenext = request.GET.get('next')+scrollTo
+                subject = 'welcome to GFG world'
+                message = 'Hi mario, thank you for registering in geeksforgeeks.'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = ["info.strabbit@gmail.com", ]
+                # send_mail(subject, message, email_from, recipient_list)
+            myuser = None
+            print("view: user_login , GET method......valuenext="+valuenext)
+            """
+
 
 @login_required
 def home(request):
@@ -188,9 +203,8 @@ class Logout(View):
         userLoggedIN = None
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
-            breakpoint()
             template = "registration/logged_out.html"
-            return redirect(mainurl)
+            return render(request, "booldog.html")
             # return render(request, "seiuscito.html", {'valuenext': next})
         return render(request, "seiuscito.html", {'valuenext': mainurl})
 
@@ -242,16 +256,16 @@ def user_register(request):
 
 def change_password(request):
     if request.method == 'POST':
+        valuenext = ""
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            breakpoint()
             if 'mainurl' in request.GET:
                 valuenext = request.GET.get('mainurl')
                 return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext})
         else:
-            return HttpResponse("errore nei dati inseriti !")
+            return render(request, "wrongdati.html", {'valuenext': valuenext})
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})

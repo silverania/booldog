@@ -43,6 +43,16 @@
     width: 65%!important;
 }
 
+#dataSetup{
+width:100%;
+height:auto;
+font-size:1rem;
+}
+
+a.badge.badge-info>span:hover {
+ cursor:pointer;
+}
+
 #blogBackHome:hover{
     opacity:0.5;
     cursor:pointer;
@@ -250,12 +260,10 @@ background-color: transparent;
 textarea {
 background-color:transparent;
   font-family:"Montserrat-Regular";
-  font-size:1rem!important;
+  /*font-size:1rem!important;*/
   line-height: 1.6;
   color:black;
   width:100%;
-height:auto;
-  /*min-width:100%;*/
   outline: none !important;
   border: none;
      background-color: transparent;
@@ -264,7 +272,7 @@ height:auto;
   box-shadow: -5px -5px 5px #719ECE;
   border-radius:4px;
   overflow:hidden;
-  padding:5px!important;
+  padding:10px!important;
 }
 
 img{
@@ -370,6 +378,9 @@ margin-left:90%;
     text-decoration: none;
     font-size:0.5rem;
 }
+#dataSetup{
+  font-size:1.7rem;
+}
 }
 
 
@@ -418,6 +429,9 @@ margin-left:90%;
   #li_cambiaPassword > a#id_cambia_password ,#liBlogEsci > a#aEsci,#li_login > #id_entra>#span_entra{
     text-decoration: none;
     font-size:1rem;
+}
+#dataSetup{
+  font-size:3rem;
 }
 }
 

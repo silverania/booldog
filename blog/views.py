@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 import blog
 from django.shortcuts import render
 # from django.views.decorators.clickjacking import xframe_options_exempt
+from django.utils.translation import gettext_lazy as _
 photo = ""
 message = ""
 formatted_datetime = formats.date_format(

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from user.models import Profile
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
@@ -87,7 +88,7 @@ class Resp(models.Model):
         ("respToResp", "respToResp"),
     )
     author = models.ForeignKey(
-            Profile, on_delete=models.CASCADE, related_name="resps")
+        Profile, on_delete=models.CASCADE, related_name="resps")
     respToUser = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="userResps")
     body = models.TextField()
@@ -95,16 +96,16 @@ class Resp(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     # post=models.CharField(max_length=250,default="post anonimo")
     commento = models.ForeignKey(
-            Comment,
-            related_name="risposte",
-            on_delete=models.CASCADE,
-            null=True,
-            blank=True,
-            )
+        Comment,
+        related_name="risposte",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
     resps = models.ManyToManyField("Resp", blank=True)
     idRespTo = models.CharField(max_length=50, default="0_0")
     postType = models.CharField(
-            max_length=10, default="respToPost", choices=MESS_TYPE)
+        max_length=10, default="respToPost", choices=MESS_TYPE)
     site = models.ForeignKey(
         Site,
         related_name="all_resps",

@@ -1,7 +1,7 @@
 {% load static %}
+{% load i18n %}
 <html>
 <head>
-
     <meta name="author" content="silverania"\>
     <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}"\>
     <link rel="stylesheet" href="{% static "css/all.min.css" %}"\>
@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="{% static 'css/blog.css' %}"\>
     </head>
     <body>
-
-
-
 <script src="{% static 'js/blog.js' %}" id="s_blog" ></script>
 <script>
-
 var currentUrl="{{currentUrl}}";
+var buttonRispo="{% trans "Reply" %}"
+var postinserito='{% trans "Entered" %}';
+var postinviato='{% trans "Sent" %}';
+sessionStorage.setItem('buttonRispondi',buttonRispo)
 initBlogSGang("mario","sol-7373",currentUrl);
 </script>
 </body>

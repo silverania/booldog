@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-15 14:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/templates/booldog.html:18
+msgid "Reply"
+msgstr "Responder"
+
+#: blog/templates/booldog.html:19
+msgid "Entered"
+msgstr "Ingresado"
+
+#: blog/templates/booldog.html:20
+msgid "Sent"
+msgstr "Enviado"
+
+#: user/templates/base_password.html:22
+msgid "Password recover"
+msgstr "Recuperar Contraseña"
+
+#: user/templates/base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+#: user/templates/base_site.html:6
+msgid "Django administration"
+msgstr ""
+
+#: user/templates/change_password.html:56
+msgid ""
+"To change your password, you must first log in! If you don't remember your "
+"password, you need to recover it"
+msgstr ""
+
+#: user/templates/registration/password_reset_done.html:5
+msgid "Done !"
+msgstr ""
+
+#: user/templates/registration/password_reset_done.html:11
+msgid ""
+"Recovery link sent to your email We have sent instructions to set your "
+"password, if there is a valid account at the email address you provided. You "
+"should receive them shortly. If you do not receive an email, make sure you "
+"enter the address you registered with, and check your spam folder."
+msgstr ""
+
+#: user/templates/registration/password_reset_form.html:8
+#, fuzzy
+#| msgid "Password recover"
+msgid "password reset"
+msgstr "Recuperar Contraseña"
+
+#: user/templates/registration/password_reset_form.html:12
+msgid "Insert your mail"
+msgstr "Introduce tu correo electrónico"
+
+#: user/templates/registration/password_reset_form.html:17
+msgid "Send e-mail"
+msgstr ""
+
+#: user/templates/wrongdati.html:15
+msgid "wrong data !"
+msgstr "información incorrecta !"
+
+#~ msgid "lose password ?"
+#~ msgstr "Contraseña Perdida"

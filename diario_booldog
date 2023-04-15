@@ -9,4 +9,7 @@ crea un cookie con i cazzo di dati sessione e inviali al client per recuperare l
 le taextarea hanno la base maggiore in alcune pagine ( quando click su back nella pagina login per es.)
 salvare le informazioni sulle diomensioni di section blog nello storage
 qunado sbaglio user e pass nel login mi reindirizza a una scritta <h1> non centrata e da aggoiustare
-impostare l' altezza dei post presi dal server col numero di righe della variabile post.body (getcomment) per far entrare il testo . 
+impostare l' altezza dei post presi dal server col numero di righe della variabile post.body (getcomment) per far entrare il testo .
+controllare i link in blog.js affinchè non redirigano a tutorial(127.0.0.1:9000)
+servono i link assoluti!
+riparare gli url in login.js

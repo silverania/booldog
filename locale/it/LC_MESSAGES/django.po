@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-15 14:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/templates/booldog.html:18
+msgid "Reply"
+msgstr "Rispondi"
+
+#: blog/templates/booldog.html:19
+msgid "Entered"
+msgstr "Inserito"
+
+#: blog/templates/booldog.html:20
+msgid "Sent"
+msgstr "Inviato"
+
+#: user/templates/base_password.html:22
+msgid "Password recover"
+msgstr "Recupero Dati"
+
+#: user/templates/base_site.html:3
+msgid "Django site admin"
+msgstr "Sito Di Amministrazione Django"
+
+#: user/templates/base_site.html:6
+msgid "Django administration"
+msgstr "Amministrazione django"
+
+#: user/templates/change_password.html:56
+msgid ""
+"To change your password, you must first log in! If you don't remember your "
+"password, you need to recover it"
+msgstr ""
+"Per modificare la password bisogna prima autenticarsi ! Se non ricordi la "
+"tua password , devi recuperarla"
+
+#: user/templates/registration/password_reset_done.html:5
+msgid "Done !"
+msgstr "Ben fatto!"
+
+#: user/templates/registration/password_reset_done.html:11
+msgid ""
+"Recovery link sent to your email We have sent instructions to set your "
+"password, if there is a valid account at the email address you provided. You "
+"should receive them shortly. If you do not receive an email, make sure you "
+"enter the address you registered with, and check your spam folder."
+msgstr ""
+"Link per il recupero inviati alla tua mail Abbiamo inviato istruzioni per "
+"impostare la password, se esiste un accoun valido all indirizzo email che "
+"hai indicato. Dovresti riceverle a breve.Se non ricevi un messaggio email, "
+"accertati di aver inserito l indirizzo con cui ti sei registrato, e "
+"controlla la cartella dello spam"
+
+#: user/templates/registration/password_reset_form.html:8
+#, fuzzy
+#| msgid "Password recover"
+msgid "password reset"
+msgstr "Recupero Password"
+
+#: user/templates/registration/password_reset_form.html:12
+msgid "Insert your mail"
+msgstr "Inserisci un email"
+
+#: user/templates/registration/password_reset_form.html:17
+msgid "Send e-mail"
+msgstr "Invia"
+
+#: user/templates/wrongdati.html:15
+msgid "wrong data !"
+msgstr "Dati non corretti !"
+
+#~ msgid "lose password ?"
+#~ msgstr "Password Persa ?"
+
+#~ msgid "translate"
+#~ msgstr "traduci"
