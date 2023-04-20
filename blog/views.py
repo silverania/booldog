@@ -26,7 +26,9 @@ class Booldog(View):
         print("entry in booldog vieew")
         booldogHtml = "booldog.html"
         currentUrl = request.GET.get('mainurl')
-        return render(request, booldogHtml, {'currentUrl': currentUrl})
+        user = request.GET.get('user')
+        password = request.GET.get('password')
+        return render(request, booldogHtml, {'currentUrl': currentUrl, 'user': user, 'password': password})
 
 
 class LazyEncoder(DjangoJSONEncoder):
