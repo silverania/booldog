@@ -573,7 +573,7 @@ class postArea {
             return -1;
           }
           //form_risposta_post.setAttribute("action",url)
-          url = URL_NEW_POST + "?mainurl=" + currentUrl;
+          url = URL_NEW_POST + "?mainurl=" + localStorage.getItem('next');
           mess.body = txts;
           if (sendToServer(mess, url) == 0) {
             isOpen = false;
@@ -648,15 +648,16 @@ function getCookie(name) {
 }
 
 function initBlogSGang(u, p, url) {
-  currentUrl = url.replace(/\/$/, "");
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
-  if (u != "" && p != "" && url != "") {
+  var blog;
+  if ((u !== undefined && p !== undefined && url !== undefined) && (u !== "" && p !== "" && url !== "")) {
+    currentUrl = url.replace(/\/$/, "");
     localStorage.setItem('user', u);
     localStorage.setItem('password', p);
     localStorage.setItem("next", currentUrl);
   }
-  HIDDENFIELD = "?mainurl=" + currentUrl;
+  HIDDENFIELD = "?mainurl=" + localStorage.getItem('next');
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + localStorage.getItem('next');
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
@@ -666,7 +667,10 @@ function initBlogSGang(u, p, url) {
   sessionStorage.getItem("csrfmiddlewaretoken");
   requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
   function sendTokenPost() {
-    document.getElementById("s_blog").remove();
+    blog = document.getElementById("s_blog");
+    if (blog !== null) {
+      document.getElementById("s_blog").remove();
+    }
     (function () {
       let s = {
         user: localStorage.getItem('user'),
@@ -746,7 +750,7 @@ function getComment() {
     url:
       BASE_URL +
       "post/showposts?tagTitle=" +
-      currentUrl,
+      localStorage.getItem('next'),
     data: {
       userAuth: userAuth,
     },

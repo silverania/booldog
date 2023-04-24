@@ -143,7 +143,7 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    print("auth ="+str(request.user.is_authenticated))
+    print("auth ="+str(request.user))
     print("token="+str(request.META.get('HTTP_AUTHORIZATION')))
     if request.method == 'POST':
         valuenext = request.POST.get('mainurl')

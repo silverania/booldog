@@ -1,15 +1,1 @@
-BOOLDOG:
-fatto il login , l' IFRAME invece del blog mostra la pagina principale
-prendere il valore request.user_is_authenticated all' apertura pagina
-rivedere la gestione csrftoken per capire se l 'user è autenticato;
-user/login/blog non ritorna response dalla view
-prendi il token direttamente nel sessionStorage e usalo per la post nella view checkuser()
-vedi se puoi esportare la request dal client al server e viceversa
-crea un cookie con i cazzo di dati sessione e inviali al client per recuperare la sessiohne nella view
-le taextarea hanno la base maggiore in alcune pagine ( quando click su back nella pagina login per es.)
-salvare le informazioni sulle diomensioni di section blog nello storage
-qunado sbaglio user e pass nel login mi reindirizza a una scritta <h1> non centrata e da aggoiustare
-impostare l' altezza dei post presi dal server col numero di righe della variabile post.body (getcomment) per far entrare il testo .
-controllare i link in blog.js affinchè non redirigano a tutorial(127.0.0.1:9000)
-servono i link assoluti!
-riparare gli url in login.js
+con user loggato il click su modifica apre un link non riconosciuto da urls.py
