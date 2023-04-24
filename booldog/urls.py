@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', views.Homepage.as_view(), name="homepage"),
     path('booldog', views.Booldog.as_view(), name="booldog"),
     path('booldog/admin/', admin.site.urls),
     path('user/', include('user.urls')),

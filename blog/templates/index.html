@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load static %}
+<html lang="en">
+  <head>
+    {% include '_heads.html' %}
+    <title>Get Booldog !</title>
+    <meta name="keywords" content="download,booldog,messages,hosting,software" />
+    <meta name="description" content="messages hosting software download git" />
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid">
+        <div class="row mt-3">
+          <div class="col-4 text-center">
+            <div id="div_comment_icon" style="margin:0 auto 10% auto">
+              <div style="text-align:center;font-weight:bold;" id="blog_icon">
+                <a id="a_logo_booldog" class="navbar-brand" href="#">
+                  <div class="booldog">
+                    <span class="badgebooldog"><i id="titleicon" class="fas fa-comment-dots"></i></span>
+                    <span id="booldogtitle" class="spanbooldog">BoolDog</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-8 mt-1 text-end">
+            <div>
+              <ul id="loginbooldog" class="list-group mr-0">
+                {% if request.user.is_authenticated %}
+                  <li id="liTutorial_booldog" class="nav-item" style="text-align:right;">
+                    <a class="nav-link" id="aTutorial_booldog" href="newpage"><span id="spanTutorial_booldog"><b>{% trans 'Admin Settings' %}</b></span></a>
+                  </li>
+                  <li id="liEsci_booldog" class="nav-item" style="text-align:right;">
+                    <a id="aEsci_booldog" class="nav-link"><span id="spanEsci_booldog"><b>{% trans 'Exit' %}</b></span></a>
+                  </li>
+                {% else %}
+                  <li class="nav-item" id="liRegistrati_booldog" style="text-align:right;">
+                    <a id="aRegistrati_booldog" class="nav-link"><span id="spanRegistrati_booldog"><b>{% trans 'SignUp' %}</b></span></a>
+                  </li>
+                  <li class="nav-item" style="float:right!important;">
+                    <a id="aEntra_booldog" class="nav-link"><span id="spanEntra_booldog"><b>{% trans 'Login' %}</b></span></a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% trans 'it work !' %}
+  </body>
+</html>

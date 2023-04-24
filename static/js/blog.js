@@ -1,7 +1,6 @@
 
 
 /* By Mario , superior code */
-
 const BASE_URL = "https://localbooldog:8000/"; // URL del server
 sessionStorage.setItem('BASE_URL', BASE_URL);
 const HOME_PATH = BASE_URL + "booldog";
@@ -580,9 +579,7 @@ class postArea {
             isOpen = false;
           }
           $(postarea.postarea).css("box-shadow", "0 0 0 0");
-          mess.type == "newpost"
-            ? (button_risposta_post.textContent = "Post Inserito")
-            : (button_risposta_post.textContent = "inviato");
+          mess.type == "newpost" ? button_risposta_post.textContent = postinserito : button_risposta_post.textContent = postinviato;
 
           button_risposta_post.setAttribute("disabled", "");
           postarea.postarea.setAttribute("disabled", "");
@@ -593,11 +590,11 @@ class postArea {
         break;
       case "post":
         var objectToAppendChild = divUserBlog.id;
-        button_risposta_post.textContent = '{% trans "Rispondi" %}';
+        button_risposta_post.textContent = buttonRispo;
         break;
       case "resp":
         var objectToAppendChild = "divuserblog_" + id;
-        button_risposta_post.textContent = "Rispondi";
+        button_risposta_post.textContent = buttonRispo;
         break;
     }
     var elementToAppendButton = document.getElementById(objectToAppendChild);

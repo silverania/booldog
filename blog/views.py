@@ -21,6 +21,12 @@ formatted_datetime = formats.date_format(
 # @xframe_options_exempt
 
 
+class Homepage(View):
+    def get(self, request):
+        booldogHtml = "index.html"
+        return render(request, booldogHtml)
+
+
 class Booldog(View):
     def get(self, request):
         print("entry in booldog vieew")

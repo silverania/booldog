@@ -1,7 +1,6 @@
 
 
 /* By Mario , superior code */
-//var frameroot = document.getElementById('booldogFrame');
 const BASE_URL = "https://localbooldog:8000/"; // URL del server
 sessionStorage.setItem('BASE_URL', BASE_URL);
 const HOME_PATH = BASE_URL + "booldog";

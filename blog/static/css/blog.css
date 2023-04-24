@@ -25,7 +25,7 @@
   src: url('../Fonts/WorkSans-Regular.ttf');
 }
 
-    html,body {width:auto;height: 3;min-height: auto;}
+    html,body {width:auto;height:auto;min-height: auto;}
 
 
 #blog{

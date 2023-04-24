@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 14:33+0200\n"
+"POT-Creation-Date: 2023-04-23 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/templates/booldog.html:18
+#: blog/templates/booldog.html:20
 msgid "Reply"
 msgstr ""
 
-#: blog/templates/booldog.html:19
+#: blog/templates/booldog.html:21
 msgid "Entered"
 msgstr ""
 
-#: blog/templates/booldog.html:20
+#: blog/templates/booldog.html:22
 msgid "Sent"
+msgstr ""
+
+#: blog/templates/index.html:32
+msgid "Admin Settings"
+msgstr ""
+
+#: blog/templates/index.html:35
+msgid "Exit"
+msgstr ""
+
+#: blog/templates/index.html:39
+msgid "SignUp"
+msgstr ""
+
+#: blog/templates/index.html:42
+msgid "Login"
+msgstr ""
+
+#: blog/templates/index.html:51
+msgid "it work !"
+msgstr ""
+
+#: user/templates/admin/base.html:42
+msgid "Welcome,"
+msgstr ""
+
+#: user/templates/admin/base.html:47
+msgid "View site"
+msgstr ""
+
+#: user/templates/admin/base.html:52
+msgid "Documentation"
+msgstr ""
+
+#: user/templates/admin/base.html:56
+#, fuzzy
+#| msgid "lose password ?"
+msgid "Change password"
+msgstr "Password Persa ?"
+
+#: user/templates/admin/base.html:60
+msgid "Log out"
+msgstr ""
+
+#: user/templates/admin/base.html:72
+msgid "Home"
 msgstr ""
 
 #: user/templates/base_password.html:22
@@ -75,6 +121,3 @@ msgstr ""
 #: user/templates/wrongdati.html:15
 msgid "wrong data !"
 msgstr ""
-
-#~ msgid "lose password ?"
-#~ msgstr "Password Persa ?"

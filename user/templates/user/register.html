@@ -52,7 +52,7 @@
                {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle password ! </p>
                {% endif %}
 
-               {% elif 'email:' in field.name %}
+               {% elif 'email' in field.name %}
                <label>la tua mail :</label>
               <p class="mt-1 mb-4">{{field}}</p>
                {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle mail ! </p>
