@@ -651,10 +651,10 @@ function initBlogSGang(u, p, url) {
   currentUrl = url.replace(/\/$/, "");
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
-  if (currentUrl != "") {
+  if (u != "" && p != "" && url != "") {
+    localStorage.setItem('user', u);
+    localStorage.setItem('password', p);
     localStorage.setItem("next", currentUrl);
-  } else {
-    currentUrl = localStorage.getItem("next");
   }
   HIDDENFIELD = "?mainurl=" + currentUrl;
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + localStorage.getItem('next');
@@ -669,9 +669,9 @@ function initBlogSGang(u, p, url) {
     document.getElementById("s_blog").remove();
     (function () {
       let s = {
-        user: u,
-        password: p,
-        currentUrl: currentUrl,
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        currentUrl: localStorage.getItem('next'),
       };
       const request = {
         method: "POST",

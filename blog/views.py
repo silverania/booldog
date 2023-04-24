@@ -34,6 +34,7 @@ class Booldog(View):
         currentUrl = request.GET.get('mainurl')
         user = request.GET.get('user')
         password = request.GET.get('password')
+        breakpoint()
         return render(request, booldogHtml, {'currentUrl': currentUrl, 'user': user, 'password': password})
 
 

@@ -17,9 +17,15 @@ $(document).ready(function () {
     }
     finally {
         if (valuenext) {
+            try {
+                document.getElementById('next').setAttribute("value", next);
+            }
+            catch (TypeError) {
+                console.log("element with id next absent !");
+            }
             localStorage.setItem("next", valuenext);
             next = localStorage.getItem("next");
-            document.getElementById('next').setAttribute("value", next);
+
             console.log("valuenext not empty : " + next);
         }
         else {
@@ -34,7 +40,7 @@ $(document).ready(function () {
 });
 function htmlIframeWidthHeight() {
     var height, width;
-    var bsectionHeight = document.getElementById("containerlogin");
+    var bsectionHeight = document.getElementsByTagName('body')[0];
     height = bsectionHeight.scrollHeight + 340;
     width = bsectionHeight.scrollWidth + 200;
     localStorage.setItem("iframewidth", width.toString());
