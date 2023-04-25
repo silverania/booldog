@@ -27,7 +27,9 @@
    <div style="width:100%!important;min-width:100%!important">
     <span style="margin-bottom:70px;font-weight:heavy;font-size:1vw">Password Modificata !</span></div>
 
-<a href='{% url "booldog" %}?mainurl={{valuenext}}'> < Torna </a>
+<a id="passwordchanged" href="">Home</a>
+<script>let templink=document.getElementById('passwordchanged');templink.href=localStorage.getItem('BASE_URL')+"booldog?mainurl={{valuenext}}&user="+localStorage.getItem("user")+"&password="+localStorage.getItem("password");
+</script>    
 </div>
 </div>
 </div>
