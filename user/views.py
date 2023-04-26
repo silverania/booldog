@@ -221,7 +221,6 @@ def user_register(request):
             user.profile.photo = form.cleaned_data.get('photo')
             user.profile.first_name = username
             user.profile.email = form.cleaned_data.get('email')
-            breakpoint()
             user.profile.website = form.cleaned_data.get('website')
             if 'blog' in request.path:
                 valuenext = request.GET.get('mainurl')

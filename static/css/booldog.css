@@ -1,3 +1,29 @@
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url('../Fonts/Montserrat-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('../Fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Open-Sans-Bold';
+  src: url('../Fonts/Open-Sans-Bold.ttf');
+}
+@font-face {
+  font-family: 'Open-Sans';
+  src: url('../Fonts/OpenSans-VariableFont_wdth,wght.ttf');
+}
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('../Fonts/WorkSans-Regular.ttf');
+}
+#loginbooldog{
+    list-style:none;
+}
+
 a#a_download.title {
     margin-top:20px;
     width:auto;
@@ -31,7 +57,18 @@ a#a_download.title {
     margin-top: 15px;
 }
 
+.fa-comment-dots{
+    color:#ffebbf;
+}
+
 @media screen and (min-width: 576px) {
+    span#booldogtitle{
+       font-size:2em;
+       font-family: 'WorkSans-Regular';
+    }
+    .fa-comment-dots{
+        font-size:3em;
+    }
     .badgebooldog.title{
         font-size:1em;
     }

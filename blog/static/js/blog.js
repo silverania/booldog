@@ -75,8 +75,9 @@ var inputSubmit = document.createElement("INPUT");
 var logo =
   '<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
 $(bIcon).append(logo);
+var iconRefresh = '<a  href="#"  target="_blank" id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+$(bdiv).append(iconRefresh);
 bIcon.appendChild(H1Welcome);
-
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;

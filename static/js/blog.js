@@ -2,7 +2,7 @@
 
 /* By Mario , superior code */
 const BASE_URL = "https://localbooldog:8000/"; // URL del server
-sessionStorage.setItem('BASE_URL', BASE_URL);
+localStorage.setItem('BASE_URL', BASE_URL);
 const HOME_PATH = BASE_URL + "booldog";
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
@@ -75,8 +75,9 @@ var inputSubmit = document.createElement("INPUT");
 var logo =
   '<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
 $(bIcon).append(logo);
+var iconRefresh = '<a  href="#"  target="_blank" id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+$(bdiv).append(iconRefresh);
 bIcon.appendChild(H1Welcome);
-
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
@@ -573,7 +574,7 @@ class postArea {
             return -1;
           }
           //form_risposta_post.setAttribute("action",url)
-          url = URL_NEW_POST + "?mainurl=" + currentUrl;
+          url = URL_NEW_POST + "?mainurl=" + localStorage.getItem('next');
           mess.body = txts;
           if (sendToServer(mess, url) == 0) {
             isOpen = false;
@@ -648,30 +649,34 @@ function getCookie(name) {
 }
 
 function initBlogSGang(u, p, url) {
-  currentUrl = url.replace(/\/$/, "");
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
-  if (currentUrl != "") {
+  var blog;
+  if ((u !== undefined && p !== undefined && url !== undefined) && (u !== "" && p !== "" && url !== "")) {
+    currentUrl = url.replace(/\/$/, "");
+    localStorage.setItem('user', u);
+    localStorage.setItem('password', p);
     localStorage.setItem("next", currentUrl);
-  } else {
-    currentUrl = localStorage.getItem("next");
   }
-  HIDDENFIELD = "?mainurl=" + currentUrl;
+  HIDDENFIELD = "?mainurl=" + localStorage.getItem('next');
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + localStorage.getItem('next');
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
   localStorage.setItem('HOME_PATH', HOME_PATH + HIDDENFIELD);
-  HTTPURL_CHANGEPASSWORD = BASE_URL + "user/change_password" + HIDDENFIELD;
+  HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
   sessionStorage.getItem("csrfmiddlewaretoken");
   requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
   function sendTokenPost() {
-    document.getElementById("s_blog").remove();
+    blog = document.getElementById("s_blog");
+    if (blog !== null) {
+      document.getElementById("s_blog").remove();
+    }
     (function () {
       let s = {
-        user: u,
-        password: p,
-        currentUrl: currentUrl,
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        currentUrl: localStorage.getItem('next'),
       };
       const request = {
         method: "POST",
@@ -746,7 +751,7 @@ function getComment() {
     url:
       BASE_URL +
       "post/showposts?tagTitle=" +
-      currentUrl,
+      localStorage.getItem('next'),
     data: {
       userAuth: userAuth,
     },

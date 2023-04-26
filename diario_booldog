@@ -1,1 +1,1 @@
-con user loggato il click su modifica apre un link non riconosciuto da urls.py
+quando mi registro dal blog, la variabile sito in registrazione non è il sito su cui l' user registrato aggiungerà il blog , ma un sito qualsiasi , importante relativamente.
