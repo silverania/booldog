@@ -129,6 +129,7 @@ def newPost(request):
     body = request.GET.get("body")
     author = request.GET.get("username")
     myuser = Profile.objects.get(first_name=author)
+    pageadmin = request.GET.get("useradmin")
     myuser.firstname = getLoginName(request)
     tagTitle = request.GET.get('mainurl')
     split_url = urlsplit(tagTitle)
@@ -136,8 +137,9 @@ def newPost(request):
     try:
         thisSite = split_url.scheme+"://" + \
             (split_url.netloc)+(split_url.path)
-        site = Site(title=thisSite, user=myuser)
-        site.save()
+        site = Site.objects.get(
+            title=thisSite, user=Profile.objects.get(first_name=pageadmin))
+        breakpoint()
     except Exception:
         raise Exception(
             "errore nell inserimeto del url.")

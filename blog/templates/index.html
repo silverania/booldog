@@ -11,7 +11,7 @@
     <header>
       <div class="container-fluid">
         <div class="row mt-3">
-          <div class="col-4 text-center">
+          <div class="offset-3 col-4 text-center">
             <div id="div_comment_icon" style="margin:0 auto 10% auto">
               <div style="text-align:center;font-weight:bold;" id="blog_icon">
                 <a id="a_logo_booldog" class="navbar-brand" href="#">
@@ -24,7 +24,7 @@
             </div>
           </div>
 
-          <div class="col-8 mt-1 text-end">
+          <div class="col-4 mt-1 text-end">
             <div>
               <ul id="loginbooldog" class="list-group mr-0">
                 {% if request.user.is_authenticated %}
@@ -50,11 +50,17 @@
     </header>
     <div class="container-fluid">
         <div class="row mt-3">
-          <div class="col-4 text-center">
-            {% trans 'it work !' %}
+          
+          <div class="col-3 text-center">
+          <a href="{% url 'homepage' %}" target="_blank"><span class="badge bg-info">SignUp To Use Booldog on your website !</span></a>
           </div>
           <div class="col-4 text-center">
-          <a href="{% url 'homepage' %}" target="_blank"><span class="badge bg-info">SignUp To Use Booldog on your website !</span>
+            <div  ><p class="badge bg-primary">{% trans 'Cosa è Booldog ? ' %}</p>
+              <p class="">{% trans 'Booldog è un servizio di hosting messaggi per siti web .Installalo sul tuo sito per permettere ai tuoi visitatori di commentare .' %}</p>
+            </div>
+            <div  ><p class="badge bg-primary">{% trans 'How to Use ? ' %}</p>
+              <p class="">{% trans 'Registrati' %} <a href="{% url 'register' %}admin">qui</a> per ottenere user e password' %}</p>
+            </div>
           </div>
         </div>
     </div>

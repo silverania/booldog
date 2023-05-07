@@ -10,10 +10,11 @@ class PostAdmin(admin.ModelAdmin):
         filtered_query = Comment.objects.none()
         profile = Profile.objects.get(user=request.user)
         site = Site.objects.filter(user=profile)
-        for s in site:
+        for s in site.all():
+            # mysite=Site.objects.get(user=)
             filtered_query |= query.filter(site=s)
             print(s.title)
-        return query
+        return filtered_query
     search_fields = ('body',)
     list_filter = ('slug', 'status', 'created', 'publish', 'author',)
     #prepopulated_fields = {'slug': ('title',)}

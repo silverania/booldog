@@ -1082,6 +1082,7 @@ function sendToServer(post, url) {
       commento: post.post.pk,
       type: post.type,
       username: userThatLogin[0].fields.first_name,
+      useradmin: localStorage.getItem("user"),
       body: post.body,
       respTo: post.respToID,
       id: post.pk,
@@ -1092,6 +1093,7 @@ function sendToServer(post, url) {
     data = {
       type: post.type,
       tutorial: post.thisTutorialTitle,
+      useradmin: localStorage.getItem("user"),
       username: userThatLogin[0].fields.first_name,
       body: post.body,
     };

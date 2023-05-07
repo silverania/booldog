@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
+from blog.models import Site
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
@@ -227,7 +228,11 @@ def user_register(request):
                 # agiungere i permessi per leggere i propri post dall adminpage
                 user.save()
                 return redirect('/user/login/blog?mainurl='+valuenext)
-            elif 'blogadmin' in request.path:
+            elif 'admin' in request.path:
+                breakpoint()
+                site = Site.objects.create(
+                    title=user.profile.website, user=user.profile)
+                site.save()
                 group = Group.get(name='BlogAdmin')
                 user.groups.add(group)
                 print('myuser'+str(user)
@@ -235,7 +240,7 @@ def user_register(request):
                 user.is_staff = True
                 user.save()
                 # mostra messaggio e esci
-                return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html del tuo sito . </h2>")
+                return HttpResponse("<h1>sei autorizzato ad usare Booldog ! </h1><h2>Ora inserisci user e password nel file bldg.js</h2>")
             else:
                 if 'next' in request.GET:
                     valuenext = request.GET.get('mainurl')

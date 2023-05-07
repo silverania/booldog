@@ -43,7 +43,9 @@
     width: 65%!important;
 }
 
-#spanrefresh{
+span#spanrefresh.badgebooldog{
+  display:block;
+  width:fit-content;
   margin:0 auto;
 }
 
@@ -88,6 +90,7 @@ div.breadcrumbs{
 
 .fa-comment-dots{
     color:#ffebbf;
+    size:3rem;
 }
 
 .spanbooldog.admin{opacity:1;color:white;}

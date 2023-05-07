@@ -1,5 +1,6 @@
 
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}Log-in {% endblock title %}
 
@@ -68,12 +69,14 @@
 
 
 
-                  {% elif 'website' in field.label_tag %}
-                  {% if next %}
+                  {% elif 'website' in field.name %}
+                  {% if 'blog' in request.path %} 
                   <small style="color: grey">Opzionale</small>
                    <label>{{field.label_tag}}</label>
                   {%else%}
-                  <label>{{field.label_tag}}</label>{% endif %}
+                  <label>{{field.label_tag}}</label>
+                  <small style="color: grey">{% trans 'Il sito su cui userai Booldog' %}</small>
+                  {% endif %}
                  <p class="mt-1 mb-4">{{field}}</p>
                    {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto del Sito Web ! </p>
                   <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
