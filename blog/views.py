@@ -148,6 +148,7 @@ def newPost(request):
         post = blog.models.Comment()
         post.postType = "post"
     else:
+        breakpoint()
         post = blog.models.Resp()
         respToProfile = request.GET.get("respToUser")
         respToProfile = Profile.objects.get(first_name=respToProfile)
