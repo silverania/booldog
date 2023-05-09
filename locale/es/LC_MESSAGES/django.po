@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 14:24+0200\n"
+"POT-Creation-Date: 2023-05-09 20:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Exit"
 msgstr "Salida"
 
-#: blog/templates/index.html:39
+#: blog/templates/index.html:39 blog/templates/index.html:63
 msgid "SignUp"
 msgstr "Registro"
 
@@ -64,31 +64,26 @@ msgstr ""
 
 #: blog/templates/index.html:58
 msgid "Boolddog is also used on this page ! in the footer section."
-msgstr "¡Boolddog también se usa en esta página! en la sección de pie de página."
+msgstr ""
+"¡Boolddog también se usa en esta página! en la sección de pie de página."
 
-#: blog/templates/index.html:60
+#: blog/templates/index.html:61
 msgid "How use it ? "
 msgstr "¿Cómo usarlo?"
 
-#: blog/templates/index.html:62
-#, fuzzy
-#| msgid "SignUp"
-msgid "Signup"
-msgstr "Registro"
-
-#: blog/templates/index.html:62
+#: blog/templates/index.html:63
 msgid "here"
 msgstr "aqui"
 
-#: blog/templates/index.html:62
+#: blog/templates/index.html:63
 msgid "to obtain user and password"
 msgstr "para obtener usuario y contraseña"
 
-#: blog/templates/index.html:63
+#: blog/templates/index.html:64
 msgid "link booldog files in your head !"
 msgstr "¡Enlaza archivos booldog en tu cabeza!"
 
-#: blog/templates/index.html:66
+#: blog/templates/index.html:67
 msgid ""
 "edit the bldg.js file by inserting the username and password chosen to "
 "register , in quotes !"
@@ -211,6 +206,11 @@ msgstr "Contraseña Perdida"
 #: user/templates/wrongdati.html:15
 msgid "wrong data !"
 msgstr "información incorrecta !"
+
+#, fuzzy
+#~| msgid "SignUp"
+#~ msgid "Signup"
+#~ msgstr "Registro"
 
 #~ msgid "SignUp To Use Booldog on your website !"
 #~ msgstr "¡Regístrese para usar Booldog en su sitio web!"
