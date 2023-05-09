@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-23 14:07+0200\n"
+"POT-Creation-Date: 2023-05-09 14:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/templates/booldog.html:20
+#: blog/templates/booldog.html:21
 msgid "Reply"
 msgstr "Rispondi"
 
-#: blog/templates/booldog.html:21
+#: blog/templates/booldog.html:22
 msgid "Entered"
 msgstr "Inserito"
 
-#: blog/templates/booldog.html:22
+#: blog/templates/booldog.html:23
 msgid "Sent"
 msgstr "Inviato"
 
@@ -46,21 +46,68 @@ msgstr "Registrazione"
 msgid "Login"
 msgstr "Entra"
 
-#: blog/templates/index.html:51
-msgid "it work !"
+#: blog/templates/index.html:56
+msgid "What is Booldog ? "
+msgstr "Cosa è Booldog ?"
+
+#: blog/templates/index.html:57
+msgid ""
+"Booldog is a message hosting service for websites. Install it on your site "
+"to allow your visitors to comment. Registering will give you access to the "
+"Boolddog admin panel to moderate posts and have control over what is posted "
+"on your site."
 msgstr ""
+"Booldog è un servizio di hosting messaggi per siti web . Usalo sul tuo sito "
+"per i commenti .La registrazione ti darà accesso al pannello di "
+"amministrazione di Booldog per moderare i messaggi e avere il controllo su "
+"cosa viene pubblicato sul tuo sito ."
+
+#: blog/templates/index.html:58
+msgid "Boolddog is also used on this page ! in the footer section."
+msgstr "Booldog viene usato su uquesto sito ! nella sezione footer sotto ."
+
+#: blog/templates/index.html:60
+msgid "How use it ? "
+msgstr "Come usarlo ?"
+
+#: blog/templates/index.html:62
+#, fuzzy
+#| msgid "SignUp"
+msgid "Signup"
+msgstr "Registrazione"
+
+#: blog/templates/index.html:62
+msgid "here"
+msgstr "qui"
+
+#: blog/templates/index.html:62
+msgid "to obtain user and password"
+msgstr "per ottenere user e password"
+
+#: blog/templates/index.html:63
+msgid "link booldog files in your head !"
+msgstr ""
+"aggiungi il percorso dei files scaricati nella sezione Head del tuo sito "
+
+#: blog/templates/index.html:66
+msgid ""
+"edit the bldg.js file by inserting the username and password chosen to "
+"register , in quotes !"
+msgstr ""
+"Edita il file bldg.js inserendo , tra virgolette , user e password scelti "
+"per registrarti. "
 
 #: user/templates/admin/base.html:42
 msgid "Welcome,"
-msgstr ""
+msgstr "Benvenuto"
 
 #: user/templates/admin/base.html:47
 msgid "View site"
-msgstr ""
+msgstr "Vedi Sito"
 
 #: user/templates/admin/base.html:52
 msgid "Documentation"
-msgstr ""
+msgstr "Documentazione"
 
 #: user/templates/admin/base.html:56
 #, fuzzy
@@ -70,13 +117,13 @@ msgstr "Password Persa ?"
 
 #: user/templates/admin/base.html:60
 msgid "Log out"
-msgstr ""
+msgstr "Esci"
 
 #: user/templates/admin/base.html:72
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
-#: user/templates/base_password.html:22
+#: user/templates/base_password.html:24
 msgid "Password recover"
 msgstr "Recupero Dati"
 
@@ -127,9 +174,55 @@ msgstr "Inserisci un email"
 msgid "Send e-mail"
 msgstr "Invia"
 
+#: user/templates/user/register.html:47
+msgid "Error entering username !"
+msgstr "Erroe nell inserimento username !"
+
+#: user/templates/user/register.html:53 user/templates/user/register.html:65
+msgid "Error entering password !"
+msgstr "Errore nell inserimento password !"
+
+#: user/templates/user/register.html:59
+msgid "Error entering email !"
+msgstr "Erroe nell inserimento email !"
+
+#: user/templates/user/register.html:78
+msgid "The site you will be using Booldog on"
+msgstr "Il tuo sito usato per Booldog"
+
+#: user/templates/user/register.html:81
+msgid "Error entering the Website !"
+msgstr "Errore nell inserimento del Sito !"
+
+#: user/templates/user/register.html:89
+msgid "Error entering photo !"
+msgstr "Errore nell inserimento photo!"
+
+#: user/templates/user/register.html:97
+#, fuzzy
+#| msgid "SignUp"
+msgid "Signup me"
+msgstr "Registrazione"
+
+#: user/templates/user/register.html:107
+msgid "Remember me"
+msgstr "Ricordami"
+
+#: user/templates/user/register.html:114
+#, fuzzy
+#| msgid "lose password ?"
+msgid "Forget Password ?"
+msgstr "Password Persa ?"
+
 #: user/templates/wrongdati.html:15
 msgid "wrong data !"
 msgstr "Dati non corretti !"
+
+#~ msgid "SignUp To Use Booldog on your website !"
+#~ msgstr "Registrati per usare booldog sul tuo sito !"
+
+#~ msgid "What\\"
+#~ msgstr "Cosa "
 
 #~ msgid "translate"
 #~ msgstr "traduci"

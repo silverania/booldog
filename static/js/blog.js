@@ -1,7 +1,7 @@
 
 
 /* By Mario , superior code */
-const BASE_URL = "https://localbooldog:8000/"; // URL del server
+const BASE_URL = "https://localbooldog:9000/"; // URL del server
 localStorage.setItem('BASE_URL', BASE_URL);
 const HOME_PATH = BASE_URL + "booldog";
 var HIDDENFIELD;
@@ -1082,6 +1082,7 @@ function sendToServer(post, url) {
       commento: post.post.pk,
       type: post.type,
       username: userThatLogin[0].fields.first_name,
+      useradmin: localStorage.getItem("user"),
       body: post.body,
       respTo: post.respToID,
       id: post.pk,
@@ -1092,6 +1093,7 @@ function sendToServer(post, url) {
     data = {
       type: post.type,
       tutorial: post.thisTutorialTitle,
+      useradmin: localStorage.getItem("user"),
       username: userThatLogin[0].fields.first_name,
       body: post.body,
     };

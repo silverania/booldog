@@ -45,7 +45,7 @@ def checkUser(request):
         authorized = False
         list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
-            print(key)
+            print(key+value)
             if 'user' in key:
                 myuser = value
             if 'password' in key:
@@ -55,6 +55,7 @@ def checkUser(request):
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
+                breakpoint()
                 if myuser is not None:
                     list_current_user = getUser(myuser)
                     firstName = str(myuser)

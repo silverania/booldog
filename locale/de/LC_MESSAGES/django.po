@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-23 14:07+0200\n"
+"POT-Creation-Date: 2023-05-09 14:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/templates/booldog.html:20
+#: blog/templates/booldog.html:21
 msgid "Reply"
 msgstr "Replik"
 
-#: blog/templates/booldog.html:21
+#: blog/templates/booldog.html:22
 msgid "Entered"
 msgstr "Eingegeben"
 
-#: blog/templates/booldog.html:22
+#: blog/templates/booldog.html:23
 msgid "Sent"
 msgstr "Gesendet"
 
 #: blog/templates/index.html:32
 msgid "Admin Settings"
-msgstr ""
+msgstr "Admin Settings"
 
 #: blog/templates/index.html:35
 msgid "Exit"
@@ -46,17 +46,64 @@ msgstr "Anmeldung"
 msgid "Login"
 msgstr "Login"
 
-#: blog/templates/index.html:51
-msgid "it work !"
+#: blog/templates/index.html:56
+msgid "What is Booldog ? "
+msgstr "Was ist Booldog?"
+
+#: blog/templates/index.html:57
+msgid ""
+"Booldog is a message hosting service for websites. Install it on your site "
+"to allow your visitors to comment. Registering will give you access to the "
+"Boolddog admin panel to moderate posts and have control over what is posted "
+"on your site."
 msgstr ""
+"Booldog ist ein Nachrichten-Hosting-Dienst für Websites. Installieren Sie es "
+"auf Ihrer Website, damit Ihre Besucher Kommentare abgeben können. Durch die "
+"Registrierung erhalten Sie Zugriff auf das Boolddog-Admin-Panel, um Beiträge "
+"zu moderieren und die Kontrolle darüber zu haben, was auf Ihrer Website "
+"gepostet wird."
+
+#: blog/templates/index.html:58
+msgid "Boolddog is also used on this page ! in the footer section."
+msgstr "Boolddog wird auch auf dieser Seite verwendet ! im Fußbereich."
+
+#: blog/templates/index.html:60
+msgid "How use it ? "
+msgstr "wie benutze es"
+
+#: blog/templates/index.html:62
+#, fuzzy
+#| msgid "SignUp"
+msgid "Signup"
+msgstr "Anmeldung"
+
+#: blog/templates/index.html:62
+msgid "here"
+msgstr "who"
+
+#: blog/templates/index.html:62
+msgid "to obtain user and password"
+msgstr "um Benutzer und Passwort zu erhalten"
+
+#: blog/templates/index.html:63
+msgid "link booldog files in your head !"
+msgstr "Verknüpfen Sie Booldog-Dateien in Ihrem Kopf !"
+
+#: blog/templates/index.html:66
+msgid ""
+"edit the bldg.js file by inserting the username and password chosen to "
+"register , in quotes !"
+msgstr ""
+"Bearbeiten Sie die Datei bldg.js, indem Sie den zur Registrierung gewählten "
+"Benutzernamen und das Kennwort in Anführungszeichen einfügen"
 
 #: user/templates/admin/base.html:42
 msgid "Welcome,"
-msgstr ""
+msgstr "Welcome"
 
 #: user/templates/admin/base.html:47
 msgid "View site"
-msgstr ""
+msgstr "View site"
 
 #: user/templates/admin/base.html:52
 msgid "Documentation"
@@ -74,19 +121,19 @@ msgstr "Ausloggen"
 
 #: user/templates/admin/base.html:72
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
-#: user/templates/base_password.html:22
+#: user/templates/base_password.html:24
 msgid "Password recover"
 msgstr "Passwort zurücksetzen"
 
 #: user/templates/base_site.html:3
 msgid "Django site admin"
-msgstr ""
+msgstr "Django site admin"
 
 #: user/templates/base_site.html:6
 msgid "Django administration"
-msgstr ""
+msgstr "Django administration"
 
 #: user/templates/change_password.html:56
 msgid ""
@@ -128,6 +175,57 @@ msgstr "E-Mail"
 msgid "Send e-mail"
 msgstr "E-mail senden"
 
+#: user/templates/user/register.html:47
+msgid "Error entering username !"
+msgstr "Fehler beim Eingeben des Nutzername"
+
+#: user/templates/user/register.html:53 user/templates/user/register.html:65
+msgid "Error entering password !"
+msgstr "Fehler beim Eingeben des password !"
+
+#: user/templates/user/register.html:59
+msgid "Error entering email !"
+msgstr "Fehler beim Eingeben des email !"
+
+#: user/templates/user/register.html:78
+msgid "The site you will be using Booldog on"
+msgstr "Die Website, auf der Sie Booldog verwenden werden"
+
+#: user/templates/user/register.html:81
+msgid "Error entering the Website !"
+msgstr "Fehler beim Eingeben des webseite !"
+
+#: user/templates/user/register.html:89
+msgid "Error entering photo !"
+msgstr "Fehler beim Eingeben des Fotos !"
+
+#: user/templates/user/register.html:97
+#, fuzzy
+#| msgid "SignUp"
+msgid "Signup me"
+msgstr "Anmeldung"
+
+#: user/templates/user/register.html:107
+msgid "Remember me"
+msgstr "mich erinnern"
+
+#: user/templates/user/register.html:114
+#, fuzzy
+#| msgid "lose password ?"
+msgid "Forget Password ?"
+msgstr "Passwort vergessen?"
+
 #: user/templates/wrongdati.html:15
 msgid "wrong data !"
 msgstr "falschen Daten !"
+
+#~ msgid "SignUp To Use Booldog on your website !"
+#~ msgstr "Melden Sie sich an, um Booldog auf Ihrer Website zu verwenden !"
+
+#~ msgid "qui"
+#~ msgstr "Who"
+
+#, fuzzy
+#~| msgid "What"
+#~ msgid "What\\"
+#~ msgstr "Was"

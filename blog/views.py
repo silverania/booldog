@@ -1,3 +1,5 @@
+import mimetypes
+import os
 from user.models import Profile
 from blog.models import Comment, Resp, Site
 from django.http import HttpResponse, JsonResponse
@@ -10,11 +12,12 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
 from urllib.parse import urlsplit
 import blog
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # from django.views.decorators.clickjacking import xframe_options_exempt
 from django.utils.translation import gettext_lazy as _
 photo = ""
 message = ""
+
 formatted_datetime = formats.date_format(
     datetime.now(), "SHORT_DATETIME_FORMAT")
 
@@ -25,6 +28,17 @@ class Homepage(View):
     def get(self, request):
         booldogHtml = "index.html"
         return render(request, booldogHtml)
+
+
+def files(request, arg):
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filename = arg
+    filepath = BASE_DIR + '/static/client/' + filename
+    path = open(filepath, 'r')
+    mime_type, _ = mimetypes.guess_type(filepath)
+    response = HttpResponse(path, content_type=mime_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
 
 
 class Booldog(View):

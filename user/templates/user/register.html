@@ -44,25 +44,25 @@
               {% if 'username' in field.name %}
               <label>Username:</label>
               <p class="mt-1 mb-4">{{field}}</p>
-              {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto di username ! </p>
+              {% if field.errors %}  <p style="color:red;">{% trans 'Error entering username !' %} </p>
               {% endif %}
               
               {% elif 'password1' in field.name %}
                <label>Password:</label>
               <p class="mt-1 mb-4">{{field}}</p>
-               {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle password ! </p>
+               {% if field.errors %}  <p style="color:red;">{% trans 'Error entering password !' %} </p>
                {% endif %}
 
                {% elif 'email' in field.name %}
                <label>la tua mail :</label>
               <p class="mt-1 mb-4">{{field}}</p>
-               {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle mail ! </p>
+               {% if field.errors %}  <p style="color:red;">{% trans 'Error entering email !' %} </p>
                {% endif %}
 
                 {% elif 'password2' in field.name %}
                 <label>Conferma Password :</label>
                 <p class="mt-1 mb-4">{{field}}</p>
-                    {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle password ! </p>
+                    {% if field.errors %}  <p style="color:red;">{% trans 'Error entering password !' %} </p>
                 <script>setTimeout(() => { window.location.href = {% if 'blog' in request.path %} "/user/register/blog"
                   {% else %} "/user/register "{% endif %}},5000);</script>{% endif %}
 
@@ -75,10 +75,10 @@
                    <label>{{field.label_tag}}</label>
                   {%else%}
                   <label>{{field.label_tag}}</label>
-                  <small style="color: grey">{% trans 'Il sito su cui userai Booldog' %}</small>
+                  <small style="color: grey">{% trans 'The site you will be using Booldog on' %}</small>
                   {% endif %}
                  <p class="mt-1 mb-4">{{field}}</p>
-                   {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto del Sito Web ! </p>
+                   {% if field.errors %}  <p style="color:red;">{% trans 'Error entering the Website !' %} </p>
                   <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
                 {% else %} /user/register {% endif %} "},5000);</script>{% endif %}
                 
@@ -86,7 +86,7 @@
                       <small style="color: grey">Opzionale</small>
                   <label>{{field.label_tag}}</label>
                   <p class="mt-1 mb-4">{{field}}</p>
-                  {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto della Photo ! </p>{%endif%}
+                  {% if field.errors %}  <p style="color:red;">{% trans 'Error entering photo !' %} </p>{%endif%}
 
 
                  
@@ -94,7 +94,7 @@
                    {% endif %}
                     {% endfor %}
                     <div >
-                      <button style="width:60%" class="btn ms-5 btn-outline-primary "  type="submit">Registrami</button>
+                      <button style="width:60%" class="btn ms-5 btn-outline-primary "  type="submit">{% trans 'Signup me' %}</button>
                     </div></div>
                   </div>
                 </div>
@@ -104,14 +104,14 @@
                     <label class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" value="remember-me">
                       <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">Ricordami !</span>
+                      <span class="custom-control-description">{% trans 'Remember me' %}</span>
                     </label>
 
 
                   </div>
                   <div class="col-xs-12 col-sm-3">
                     <p class="kpx_forgotPwd">
-                      <a href="#">Password Dimenticata ?</a>
+                      <a href="#">{% trans 'Forget Password ?' %}</a>
                     </p>
                   </div>
                 </div-->
