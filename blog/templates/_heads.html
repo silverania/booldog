@@ -1,0 +1,14 @@
+{% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="silverania">
+    <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
+    <link rel="stylesheet" href="{% static "css/all.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/booldog.css" %}">
+    <script  src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
+    <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    <script src="/static/client/bldg.js"></script>
+<script src="/static/client/booldog.js" defer></script>
+    {% block otherscripts %} {% endblock otherscripts %}

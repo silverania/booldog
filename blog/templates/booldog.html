@@ -1,0 +1,28 @@
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <title>booldog</title>
+    <meta name="author" content="silverania"/>
+    <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/all.min.css" %}"/>
+    <script  src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet"/>
+    <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
+    </head>
+    <body>
+<script src="{% static 'js/blog.js' %}" id="s_blog" ></script>
+<script>
+var currentUrl="{{currentUrl}}";
+var thisuser="{{u}}";
+var thispassword="{{password}}";
+var buttonRispo="{% trans "Reply" %}"
+var postinserito='{% trans "Entered" %}';
+var postinviato='{% trans "Sent" %}';
+sessionStorage.setItem('buttonRispondi',buttonRispo)
+initBlogSGang(thisuser,thispassword,currentUrl);
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Log-in {% endblock title %}
+
+{% block content %}
+<div id="containerlogin" class="container">
+        <h3 align="center">Entra {{ request.user.is_authenticated }}</h3>
+             <div class="row justify-content-center">
+          <div class=" facebook col-md-1 col-1 col-sm-1 ">
+                  <a href="{% url 'social:begin' 'facebook' %}" class="facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            </div>
+          <!--div class="col-xs-2 col-sm-2">
+            <a href="#" class="twitter btn btn-lg btn-block kpx_btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+              <i class="fab fa-twitter fa-2x"></i>
+              <span class="hidden-xs"></span>
+            </a>
+          </div-->
+          <div class="col-md-1 col-sm-1 col-social col-1 ms-0 social">
+          <a href="#" data-toggle="tooltip" class="google"data-placement="top" title="Google Plus">
+              <i class="fab fa-google fa-2x"></i>
+            </a>
+            </div>
+            </div>
+    <br>
+
+		<div class="row justify-content-center">
+			<div class="text-center" style="margin-bottom:5%;">
+				<!--hr class="kpx_hrOr"-->
+				<h5 class="h5 text-center">Se non hai User E Passsword
+          <a id="a_reg"><span style="color:green;">Registrati</span></a></h5>
+			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-md-5 col-lg-4 col-sm-6 col-8">
+			    <form id="formlogin" autocomplete="on" method="post" action="" /> 
+					{% csrf_token %}
+          <div class="input-group">
+						<span class="input-group-addon"><span class="fas fa-user"></span></span>
+            <label for="{{ form.username.id_for_label }}"></label>
+            <input type="input" class="form-control" name="username" id="inputUsername" placeholder="Username" required />
+            <input id="next" type="hidden" name="mainurl" value="{{ valuenext }}" />
+        {{ form.username.errors }}
+					</div>
+                    <hr/>
+
+					<div class="input-group">
+						<span class="input-group-addon"><span class="fa fa-key"></span></span>
+            <input type="password" class="form-control" name="password" id="inputEmail" placeholder="Password" required >
+    {{form.password.errors }}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+              <br><br><ul class="form-errors">
+              <li style="display:block;color:red;"><mark style="color:red;">{{error}}</mark></li></ul>
+{% endfor%}
+{% endif %}
+					</div>
+
+                    <hr />
+					<button id="id_login"  class="btn btn-outline-primary" type="submit">Entra</button>
+			</div>
+    	</div>
+		<div class="row kpx_row-sm-offset-3">
+			<div class="col-xs-12 offset-sm-3 col-sm-3">
+            <p></p>
+
+
+
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<p class="kpx_forgotPwd">
+					<small><a href="#" id="a_passwordforget">Password Dimenticata ?</a></small>
+				</p>
+        <p class="kpx_forgotPwd">
+					<small><a id="a_changepassword">Vuoi Cambiare Password ?</a></small>
+				</p>
+			</div>
+		</div>
+</div>
+
+
+
+    
+{% endblock content %}
