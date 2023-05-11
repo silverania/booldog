@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 20:16+0200\n"
+"POT-Creation-Date: 2023-05-10 20:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: blog/templates/index.html:39 blog/templates/index.html:63
+#: blog/templates/index.html:39 blog/templates/index.html:65
 msgid "SignUp"
 msgstr ""
 
@@ -66,19 +66,23 @@ msgstr ""
 msgid "How use it ? "
 msgstr ""
 
-#: blog/templates/index.html:63
+#: blog/templates/index.html:64
+msgid "and put them in your root web folder"
+msgstr ""
+
+#: blog/templates/index.html:65
 msgid "here"
 msgstr ""
 
-#: blog/templates/index.html:63
+#: blog/templates/index.html:65
 msgid "to obtain user and password"
 msgstr ""
 
-#: blog/templates/index.html:64
+#: blog/templates/index.html:66
 msgid "link booldog files in your head !"
 msgstr ""
 
-#: blog/templates/index.html:67
+#: blog/templates/index.html:69
 msgid ""
 "edit the bldg.js file by inserting the username and password chosen to "
 "register , in quotes !"
