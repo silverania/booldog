@@ -1,7 +1,7 @@
 
 
 /* By Mario , superior code */
-const BASE_URL = "https://booldog.it/booldog"; // URL del server
+const BASE_URL = "https://127.0.0.1:9000/"; // URL del server
 localStorage.setItem('BASE_URL', BASE_URL);
 const HOME_PATH = BASE_URL + "booldog";
 var HIDDENFIELD;

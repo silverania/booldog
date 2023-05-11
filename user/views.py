@@ -37,6 +37,7 @@ def getUser(user):
 
 @csrf_exempt
 def checkUser(request):
+    print("request checkuser")
     if request.method == 'POST':
         print("user is auth ?"+str(request.user.is_authenticated)+str(request.user))
         login = getUser(
