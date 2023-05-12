@@ -56,7 +56,6 @@ def checkUser(request):
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
-                breakpoint()
                 if myuser is not None:
                     list_current_user = getUser(myuser)
                     firstName = str(myuser)
@@ -201,15 +200,17 @@ def dashboard(request):
 
 class Logout(View):
     def get(self, request):
-        global userLoggedIN
+        mainurl = ""
         logout(request)
         userLoggedIN = None
+        breakpoint()
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
-            template = "registration/logged_out.html"
-            return render(request, "booldog.html")
-            # return render(request, "seiuscito.html", {'valuenext': next})
-        return render(request, "seiuscito.html", {'valuenext': mainurl})
+            #template = "registration/logged_out.html"
+            return redirect(mainurl,  {'valuenext': mainurl})
+        else:
+            # return render(request, "seiuscito.html", {'valuenext': mainurl})
+            return render(request, "booldog.html",  {'valuenext': mainurl})
 
 
 def user_register(request):

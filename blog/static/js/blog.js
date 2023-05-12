@@ -93,7 +93,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     buttonLinkComment.setAttribute("id", "id_link_comment");
     divFormChild.setAttribute("id", "multiarea");
     divExitLogin.setAttribute("id", "d_blog_reg");
-    buttonLinkComment.textContent = "Commenta";
+
     buttonLinkComment.setAttribute("class", "mybut mybut-outline-info");
     divExitLogin.setAttribute("style", "width:45%;display:inline-block;");
     bdiv.setAttribute("id", "bdiv");
@@ -144,7 +144,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     divBlogReg.setAttribute("id", "div_blog_reg");
     bbutton.textContent = "Commenta";
     spanBlogReg.textContent = "Registrati";
-    spanBlogEntra.textContent = "Entra";
+
     ulBlogReg.setAttribute("id", "ul_blog");
     ulBlogReg.setAttribute("style", "list-style: none;padding: 0;margin: 0;");
     parent = document.body.insertBefore(
@@ -512,7 +512,7 @@ class postArea {
               )),
               elementToAppendPostArea
             );
-            htmlIframeWidthHeight();
+            htmlIframeWidthHeight(document.getElementById("blog"));
             resps.push(r);
           } else if (
             button_risposta_post.textContent == "Rispondi" &&
@@ -795,7 +795,7 @@ function getComment() {
                 )
               );
               createPostArea(mess[indexX]);
-              htmlIframeWidthHeight();
+              htmlIframeWidthHeight(document.getElementById("blog"));
               break;
             }
           }
@@ -848,7 +848,7 @@ function getComment() {
                 break;
               } else {
                 createPostArea(resps.at(-1), elementToAppend);
-                htmlIframeWidthHeight();
+                htmlIframeWidthHeight(document.getElementById("blog"));
               }
             }
           }
@@ -868,17 +868,17 @@ function getComment() {
           )
         );
         createPostArea(mess[0]);
-        htmlIframeWidthHeight();
+        htmlIframeWidthHeight(document.getElementById("blog"));
       }
     },
   });
 }
 
-function htmlIframeWidthHeight() {
+function htmlIframeWidthHeight(elem) {
   var height, width;
-  var bsectionHeight = document.getElementById("blog");
-  height = bsectionHeight.scrollHeight + 340;
-  width = bsectionHeight.scrollWidth + 200;
+  //var bsectionHeight = document.getElementById("blog");
+  height = elem.scrollHeight + 340;
+  width = elem.scrollWidth + 200;
   localStorage.setItem("iframewidth", width.toString());
   localStorage.setItem("iframeheight", height.toString());
   window.top.postMessage(
@@ -888,7 +888,7 @@ function htmlIframeWidthHeight() {
     },
     "*"
   );
-  return bsectionHeight;
+  return elem;
 }
 /* esegui se l'uiser è loggato */
 $(bbutton).click(function () {
@@ -941,7 +941,7 @@ function createNewComment(mess) {
     : (mess.photo = BASE_PHOTO_DIR + userThatLogin[0].fields.photo); //la cartella media si trova nel path del progetto :"tutorial"
   mess.pk = newPostId;
   createPostArea(mess);
-  htmlIframeWidthHeight();
+  htmlIframeWidthHeight(document.getElementById("blog"));
   if (exist == false) {
     Boolean(exist);
     return mess;

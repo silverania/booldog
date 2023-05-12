@@ -40,9 +40,12 @@ $(document).ready(function () {
             window.location.href = BASE_URL + "booldog?mainurl=" + localStorage.getItem('next') + "&user=" + localStorage.getItem('user') + "&password=" + localStorage.getItem('password');
             //window.location.href = 'javascript:initBlogSGang(localStorage.getItem("user"),localStorage.getItem("password"),localStorage.getItem("next"))';
         }
-        htmlIframeWidthHeight();
+        $(document).ready(function () {
+            htmlIframeWidthHeight(document.getElementById("containerLogin"));
+        });
     }
 });
+/*
 function htmlIframeWidthHeight() {
     var height, width;
     var bsectionHeight = document.getElementsByTagName('body')[0];
@@ -58,4 +61,4 @@ function htmlIframeWidthHeight() {
         "*"
     );
     return bsectionHeight;
-}
+}*/

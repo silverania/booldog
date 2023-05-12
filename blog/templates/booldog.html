@@ -19,8 +19,10 @@ var currentUrl="{{currentUrl}}";
 var thisuser="{{u}}";
 var thispassword="{{password}}";
 var buttonRispo="{% trans "Reply" %}"
-var postinserito='{% trans "Entered" %}';
-var postinviato='{% trans "Sent" %}';
+buttonLinkComment.textContent = "{% trans 'Comment' %}";
+var postinserito="{% trans "Entered" %}";
+var postinviato="{% trans "Sent" %}";
+spanBlogEntra.textContent = "{% trans 'Login' %}";
 sessionStorage.setItem('buttonRispondi',buttonRispo)
 initBlogSGang(thisuser,thispassword,currentUrl);
 </script>
