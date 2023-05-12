@@ -29,7 +29,7 @@
               <ul id="loginbooldog" class="list-group mr-0">
                 {% if request.user.is_authenticated %}
                   <li id="liTutorial_booldog" class="nav-item" style="text-align:right;">
-                    <a class="nav-link" id="aTutorial_booldog" href="newpage"><span id="spanTutorial_booldog"><b>{% trans 'Admin Settings' %}</b></span></a>
+                    <a class="nav-link" id="aTutorial_booldog" href="{% url "logout" %}"><span id="spanTutorial_booldog"><b>{% trans 'SignUp' %}</b></span></a>
                   </li>
                   <li id="liEsci_booldog" class="nav-item" style="text-align:right;">
                     <a id="aEsci_booldog" class="nav-link"><span id="spanEsci_booldog"><b>{% trans 'Exit' %}</b></span></a>
@@ -59,7 +59,7 @@
             </div>
             
             <div ><p class="title badge bg-primary">{% trans 'How use it ? ' %}</p>
-              <p class="text-start">1) Download <a href="{% url 'files' "booldog.js" %}"><span> booldog.js</span></a><span> | <a href="{% url 'files' 'bldg.js'  %}"> <span>bldg.js</span></a></span></p>
+              <p class="text-start">1) Download <a href="{% url 'files' "booldog.js" %}"><span> booldog.js</span></a><span> | <a href="{% url 'files' 'bldg.js'  %}"> <span>bldg.js</span></a>{% trans ' and put them in your root web folder' %}</span></p>
               <p class="text-start">2) {% trans 'SignUp' %} <a href="{% url 'register' %}admin">{% trans 'here' %}</a> {% trans 'to obtain user and password' %}</p>
               <p class="text-start">3) {% trans 'link booldog files in your head !' %}</p>
               <code>&lt;script src="{% static 'js/bldg.js' %}">&lt;/script><br>

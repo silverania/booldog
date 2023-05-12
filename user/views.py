@@ -204,10 +204,11 @@ class Logout(View):
         userLoggedIN = None
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
-            template = "registration/logged_out.html"
-            return render(request, "booldog.html")
-            # return render(request, "seiuscito.html", {'valuenext': next})
-        return render(request, "seiuscito.html", {'valuenext': mainurl})
+            #template = "registration/logged_out.html"
+            return redirect(mainurl,  {'valuenext': mainurl})
+        else:
+            # return render(request, "seiuscito.html", {'valuenext': mainurl})
+            return render(request, "booldog.html",  {'valuenext': mainurl})
 
 
 def user_register(request):

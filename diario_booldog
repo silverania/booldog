@@ -2,3 +2,4 @@ quando mi registro dal blog, la variabile sito in registrazione non è il sito s
 il tasto aggiorna riporta al link sbagliato
 controlla se l' utente marioa è stato registrato con i giusti pivilegi . Se in admin vede solo i suoi commenti ecc...
 completa la pagina homre di booldog
+traduci la frase :"sei autorizzato ad usare booldog" che compare dopo essersi registrati , e controllare la view logout
