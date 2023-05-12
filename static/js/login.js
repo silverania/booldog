@@ -41,7 +41,7 @@ $(document).ready(function () {
             //window.location.href = 'javascript:initBlogSGang(localStorage.getItem("user"),localStorage.getItem("password"),localStorage.getItem("next"))';
         }
         $(document).ready(function () {
-            htmlIframeWidthHeight(document.getElementById("containerLogin"));
+            htmlIframeWidthHeight(document.getElementById("containerlogin"));
         });
     }
 });
