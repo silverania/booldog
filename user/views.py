@@ -21,6 +21,7 @@ from django.contrib import messages
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext as _
 scrollTo = ''
 Group = Group.objects.all()
 
@@ -227,11 +228,12 @@ def user_register(request):
             user.profile.email = form.cleaned_data.get('email')
             user.profile.website = form.cleaned_data.get('website')
             if 'blog' in request.path:
+                breakpoint()
                 valuenext = request.GET.get('mainurl')
                 # agiungere i permessi per leggere i propri post dall adminpage
                 user.save()
                 return redirect('/user/login/blog?mainurl='+valuenext)
-            elif 'admin' in request.path:
+            elif 'booldog' in request.path:
                 breakpoint()
                 site = Site.objects.create(
                     title=user.profile.website, user=user.profile)
@@ -243,8 +245,12 @@ def user_register(request):
                 user.is_staff = True
                 user.save()
                 # mostra messaggio e esci
-                return HttpResponse("<h1>sei autorizzato ad usare Booldog ! </h1><h2>Ora inserisci user e password nel file bldg.js</h2>")
+                responsetext = _("you are authorized to use booldog .")
+                responsetext2 = _(
+                    "Enter your username and password in the bldg.js file")
+                return HttpResponse("<h1>"+responsetext+"</h1><h2>"+responsetext2+"</h2>")
             else:
+                breakpoint()
                 if 'next' in request.GET:
                     valuenext = request.GET.get('mainurl')
                     user.save()
@@ -252,15 +258,17 @@ def user_register(request):
                 else:
                     user.save()
                     return redirect('/user/login')
-
     else:
         # in base alla presenza della variabile next capisco
         # se la richiesta di registrazione è per installare il Blog
         # oppure per usarlo
+        form = SignUpForm()
+        breakpoint()
         if 'mainurl' in request.GET:
             valuenext = request.GET.get('mainurl')
-        form = SignUpForm()
-    return render(request, 'user/register.html', {'form': form, 'mainurl': valuenext})
+        if 'booldog' in request.path:
+            breakpoint()
+            return render(request, 'user/register.html', {'form': form, 'mainurl': valuenext})
 
 
 def change_password(request):

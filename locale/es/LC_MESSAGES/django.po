@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR THE PACKAGE"S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-11 13:27+0200\n"
+"POT-Creation-Date: 2023-05-15 19:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,20 +35,19 @@ msgid "Sent"
 msgstr "Enviado"
 
 #: blog/templates/booldog.html:25 blog/templates/index.html:42
+#: user/templates/registration/login.html:10
+#: user/templates/registration/login.html:71
 msgid "Login"
 msgstr "Login"
 
-#: blog/templates/index.html:32
-msgid "Admin Settings"
-msgstr ""
+#: blog/templates/index.html:32 blog/templates/index.html:39
+#: blog/templates/index.html:65
+msgid "SignUp"
+msgstr "Registro"
 
 #: blog/templates/index.html:35
 msgid "Exit"
 msgstr "Salida"
-
-#: blog/templates/index.html:39 blog/templates/index.html:65
-msgid "SignUp"
-msgstr "Registro"
 
 #: blog/templates/index.html:56
 msgid "What is Booldog ? "
@@ -112,8 +111,6 @@ msgid "Documentation"
 msgstr " documentación"
 
 #: user/templates/admin/base.html:56
-#, fuzzy
-#| msgid "lose password ?"
 msgid "Change password"
 msgstr "Contraseña Perdida"
 
@@ -145,6 +142,22 @@ msgstr ""
 "¡Para cambiar su contraseña, primero debe iniciar sesión! Si no recuerda su "
 "contraseña, debe recuperarla"
 
+#: user/templates/registration/login.html:35
+msgid "If you don't have User and Password"
+msgstr "para obtener usuario y contraseña"
+
+#: user/templates/registration/login.html:36
+msgid " SignUp"
+msgstr "Registro"
+
+#: user/templates/registration/login.html:80
+msgid "Password Forgot ?"
+msgstr "Recuperar Contraseña"
+
+#: user/templates/registration/login.html:83
+msgid "Do you want to change your password?"
+msgstr "¿Quieres cambiar tu contraseña?"
+
 #: user/templates/registration/password_reset_done.html:5
 msgid "Done !"
 msgstr "Hecho"
@@ -156,6 +169,11 @@ msgid ""
 "should receive them shortly. If you do not receive an email, make sure you "
 "enter the address you registered with, and check your spam folder."
 msgstr ""
+"Enlace de recuperación enviado a su correo electrónico. Hemos enviado "
+"instrucciones para configurar su contraseña, si hay una cuenta válida en la "
+"dirección de correo electrónico que proporcionó. Tú Debería recibirlos en "
+"breve. Si no recibe un correo electrónico, asegúrese de ingrese la dirección "
+"con la que se registró y verifique su carpeta de correo no deseado."
 
 #: user/templates/registration/password_reset_form.html:8
 #, fuzzy
@@ -171,41 +189,41 @@ msgstr "Introduce tu correo electrónico"
 msgid "Send e-mail"
 msgstr "Enviar correo electrónico"
 
-#: user/templates/user/register.html:47
+#: user/templates/user/register.html:65
 msgid "Error entering username !"
 msgstr "¡Error al ingresar el nombre de usuario!"
 
-#: user/templates/user/register.html:53 user/templates/user/register.html:65
+#: user/templates/user/register.html:71 user/templates/user/register.html:83
 msgid "Error entering password !"
 msgstr "¡Error al ingresar el nombre de password!"
 
-#: user/templates/user/register.html:59
+#: user/templates/user/register.html:77
 msgid "Error entering email !"
 msgstr "¡Error al ingresar el nombre de email!"
 
-#: user/templates/user/register.html:78
+#: user/templates/user/register.html:96
 msgid "The site you will be using Booldog on"
 msgstr "El sitio en el que utilizará Booldog"
 
-#: user/templates/user/register.html:81
+#: user/templates/user/register.html:99
 msgid "Error entering the Website !"
 msgstr "¡Error al ingresar el nombre de webSite!"
 
-#: user/templates/user/register.html:89
+#: user/templates/user/register.html:107
 msgid "Error entering photo !"
 msgstr "¡Error al ingresar el nombre de photo !"
 
-#: user/templates/user/register.html:97
+#: user/templates/user/register.html:115
 #, fuzzy
 #| msgid "SignUp"
 msgid "Signup me"
 msgstr "Registro"
 
-#: user/templates/user/register.html:107
+#: user/templates/user/register.html:125
 msgid "Remember me"
 msgstr "Acuérdate de mí"
 
-#: user/templates/user/register.html:114
+#: user/templates/user/register.html:132
 #, fuzzy
 #| msgid "lose password ?"
 msgid "Forget Password ?"
@@ -214,6 +232,19 @@ msgstr "Contraseña Perdida"
 #: user/templates/wrongdati.html:15
 msgid "wrong data !"
 msgstr "información incorrecta !"
+
+#: user/views.py:247
+msgid "you are authorized to use booldog ."
+msgstr "está autorizado a utilizar booldog."
+
+#: user/views.py:249
+msgid "Enter your username and password in the bldg.js file"
+msgstr "Ingrese su nombre de usuario y contraseña en el archivo bldg.js"
+
+#, fuzzy
+#~| msgid "to obtain user and password"
+#~ msgid "Se non hai User E Passsword"
+#~ msgstr "para obtener usuario y contraseña"
 
 #, fuzzy
 #~| msgid "SignUp"
