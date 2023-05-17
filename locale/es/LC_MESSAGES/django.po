@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 19:35+0200\n"
+"POT-Creation-Date: 2023-05-16 18:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,8 +35,8 @@ msgid "Sent"
 msgstr "Enviado"
 
 #: blog/templates/booldog.html:25 blog/templates/index.html:42
-#: user/templates/registration/login.html:10
-#: user/templates/registration/login.html:71
+#: user/templates/registration/login.html:13
+#: user/templates/registration/login.html:74
 msgid "Login"
 msgstr "Login"
 
@@ -142,19 +142,19 @@ msgstr ""
 "¡Para cambiar su contraseña, primero debe iniciar sesión! Si no recuerda su "
 "contraseña, debe recuperarla"
 
-#: user/templates/registration/login.html:35
+#: user/templates/registration/login.html:38
 msgid "If you don't have User and Password"
 msgstr "para obtener usuario y contraseña"
 
-#: user/templates/registration/login.html:36
+#: user/templates/registration/login.html:39
 msgid " SignUp"
 msgstr "Registro"
 
-#: user/templates/registration/login.html:80
+#: user/templates/registration/login.html:83
 msgid "Password Forgot ?"
 msgstr "Recuperar Contraseña"
 
-#: user/templates/registration/login.html:83
+#: user/templates/registration/login.html:86
 msgid "Do you want to change your password?"
 msgstr "¿Quieres cambiar tu contraseña?"
 
@@ -189,41 +189,41 @@ msgstr "Introduce tu correo electrónico"
 msgid "Send e-mail"
 msgstr "Enviar correo electrónico"
 
-#: user/templates/user/register.html:65
+#: user/templates/user/register.html:64
 msgid "Error entering username !"
 msgstr "¡Error al ingresar el nombre de usuario!"
 
-#: user/templates/user/register.html:71 user/templates/user/register.html:83
+#: user/templates/user/register.html:70 user/templates/user/register.html:82
 msgid "Error entering password !"
 msgstr "¡Error al ingresar el nombre de password!"
 
-#: user/templates/user/register.html:77
+#: user/templates/user/register.html:76
 msgid "Error entering email !"
 msgstr "¡Error al ingresar el nombre de email!"
 
-#: user/templates/user/register.html:96
+#: user/templates/user/register.html:95
 msgid "The site you will be using Booldog on"
 msgstr "El sitio en el que utilizará Booldog"
 
-#: user/templates/user/register.html:99
+#: user/templates/user/register.html:98
 msgid "Error entering the Website !"
 msgstr "¡Error al ingresar el nombre de webSite!"
 
-#: user/templates/user/register.html:107
+#: user/templates/user/register.html:106
 msgid "Error entering photo !"
 msgstr "¡Error al ingresar el nombre de photo !"
 
-#: user/templates/user/register.html:115
+#: user/templates/user/register.html:114
 #, fuzzy
 #| msgid "SignUp"
 msgid "Signup me"
 msgstr "Registro"
 
-#: user/templates/user/register.html:125
+#: user/templates/user/register.html:124
 msgid "Remember me"
 msgstr "Acuérdate de mí"
 
-#: user/templates/user/register.html:132
+#: user/templates/user/register.html:131
 #, fuzzy
 #| msgid "lose password ?"
 msgid "Forget Password ?"
@@ -233,13 +233,19 @@ msgstr "Contraseña Perdida"
 msgid "wrong data !"
 msgstr "información incorrecta !"
 
-#: user/views.py:247
+#: user/views.py:246
 msgid "you are authorized to use booldog ."
 msgstr "está autorizado a utilizar booldog."
 
-#: user/views.py:249
-msgid "Enter your username and password in the bldg.js file"
-msgstr "Ingrese su nombre de usuario y contraseña en el archivo bldg.js"
+#: user/views.py:248
+#, fuzzy
+#| msgid "Enter your username and password in the bldg.js file"
+msgid ""
+"Enter your username and password in the bldg.js file and you are ready to "
+"use booldog on your site"
+msgstr ""
+"Ingrese su nombre de usuario y contraseña en el archivo bldg.js y ya está "
+"listo para usar booldog en su sitio"
 
 #, fuzzy
 #~| msgid "to obtain user and password"

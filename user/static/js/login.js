@@ -2,7 +2,6 @@ $(document).ready(function () {
     var r, pf, pc, thisurl, fs, tokenhtml;
     const params = new URLSearchParams(window.location.search);
     var valuenext = params.get('mainurl');
-    login = "{{ request.user.is_authenticated }}";
     localStorage.setItem("login", login);
     login = localStorage.getItem('login');
     $('[data-toggle="tooltip"]').tooltip();

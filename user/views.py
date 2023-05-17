@@ -38,16 +38,14 @@ def getUser(user):
 
 @csrf_exempt
 def checkUser(request):
-    print("request checkuser")
     if request.method == 'POST':
-        print("user is auth ?"+str(request.user.is_authenticated)+str(request.user))
         login = getUser(
             request.user) if request.user.is_authenticated else "false"
         myuser = object()
         authorized = False
         list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
-            print(key+value)
+            print(("chiave="+str(key)+"valore"+str(value)))
             if 'user' in key:
                 myuser = value
             if 'password' in key:
@@ -84,17 +82,15 @@ def checkUser(request):
         else:
             list_current_user = getUser(myuser)
             print("86 "+str(list_current_user))
-        data = json.dumps(
+        authorized = str(authorized)
+        login = str(login)
+        return JsonResponse(
             {
                 "authorized": authorized,
-                # "userLoggedIN": list_current_user,
-                "authenticated": login,
-            })
-        print(str(JsonResponse(data, safe=False)))
-        response = JsonResponse(
-            data, safe=False
+                "authenticated": login
+            }, safe=False
         )
-        return response
+
     """
     def get(self, request):
         print("view checuser GET request.user & session is =" +
@@ -124,8 +120,8 @@ def checkUser(request):
             print("in dispatch GET request.user is ="+str(request.user))
             return self.get(request)
         elif request.method == 'POST':
-            #cv = request.body
-            #print("from dispatch method :"+str(cv))
+            # cv = request.body
+            # print("from dispatch method :"+str(cv))
             print("in dispatch POST request.user is ="+str(request.user))
             return self.post(self.request)
     """
@@ -154,7 +150,8 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username,
+                                password=password)
             if user:
                 login(request, user)
                 # return redirect(valuenext)
@@ -189,12 +186,12 @@ def user_login(request):
             """
 
 
-@login_required
+@ login_required
 def home(request):
     return render(request, 'compilare_il_kernel.html')
 
 
-@login_required
+@ login_required
 def dashboard(request):
     return render(request, ' user/dashboard.html', {'section': 'dashboard'})
 
@@ -207,7 +204,7 @@ class Logout(View):
         breakpoint()
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
-            #template = "registration/logged_out.html"
+            # template = "registration/logged_out.html"
             return redirect(mainurl,  {'valuenext': mainurl})
         else:
             # return render(request, "seiuscito.html", {'valuenext': mainurl})
@@ -228,13 +225,11 @@ def user_register(request):
             user.profile.email = form.cleaned_data.get('email')
             user.profile.website = form.cleaned_data.get('website')
             if 'blog' in request.path:
-                breakpoint()
                 valuenext = request.GET.get('mainurl')
                 # agiungere i permessi per leggere i propri post dall adminpage
                 user.save()
                 return redirect('/user/login/blog?mainurl='+valuenext)
             elif 'booldog' in request.path:
-                breakpoint()
                 site = Site.objects.create(
                     title=user.profile.website, user=user.profile)
                 site.save()
@@ -247,10 +242,9 @@ def user_register(request):
                 # mostra messaggio e esci
                 responsetext = _("you are authorized to use booldog .")
                 responsetext2 = _(
-                    "Enter your username and password in the bldg.js file")
+                    "Enter your username and password in the bldg.js file and you are ready to use booldog on your site")
                 return HttpResponse("<h1>"+responsetext+"</h1><h2>"+responsetext2+"</h2>")
             else:
-                breakpoint()
                 if 'next' in request.GET:
                     valuenext = request.GET.get('mainurl')
                     user.save()
@@ -263,12 +257,13 @@ def user_register(request):
         # se la richiesta di registrazione è per installare il Blog
         # oppure per usarlo
         form = SignUpForm()
-        breakpoint()
         if 'mainurl' in request.GET:
             valuenext = request.GET.get('mainurl')
-        if 'booldog' in request.path:
-            breakpoint()
-            return render(request, 'user/register.html', {'form': form, 'mainurl': valuenext})
+            response = render(request, "user/register.html", {
+                'form': form, 'mainurl': valuenext})
+        else:
+            response = render(request, "user/register.html")
+        return response
 
 
 def change_password(request):

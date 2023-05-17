@@ -2,7 +2,6 @@ $(document).ready(function () {
     var r, pf, pc, thisurl, fs, tokenhtml;
     const params = new URLSearchParams(window.location.search);
     var valuenext = params.get('mainurl');
-    login = "{{ request.user.is_authenticated }}";
     localStorage.setItem("login", login);
     login = localStorage.getItem('login');
     $('[data-toggle="tooltip"]').tooltip();
@@ -15,8 +14,8 @@ $(document).ready(function () {
         pc = document.getElementById("a_changepassword");
         thisurl = params.get('mainurl');
         r.href = "/user/register/blog?mainurl=" + params.get('mainurl');
-        pc.href = sessionStorage.getItem('BASE_URL') + "user/login/change_password?mainurl=" + thisurl;
-        pf.href = sessionStorage.getItem('BASE_URL') + "user/login/password_reset?mainurl=" + thisurl;
+        pc.href = localStorage.getItem('BASE_URL') + "user/login/change_password?mainurl=" + thisurl;
+        pf.href = localStorage.getItem('BASE_URL') + "user/login/password_reset?mainurl=" + thisurl;
         fs = document.getElementById("formlogin");
     }
     catch (TypeError) {

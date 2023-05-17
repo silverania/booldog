@@ -6,9 +6,12 @@
 {% endblock %}
 
 {% block content %}
+  <script>
+    var login = '{{request.user.is_authenticated}}'
+  </script>
   <div id="containerlogin" class="container">
     <h3 align="center">{% trans 'Login' %}</h3>
-    <!-- div class="row justify-content-center">
+    <!--  div class="row justify-content-center">
           <div class=" facebook col-md-1 col-1 col-sm-1 ">
                   <a href="{% url 'social:begin' 'facebook' %}" class="facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
               <i class="fab fa-facebook fa-2x"></i>
@@ -25,7 +28,7 @@
               <i class="fab fa-google fa-2x"></i>
             </a>
             </div>
-            </div -->
+            </div  -->
     <br />
 
     <div class="row justify-content-center">

@@ -1,7 +1,7 @@
 
 
 /* By Mario , superior code */
-const BASE_URL = "https://127.0.0.1:9000/"; // URL del server
+const BASE_URL = "https://127.0.0.1:8000/"; // URL del server
 localStorage.setItem('BASE_URL', BASE_URL);
 const HOME_PATH = BASE_URL + "booldog";
 var HIDDENFIELD;
@@ -679,12 +679,12 @@ function initBlogSGang(u, p, url) {
         currentUrl: localStorage.getItem('next'),
       };
       const request = {
+        credentials: "include",
         method: "POST",
-        //credentials: "include",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        mode: "no-cors", // Do not send CSRF token to another domain.
+        mode: "no-cors",
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)
@@ -692,11 +692,9 @@ function initBlogSGang(u, p, url) {
           return response.json();
         })
         .then(function (json) {
-          console.log(json.substring(0, 400));
           //response=JSON.stringify(json)
-          json = JSON.parse(json);
-          authorized = JSON.parse(json.authorized);
-          authenticated = JSON.parse(json.authenticated);
+          authorized = json.authorized;
+          authenticated = json.authenticated;
           if (authorized.toString() === "true") {
             if (authenticated !== "false")
               authenticated = JSON.parse(json.authenticated);

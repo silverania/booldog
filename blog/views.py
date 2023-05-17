@@ -151,9 +151,9 @@ def newPost(request):
     try:
         thisSite = split_url.scheme+"://" + \
             (split_url.netloc)+(split_url.path)
+        breakpoint()
         site = Site.objects.get(
             title=thisSite, user=Profile.objects.get(first_name=pageadmin))
-        breakpoint()
     except Exception:
         raise Exception(
             "errore nell inserimeto del url.")
