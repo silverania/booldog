@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="{% static "css/blog.css" %}"/>
         <link rel="stylesheet" href="{% static "css/register.css" %}"/>
         <link rel="stylesheet" href="{% static "css/login.css"%}"/>
-        <link rel="stylesheet" href="{% static "js/blog.js" %}"/>
         <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
         <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
   <script  src="{% static 'js/jquery.min.js' %}"></script>
@@ -22,13 +21,22 @@
 <script src="{% static "js/all.min.js"%}"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v14.0&appId=810115799892623&autoLogAppEvents=1" nonce="ZQl7gT5l">
   </script>
+  <script>
+    /* RELOAD IFRAME TO  SEND DATA */
+    $(document).ready(function(){
+     (function() {
+      let el=document.getElementById('containerlogin');
+      window.top.postMessage(
+    {
+      height:el.scrollHeight,
+      base: el.scrollWidth,
+    },
+    "*"
+  );
+     })();
+     });
+    </script>
 </head>
-
-
-  <!--script  src="{% static 'js/blog.js'%}"></script-->
-
-
-<!--script  src="{% static 'js/aside.js' %}"></script-->
 <body>
   {% block content %} {% endblock content %}
   </body>

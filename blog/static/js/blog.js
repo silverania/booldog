@@ -1,9 +1,8 @@
 
 
 /* By Mario , superior code */
-const BASE_URL = "https://127.0.0.1:8000/"; // URL del server
-localStorage.setItem('BASE_URL', BASE_URL);
-const HOME_PATH = BASE_URL + "booldog";
+
+const BASE_URL = "https://localbooldog.com:8000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
@@ -27,9 +26,10 @@ var userAuth;
 var userThatLogin;
 var butcloned;
 var isChanged = false;
+window.buttonLinkComment = document.createElement("BUTTON");
 var H1Welcome = document.createElement("H6");
 var bbutton = document.createElement("ButtotagTitlen");
-var buttonLinkComment = document.createElement("BUTTON");
+
 var resps;
 var tagTitle;
 var globDivContainerHead;
@@ -51,7 +51,7 @@ var liBlogEntra = document.createElement("LI");
 var liBlogCambiaPassword = document.createElement("LI");
 var aBlogEntra = document.createElement("A");
 var aBlogCambiaPassword = document.createElement("A");
-var spanBlogEntra = document.createElement("SPAN");
+
 var liBlogEsci = document.createElement("LI");
 var aBlogEsci = document.createElement("A");
 var post,
@@ -81,7 +81,7 @@ bIcon.appendChild(H1Welcome);
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
-  if (userAdmin.toString() !== "false") {
+  if (userAdmin.toString() === "True") {
     bForm.setAttribute("action", BASE_URL + "post/getpost");
     bForm.setAttribute("class", "form_comment");
     firstDivHead.setAttribute("style", "width:45%;display:inline;");
@@ -174,13 +174,15 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       inputSubmit.setAttribute("type", "submit");
       inputSubmit.setAttribute("value", "Esci");
       liBlogEsci.setAttribute("id", "liBlogEsci");
-      if (userThatLogin[0].fields.first_name !== "None")
+      if (userThatLogin !== "None")
         H1Welcome.setAttribute("id", "H1Welcome");
       H1Welcome.style.display = "block";
+      let temp = JSON.parse(userThatLogin);
       $(H1Welcome).append(
         '<span class="spanuser">' +
-        userThatLogin[0].fields.first_name.charAt(0).toUpperCase() +
-        userThatLogin[0].fields.first_name.slice(1) +
+
+        temp[0].fields.first_name.charAt(0).toUpperCase() +
+        temp[0].fields.first_name.slice(1) +
         "</span>"
       );
     }
@@ -574,7 +576,7 @@ class postArea {
             return -1;
           }
           //form_risposta_post.setAttribute("action",url)
-          url = URL_NEW_POST + "?mainurl=" + localStorage.getItem('next');
+          url = URL_NEW_POST + "?mainurl=" + currentUrl
           mess.body = txts;
           if (sendToServer(mess, url) == 0) {
             isOpen = false;
@@ -654,19 +656,16 @@ function initBlogSGang(u, p, url) {
   var blog;
   if ((u !== undefined && p !== undefined && url !== undefined) && (u !== "" && p !== "" && url !== "")) {
     currentUrl = url.replace(/\/$/, "");
-    localStorage.setItem('user', u);
-    localStorage.setItem('password', p);
-    localStorage.setItem("next", currentUrl);
   }
-  HIDDENFIELD = "?mainurl=" + localStorage.getItem('next');
-  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + localStorage.getItem('next');
+  var xhttp2 = new XMLHttpRequest();
+  var requestPostKey;
+  var blog;
+  HIDDENFIELD = "?mainurl=" + currentUrl;
+  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
-  localStorage.setItem('HOME_PATH', HOME_PATH + HIDDENFIELD);
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
-  sessionStorage.getItem("csrfmiddlewaretoken");
-  requestPostKey = sessionStorage.getItem("csrfmiddlewaretoken");
   function sendTokenPost() {
     blog = document.getElementById("s_blog");
     if (blog !== null) {
@@ -674,9 +673,9 @@ function initBlogSGang(u, p, url) {
     }
     (function () {
       let s = {
-        user: localStorage.getItem('user'),
-        password: localStorage.getItem('password'),
-        currentUrl: localStorage.getItem('next'),
+        user: u,
+        password: p,
+        currentUrl: url,
       };
       const request = {
         method: "POST",
@@ -721,7 +720,9 @@ function initBlogSGang(u, p, url) {
       }
     };
   }
+
   sendTokenPost();
+
 }
 
 function getComment() {
@@ -747,8 +748,7 @@ function getComment() {
   $.ajax({
     url:
       BASE_URL +
-      "post/showposts?tagTitle=" +
-      localStorage.getItem('next'),
+      "post/showposts" + HIDDENFIELD,
     data: {
       userAuth: userAuth,
     },
@@ -876,8 +876,6 @@ function htmlIframeWidthHeight(elem) {
   //var bsectionHeight = document.getElementById("blog");
   height = elem.scrollHeight + 340;
   width = elem.scrollWidth + 200;
-  localStorage.setItem("iframewidth", width.toString());
-  localStorage.setItem("iframeheight", height.toString());
   window.top.postMessage(
     {
       height: height,
@@ -892,7 +890,7 @@ $(bbutton).click(function () {
   openNewCommentArea();
 });
 
-$(buttonLinkComment).click(function () {
+window.buttonLinkComment.addEventListener("click", function () {
   openNewCommentArea();
 });
 
@@ -1079,7 +1077,7 @@ function sendToServer(post, url) {
       commento: post.post.pk,
       type: post.type,
       username: userThatLogin[0].fields.first_name,
-      useradmin: localStorage.getItem("user"),
+      useradmin: user,
       body: post.body,
       respTo: post.respToID,
       id: post.pk,
@@ -1090,7 +1088,7 @@ function sendToServer(post, url) {
     data = {
       type: post.type,
       tutorial: post.thisTutorialTitle,
-      useradmin: localStorage.getItem("user"),
+      useradmin: user,
       username: userThatLogin[0].fields.first_name,
       body: post.body,
     };

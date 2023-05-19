@@ -1,6 +1,3 @@
-quando mi registro dal blog, la variabile sito in registrazione non è il sito su cui l' user registrato aggiungerà il blog , ma un sito qualsiasi , importante relativamente.
-il tasto aggiorna riporta al link sbagliato
-controlla se l' utente marioa è stato registrato con i giusti pivilegi . Se in admin vede solo i suoi commenti ecc...
-completa la pagina homre di booldog
-finire la traduzione di booldog : pulsanti ecc... e traduci la frase :"sei autorizzato ad usare booldog" che compare dopo essersi registrati , e controllare la view logout che quando esce da blog.js va alla pagina sbagliata : " booldog.it"
-controlla traduzione in italiano e tedesco di login html e cambia il link di registrazione in login.html che punta a blog invece che booldog
+devo rendere le variabili user e password globali con lo storage js.
+user e password devono essere rese statiche fra le chiamate.
+forzare l' invio di user e password con iframe reload in message 

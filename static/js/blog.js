@@ -574,7 +574,7 @@ class postArea {
             return -1;
           }
           //form_risposta_post.setAttribute("action",url)
-          url = URL_NEW_POST + "?mainurl=" + localStorage.getItem('next');
+          url = URL_NEW_POST + "?mainurl=" + sessionStorage.getItem('next');
           mess.body = txts;
           if (sendToServer(mess, url) == 0) {
             isOpen = false;
@@ -656,13 +656,13 @@ function initBlogSGang(u, p, url) {
     currentUrl = url.replace(/\/$/, "");
     localStorage.setItem('user', u);
     localStorage.setItem('password', p);
-    localStorage.setItem("next", currentUrl);
+    sessionStorage.setItem("next", currentUrl);
   }
-  HIDDENFIELD = "?mainurl=" + localStorage.getItem('next');
-  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + localStorage.getItem('next');
+  HIDDENFIELD = "?mainurl=" + sessionStorage.getItem('next');
+  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + sessionStorage.getItem('next');
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
-  localStorage.setItem('HOME_PATH', HOME_PATH + HIDDENFIELD);
+  sessionStorage.setItem('HOME_PATH', HOME_PATH + HIDDENFIELD);
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
   sessionStorage.getItem("csrfmiddlewaretoken");
@@ -676,15 +676,14 @@ function initBlogSGang(u, p, url) {
       let s = {
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
-        currentUrl: localStorage.getItem('next'),
+        currentUrl: sessionStorage.getItem('next'),
       };
       const request = {
-        credentials: "include",
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        mode: "no-cors",
+        mode: "cors",
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)
@@ -749,7 +748,7 @@ function getComment() {
     url:
       BASE_URL +
       "post/showposts?tagTitle=" +
-      localStorage.getItem('next'),
+      sessionStorage.getItem('next'),
     data: {
       userAuth: userAuth,
     },
@@ -877,8 +876,8 @@ function htmlIframeWidthHeight(elem) {
   //var bsectionHeight = document.getElementById("blog");
   height = elem.scrollHeight + 340;
   width = elem.scrollWidth + 200;
-  localStorage.setItem("iframewidth", width.toString());
-  localStorage.setItem("iframeheight", height.toString());
+  sessionStorage.setItem("iframewidth", width.toString());
+  sessionStorage.setItem("iframeheight", height.toString());
   window.top.postMessage(
     {
       height: height,

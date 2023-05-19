@@ -10,20 +10,40 @@
     <script src="{% static 'js/all.min.js' %}"></script>
     <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet"/>
     <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    
     <link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
+    <script src="{% static 'js/blog.js' %}" id="s_blog" ></script>
+
     </head>
     <body>
-<script src="{% static 'js/blog.js' %}" id="s_blog" ></script>
+
 <script>
-var currentUrl="{{currentUrl}}";
+        
+        var spanBlogEntra = document.createElement("SPAN");
+    var currentUrl="{{currentUrl}}";
 var thisuser="{{u}}";
 var thispassword="{{password}}";
+
 var buttonRispo="{% trans "Reply" %}"
-buttonLinkComment.textContent = "{% trans 'Comment' %}";
+window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
 var postinserito="{% trans "Entered" %}";
 var postinviato="{% trans "Sent" %}";
 spanBlogEntra.textContent = "{% trans 'Login' %}";
-sessionStorage.setItem('buttonRispondi',buttonRispo)
+localStorage.setItem('buttonRispondi',buttonRispo)</script>
+<script>
+    var thisurl=location.href;
+window.addEventListener("message", function (event) {
+    if (!(event.origin.includes('https://127.0.0.1:000'))) {
+        console.log("messaggio ignorato");
+        return -1;
+        ("mancata autorizzazione!")
+    }
+    else {
+        var msg = JSON.parse(event.data);
+        var user = JSON.parse(msg.user);
+        var password=JSON.parse(msg.password);
+    }
+});
 initBlogSGang(thisuser,thispassword,currentUrl);
 </script>
 </body>

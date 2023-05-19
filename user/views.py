@@ -156,9 +156,7 @@ def user_login(request):
                 login(request, user)
                 # return redirect(valuenext)
                 # form is not valid or user is not authenticated
-                thissession = request.session.session_key
                 response = render(request, "booldog.html")
-                response.set_cookie('thissess', thissession)
                 return response
             else:
                 return render(request, 'wrongdati.html', {'valuenext': valuenext})
@@ -201,7 +199,6 @@ class Logout(View):
         mainurl = ""
         logout(request)
         userLoggedIN = None
-        breakpoint()
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
             # template = "registration/logged_out.html"

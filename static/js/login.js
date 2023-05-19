@@ -2,8 +2,8 @@ $(document).ready(function () {
     var r, pf, pc, thisurl, fs, tokenhtml;
     const params = new URLSearchParams(window.location.search);
     var valuenext = params.get('mainurl');
-    localStorage.setItem("login", login);
-    login = localStorage.getItem('login');
+    sessionStorage.setItem("login", login);
+    login = sessionStorage.getItem('login');
     $('[data-toggle="tooltip"]').tooltip();
     try {
         tokenhtml = document.getElementsByName('csrfmiddlewaretoken');
@@ -14,8 +14,8 @@ $(document).ready(function () {
         pc = document.getElementById("a_changepassword");
         thisurl = params.get('mainurl');
         r.href = "/user/register/blog?mainurl=" + params.get('mainurl');
-        pc.href = localStorage.getItem('BASE_URL') + "user/login/change_password?mainurl=" + thisurl;
-        pf.href = localStorage.getItem('BASE_URL') + "user/login/password_reset?mainurl=" + thisurl;
+        pc.href = sessionStorage.getItem('BASE_URL') + "user/login/change_password?mainurl=" + thisurl;
+        pf.href = sessionStorage.getItem('BASE_URL') + "user/login/password_reset?mainurl=" + thisurl;
         fs = document.getElementById("formlogin");
     }
     catch (TypeError) {
@@ -29,15 +29,15 @@ $(document).ready(function () {
             catch (TypeError) {
                 console.log("element with id next absent !");
             }
-            localStorage.setItem("next", valuenext);
-            next = localStorage.getItem("next");
+            sessionStorage.setItem("next", valuenext);
+            next = sessionStorage.getItem("next");
 
             console.log("valuenext not empty : " + next);
         }
         else {
-            next = localStorage.getItem("next");
-            window.location.href = BASE_URL + "booldog?mainurl=" + localStorage.getItem('next') + "&user=" + localStorage.getItem('user') + "&password=" + localStorage.getItem('password');
-            //window.location.href = 'javascript:initBlogSGang(localStorage.getItem("user"),localStorage.getItem("password"),localStorage.getItem("next"))';
+            next = sessionStorage.getItem("next");
+            window.location.href = BASE_URL + "booldog?mainurl=" + sessionStorage.getItem('next') + "&user=" + sessionStorage.getItem('user') + "&password=" + sessionStorage.getItem('password');
+            //window.location.href = 'javascript:initBlogSGang(sessionStorage.getItem("user"),sessionStorage.getItem("password"),sessionStorage.getItem("next"))';
         }
         $(document).ready(function () {
             htmlIframeWidthHeight(document.getElementById("containerlogin"));
@@ -50,8 +50,8 @@ function htmlIframeWidthHeight() {
     var bsectionHeight = document.getElementsByTagName('body')[0];
     height = bsectionHeight.scrollHeight + 340;
     width = bsectionHeight.scrollWidth + 200;
-    localStorage.setItem("iframewidth", width.toString());
-    localStorage.setItem("iframeheight", height.toString());
+    sessionStorage.setItem("iframewidth", width.toString());
+    sessionStorage.setItem("iframeheight", height.toString());
     window.top.postMessage(
         {
             height: height,

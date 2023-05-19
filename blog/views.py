@@ -91,8 +91,8 @@ def getPost(request):
     profiles = list(Profile.objects.all())
     profiles_list = serializer(profiles)
     t2 = []
-    if "tagTitle" in request.GET and request.GET["tagTitle"]:
-        tagTitle = str(request.GET.get("tagTitle"))
+    if "mainurl" in request.GET and request.GET["mainurl"]:
+        tagTitle = str(request.GET.get("mainurl"))
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
                 site__title=tagTitle).order_by('-publish')
