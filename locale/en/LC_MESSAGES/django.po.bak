@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-15 13:53+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/templates/booldog.html:21
+msgid "Reply"
+msgstr "Responder"
+
+#: blog/templates/booldog.html:22
+msgid "Comment"
+msgstr "Comentario"
+
+#: blog/templates/booldog.html:23
+msgid "Entered"
+msgstr "Ingresado"
+
+#: blog/templates/booldog.html:24
+msgid "Sent"
+msgstr "Enviado"
+
+#: blog/templates/booldog.html:25 blog/templates/index.html:42
+msgid "Login"
+msgstr "Login"
+
+#: blog/templates/index.html:32 blog/templates/index.html:39
+#: blog/templates/index.html:65
+msgid "SignUp"
+msgstr "Inscribirse"
+
+#: blog/templates/index.html:35
+msgid "Exit"
+msgstr "Salida"
+
+#: blog/templates/index.html:56
+msgid "What is Booldog ? "
+msgstr "¿Qué es booldog?"
+
+#: blog/templates/index.html:57
+msgid ""
+"Booldog is a message hosting service for websites. Install it on your site "
+"to allow your visitors to comment. Registering will give you access to the "
+"Boolddog admin panel to moderate posts and have control over what is posted "
+"on your site."
+msgstr "Booldog es un servicio de alojamiento de mensajes para sitios web"
+msgstr ". Instálalo en tu sitio para permitir que sus visitantes comenten."
+msgstr "Registrarse le dará acceso al panel de administración de Boolddog para moderar publicaciones y tener control sobre lo que se publica en su sitio."
+
+#: blog/templates/index.html:58
+msgid "Boolddog is also used on this page ! in the footer section."
+msgstr "¡Boolddog también se usa en esta página! en la sección de pie de página."
+
+#: blog/templates/index.html:61
+msgid "How use it ? "
+msgstr "Cómo usarlo ?"
+
+#: blog/templates/index.html:64
+msgid "and put them in your root web folder"
+msgstr "y colóquelos en su carpeta web raíz"
+
+#: blog/templates/index.html:65
+msgid "here"
+msgstr "que"
+
+#: blog/templates/index.html:65
+msgid "to obtain user and password"
+msgstr "para obtener usuario y contraseña"
+
+#: blog/templates/index.html:66
+msgid "link booldog files in your head !"
+msgstr "¡Enlaza archivos booldog en tu cabeza!"
+
+#: blog/templates/index.html:69
+msgid ""
+"edit the bldg.js file by inserting the username and password chosen to "
+"register , in quotes !"
+msgstr "edite el archivo bldg.js insertando el nombre de usuario y la contraseña elegidos para registrarse, entre comillas!"
+
+#: user/templates/admin/base.html:42
+msgid "Welcome,"
+msgstr "Bienvenido"
+
+#: user/templates/admin/base.html:47
+msgid "View site"
+msgstr ""
+
+#: user/templates/admin/base.html:52
+msgid "Documentation"
+msgstr ""
+
+#: user/templates/admin/base.html:56
+msgid "Change password"
+msgstr "Cambiar la contraseña"
+
+#: user/templates/admin/base.html:60
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+#: user/templates/admin/base.html:72
+msgid "Home"
+msgstr "Home"
+
+#: user/templates/base_password.html:24
+msgid "Password recover"
+msgstr "Recuperar Contraseña"
+
+#: user/templates/base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+#: user/templates/base_site.html:6
+msgid "Django administration"
+msgstr ""
+
+#: user/templates/change_password.html:56
+msgid ""
+"To change your password, you must first log in! If you don't remember your "
+"password, you need to recover it"
+msgstr '¡Para cambiar su contraseña, primero debe iniciar sesión! Si no recuerdas tu'
+msgstr 'contraseña, necesitas recuperarla'
+
+#: user/templates/registration/password_reset_done.html:5
+msgid "Done !"
+msgstr "Hecho"
+
+#: user/templates/registration/password_reset_done.html:11
+msgid ""
+"Recovery link sent to your email We have sent instructions to set your "
+"password, if there is a valid account at the email address you provided. You "
+"should receive them shortly. If you do not receive an email, make sure you "
+"enter the address you registered with, and check your spam folder."
+msgstr 'Enlace de recuperación enviado a su correo electrónico. Hemos enviado instrucciones para configurar su '
+msgstr 'contraseña, si hay una cuenta válida en la dirección de correo electrónico que proporcionmsgstró. Tú'
+msgstr 'Debería recibirlos en breve. Si no recibe un correo electrónico, asegúrese de '
+msgstr 'ingrese la dirección con la que se registró y verifique su carpeta de correo no deseado.'
+
+#: user/templates/registration/password_reset_form.html:8
+#, fuzzy
+#| msgid "Password recover"
+msgid "password reset"
+msgstr "Recuperar Contraseña"
+
+#: user/templates/registration/password_reset_form.html:12
+msgid "Insert your mail"
+msgstr "Introduce tu correo electrónico"
+
+#: user/templates/registration/password_reset_form.html:17
+msgid "Send e-mail"
+msgstr "Enviar correo electrónico"
+
+#: user/templates/user/register.html:65
+msgid "Error entering username !"
+msgstr "¡Error al ingresar el nombre de usuario!"
+
+#: user/templates/user/register.html:71 user/templates/user/register.html:83
+msgid "Error entering password !"
+msgstr "¡Error al ingresar la contraseña!"
+
+#: user/templates/user/register.html:77
+msgid "Error entering email !"
+msgstr "¡Error al ingresar el correo electrónico!"
+
+#: user/templates/user/register.html:96
+msgid "The site you will be using Booldog on"
+msgstr "El sitio en el que usará Booldog"
+
+#: user/templates/user/register.html:99
+msgid "Error entering the Website !"
+msgstr "¡Error al ingresar al sitio web!"
+
+#: user/templates/user/register.html:107
+msgid "Error entering photo !"
+msgstr "¡Error al ingresar la foto!"
+
+#: user/templates/user/register.html:115
+msgid "Signup me"
+msgstr "registrarme"
+
+#: user/templates/user/register.html:125
+msgid "Remember me"
+msgstr "Acuérdate de mí"
+
+#: user/templates/user/register.html:132
+msgid "Forget Password ?"
+msgstr "Contraseña olvidada ?"
+
+#: user/templates/wrongdati.html:15
+msgid "wrong data !"
+msgstr "información incorrecta !"
+
+#: user/views.py:247
+msgid "you are authorized to use booldog ."
+msgstr "está autorizado a utilizar booldog."
+
+#: user/views.py:249
+msgid "Enter your username and password in the bldg.js file"
+msgstr "Ingrese su nombre de usuario y contraseña en el archivo bldg.js"
