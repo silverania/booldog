@@ -21,21 +21,6 @@
 <script src="{% static "js/all.min.js"%}"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v14.0&appId=810115799892623&autoLogAppEvents=1" nonce="ZQl7gT5l">
   </script>
-  <script>
-    /* RELOAD IFRAME TO  SEND DATA */
-    $(document).ready(function(){
-     (function() {
-      let el=document.getElementById('containerlogin');
-      window.top.postMessage(
-    {
-      height:el.scrollHeight,
-      base: el.scrollWidth,
-    },
-    "*"
-  );
-     })();
-     });
-    </script>
 </head>
 <body>
   {% block content %} {% endblock content %}

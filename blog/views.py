@@ -93,6 +93,7 @@ def getPost(request):
     t2 = []
     if "mainurl" in request.GET and request.GET["mainurl"]:
         tagTitle = str(request.GET.get("mainurl"))
+        breakpoint()
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
                 site__title=tagTitle).order_by('-publish')
@@ -145,13 +146,12 @@ def newPost(request):
     myuser = Profile.objects.get(first_name=author)
     pageadmin = request.GET.get("useradmin")
     myuser.firstname = getLoginName(request)
-    tagTitle = request.GET.get('mainurl')
-    split_url = urlsplit(tagTitle)
+    rootSite = request.GET.get('mainurl')
+    split_url = urlsplit(rootSite)
     # check site authorization
     try:
         thisSite = split_url.scheme+"://" + \
             (split_url.netloc)+(split_url.path)
-        breakpoint()
         site = Site.objects.get(
             title=thisSite, user=Profile.objects.get(first_name=pageadmin))
     except Exception:
@@ -162,7 +162,6 @@ def newPost(request):
         post = blog.models.Comment()
         post.postType = "post"
     else:
-        breakpoint()
         post = blog.models.Resp()
         respToProfile = request.GET.get("respToUser")
         respToProfile = Profile.objects.get(first_name=respToProfile)
@@ -181,12 +180,12 @@ def newPost(request):
                 pk=commento)
             post.commento = getRespOrPostToAssignResp
     post.site = site
-    post.site.title = tagTitle
+    post.site.title = rootSite
     post.slug = site.title.replace("/", "")
     post.slug = site.title.replace(":", "")
     post.author = myuser
     # post.site.user = myuser
-    post.site.titleTagContent = tagTitle
+    post.site.titleTagContent = rootSite
     post.publish = datetime.now()
     post.created = post.publish
     post.body = body

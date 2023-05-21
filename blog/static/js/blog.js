@@ -12,6 +12,7 @@ var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
 const BASE_PHOTO_DIR = BASE_URL + "media/";
 var HTTPURL_CHANGEPASSWORD;
+var comments_json;
 var borderPost = "none";
 var borderResponse = "1px solid grey";
 var paPostOrResp;
@@ -19,7 +20,6 @@ var postarea;
 var el;
 var mess;
 var padre;
-var user;
 var lastUpdate;
 var postAuthor;
 var userAuth;
@@ -29,7 +29,7 @@ var isChanged = false;
 window.buttonLinkComment = document.createElement("BUTTON");
 var H1Welcome = document.createElement("H6");
 var bbutton = document.createElement("ButtotagTitlen");
-
+var user, password;
 var resps;
 var tagTitle;
 var globDivContainerHead;
@@ -174,15 +174,15 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       inputSubmit.setAttribute("type", "submit");
       inputSubmit.setAttribute("value", "Esci");
       liBlogEsci.setAttribute("id", "liBlogEsci");
-      if (userThatLogin !== "None")
+      if (userThatLogin !== "false")
         H1Welcome.setAttribute("id", "H1Welcome");
       H1Welcome.style.display = "block";
-      let temp = JSON.parse(userThatLogin);
+      userThatLogin = JSON.parse(userThatLogin);
       $(H1Welcome).append(
         '<span class="spanuser">' +
 
-        temp[0].fields.first_name.charAt(0).toUpperCase() +
-        temp[0].fields.first_name.slice(1) +
+        userThatLogin[0].fields.first_name.charAt(0).toUpperCase() +
+        userThatLogin[0].fields.first_name.slice(1) +
         "</span>"
       );
     }
@@ -654,14 +654,24 @@ function initBlogSGang(u, p, url) {
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
-  if ((u !== undefined && p !== undefined && url !== undefined) && (u !== "" && p !== "" && url !== "")) {
+  if ((u !== "undefined" && p !== "undefined" && (url !== null || url !== "undefined")) && (u !== "" && p !== "" && url !== "")) {
     currentUrl = url.replace(/\/$/, "");
+    user = u;
+    password = p;
+    localStorage.setItem("user", user);
+    localStorage.setItem("password", password);
+    localStorage.setItem("url", currentUrl);
+  }
+  else {
+    u = localStorage.getItem("user");
+    p = localStorage.getItem("password");
+    currentUrl = localStorage.getItem("url");
   }
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
   HIDDENFIELD = "?mainurl=" + currentUrl;
-  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
+  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + currentUrl;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
@@ -675,7 +685,7 @@ function initBlogSGang(u, p, url) {
       let s = {
         user: u,
         password: p,
-        currentUrl: url,
+        currentUrl: currentUrl,
       };
       const request = {
         method: "POST",
@@ -735,7 +745,7 @@ function getComment() {
   var profiles = new Array();
   profiles_json = new Array();
   var z = 0;
-  var comments_json = new Array();
+  comments_json = new Array();
   butcloned = document.getElementById("button_post");
   $(".mybut").hover(
     function () {
@@ -1110,7 +1120,3 @@ function sendToServer(post, url) {
   return 0;
 }
 
-/*(function(){
-    frame=$('#booldogFrame')
- frame.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-}())*/

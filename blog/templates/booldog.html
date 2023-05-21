@@ -18,12 +18,10 @@
     <body>
 
 <script>
-        
         var spanBlogEntra = document.createElement("SPAN");
     var currentUrl="{{currentUrl}}";
-var thisuser="{{u}}";
-var thispassword="{{password}}";
-
+var user="{{u}}";
+var password="{{password}}";
 var buttonRispo="{% trans "Reply" %}"
 window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
 var postinserito="{% trans "Entered" %}";
@@ -33,18 +31,20 @@ localStorage.setItem('buttonRispondi',buttonRispo)</script>
 <script>
     var thisurl=location.href;
 window.addEventListener("message", function (event) {
-    if (!(event.origin.includes('https://127.0.0.1:000'))) {
+    if (!(currentUrl.includes(event.origin))) {
         console.log("messaggio ignorato");
         return -1;
         ("mancata autorizzazione!")
     }
     else {
-        var msg = JSON.parse(event.data);
-        var user = JSON.parse(msg.user);
-        var password=JSON.parse(msg.password);
+        /* PIGLI I MESSAGG RU GESUCRIST RU CLIENT
+         user = event.data.user;
+         password=event.data.password;
+         */
+        console.log("link autorizzato a invio messaggi !")
     }
 });
-initBlogSGang(thisuser,thispassword,currentUrl);
+initBlogSGang(user,password,currentUrl);
 </script>
 </body>
 </html>

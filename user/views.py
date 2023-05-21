@@ -201,11 +201,8 @@ class Logout(View):
         userLoggedIN = None
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
-            # template = "registration/logged_out.html"
-            return redirect(mainurl,  {'valuenext': mainurl})
-        else:
             # return render(request, "seiuscito.html", {'valuenext': mainurl})
-            return render(request, "booldog.html",  {'valuenext': mainurl})
+        return render(request, "booldog.html",  {'valuenext': mainurl})
 
 
 def user_register(request):
@@ -265,6 +262,7 @@ def user_register(request):
 
 def change_password(request):
     if request.method == 'POST':
+        breakpoint()
         valuenext = ""
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -276,6 +274,7 @@ def change_password(request):
         else:
             return render(request, "wrongdati.html", {'valuenext': valuenext})
     else:
+        breakpoint()
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
 
@@ -284,6 +283,7 @@ def change_password(request):
 def edit(request):
     print("request="+str(request))
     if request.method == 'POST':
+        breakpoint()
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
         profile_form = ProfileEditForm(
@@ -292,6 +292,7 @@ def edit(request):
             user_form.save()
             profile_form.save()
     else:
+        breakpoint()
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
             instance=request.user.profile)

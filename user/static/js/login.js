@@ -1,21 +1,16 @@
+var valuenext;
 $(document).ready(function () {
     var r, pf, pc, thisurl, fs, tokenhtml;
     const params = new URLSearchParams(window.location.search);
-    var valuenext = params.get('mainurl');
-    localStorage.setItem("login", login);
-    login = localStorage.getItem('login');
+    valuenext = params.get('mainurl');
     $('[data-toggle="tooltip"]').tooltip();
     try {
-        tokenhtml = document.getElementsByName('csrfmiddlewaretoken');
-        tokenhtml = tokenhtml[0].value;
-        sessionStorage.setItem('csrfmiddlewaretoken', tokenhtml);
         r = document.getElementById("a_reg");
         pf = document.getElementById("a_passwordforget");
         pc = document.getElementById("a_changepassword");
-        thisurl = params.get('mainurl');
-        r.href = "/user/register/blog?mainurl=" + params.get('mainurl');
-        pc.href = sessionStorage.getItem('BASE_URL') + "user/login/change_password?mainurl=" + thisurl;
-        pf.href = sessionStorage.getItem('BASE_URL') + "user/login/password_reset?mainurl=" + thisurl;
+        r.href = "/user/register/blog?mainurl=" + valuenext;
+        pc.href = BASE_URL + "user/login/change_password?mainurl=" + valuenext;
+        pf.href = BASE_URL + "user/login/password_reset?mainurl=" + valuenext;
         fs = document.getElementById("formlogin");
     }
     catch (TypeError) {
@@ -24,26 +19,38 @@ $(document).ready(function () {
     finally {
         if (valuenext) {
             try {
-                document.getElementById('next').setAttribute("value", next);
+                document.getElementById('next').setAttribute("value", valuenext);
             }
             catch (TypeError) {
                 console.log("element with id next absent !");
             }
-            sessionStorage.setItem("next", valuenext);
-            next = sessionStorage.getItem("next");
+        }
 
-            console.log("valuenext not empty : " + next);
-        }
-        else {
-            next = sessionStorage.getItem("next");
-            window.location.href = BASE_URL + "booldog?mainurl=" + sessionStorage.getItem('next') + "&user=" + localStorage.getItem('user2') + "&password=" + localStorage.getItem('password2');
-            //window.location.href = 'javascript:initBlogSGang(localStorage.getItem("user"),localStorage.getItem("password"),sessionStorage.getItem("next"))';
-        }
         $(document).ready(function () {
             htmlIframeWidthHeight(document.getElementById("containerlogin"));
         });
     }
+    /* RELOAD IFRAME TO  SEND DATA */
+    (function () {
+        let el = document.getElementById('containerlogin');
+        window.top.postMessage(
+            {
+                height: el.scrollHeight,
+                base: el.scrollWidth,
+            },
+            "*"
+        );
+    })();
+    window.addEventListener("message", function (event) {
+        if (valuenext.includes(event.origin)) {
+            user = event.data.user;
+            password = event.data.password;
+        }
+    }
+    );
 });
+
+
 /*
 function htmlIframeWidthHeight() {
     var height, width;
