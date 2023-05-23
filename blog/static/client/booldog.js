@@ -1,13 +1,8 @@
-var iframe;
 let f = function () {
     var height = "";
     var width = "";
     window.addEventListener("message", function (event) {
-        if (!(event.origin.includes('https://localbooldog.com:8000'))) {
-            console.log("messaggio ignorato" + event.origin);
-            ("mancata autorizzazione!");
-        }
-        else {
+        if (event.origin.includes('https://localbooldog.com:8000')) {
             event.source.postMessage({
                 user: user,
                 password: password,
@@ -22,12 +17,11 @@ let f = function () {
                 document.getElementById('booldogFrame').src = "https://localbooldog.com:8000/booldog?mainurl=" + this.location.href.toString() + "&user=" + user + "&password=" + password;
                 console.log("iframe reload !");
             }
-            //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
         }
     });
 
     if (height == "") {
-        iframe = document.createElement("IFRAME");
+        var iframe = document.createElement("IFRAME");
         let mainurl = location.href.toString();
         iframe.setAttribute("id", "booldogFrame");
         iframe.setAttribute("scrolling", "no");

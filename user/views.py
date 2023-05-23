@@ -160,13 +160,14 @@ def user_login(request):
                 return response
             else:
                 return render(request, 'wrongdati.html', {'valuenext': valuenext})
-
     elif request.method == 'GET':
         form = LoginForm()
         if 'mainurl' in request.GET:
             valuenext = request.GET.get('mainurl')
             return render(request, 'registration/login.html',
                           {'form': form, 'valuenext': valuenext})
+        else:
+            return render(request, 'registration/login.html')
 
     """ per cambiare password """
     """
@@ -262,7 +263,6 @@ def user_register(request):
 
 def change_password(request):
     if request.method == 'POST':
-        breakpoint()
         valuenext = ""
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -274,7 +274,6 @@ def change_password(request):
         else:
             return render(request, "wrongdati.html", {'valuenext': valuenext})
     else:
-        breakpoint()
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
 

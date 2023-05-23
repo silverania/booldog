@@ -1,22 +1,39 @@
-#: blog/templates/booldog.html:21
+#: blog/templates/booldog.html:25
 msgid "Reply"
 msgstr ""
 
-#: blog/templates/booldog.html:22
+#: blog/templates/booldog.html:26 blog/templates/booldog.html:28
 msgid "Comment"
 msgstr ""
 
-#: blog/templates/booldog.html:23
+#: blog/templates/booldog.html:27
+msgid "Logout"
+msgstr ""
+
+#: blog/templates/booldog.html:29
+msgid "edit"
+msgstr ""
+
+#: blog/templates/booldog.html:30
+msgid "answers to "
+msgstr ""
+
+#: blog/templates/booldog.html:31
+msgid "alle "
+msgstr ""
+
+#: blog/templates/booldog.html:32
 msgid "Entered"
 msgstr ""
 
-#: blog/templates/booldog.html:24
+#: blog/templates/booldog.html:33
 msgid "Sent"
 msgstr ""
 
-#: blog/templates/booldog.html:25 blog/templates/index.html:42
+#: blog/templates/booldog.html:34 blog/templates/index.html:42
 #: user/templates/registration/login.html:13
 #: user/templates/registration/login.html:74
+#: user/templates/user/register.html:34 user/templates/user/register.html:35
 msgid "Login"
 msgstr ""
 
@@ -95,6 +112,11 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: user/templates/base.html:10 user/templates/user/register.html:11
+#: user/templates/user/register.html:50
+msgid "Signup"
+msgstr ""
+
 #: user/templates/base_password.html:24
 msgid "Password recover"
 msgstr ""
@@ -105,6 +127,26 @@ msgstr ""
 
 #: user/templates/base_site.html:6
 msgid "Django administration"
+msgstr ""
+
+#: user/templates/change_password.html:12
+msgid "Password change for"
+msgstr ""
+
+#: user/templates/change_password.html:24
+msgid "Current password"
+msgstr ""
+
+#: user/templates/change_password.html:32
+msgid "new password:"
+msgstr ""
+
+#: user/templates/change_password.html:41
+msgid "Confirm password:"
+msgstr ""
+
+#: user/templates/change_password.html:50
+msgid "Save"
 msgstr ""
 
 #: user/templates/change_password.html:56
@@ -141,6 +183,18 @@ msgid ""
 "enter the address you registered with, and check your spam folder."
 msgstr ""
 
+#: user/templates/registration/password_reset_email.html:7
+msgid "Someone asked for password recovery for the user with email :"
+msgstr ""
+
+#: user/templates/registration/password_reset_email.html:7
+msgid "Go to:"
+msgstr ""
+
+#: user/templates/registration/password_reset_email.html:8
+msgid "Your username, in case you have forgotten it is:"
+msgstr ""
+
 #: user/templates/registration/password_reset_form.html:8
 msgid "password reset"
 msgstr ""
@@ -153,16 +207,40 @@ msgstr ""
 msgid "Send e-mail"
 msgstr ""
 
+#: user/templates/user/register.html:31
+msgid "Signup or"
+msgstr ""
+
+#: user/templates/user/register.html:62
+msgid "Username:"
+msgstr ""
+
 #: user/templates/user/register.html:64
 msgid "Error entering username !"
+msgstr ""
+
+#: user/templates/user/register.html:68
+msgid "Password:"
 msgstr ""
 
 #: user/templates/user/register.html:70 user/templates/user/register.html:82
 msgid "Error entering password !"
 msgstr ""
 
+#: user/templates/user/register.html:74
+msgid "Email:"
+msgstr ""
+
 #: user/templates/user/register.html:76
 msgid "Error entering email !"
+msgstr ""
+
+#: user/templates/user/register.html:80
+msgid "repeat Password:"
+msgstr ""
+
+#: user/templates/user/register.html:91 user/templates/user/register.html:103
+msgid "Optional:"
 msgstr ""
 
 #: user/templates/user/register.html:95
@@ -193,11 +271,11 @@ msgstr ""
 msgid "wrong data !"
 msgstr ""
 
-#: user/views.py:246
+#: user/views.py:238
 msgid "you are authorized to use booldog ."
 msgstr ""
 
-#: user/views.py:248
+#: user/views.py:240
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"

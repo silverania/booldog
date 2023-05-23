@@ -28,7 +28,7 @@ var butcloned;
 var isChanged = false;
 window.buttonLinkComment = document.createElement("BUTTON");
 var H1Welcome = document.createElement("H6");
-var bbutton = document.createElement("ButtotagTitlen");
+var bbutton = document.createElement("Button");
 var user, password;
 var resps;
 var tagTitle;
@@ -73,10 +73,8 @@ var re, keytoken;
 var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
-  '<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
+  '<a  href="https://booldog.it"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
 $(bIcon).append(logo);
-var iconRefresh = '<a  href="#"  target="_blank" id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
-$(bdiv).append(iconRefresh);
 bIcon.appendChild(H1Welcome);
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
@@ -117,8 +115,8 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     );
     aBlogReg.setAttribute("href", XMLHTTPURL_REGISTER);
     aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD);
-    aBlogCambiaPassword.textContent = "Modifica";
-    aBlogEsci.textContent = "Esci";
+    aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
+    aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
     aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
     aBlogEsci.setAttribute(
@@ -142,7 +140,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     spanBlogEntra.setAttribute("id", "span_entra");
     spanBlogReg.setAttribute("id", "span_reg");
     divBlogReg.setAttribute("id", "div_blog_reg");
-    bbutton.textContent = "Commenta";
+    //bbutton.textContent = "Commenta";
     spanBlogReg.textContent = "Registrati";
 
     ulBlogReg.setAttribute("id", "ul_blog");
@@ -404,7 +402,7 @@ class postArea {
           spanInUserName.appendChild(spanUserBar);
           let respTo =
             mess.respToUser[0].toUpperCase() + mess.respToUser.slice("1");
-          spanUserName.textContent = " in risposta a " + respTo;
+          spanUserName.textContent = spanusernametext + respTo;
           spanUserName.appendChild(spanUserBar_2);
           divUserBlog.setAttribute("style", "margin-left:20%");
           break;
@@ -446,7 +444,7 @@ class postArea {
           spanInUserName.textContent =
             mess.author[0].toUpperCase() + mess.author.slice("1") + "  |  ";
           $("#post_response").css("border", "1px solid grey");
-          bbutton.textContent = "Commenta";
+          bbutton.textContent = bbuttontext;
           var idWherePutElement = "button_post";
         }
       }
@@ -524,7 +522,7 @@ class postArea {
           }
         }
       } else {
-        window.location.href = ("user/login/blog" + HIDDENFIELD);
+        window.location.href = (BASE_URL + "user/login/blog" + HIDDENFIELD);
         //window.location.href = XMLHTTPURL_LOGIN;
       }
     });
@@ -652,6 +650,8 @@ function getCookie(name) {
 
 function initBlogSGang(u, p, url) {
   var xhttp2 = new XMLHttpRequest();
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + user + "&password=" + password + "&mainurl=" + currentUrl + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  $(bdiv).append(iconRefresh);
   var requestPostKey;
   var blog;
   if ((u !== "undefined" && p !== "undefined" && (url !== null || url !== "undefined")) && (u !== "" && p !== "" && url !== "")) {

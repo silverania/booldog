@@ -93,7 +93,6 @@ def getPost(request):
     t2 = []
     if "mainurl" in request.GET and request.GET["mainurl"]:
         tagTitle = str(request.GET.get("mainurl"))
-        breakpoint()
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
                 site__title=tagTitle).order_by('-publish')

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" >
@@ -6,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="author" content="silverania">
         {% block anteprima %}{% endblock %}
-        <title>Registrazione</title>
+        <title>{% trans 'Signup' %}</title>
         <link rel="stylesheet" href='{% static "node_modules/bootstrap/dist/css/bootstrap.css" %}'/>
         <link rel="stylesheet" href="{% static "css/all.min.css" %}"/>
         <link rel="stylesheet" href="{% static "css/blog.css" %}"/>

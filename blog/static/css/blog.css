@@ -146,11 +146,12 @@ margin-top:1%;
     /* color: #baaa00a6; */
     }
 
-.booldog{
-    width:100%;
+#a_refresh{
+    width:fit-content;
     height:auto;
     text-decoration:none;
-    margin-right: auto;
+    margin:0 auto;
+    display:block;
 }
 .badgebooldog {
     width:inherit;

@@ -2,7 +2,7 @@ var valuenext;
 $(document).ready(function () {
     var r, pf, pc, thisurl, fs, tokenhtml;
     const params = new URLSearchParams(window.location.search);
-    valuenext = params.get('mainurl');
+    params.get('mainurl') === null ? valuenext = localStorage.getItem("url") : valuenext = params.get('mainurl');
     $('[data-toggle="tooltip"]').tooltip();
     try {
         r = document.getElementById("a_reg");

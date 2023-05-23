@@ -10,15 +10,5 @@ function getParam() {
     pc.href = "{% url 'change_password' %}?next=" + params.get('next');
     pf.href = "{% url 'password_reset' %}?next=" + params.get('next');
     //var fs= document.getElementById("formlogin");
-    if (valuenext) {
-        sessionStorage.setItem("next", valuenext);
-        next = sessionStorage.getItem("next")
-        console.log("valuenext not empty : " + next)
-    }
-    else {
-        next = sessionStorage.getItem("next")
-        window.location.href = window.location.href + "?next=" + next
-        console.log(next)
-    }
     return next;
 }

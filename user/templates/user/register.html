@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <meta name="author" content="silverania">
-        <title>Registrazione</title>
+        <title>{% trans 'Signup' %}</title>
         <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
         <link rel="stylesheet" href="{% static "css/all.min.css" %}">
         <link rel="stylesheet" href="{% static "css/blog.css" %}">
@@ -28,11 +28,11 @@
     {% if '/register/blog' in request.full_path %}<div class="row title">
       <div class="col-xs-12 col-6 text-center offset-sm-3 col-sm-6" style="margin-bottom:5%;">
         <!--hr class="kpx_hrOr"-->
-        <!--span class="kpx_spanOr">Registrati o Fai il
+        <!--span class="kpx_spanOr">{% trans 'Signup or' %}
         <a id="a_reg" href="{% if 'blog' in request.path %} /user/login/blog
         {% else %} /user/login {% endif %}"><span style="color:green;">Login</span></a></span-->
-        <span class="kpx_spanOr">Registrati o Fai il
-          <a id="a_reg"><span style="color:green;">Login</span></a></span>
+        <span class="kpx_spanOr">{% trans 'Login' %}
+          <a id="a_reg"><span style="color:green;">{% trans 'Login' %}</span></a></span>
         </div>
       </div>{% endif %}
       <script type="text/javascript">
@@ -47,7 +47,7 @@
       <div class="row justify-content-center">
         <div class="col-12 text-center col-sm-6">
           {% if not 'blog' in request.path %}<hr class="kpx_hrOr"><br>{% endif %}
-          <h2 align="center"class="title">Registrazione</h2>
+          <h2 align="center"class="title">{% trans 'Signup' %}</h2>
         </div>
       </div>
 
@@ -59,25 +59,25 @@
               {% csrf_token %}
               {% for field in form %}
               {% if 'username' in field.name %}
-              <label>Username:</label>
+              <label>{% trans 'Username:' %}</label>
               <p class="mt-1 mb-4">{{field}}</p>
               {% if field.errors %}  <p style="color:red;">{% trans 'Error entering username !' %} </p>
               {% endif %}
               
               {% elif 'password1' in field.name %}
-               <label>Password:</label>
+               <label>{% trans 'Password:' %}</label>
               <p class="mt-1 mb-4">{{field}}</p>
                {% if field.errors %}  <p style="color:red;">{% trans 'Error entering password !' %} </p>
                {% endif %}
 
                {% elif 'email' in field.name %}
-               <label>la tua mail :</label>
+               <label>{% trans 'Email:' %}</label>
               <p class="mt-1 mb-4">{{field}}</p>
                {% if field.errors %}  <p style="color:red;">{% trans 'Error entering email !' %} </p>
                {% endif %}
 
                 {% elif 'password2' in field.name %}
-                <label>Conferma Password :</label>
+                <label>{% trans 'repeat Password:' %}</label>
                 <p class="mt-1 mb-4">{{field}}</p>
                     {% if field.errors %}  <p style="color:red;">{% trans 'Error entering password !' %} </p>
                 <script>setTimeout(() => { window.location.href = {% if 'blog' in request.path %} "/user/register/blog"
@@ -88,7 +88,7 @@
 
                   {% elif 'website' in field.name %}
                   {% if 'blog' in request.path %} 
-                  <small style="color: grey">Opzionale</small>
+                  <small style="color: grey">{% trans 'Optional:' %}</small>
                    <label>{{field.label_tag}}</label>
                   {%else%}
                   <label>{{field.label_tag}}</label>
@@ -100,7 +100,7 @@
                 {% else %} /user/register {% endif %} "},5000);</script>{% endif %}
                 
                   {% elif 'Photo' in field.label_tag %}
-                      <small style="color: grey">Opzionale</small>
+                      <small style="color: grey">{% trans 'Optional:' %}</small>
                   <label>{{field.label_tag}}</label>
                   <p class="mt-1 mb-4">{{field}}</p>
                   {% if field.errors %}  <p style="color:red;">{% trans 'Error entering photo !' %} </p>{%endif%}
