@@ -45,7 +45,6 @@ def checkUser(request):
         authorized = False
         list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
-            print(("chiave="+str(key)+"valore"+str(value)))
             if 'user' in key:
                 myuser = value
             if 'password' in key:
@@ -56,20 +55,13 @@ def checkUser(request):
             try:
                 myuser = authenticate(username=myuser, password=password)
                 if myuser is not None:
-                    list_current_user = getUser(myuser)
                     firstName = str(myuser)
                     currentUser = Profile.objects.get(first_name=firstName)
                     if 'blog' in request.get_full_path():
-                        if not str(currentUser.website) in currentUrl:
-                            print("nessun autorizzazione concessa !" +
-                                  str(currentUrl)+"__"+str(currentUser.website))
-                            raise Exception(
-                                "sito Web non autoriazzato o assente in fase di registrazione")
-                        else:
+                        if str(currentUser.website) in currentUrl:
                             authorized = True
                 else:
                     myuser = "None"
-                    list_current_user = myuser
                 if not myuser.groups.filter(name__in=['BlogAdmin']).exists():
                     group = Group.get(name='BlogAdmin')
                     myuser.groups.add(group)
@@ -77,11 +69,6 @@ def checkUser(request):
                 print("Errore nel autenticazione dell user , e/o nella sua assegnazione"
                       + "al gruppo BlogAdmin")
                 myuser = "None"
-                list_current_user = myuser
-                print("77 "+str(list_current_user))
-        else:
-            list_current_user = getUser(myuser)
-            print("86 "+str(list_current_user))
         authorized = str(authorized)
         login = str(login)
         return JsonResponse(
@@ -90,7 +77,6 @@ def checkUser(request):
                 "authenticated": login
             }, safe=False
         )
-
     """
     def get(self, request):
         print("view checuser GET request.user & session is =" +
