@@ -51,7 +51,6 @@ def checkUser(request):
                 password = value
             if 'currentUrl' in key:
                 currentUrl = value
-        breakpoint()
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
@@ -244,7 +243,7 @@ def user_register(request):
             response = render(request, "user/register.html", {
                 'form': form, 'mainurl': valuenext})
         else:
-            response = render(request, "user/register.html")
+            response = render(request, "user/register.html", {'form': form})
         return response
 
 

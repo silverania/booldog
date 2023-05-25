@@ -35,14 +35,26 @@
           <a id="a_reg"><span style="color:green;">{% trans 'Login' %}</span></a></span>
         </div>
       </div>{% endif %}
-      <script type="text/javascript">
-         $(document).ready(function () {
-            htmlIframeWidthHeight(document.getElementById("reg_container"));
-        });
+      <script type="text/javascript" defer>
+        try{
+            var regContainer=document.getElementById("reg_container");
+        }
+        catch(e){
+          var regContainer=document.getElementsByTag("body");
+        }
+        finally{
+          htmlIframeWidthHeight(regContainer);
+        }
         const params = new URLSearchParams(window.location.search);
         //document.getElementById("next").value = params.get('next');
-        var r=document.getElementById("a_reg");
-        r.href="/user/login/blog?next="+params.get('next');
+        try{
+          var r=document.getElementById("a_reg");
+          r.href="/user/login/blog?next="+params.get('next');
+        }
+        catch(e){
+          console.log("non ho l elemeto a_reg !");
+        }
+        
       </script>
       <div class="row justify-content-center">
         <div class="col-12 text-center col-sm-6">

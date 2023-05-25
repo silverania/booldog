@@ -25,18 +25,18 @@ $(document).ready(function () {
                 console.log("element with id next absent !");
             }
         }
-
-        $(document).ready(function () {
-            htmlIframeWidthHeight(document.getElementById("containerlogin"));
-        });
+        var containerlogin = document.getElementById("containerlogin");
+        if (containerlogin === null) {
+            var containerlogin = document.getElementsByTagName("body")[0];
+        }
+        htmlIframeWidthHeight(containerlogin);
     }
     /* RELOAD IFRAME TO  SEND DATA */
     (function () {
-        let el = document.getElementById('containerlogin');
         window.top.postMessage(
             {
-                height: el.scrollHeight,
-                base: el.scrollWidth,
+                height: containerlogin.scrollHeight,
+                base: containerlogin.scrollWidth,
             },
             "*"
         );

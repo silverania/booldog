@@ -3,12 +3,17 @@ function getParam() {
     var valuenext = params.get('next');
     //var login="{{ request.user.is_authenticated }}"
     $('[data-toggle="tooltip"]').tooltip()
-    var r = document.getElementById("a_reg");
-    var pf = document.getElementById("a_passwordforget");
-    var pc = document.getElementById("a_changepassword");
-    r.href = "/user/register/blog?next=" + params.get('next');
-    pc.href = "{% url 'change_password' %}?next=" + params.get('next');
-    pf.href = "{% url 'password_reset' %}?next=" + params.get('next');
+    try {
+        var r = document.getElementById("a_reg");
+        var pf = document.getElementById("a_passwordforget");
+        var pc = document.getElementById("a_changepassword");
+        r.href = "/user/register/blog?next=" + params.get('next');
+        pc.href = "{% url 'change_password' %}?next=" + params.get('next');
+        pf.href = "{% url 'password_reset' %}?next=" + params.get('next');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
     //var fs= document.getElementById("formlogin");
     return next;
 }

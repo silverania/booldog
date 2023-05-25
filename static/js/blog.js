@@ -692,7 +692,7 @@ function initBlogSGang(u, p, url) {
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        mode: "cors",
+        mode: "no-cors",
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)
