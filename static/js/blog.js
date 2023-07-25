@@ -884,8 +884,8 @@ function getComment() {
 function htmlIframeWidthHeight(elem) {
   var height, width;
   //var bsectionHeight = document.getElementById("blog");
-  height = elem.scrollHeight + 340;
-  width = elem.scrollWidth + 200;
+  height = elem.scrollHeight;
+  width = elem.scrollWidth;
   window.top.postMessage(
     {
       height: height,

@@ -25,10 +25,7 @@ $(document).ready(function () {
                 console.log("element with id next absent !");
             }
         }
-        var containerlogin = document.getElementById("containerlogin");
-        if (containerlogin === null) {
-            var containerlogin = document.getElementsByTagName("body")[0];
-        }
+        var containerlogin = document.getElementsByTagName("body")[0];
         htmlIframeWidthHeight(containerlogin);
     }
     /* RELOAD IFRAME TO  SEND DATA */
