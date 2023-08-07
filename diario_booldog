@@ -1,7 +1,3 @@
-devo rendere le variabili user e password globali con lo storage js.
-user e password devono essere rese statiche fra le chiamate.
-forzare l' invio di user e password con iframe reload in message
-controllare source in messagehandler in login.js
-user e password sono statiche tra le chiamate , usando localstorage....cambialo in session magari ....più sicuro!
-controlla la var userthatlogin in blog.js se funziona
 tradurre pagina "modifica della password"
+aggiungere l ' informazione "controlla email per ripristinare pasword" nel template "ripristina password"
+imposta language english su chrome e controllare la traduzione su booldog.it

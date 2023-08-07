@@ -66,6 +66,10 @@ msgstr ""
 msgid "How use it ? "
 msgstr ""
 
+#: blog/templates/index.html:62
+msgid "download the two files"
+msgstr ""
+
 #: blog/templates/index.html:64
 msgid "and put them in your root web folder"
 msgstr ""
@@ -86,6 +90,12 @@ msgstr ""
 msgid ""
 "edit the bldg.js file by inserting the username and password chosen to "
 "register , in quotes !"
+msgstr ""
+
+#: blog/templates/index.html:70
+msgid ""
+"in the footer section of your site the comment iframe will become visible, "
+"as below, on this page"
 msgstr ""
 
 #: user/templates/admin/base.html:42
@@ -113,7 +123,7 @@ msgid "Home"
 msgstr ""
 
 #: user/templates/base.html:10 user/templates/user/register.html:11
-#: user/templates/user/register.html:50
+#: user/templates/user/register.html:62
 msgid "Signup"
 msgstr ""
 
@@ -211,59 +221,59 @@ msgstr ""
 msgid "Signup or"
 msgstr ""
 
-#: user/templates/user/register.html:62
+#: user/templates/user/register.html:74
 msgid "Username:"
 msgstr ""
 
-#: user/templates/user/register.html:64
+#: user/templates/user/register.html:76
 msgid "Error entering username !"
 msgstr ""
 
-#: user/templates/user/register.html:68
+#: user/templates/user/register.html:80
 msgid "Password:"
 msgstr ""
 
-#: user/templates/user/register.html:70 user/templates/user/register.html:82
+#: user/templates/user/register.html:82 user/templates/user/register.html:94
 msgid "Error entering password !"
 msgstr ""
 
-#: user/templates/user/register.html:74
+#: user/templates/user/register.html:86
 msgid "Email:"
 msgstr ""
 
-#: user/templates/user/register.html:76
+#: user/templates/user/register.html:88
 msgid "Error entering email !"
 msgstr ""
 
-#: user/templates/user/register.html:80
+#: user/templates/user/register.html:92
 msgid "repeat Password:"
 msgstr ""
 
-#: user/templates/user/register.html:91 user/templates/user/register.html:103
+#: user/templates/user/register.html:103 user/templates/user/register.html:115
 msgid "Optional:"
 msgstr ""
 
-#: user/templates/user/register.html:95
+#: user/templates/user/register.html:107
 msgid "The site you will be using Booldog on"
 msgstr ""
 
-#: user/templates/user/register.html:98
+#: user/templates/user/register.html:110
 msgid "Error entering the Website !"
 msgstr ""
 
-#: user/templates/user/register.html:106
+#: user/templates/user/register.html:118
 msgid "Error entering photo !"
 msgstr ""
 
-#: user/templates/user/register.html:114
+#: user/templates/user/register.html:126
 msgid "Signup me"
 msgstr ""
 
-#: user/templates/user/register.html:124
+#: user/templates/user/register.html:136
 msgid "Remember me"
 msgstr ""
 
-#: user/templates/user/register.html:131
+#: user/templates/user/register.html:143
 msgid "Forget Password ?"
 msgstr ""
 
@@ -271,11 +281,11 @@ msgstr ""
 msgid "wrong data !"
 msgstr ""
 
-#: user/views.py:238
+#: user/views.py:224
 msgid "you are authorized to use booldog ."
 msgstr ""
 
-#: user/views.py:240
+#: user/views.py:226
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"

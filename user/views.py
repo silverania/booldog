@@ -268,7 +268,6 @@ def change_password(request):
 def edit(request):
     print("request="+str(request))
     if request.method == 'POST':
-        breakpoint()
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
         profile_form = ProfileEditForm(
@@ -277,7 +276,6 @@ def edit(request):
             user_form.save()
             profile_form.save()
     else:
-        breakpoint()
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
             instance=request.user.profile)

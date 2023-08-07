@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 12:33+0200\n"
+"POT-Creation-Date: 2023-07-29 08:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,6 +91,10 @@ msgstr ""
 msgid "How use it ? "
 msgstr "¿Cómo usarlo?"
 
+#: blog/templates/index.html:62
+msgid "download the two files"
+msgstr ""
+
 #: blog/templates/index.html:64
 msgid "and put them in your root web folder"
 msgstr "y ponerlos en la carpeta raíz"
@@ -114,6 +118,12 @@ msgid ""
 msgstr ""
 "edite el archivo bldg.js insertando el nombre de usuario y la contraseña "
 "elegidos para registrarse, entre comillas"
+
+#: blog/templates/index.html:70
+msgid ""
+"in the footer section of your site the comment iframe will become visible, "
+"as below, on this page"
+msgstr ""
 
 #: user/templates/admin/base.html:42
 msgid "Welcome,"
@@ -140,7 +150,7 @@ msgid "Home"
 msgstr "Home"
 
 #: user/templates/base.html:10 user/templates/user/register.html:11
-#: user/templates/user/register.html:50
+#: user/templates/user/register.html:62
 msgid "Signup"
 msgstr "Inscribirse"
 
@@ -160,7 +170,7 @@ msgstr "Django Administration"
 msgid "Password change for"
 msgstr "Cambio de contraseña para"
 
-
+#: user/templates/change_password.html:24
 msgid "Current password"
 msgstr "Contraseña actual"
 
@@ -255,65 +265,65 @@ msgstr "Enviar correo electrónico"
 msgid "Signup or"
 msgstr "Registrarse o"
 
-#: user/templates/user/register.html:62
+#: user/templates/user/register.html:74
 msgid "Username:"
 msgstr "Nombre de usuario"
 
-#: user/templates/user/register.html:64
+#: user/templates/user/register.html:76
 msgid "Error entering username !"
 msgstr "¡Error al ingresar el nombre de usuario!"
 
-#: user/templates/user/register.html:68
+#: user/templates/user/register.html:80
 #, fuzzy
 #| msgid "Password recover"
 msgid "Password:"
 msgstr "Recuperar Contraseña"
 
-#: user/templates/user/register.html:70 user/templates/user/register.html:82
+#: user/templates/user/register.html:82 user/templates/user/register.html:94
 msgid "Error entering password !"
 msgstr "¡Error al ingresar el nombre de password!"
 
-#: user/templates/user/register.html:74
+#: user/templates/user/register.html:86
 msgid "Email:"
 msgstr "Correo Electrónico:"
 
-#: user/templates/user/register.html:76
+#: user/templates/user/register.html:88
 msgid "Error entering email !"
 msgstr "¡Error al ingresar el nombre de email!"
 
-#: user/templates/user/register.html:80
+#: user/templates/user/register.html:92
 #, fuzzy
 #| msgid "lose password ?"
 msgid "repeat Password:"
 msgstr "Contraseña Perdida"
 
-#: user/templates/user/register.html:91 user/templates/user/register.html:103
+#: user/templates/user/register.html:103 user/templates/user/register.html:115
 msgid "Optional:"
 msgstr ""
 
-#: user/templates/user/register.html:95
+#: user/templates/user/register.html:107
 msgid "The site you will be using Booldog on"
 msgstr "El sitio en el que utilizará Booldog"
 
-#: user/templates/user/register.html:98
+#: user/templates/user/register.html:110
 msgid "Error entering the Website !"
 msgstr "¡Error al ingresar el nombre de webSite!"
 
-#: user/templates/user/register.html:106
+#: user/templates/user/register.html:118
 msgid "Error entering photo !"
 msgstr "¡Error al ingresar el nombre de photo !"
 
-#: user/templates/user/register.html:114
+#: user/templates/user/register.html:126
 #, fuzzy
 #| msgid "SignUp"
 msgid "Signup me"
 msgstr "Registro"
 
-#: user/templates/user/register.html:124
+#: user/templates/user/register.html:136
 msgid "Remember me"
 msgstr "Acuérdate de mí"
 
-#: user/templates/user/register.html:131
+#: user/templates/user/register.html:143
 #, fuzzy
 #| msgid "lose password ?"
 msgid "Forget Password ?"
@@ -323,11 +333,11 @@ msgstr "Contraseña Perdida"
 msgid "wrong data !"
 msgstr "información incorrecta !"
 
-#: user/views.py:238
+#: user/views.py:224
 msgid "you are authorized to use booldog ."
 msgstr "está autorizado a utilizar booldog."
 
-#: user/views.py:240
+#: user/views.py:226
 #, fuzzy
 #| msgid "Enter your username and password in the bldg.js file"
 msgid ""

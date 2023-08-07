@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 12:33+0200\n"
+"POT-Creation-Date: 2023-07-29 08:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,10 @@ msgstr "Booldog viene usato su questo sito ! nella sezione footer sotto ."
 msgid "How use it ? "
 msgstr "Come usarlo ?"
 
+#: blog/templates/index.html:62
+msgid "download the two files"
+msgstr "Scarica i due files :"
+
 #: blog/templates/index.html:64
 msgid "and put them in your root web folder"
 msgstr "e mettili nella cartella principale del sito "
@@ -114,6 +118,14 @@ msgid ""
 msgstr ""
 "Edita il file bldg.js inserendo , tra virgolette , user e password scelti "
 "per registrarti. "
+
+#: blog/templates/index.html:70
+msgid ""
+"in the footer section of your site the comment iframe will become visible, "
+"as below, on this page"
+msgstr ""
+"sul tuo sito comparirà l' iframe con l' applicazione booldog all' interno, "
+"come sotto questo messaggio ."
 
 #: user/templates/admin/base.html:42
 msgid "Welcome,"
@@ -140,7 +152,7 @@ msgid "Home"
 msgstr "Home"
 
 #: user/templates/base.html:10 user/templates/user/register.html:11
-#: user/templates/user/register.html:50
+#: user/templates/user/register.html:62
 msgid "Signup"
 msgstr "Registrazione"
 
@@ -156,11 +168,11 @@ msgstr "Sito Di Amministrazione Django"
 msgid "Django administration"
 msgstr "Amministrazione django"
 
-
+#: user/templates/change_password.html:12
 msgid "Password change for"
 msgstr "Modifica password per "
 
-
+#: user/templates/change_password.html:24
 msgid "Current password"
 msgstr "password corrente"
 
@@ -254,61 +266,61 @@ msgstr "Invia"
 msgid "Signup or"
 msgstr "Registrazione"
 
-#: user/templates/user/register.html:62
+#: user/templates/user/register.html:74
 msgid "Username:"
 msgstr "Username"
 
-#: user/templates/user/register.html:64
+#: user/templates/user/register.html:76
 msgid "Error entering username !"
 msgstr "Erroe nell inserimento username !"
 
-#: user/templates/user/register.html:68
+#: user/templates/user/register.html:80
 #, fuzzy
 #| msgid "Password recover"
 msgid "Password:"
 msgstr "Recupero Dati"
 
-#: user/templates/user/register.html:70 user/templates/user/register.html:82
+#: user/templates/user/register.html:82 user/templates/user/register.html:94
 msgid "Error entering password !"
 msgstr "Errore nell inserimento password !"
 
-#: user/templates/user/register.html:74
+#: user/templates/user/register.html:86
 msgid "Email:"
 msgstr "Email"
 
-#: user/templates/user/register.html:76
+#: user/templates/user/register.html:88
 msgid "Error entering email !"
 msgstr "Erroe nell inserimento email !"
 
-#: user/templates/user/register.html:80
+#: user/templates/user/register.html:92
 msgid "repeat Password:"
 msgstr "ripeti la Password :"
 
-#: user/templates/user/register.html:91 user/templates/user/register.html:103
+#: user/templates/user/register.html:103 user/templates/user/register.html:115
 msgid "Optional:"
 msgstr "Opzionale"
 
-#: user/templates/user/register.html:95
+#: user/templates/user/register.html:107
 msgid "The site you will be using Booldog on"
 msgstr "Il tuo sito usato per Booldog"
 
-#: user/templates/user/register.html:98
+#: user/templates/user/register.html:110
 msgid "Error entering the Website !"
 msgstr "Errore nell inserimento del Sito !"
 
-#: user/templates/user/register.html:106
+#: user/templates/user/register.html:118
 msgid "Error entering photo !"
 msgstr "Errore nell inserimento photo!"
 
-#: user/templates/user/register.html:114
+#: user/templates/user/register.html:126
 msgid "Signup me"
 msgstr "Registrami"
 
-#: user/templates/user/register.html:124
+#: user/templates/user/register.html:136
 msgid "Remember me"
 msgstr "Ricordami"
 
-#: user/templates/user/register.html:131
+#: user/templates/user/register.html:143
 #, fuzzy
 #| msgid "lose password ?"
 msgid "Forget Password ?"
@@ -318,11 +330,11 @@ msgstr "Password Persa ?"
 msgid "wrong data !"
 msgstr "Dati non corretti !"
 
-#: user/views.py:238
+#: user/views.py:224
 msgid "you are authorized to use booldog ."
 msgstr "Sei autorizzato ad usare Booldog ."
 
-#: user/views.py:240
+#: user/views.py:226
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"
