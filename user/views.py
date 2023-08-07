@@ -196,6 +196,7 @@ def user_register(request):
     valuenext = ""
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
+        breakpoint()
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
@@ -214,6 +215,7 @@ def user_register(request):
                 site = Site.objects.create(
                     title=user.profile.website, user=user.profile)
                 site.save()
+                breakpoint()
                 group = Group.get(name='BlogAdmin')
                 user.groups.add(group)
                 print('myuser'+str(user)
