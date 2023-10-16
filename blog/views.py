@@ -27,6 +27,10 @@ formatted_datetime = formats.date_format(
 class Homepage(View):
     def get(self, request):
         booldogHtml = "index.html"
+        thissession = request.session.session_key
+        response = render(request, "booldog.html")
+        response.set_cookie('thissess', thissession)
+        print("inviato cookie di sessione al client con ID = "+str(thissession))
         return render(request, booldogHtml)
 
 
@@ -93,6 +97,7 @@ def getPost(request):
     t2 = []
     if "mainurl" in request.GET and request.GET["mainurl"]:
         tagTitle = str(request.GET.get("mainurl"))
+        print("tagTitle="+tagTitle)
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
                 site__title=tagTitle).order_by('-publish')
@@ -147,15 +152,10 @@ def newPost(request):
     myuser.firstname = getLoginName(request)
     rootSite = request.GET.get('mainurl')
     split_url = urlsplit(rootSite)
+    site = Site.objects.create(title=rootSite)
     # check site authorization
-    try:
-        thisSite = split_url.scheme+"://" + \
-            (split_url.netloc)+(split_url.path)
-        site = Site.objects.get(
-            title=thisSite, user=Profile.objects.get(first_name=pageadmin))
-    except Exception:
-        raise Exception(
-            "errore nell inserimeto del url.")
+    breakpoint()
+
     postType = request.GET.get("type")
     if "newpost" in postType:
         post = blog.models.Comment()
@@ -183,6 +183,7 @@ def newPost(request):
     post.slug = site.title.replace("/", "")
     post.slug = site.title.replace(":", "")
     post.author = myuser
+    breakpoint()
     # post.site.user = myuser
     post.site.titleTagContent = rootSite
     post.publish = datetime.now()

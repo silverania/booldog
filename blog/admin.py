@@ -14,7 +14,7 @@ class PostAdmin(admin.ModelAdmin):
             # mysite=Site.objects.get(user=)
             filtered_query |= query.filter(site=s)
             print(s.title)
-        return filtered_query
+        return query
     search_fields = ('body',)
     list_filter = ('slug', 'status', 'created', 'publish', 'author',)
     #prepopulated_fields = {'slug': ('title',)}

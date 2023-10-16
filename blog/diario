@@ -1,1 +1,8 @@
-quando clicco sul button rispondi e si apre la pagina di login , non viene aggiunta la ?next nell'url 
+sto facendo il piano tariffario: devo reindirizza ai link giusti in base se l' utente scegli la versione free o a pagamento
+aggiungere opzione nella piano tariffario di programmare funzionlità aggiuntice a booldog su richiesta , poi a pagamento posso aggiungere la gestione dei messaggi tramite dashboard
+
+Bug 0.1a
+
+il file blog.js non possiede ancora la lista degli user/profiles aggiornata quando l' utente sulla pagina web si registra , perciò quando viene inviata la request query tramite la
+quando commento appena registrato ,nei dati ajax ritornati dal server useradmin non c'è
+l' altezza della textarea no si adatta al testo durante l' apertura della pagina .

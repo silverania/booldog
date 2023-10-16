@@ -223,7 +223,7 @@ color:grey;
 
 [id^=but_]{
   font-family:"Montserrat-Regular";
-  width:100%;
+  width:20%;
   height:auto;
   border-style: none;
   margin:15px auto;
@@ -265,23 +265,7 @@ background-color: transparent;
   /* font-size:1rem; */
 }
 
-textarea {
-background-color:transparent;
-  font-family:"Montserrat-Regular";
-  /*font-size:1rem!important;*/
-  line-height: 1.6;
-  color:black;
-  width:100%;
-  outline: none !important;
-  border: none;
-     background-color: transparent;
-     resize: none;
-     outline: none;
-  box-shadow: -5px -5px 5px #719ECE;
-  border-radius:4px;
-  overflow:hidden;
-  padding:10px!important;
-}
+textarea {background-color:transparent;font-family:"Montserrat-Regular";/*font-size:1rem!important;*/line-height: 1.6;color:black;width:100%;outline: none !important;/* border: none; */background-color: transparent;resize: none;outline: none;box-shadow: -2px -2px 2px #719ECE;border-radius:4px;overflow:hidden;padding:10px!important;}
 
 img{
   /* outline: none !important; */

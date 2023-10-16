@@ -2,7 +2,7 @@
 
 /* By Mario , superior code */
 
-const BASE_URL = "https://localbooldog.com:8000/"; // URL del server
+const BASE_URL = "https://localtutorial.com:9000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
@@ -526,7 +526,7 @@ class postArea {
         //window.location.href = XMLHTTPURL_LOGIN;
       }
     });
-    $(button_risposta_post).hover(
+    /*$(button_risposta_post).hover(
       function () {
         $(button_risposta_post).animate(
           {
@@ -545,13 +545,13 @@ class postArea {
       function () {
         $(button_risposta_post).animate(
           {
-            width: "100%",
+            width: "30%",
           },
           200
         );
         $(button_risposta_post).css("box-shadow", "10px 10px 10px #719ECE");
       }
-    );
+    );*/
     switch (mess.type) {
       case "newpost":
       case "newresp":
@@ -606,7 +606,7 @@ class postArea {
       let buttonID = "but_" + mess.type + "_" + type;
       button_risposta_post.setAttribute("type", "button");
       button_risposta_post.setAttribute("id", buttonID);
-      button_risposta_post.setAttribute("class", "btn btn-lg btn-block");
+      button_risposta_post.setAttribute("class", "btn btn-light");
       if (mess.body === ".....")
         button_risposta_post.setAttribute("disabled", "true");
       form_risposta_post.setAttribute("id", "form_" + mess.type + "_" + id);
@@ -622,7 +622,7 @@ class postArea {
   create() {
     $(this.postarea).animate({
       width: "100%",
-    }); // nu second e dui 1,2sec
+    }, 800); // nu second e dui 1,2sec
     //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
     //this.postarea.setAttribute("rows", "3");
     this.postarea.setAttribute("name", "messaggio");
@@ -650,23 +650,23 @@ function getCookie(name) {
 
 function initBlogSGang(u, p, url) {
   var xhttp2 = new XMLHttpRequest();
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + user + "&password=" + password + "&mainurl=" + currentUrl + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
-  $(bdiv).append(iconRefresh);
   var requestPostKey;
   var blog;
   if ((u !== "undefined" && p !== "undefined" && (url !== null || url !== "undefined")) && (u !== "" && p !== "" && url !== "")) {
     currentUrl = url.replace(/\/$/, "");
-    user = u;
     password = p;
-    localStorage.setItem("user", user);
-    localStorage.setItem("password", password);
-    localStorage.setItem("url", currentUrl);
+    sessionStorage.setItem("user", user);
+    sessionStorage.setItem("password", password);
+    sessionStorage.setItem("url", currentUrl);
   }
   else {
-    u = localStorage.getItem("user");
-    p = localStorage.getItem("password");
-    currentUrl = localStorage.getItem("url");
+    u = sessionStorage.getItem("user");
+    p = sessionStorage.getItem("password");
+    currentUrl = sessionStorage.getItem("url");
   }
+  user = u;
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + user + "&password=" + password + "&mainurl=" + currentUrl + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
@@ -690,7 +690,8 @@ function initBlogSGang(u, p, url) {
       const request = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json;charset=utf-8",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
         mode: "no-cors",
         body: JSON.stringify(s),
@@ -1073,6 +1074,7 @@ function createPostArea(messOrResp, elementToAppendArea) {
       isOpen = false;
     }
   }
+  $(paPostOrResp.postarea).keyup();
   return paPostOrResp;
 }
 

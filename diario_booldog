@@ -1,3 +1,7 @@
 tradurre pagina "modifica della password"
 aggiungere l ' informazione "controlla email per ripristinare pasword" nel template "ripristina password"
 imposta language english su chrome e controllare la traduzione su booldog.it
+si devono tradurre le date nei post
+nella comparazione url vien4e considerata ola query : ..../?site=https://  .... e non dovrebbe esserlo 
+inviare user e password nei cookie , invece di usare il localstorage ( per problemi di autorizzazioni )
+il primo commento dopo aver fatto il login non arriva al server. fosrse è perchè la pagina non ha ricaricato la request dal server
