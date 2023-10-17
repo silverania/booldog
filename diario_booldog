@@ -5,3 +5,5 @@ si devono tradurre le date nei post
 nella comparazione url vien4e considerata ola query : ..../?site=https://  .... e non dovrebbe esserlo 
 inviare user e password nei cookie , invece di usare il localstorage ( per problemi di autorizzazioni )
 il primo commento dopo aver fatto il login non arriva al server. fosrse è perchè la pagina non ha ricaricato la request dal server
+filtrare commenti in base all 'user ' in admin.py
+quando si invia la risposta a u commento , al server vengono creati nuovi siti in admnin

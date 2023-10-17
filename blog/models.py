@@ -17,7 +17,7 @@ class Site(models.Model):
     slug = models.SlugField(max_length=250, null=True, blank=True)
     # def save(self, *args, **kwargs):
     #    super(Site, self).save(*args, **kwargs)
-    user = models.ForeignKey(Profile, on_delete=models.SET_NULL,
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE,
                              related_name="sites", null=True, blank=True)
     titleTagContent = models.CharField(
         max_length=200, default="empty")
@@ -34,7 +34,7 @@ class Comment(models.Model):
     site = models.ForeignKey(
         Site,
         related_name="all_comments",
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
     title = models.CharField(
         max_length=100, default="...", null=True, blank=True)
@@ -43,7 +43,7 @@ class Comment(models.Model):
     )
     author = models.ForeignKey(
         Profile,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name="blog_posts",
         null=True,
         blank=True,
@@ -109,7 +109,7 @@ class Resp(models.Model):
     site = models.ForeignKey(
         Site,
         related_name="all_resps",
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE,
     )
 
     class Meta:

@@ -12,6 +12,7 @@ from django.template.context_processors import csrf
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 import json
+from urllib.parse import urlsplit
 from django.core import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
@@ -204,9 +205,9 @@ def user_register(request):
             user.profile.photo = form.cleaned_data.get('photo')
             user.profile.first_name = username
             user.profile.email = form.cleaned_data.get('email')
-            user.profile.website = form.cleaned_data.get('website')
+            titleSite = urlsplit(form.cleaned_data.get('website'))
+            user.profile.website = titleSite.scheme+"://"+titleSite.netloc
             if 'blog' in request.path:
-                breakpoint()
                 valuenext = request.GET.get('mainurl')
                 # agiungere i permessi per leggere i propri post dall adminpage
                 user.save()

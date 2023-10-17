@@ -2,18 +2,20 @@ from django.contrib import admin
 from blog.models import Comment, Resp, Site
 from user.models import Profile
 # Register your models here.
+from urllib.parse import urlsplit
 
 
 class PostAdmin(admin.ModelAdmin):
+
     def get_queryset(self, request):
         query = super(PostAdmin, self).get_queryset(request)
-        filtered_query = Comment.objects.none()
         profile = Profile.objects.get(user=request.user)
         site = Site.objects.filter(user=profile)
-        for s in site.all():
-            # mysite=Site.objects.get(user=)
-            filtered_query |= query.filter(site=s)
-            print(s.title)
+        filtered_query = (profile.blog_posts.all())
+        if not request.user.is_superuser:
+            for mysite in site:
+                filtered_query |= mysite.all_comments.all()
+            query = filtered_query
         return query
     search_fields = ('body',)
     list_filter = ('slug', 'status', 'created', 'publish', 'author',)
@@ -29,8 +31,13 @@ class RespAdmin(admin.ModelAdmin):
         filtered_query = Resp.objects.none()
         profile = Profile.objects.get(user=request.user)
         site = Site.objects.filter(user=profile)
-        for s in site:
-            filtered_query |= query.filter(site=s)
+        if not request.user.is_superuser:
+            for mysite in site:
+                si = Site.objects.get(id=mysite.id)
+                filtered_query |= mysite.all_resps.all()
+            query = filtered_query
+        return query
+
         return query
     search_fields = ('commento', 'body')
     list_display = ('id', 'site', 'commento', 'body', 'created',
