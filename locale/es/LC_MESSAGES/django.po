@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-29 08:38+0200\n"
+"POT-Creation-Date: 2023-10-25 15:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/templates/booldog.html:25
+#: blog/templates/booldog.html:23
 msgid "Reply"
 msgstr "Responder"
 
-#: blog/templates/booldog.html:26 blog/templates/booldog.html:28
+#: blog/templates/booldog.html:24 blog/templates/booldog.html:26
 msgid "Comment"
 msgstr "Comentario"
 
-#: blog/templates/booldog.html:27
+#: blog/templates/booldog.html:25
 msgid "Logout"
 msgstr "cerrar sesión"
 
-#: blog/templates/booldog.html:29
+#: blog/templates/booldog.html:27
 msgid "edit"
 msgstr "editar"
 
-#: blog/templates/booldog.html:30
+#: blog/templates/booldog.html:28
 msgid "answers to "
 msgstr "respuestas a "
 
-#: blog/templates/booldog.html:31
+#: blog/templates/booldog.html:29
 msgid "alle "
 msgstr ""
 
-#: blog/templates/booldog.html:32
+#: blog/templates/booldog.html:30
 msgid "Entered"
 msgstr "Ingresado"
 
-#: blog/templates/booldog.html:33
+#: blog/templates/booldog.html:31
 msgid "Sent"
 msgstr "Enviado"
 
-#: blog/templates/booldog.html:34 blog/templates/index.html:42
+#: blog/templates/booldog.html:32 blog/templates/index.html:44
 #: user/templates/registration/login.html:13
 #: user/templates/registration/login.html:74
-#: user/templates/user/register.html:34 user/templates/user/register.html:35
 msgid "Login"
 msgstr "Login"
 
-#: blog/templates/index.html:32 blog/templates/index.html:39
-#: blog/templates/index.html:65
+#: blog/templates/index.html:34 blog/templates/index.html:41
+#: blog/templates/index.html:79
 msgid "SignUp"
 msgstr "Registro"
 
-#: blog/templates/index.html:35
+#: blog/templates/index.html:37
 msgid "Exit"
 msgstr "Salida"
 
-#: blog/templates/index.html:56
+#: blog/templates/index.html:58
 msgid "What is Booldog ? "
 msgstr "¿Qué es Booldog?"
 
-#: blog/templates/index.html:57
+#: blog/templates/index.html:61
 msgid ""
 "Booldog is a message hosting service for websites. Install it on your site "
 "to allow your visitors to comment. Registering will give you access to the "
@@ -82,36 +81,32 @@ msgstr ""
 "acceso al panel de administración de Boolddog para moderar publicaciones y "
 "tener control sobre lo que se publica en su sitio."
 
-#: blog/templates/index.html:58
+#: blog/templates/index.html:64
 msgid "Boolddog is also used on this page ! in the footer section."
 msgstr ""
 "¡Boolddog también se usa en esta página! en la sección de pie de página."
 
-#: blog/templates/index.html:61
+#: blog/templates/index.html:70
 msgid "How use it ? "
 msgstr "¿Cómo usarlo?"
 
-#: blog/templates/index.html:62
-msgid "download the two files"
-msgstr ""
-
-#: blog/templates/index.html:64
+#: blog/templates/index.html:75
 msgid "and put them in your root web folder"
 msgstr "y ponerlos en la carpeta raíz"
 
-#: blog/templates/index.html:65
+#: blog/templates/index.html:79
 msgid "here"
 msgstr "aqui"
 
-#: blog/templates/index.html:65
+#: blog/templates/index.html:79
 msgid "to obtain user and password"
 msgstr "para obtener usuario y contraseña"
 
-#: blog/templates/index.html:66
+#: blog/templates/index.html:82
 msgid "link booldog files in your head !"
 msgstr "¡Enlaza archivos booldog en tu cabeza!"
 
-#: blog/templates/index.html:69
+#: blog/templates/index.html:89
 msgid ""
 "edit the bldg.js file by inserting the username and password chosen to "
 "register , in quotes !"
@@ -119,10 +114,8 @@ msgstr ""
 "edite el archivo bldg.js insertando el nombre de usuario y la contraseña "
 "elegidos para registrarse, entre comillas"
 
-#: blog/templates/index.html:70
-msgid ""
-"in the footer section of your site the comment iframe will become visible, "
-"as below, on this page"
+#: blog/templates/index.html:103
+msgid "with ADV"
 msgstr ""
 
 #: user/templates/admin/base.html:42
@@ -149,8 +142,7 @@ msgstr "Salida"
 msgid "Home"
 msgstr "Home"
 
-#: user/templates/base.html:10 user/templates/user/register.html:11
-#: user/templates/user/register.html:62
+#: user/templates/base.html:12
 msgid "Signup"
 msgstr "Inscribirse"
 
@@ -237,7 +229,7 @@ msgstr ""
 
 #: user/templates/registration/password_reset_email.html:7
 msgid "Go to:"
-msgstr ""
+msgstr "ir a"
 
 #: user/templates/registration/password_reset_email.html:8
 #, fuzzy
@@ -259,85 +251,47 @@ msgstr "Introduce tu correo electrónico"
 msgid "Send e-mail"
 msgstr "Enviar correo electrónico"
 
-#: user/templates/user/register.html:31
+#: user/templates/user/register.html:14 user/templates/user/register.html:70
 #, fuzzy
-#| msgid "SignUp"
-msgid "Signup or"
-msgstr "Registrarse o"
+#| msgid "Signup"
+msgid "signup"
+msgstr "Inscribirse"
 
-#: user/templates/user/register.html:74
-msgid "Username:"
-msgstr "Nombre de usuario"
-
-#: user/templates/user/register.html:76
-msgid "Error entering username !"
-msgstr "¡Error al ingresar el nombre de usuario!"
-
-#: user/templates/user/register.html:80
+#: user/templates/user/register.html:23
 #, fuzzy
-#| msgid "Password recover"
-msgid "Password:"
-msgstr "Recuperar Contraseña"
+#| msgid "View site"
+msgid "web site"
+msgstr "ver sitio"
 
-#: user/templates/user/register.html:82 user/templates/user/register.html:94
-msgid "Error entering password !"
-msgstr "¡Error al ingresar el nombre de password!"
-
-#: user/templates/user/register.html:86
-msgid "Email:"
-msgstr "Correo Electrónico:"
-
-#: user/templates/user/register.html:88
-msgid "Error entering email !"
-msgstr "¡Error al ingresar el nombre de email!"
-
-#: user/templates/user/register.html:92
+#: user/templates/user/register.html:24
 #, fuzzy
 #| msgid "lose password ?"
-msgid "repeat Password:"
+msgid "repeat password"
 msgstr "Contraseña Perdida"
 
-#: user/templates/user/register.html:103 user/templates/user/register.html:115
-msgid "Optional:"
+#: user/templates/user/register.html:49
+msgid "optional photo"
 msgstr ""
 
-#: user/templates/user/register.html:107
-msgid "The site you will be using Booldog on"
-msgstr "El sitio en el que utilizará Booldog"
+#: user/templates/user/register.html:51
+msgid "choose photo"
+msgstr ""
 
-#: user/templates/user/register.html:110
-msgid "Error entering the Website !"
-msgstr "¡Error al ingresar el nombre de webSite!"
-
-#: user/templates/user/register.html:118
-msgid "Error entering photo !"
-msgstr "¡Error al ingresar el nombre de photo !"
-
-#: user/templates/user/register.html:126
+#: user/templates/user/register.html:90
 #, fuzzy
-#| msgid "SignUp"
-msgid "Signup me"
-msgstr "Registro"
-
-#: user/templates/user/register.html:136
-msgid "Remember me"
-msgstr "Acuérdate de mí"
-
-#: user/templates/user/register.html:143
-#, fuzzy
-#| msgid "lose password ?"
-msgid "Forget Password ?"
-msgstr "Contraseña Perdida"
+#| msgid "Password Forgot ?"
+msgid "Password forgot ?"
+msgstr "Recuperar Contraseña"
 
 #: user/templates/wrongdati.html:15
 msgid "wrong data !"
 msgstr "información incorrecta !"
 
-#: user/views.py:224
+#: user/views.py:227
 msgid "you are authorized to use booldog ."
 msgstr "está autorizado a utilizar booldog."
 
-#: user/views.py:226
+#: user/views.py:229
 #, fuzzy
 #| msgid "Enter your username and password in the bldg.js file"
 msgid ""
@@ -346,6 +300,53 @@ msgid ""
 msgstr ""
 "Ingrese su nombre de usuario y contraseña en el archivo bldg.js y ya está "
 "listo para usar booldog en su sitio"
+
+#, fuzzy
+#~| msgid "lose password ?"
+#~ msgid "forgot password ?"
+#~ msgstr "Contraseña Perdida"
+
+#, fuzzy
+#~| msgid "SignUp"
+#~ msgid "Signup or"
+#~ msgstr "Registrarse o"
+
+#~ msgid "Username:"
+#~ msgstr "Nombre de usuario"
+
+#~ msgid "Error entering username !"
+#~ msgstr "¡Error al ingresar el nombre de usuario!"
+
+#, fuzzy
+#~| msgid "Password recover"
+#~ msgid "Password:"
+#~ msgstr "Recuperar Contraseña"
+
+#~ msgid "Error entering password !"
+#~ msgstr "¡Error al ingresar el nombre de password!"
+
+#~ msgid "Email:"
+#~ msgstr "Correo Electrónico:"
+
+#~ msgid "Error entering email !"
+#~ msgstr "¡Error al ingresar el nombre de email!"
+
+#~ msgid "The site you will be using Booldog on"
+#~ msgstr "El sitio en el que utilizará Booldog"
+
+#~ msgid "Error entering the Website !"
+#~ msgstr "¡Error al ingresar el nombre de webSite!"
+
+#~ msgid "Error entering photo !"
+#~ msgstr "¡Error al ingresar el nombre de photo !"
+
+#, fuzzy
+#~| msgid "SignUp"
+#~ msgid "Signup me"
+#~ msgstr "Registro"
+
+#~ msgid "Remember me"
+#~ msgstr "Acuérdate de mí"
 
 #, fuzzy
 #~| msgid "to obtain user and password"

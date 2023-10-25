@@ -20,6 +20,8 @@
   font-family: 'WorkSans-Regular';
   src: url('../Fonts/WorkSans-Regular.ttf');
 }
+
+
 #loginbooldog{
     list-style:none;
 }
@@ -62,6 +64,13 @@ a#a_download.title {
 }
 
 @media screen and (min-width: 576px) {
+    .title{
+        display: table;
+        font-size:1rem;
+        /* margin-left:20px; */
+        text-align: end;
+        left: 0;
+        }
     span#booldogtitle{
        font-size:2em;
        font-family: 'WorkSans-Regular';
@@ -80,6 +89,13 @@ a#a_download.title {
     }
     .fa-comment-dots.title{
         font-size:1.8em;
+    }
+    #plan_free{
+        display:block;margin:0 auto;
+        font-weight:"900";
+        font-family:"Open-Sans";
+        color:white;
+        font-size:1rem;
     }
  }
 

@@ -53,6 +53,7 @@ def checkUser(request):
             if 'currentUrl' in key:
                 currentUrl = value
         if not isinstance(myuser, User):
+            breakpoint()
             try:
                 myuser = authenticate(username=myuser, password=password)
                 if myuser is not None:
@@ -201,7 +202,6 @@ def user_register(request):
             user = form.save()
             user.refresh_from_db()
             username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
             user.profile.photo = form.cleaned_data.get('photo')
             user.profile.first_name = username
             user.profile.email = form.cleaned_data.get('email')
@@ -235,6 +235,9 @@ def user_register(request):
                 else:
                     user.save()
                     return redirect('/user/login')
+        else:
+            response = render(request, "user/register.html", {'form': form})
+            return response
     else:
         # in base alla presenza della variabile next capisco
         # se la richiesta di registrazione è per installare il Blog
@@ -247,6 +250,7 @@ def user_register(request):
         else:
             response = render(request, "user/register.html", {'form': form})
         return response
+    
 
 
 def change_password(request):

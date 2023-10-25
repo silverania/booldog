@@ -53,9 +53,10 @@ class classSite(admin.ModelAdmin):
         filtered_query = Site.objects.none()
         profile = Profile.objects.get(user=request.user)
         site = Site.objects.filter(user=profile)
-        for s in site:
-            filtered_query |= query.filter(user=profile)
-            print(s.title)
+        if not request.user.is_superuser:
+            for s in site:
+                filtered_query |= query.filter(user=profile)
+            query = filtered_query
         return query
     list_filter = ('title', 'user', 'titleTagContent')
     list_display = ('title', 'user', 'titleTagContent')
@@ -68,7 +69,7 @@ class classProfile(admin.ModelAdmin):
         filtered_query = Profile.objects.none()
         profile = Profile.objects.get(user=request.user)
         filtered_query |= query.filter(user=profile.user)
-        return query
+        return filtered_query
     list_filter = ('user',)
 
 

@@ -146,13 +146,12 @@ def newPost(request):
     getRespOrPostToAssignResp = []
     body = request.GET.get("body")
     author = request.GET.get("username")
-    myuser = Profile.objects.get(first_name=author)
     pageadmin = request.GET.get("useradmin")
+    myuser = Profile.objects.get(first_name=pageadmin)
     myuser.firstname = getLoginName(request)
     rootSite = request.GET.get('mainurl')
     split_url = urlsplit(rootSite)
     site = Site.objects.get_or_create(title=rootSite, user=myuser)
-    breakpoint()
     # check site authorization
     postType = request.GET.get("type")
     if "newpost" in postType:
@@ -176,17 +175,15 @@ def newPost(request):
             getRespOrPostToAssignResp = Comment.objects.get(
                 pk=commento)
             post.commento = getRespOrPostToAssignResp
-    breakpoint()
     post.site = Site.objects.get(title=site[0].title)
-    post.site.title = rootSite
     post.slug = post.site.title.replace("/", "")
     post.slug = post.site.title.replace(":", "")
     post.author = myuser
     # post.site.user = myuser
-    post.site.titleTagContent = rootSite
     post.publish = datetime.now()
     post.created = post.publish
     post.body = body
+
     post.save()
     typeIs = str(type(getRespOrPostToAssignResp))
     if "Resp" in typeIs:

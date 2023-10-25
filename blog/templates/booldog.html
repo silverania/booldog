@@ -1,23 +1,21 @@
 {% load static %}
 {% load i18n %}
 <html lang="en">
-<head>
+  <head>
     <title>booldog</title>
-    <meta name="author" content="silverania"/>
-    <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css" %}"/>
-    <link rel="stylesheet" href="{% static "css/all.min.css" %}"/>
-    <script  src="{% static 'js/jquery.min.js' %}"></script>
+    <meta name="author" content="silverania" />
+    <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
-    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet"/>
-    <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
-    
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
-    <script src="{% static 'js/blog.js' %}" id="s_blog" ></script>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
+    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
 
-    </head>
-    <body>
-
-<script>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+    <script src="{% static 'js/blog.js' %}" id="s_blog"></script>
+  </head>
+  <body>
+    <script>
         var spanBlogEntra = document.createElement("SPAN");
     var currentUrl="{{currentUrl}}";
 var user="{{u}}";
@@ -33,7 +31,7 @@ var postinserito="{% trans "Entered" %}";
 var postinviato="{% trans "Sent" %}";
 spanBlogEntra.textContent = "{% trans 'Login' %}";
 sessionStorage.setItem('buttonRispondi',buttonRispo)</script>
-<script defer>
+    <script defer>
     var thisurl=location.href;
 window.addEventListener("message", function (event) {
     if (!(currentUrl.includes(event.origin))) {
@@ -51,5 +49,5 @@ window.addEventListener("message", function (event) {
 });
 initBlogSGang(user,password,currentUrl);
 </script>
-</body>
+  </body>
 </html>

@@ -73,9 +73,10 @@ var re, keytoken;
 var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
-  '<a  href="https://booldog.it"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
+  '<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
 $(bIcon).append(logo);
-bIcon.appendChild(H1Welcome);
+
+
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
@@ -86,7 +87,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     firstDivHead.setAttribute("id", "firstDivHead");
     divExitLogin.setAttribute("style", "width:45%;display:inline;");
     divCommentIcon.setAttribute("id", "div_comment_icon");
-    divCommentIcon.setAttribute("style", "margin:0 auto 10% auto");
+    divCommentIcon.setAttribute("style", "margin: 0 auto 10% auto;width:100%; ");
     divRespTitle.setAttribute("class", "div_resp");
     buttonLinkComment.setAttribute("id", "id_link_comment");
     divFormChild.setAttribute("id", "multiarea");
@@ -95,8 +96,9 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     buttonLinkComment.setAttribute("class", "mybut mybut-outline-info");
     divExitLogin.setAttribute("style", "width:45%;display:inline-block;");
     bdiv.setAttribute("id", "bdiv");
-    bIcon.setAttribute("style", "text-align:center;font-weight:bold;");
+    bIcon.setAttribute("style", "text-align:left;font-weight:bold;text-align: start;position: relative;font-weight:bold;width:20%; ");
     bIcon.setAttribute("id", "blog_icon");
+
     bSection.setAttribute("id", "blog");
     aBlogEntra.setAttribute(
       "style",
@@ -173,16 +175,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       inputSubmit.setAttribute("value", "Esci");
       liBlogEsci.setAttribute("id", "liBlogEsci");
       if (userThatLogin !== "false")
-        H1Welcome.setAttribute("id", "H1Welcome");
-      H1Welcome.style.display = "block";
-      userThatLogin = JSON.parse(userThatLogin);
-      $(H1Welcome).append(
-        '<span class="spanuser">' +
-
-        userThatLogin[0].fields.first_name.charAt(0).toUpperCase() +
-        userThatLogin[0].fields.first_name.slice(1) +
-        "</span>"
-      );
+        userThatLogin = JSON.parse(userThatLogin);
     }
     //bH5.appendChild(spanUserName)
     bSection.appendChild(bdiv);
@@ -693,7 +686,6 @@ function initBlogSGang(u, p, url) {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        mode: "no-cors",
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)

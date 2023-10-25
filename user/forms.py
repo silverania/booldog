@@ -12,16 +12,22 @@ class LoginForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    username = forms.CharField()
+    username = forms.CharField(max_length=200, required=False,error_messages = { 
+                 'required':"error in username"
+                 })
     photo = forms.ImageField(
             required=False, help_text='Optional.')
     website = forms.CharField(
         max_length=200, required=False, help_text='Opzionale')
-
+    email=forms.EmailField( max_length = 254,required=True)
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'photo', 'website',)
-
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password1'] != cd['password2']:
+            raise forms.ValidationError('Passwords don\'t match.')
+        return cd['password2']
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)

@@ -1,159 +1,109 @@
-
+{% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+{% block title %}SIGNUP{% endblock title %}
 
-<!DOCTYPE html>
-<html lang="en" >
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <meta name="author" content="silverania">
-        <title>{% trans 'Signup' %}</title>
-        <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
-        <link rel="stylesheet" href="{% static "css/all.min.css" %}">
-        <link rel="stylesheet" href="{% static "css/blog.css" %}">
-        <link rel="stylesheet" href="{% static "css/register.css" %}">
-        <link rel="stylesheet" href="{% static "css/login.css"%}">
-        <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
-        <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
-  <script  src="{% static 'js/jquery.min.js' %}"></script>
-  <script  src="{% static 'js/blog.js' %}"></script>
-<script  src="{% static 'js/login.js' %}"></script>
-<script src="{% static "js/all.min.js"%}"></script>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v14.0&appId=810115799892623&autoLogAppEvents=1" nonce="ZQl7gT5l">
-  </script>
-</head>
-<div id="reg_container" class="container">
-  <div class="kpx_login">
-    {% if '/register/blog' in request.full_path %}<div class="row title">
-      <div class="col-xs-12 col-6 text-center offset-sm-3 col-sm-6" style="margin-bottom:5%;">
-        <!--hr class="kpx_hrOr"-->
-        <!--span class="kpx_spanOr">{% trans 'Signup or' %}
-        <a id="a_reg" href="{% if 'blog' in request.path %} /user/login/blog
-        {% else %} /user/login {% endif %}"><span style="color:green;">Login</span></a></span-->
-        <span class="kpx_spanOr">{% trans 'Login' %}
-          <a id="a_reg"><span style="color:green;">{% trans 'Login' %}</span></a></span>
+{% block content %}
+<div class="container mt-4">
+
+
+
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+      <span class="badge bg-info spanreg title" style="display:inline-block;text-align:center">
+        {% trans 'signup' %}</span>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% trans 'web site' as website %}
+        {% trans 'repeat password' as repeat %}
+        <ul class="list-group list-group-flush">
+          {{ form.non_field_errors }}
+
+          {% for field in form %}
+
+          {{field.errors}}
+          {% if 'password1' in field.label_tag %}
+          <li class="list-group-item">
+            <input class="form-control" placeholder="{{repeat}}" type="password" name="password2" required
+              id="id_password2">
+          </li>
+          {% elif 'password2' in field.label_tag %}
+          <li class="list-group-item">
+            <input class="form-control" placeholder="password" type="password" name="password1" required
+              id="id_password1">
+          </li>
+          {% elif 'website' in field.label_tag %}
+          <li class="list-group-item mb-3">
+            <input class="form-control" placeholder="{{website}}" type="text" name="website" required=""
+              id="id_website">
+          </li>
+          {% elif 'Photo' in field.label_tag %}
+
+          <li class="list-group-item" lang="it"><small style="color: grey">{% trans "optional photo" %}</small>
+
+            <input lang="it" value="{% trans 'choose photo' %}" class="form-control" placeholder="photo" type="file"
+              name="photo" required="" id="id_photo">
+          </li>
+          {% elif 'Username' in field.label_tag %}
+          <li class="list-group-item">
+            <input class="form-control" placeholder="username" type="text" name="username" required="" id="id_username">
+          </li>
+          {% elif 'email' in field.label_tag %}
+          <li class="list-group-item">
+            <input class="form-control" placeholder="email" type="email" name="email" required="True" id="id_email">
+          </li>
+
+          {% else %}
+          {% endif %}
+
+
+          <!--script>setTimeout(() => { window.location.href = "/user/register" }, 5000);</script-->
+
+
+          {% endfor %}
+        </ul>
+        <div>
+          <button class="btn btn-outline-warning mt-5" style="display:block;margin:0 auto !important;"
+            class="btn btn-primary " type="submit">{% trans 'signup' %}</button>
         </div>
-      </div>{% endif %}
-      <script type="text/javascript" defer>
-        try{
-            var regContainer=document.getElementById("reg_container");
-        }
-        catch(e){
-          var regContainer=document.getElementsByTag("body");
-        }
-        finally{
-          htmlIframeWidthHeight(regContainer);
-        }
-        const params = new URLSearchParams(window.location.search);
-        //document.getElementById("next").value = params.get('next');
-        try{
-          var r=document.getElementById("a_reg");
-          r.href="/user/login/blog?next="+params.get('next');
-        }
-        catch(e){
-          console.log("non ho l elemeto a_reg !");
-        }
-        
-      </script>
-      <div class="row justify-content-center">
-        <div class="col-12 text-center col-sm-6">
-          {% if not 'blog' in request.path %}<hr class="kpx_hrOr"><br>{% endif %}
-          <h2 align="center"class="title">{% trans 'Signup' %}</h2>
-        </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <div class="col-xs-12 col-sm-6">
 
-          <form method="post" enctype="multipart/form-data">
-            <div class="form-group text-center">
-              {% csrf_token %}
-              {% for field in form %}
-              {% if 'username' in field.name %}
-              <label>{% trans 'Username:' %}</label>
-              <p class="mt-1 mb-4">{{field}}</p>
-              {% if field.errors %}  <p style="color:red;">{% trans 'Error entering username !' %} </p>
-              {% endif %}
-              
-              {% elif 'password1' in field.name %}
-               <label>{% trans 'Password:' %}</label>
-              <p class="mt-1 mb-4">{{field}}</p>
-               {% if field.errors %}  <p style="color:red;">{% trans 'Error entering password !' %} </p>
-               {% endif %}
 
-               {% elif 'email' in field.name %}
-               <label>{% trans 'Email:' %}</label>
-              <p class="mt-1 mb-4">{{field}}</p>
-               {% if field.errors %}  <p style="color:red;">{% trans 'Error entering email !' %} </p>
-               {% endif %}
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-3">
+      <p></p>
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" value="remember-me">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Ricordami !</span>
+      </label>
 
-                {% elif 'password2' in field.name %}
-                <label>{% trans 'repeat Password:' %}</label>
-                <p class="mt-1 mb-4">{{field}}</p>
-                    {% if field.errors %}  <p style="color:red;">{% trans 'Error entering password !' %} </p>
-                <script>setTimeout(() => { window.location.href = {% if 'blog' in request.path %} "/user/register/blog"
-                  {% else %} "/user/register "{% endif %}},5000);</script>{% endif %}
+
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <p class="">
+        <a href="#">{% block trans %}{% trans 'Password forgot ?' %}{% endblock %}</a>
+      </p>
+    </div>
+  </div>
 
 
 
 
-                  {% elif 'website' in field.name %}
-                  {% if 'blog' in request.path %} 
-                  <small style="color: grey">{% trans 'Optional:' %}</small>
-                   <label>{{field.label_tag}}</label>
-                  {%else%}
-                  <label>{{field.label_tag}}</label>
-                  <small style="color: grey">{% trans 'The site you will be using Booldog on' %}</small>
-                  {% endif %}
-                 <p class="mt-1 mb-4">{{field}}</p>
-                   {% if field.errors %}  <p style="color:red;">{% trans 'Error entering the Website !' %} </p>
-                  <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
-                {% else %} /user/register {% endif %} "},5000);</script>{% endif %}
-                
-                  {% elif 'Photo' in field.label_tag %}
-                      <small style="color: grey">{% trans 'Optional:' %}</small>
-                  <label>{{field.label_tag}}</label>
-                  <p class="mt-1 mb-4">{{field}}</p>
-                  {% if field.errors %}  <p style="color:red;">{% trans 'Error entering photo !' %} </p>{%endif%}
 
-
-                 
-                   
-                   {% endif %}
-                    {% endfor %}
-                    <div >
-                      <button style="width:60%" class="btn ms-5 btn-outline-primary "  type="submit">{% trans 'Signup me' %}</button>
-                    </div></div>
-                  </div>
-                </div>
-                <!--div class="row kpx_row-sm-offset-3">
-                  <div class="col-xs-12 col-sm-3">
-                    <p></p>
-                    <label class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" value="remember-me">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">{% trans 'Remember me' %}</span>
-                    </label>
-
-
-                  </div>
-                  <div class="col-xs-12 col-sm-3">
-                    <p class="kpx_forgotPwd">
-                      <a href="#">{% trans 'Forget Password ?' %}</a>
-                    </p>
-                  </div>
-                </div-->
-              </div>
-
-
-
-
-            </div>
-            <script>
-              $(document).ready(function(){
-                var login="{{ request.user.is_authenticated }}"
-                $('[data-toggle="tooltip"]').tooltip()
-              })
-            </script>
-</html>
+</div>
+<script>
+  $(document).ready(function () {
+    var login = "{{ request.user.is_authenticated }}"
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+{% endblock content %}

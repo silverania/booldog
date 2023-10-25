@@ -2,7 +2,7 @@
 
 /* By Mario , superior code */
 
-const BASE_URL = "https://localbooldog.com:8000/"; // URL del server
+const BASE_URL = "https://localtutorial.com:9000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
@@ -73,9 +73,10 @@ var re, keytoken;
 var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
-  '<a  href="https://booldog.it"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
+  '<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
 $(bIcon).append(logo);
-bIcon.appendChild(H1Welcome);
+
+
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
@@ -86,7 +87,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     firstDivHead.setAttribute("id", "firstDivHead");
     divExitLogin.setAttribute("style", "width:45%;display:inline;");
     divCommentIcon.setAttribute("id", "div_comment_icon");
-    divCommentIcon.setAttribute("style", "margin:0 auto 10% auto");
+    divCommentIcon.setAttribute("style", "margin: 0 auto 10% auto;width:100%; ");
     divRespTitle.setAttribute("class", "div_resp");
     buttonLinkComment.setAttribute("id", "id_link_comment");
     divFormChild.setAttribute("id", "multiarea");
@@ -95,8 +96,9 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     buttonLinkComment.setAttribute("class", "mybut mybut-outline-info");
     divExitLogin.setAttribute("style", "width:45%;display:inline-block;");
     bdiv.setAttribute("id", "bdiv");
-    bIcon.setAttribute("style", "text-align:center;font-weight:bold;");
+    bIcon.setAttribute("style", "text-align:left;font-weight:bold;text-align: start;position: relative;font-weight:bold;width:20%; ");
     bIcon.setAttribute("id", "blog_icon");
+
     bSection.setAttribute("id", "blog");
     aBlogEntra.setAttribute(
       "style",
@@ -173,16 +175,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       inputSubmit.setAttribute("value", "Esci");
       liBlogEsci.setAttribute("id", "liBlogEsci");
       if (userThatLogin !== "false")
-        H1Welcome.setAttribute("id", "H1Welcome");
-      H1Welcome.style.display = "block";
-      userThatLogin = JSON.parse(userThatLogin);
-      $(H1Welcome).append(
-        '<span class="spanuser">' +
-
-        userThatLogin[0].fields.first_name.charAt(0).toUpperCase() +
-        userThatLogin[0].fields.first_name.slice(1) +
-        "</span>"
-      );
+        userThatLogin = JSON.parse(userThatLogin);
     }
     //bH5.appendChild(spanUserName)
     bSection.appendChild(bdiv);
@@ -526,7 +519,7 @@ class postArea {
         //window.location.href = XMLHTTPURL_LOGIN;
       }
     });
-    $(button_risposta_post).hover(
+    /*$(button_risposta_post).hover(
       function () {
         $(button_risposta_post).animate(
           {
@@ -545,13 +538,13 @@ class postArea {
       function () {
         $(button_risposta_post).animate(
           {
-            width: "100%",
+            width: "30%",
           },
           200
         );
         $(button_risposta_post).css("box-shadow", "10px 10px 10px #719ECE");
       }
-    );
+    );*/
     switch (mess.type) {
       case "newpost":
       case "newresp":
@@ -606,7 +599,7 @@ class postArea {
       let buttonID = "but_" + mess.type + "_" + type;
       button_risposta_post.setAttribute("type", "button");
       button_risposta_post.setAttribute("id", buttonID);
-      button_risposta_post.setAttribute("class", "btn btn-lg btn-block");
+      button_risposta_post.setAttribute("class", "btn btn-light");
       if (mess.body === ".....")
         button_risposta_post.setAttribute("disabled", "true");
       form_risposta_post.setAttribute("id", "form_" + mess.type + "_" + id);
@@ -622,7 +615,7 @@ class postArea {
   create() {
     $(this.postarea).animate({
       width: "100%",
-    }); // nu second e dui 1,2sec
+    }, 800); // nu second e dui 1,2sec
     //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
     //this.postarea.setAttribute("rows", "3");
     this.postarea.setAttribute("name", "messaggio");
@@ -650,23 +643,23 @@ function getCookie(name) {
 
 function initBlogSGang(u, p, url) {
   var xhttp2 = new XMLHttpRequest();
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + user + "&password=" + password + "&mainurl=" + currentUrl + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
-  $(bdiv).append(iconRefresh);
   var requestPostKey;
   var blog;
   if ((u !== "undefined" && p !== "undefined" && (url !== null || url !== "undefined")) && (u !== "" && p !== "" && url !== "")) {
     currentUrl = url.replace(/\/$/, "");
-    user = u;
     password = p;
-    localStorage.setItem("user", user);
-    localStorage.setItem("password", password);
-    localStorage.setItem("url", currentUrl);
+    sessionStorage.setItem("user", user);
+    sessionStorage.setItem("password", password);
+    sessionStorage.setItem("url", currentUrl);
   }
   else {
-    u = localStorage.getItem("user");
-    p = localStorage.getItem("password");
-    currentUrl = localStorage.getItem("url");
+    u = sessionStorage.getItem("user");
+    p = sessionStorage.getItem("password");
+    currentUrl = sessionStorage.getItem("url");
   }
+  user = u;
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + user + "&password=" + password + "&mainurl=" + currentUrl + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
@@ -690,9 +683,9 @@ function initBlogSGang(u, p, url) {
       const request = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json;charset=utf-8",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-        mode: "no-cors",
         body: JSON.stringify(s),
       };
       fetch(XMLHTTPURL_GETUSER, request)
@@ -1073,6 +1066,7 @@ function createPostArea(messOrResp, elementToAppendArea) {
       isOpen = false;
     }
   }
+  $(paPostOrResp.postarea).keyup();
   return paPostOrResp;
 }
 
