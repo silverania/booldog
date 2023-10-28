@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 15:12+0200\n"
+"POT-Creation-Date: 2023-10-26 20:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,7 +199,6 @@ msgid " SignUp"
 msgstr "Anmeldung"
 
 #: user/templates/registration/login.html:83
-#| msgid "Password recover"
 msgid "Password Forgot ?"
 msgstr "Passwort wiederherstellen"
 
@@ -255,7 +254,7 @@ msgstr "E-Mail"
 msgid "Send e-mail"
 msgstr "E-mail senden"
 
-#: user/templates/user/register.html:14 user/templates/user/register.html:70
+#: user/templates/user/register.html:14 user/templates/user/register.html:73
 #, fuzzy
 #| msgid "Signup"
 msgid "signup"
@@ -273,18 +272,23 @@ msgstr "View site"
 msgid "repeat password"
 msgstr "Aktuelles Passwort"
 
-#: user/templates/user/register.html:49
+#: user/templates/user/register.html:48
 #, fuzzy
 #| msgid "Optional:"
 msgid "optional photo"
 msgstr "Fakultativ"
 
-#: user/templates/user/register.html:51
+#: user/templates/user/register.html:50
 msgid "choose photo"
 msgstr "Wähle ein Foto aus"
 
-#: user/templates/user/register.html:90
-#| msgid "Password recover"
+#: user/templates/user/register.html:86
+#, fuzzy
+#| msgid "Remember me"
+msgid "remember me"
+msgstr "mich erinnern"
+
+#: user/templates/user/register.html:93
 msgid "Password forgot ?"
 msgstr "Passwort wiederherstellen"
 
@@ -292,11 +296,11 @@ msgstr "Passwort wiederherstellen"
 msgid "wrong data !"
 msgstr "falschen Daten !"
 
-#: user/views.py:227
+#: user/views.py:226
 msgid "you are authorized to use booldog ."
 msgstr "Sie sind berechtigt, booldog zu verwenden."
 
-#: user/views.py:229
+#: user/views.py:228
 #, fuzzy
 #| msgid ""
 #| "Enter your username and password in the bldg.js file and you're ready to "
@@ -345,9 +349,6 @@ msgstr ""
 
 #~ msgid "Signup me"
 #~ msgstr "Anmeldung"
-
-#~ msgid "Remember me"
-#~ msgstr "mich erinnern"
 
 #, fuzzy
 #~| msgid "Password:"

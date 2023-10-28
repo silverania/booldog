@@ -12,6 +12,7 @@ class PostAdmin(admin.ModelAdmin):
         profile = Profile.objects.get(user=request.user)
         site = Site.objects.filter(user=profile)
         filtered_query = (profile.blog_posts.all())
+        breakpoint()
         if not request.user.is_superuser:
             for mysite in site:
                 filtered_query |= mysite.all_comments.all()
@@ -53,10 +54,12 @@ class classSite(admin.ModelAdmin):
         filtered_query = Site.objects.none()
         profile = Profile.objects.get(user=request.user)
         site = Site.objects.filter(user=profile)
+        breakpoint()
         if not request.user.is_superuser:
             for s in site:
                 filtered_query |= query.filter(user=profile)
             query = filtered_query
+            breakpoint()
         return query
     list_filter = ('title', 'user', 'titleTagContent')
     list_display = ('title', 'user', 'titleTagContent')
@@ -66,13 +69,12 @@ class classSite(admin.ModelAdmin):
 class classProfile(admin.ModelAdmin):
     def get_queryset(self, request):
         query = super(classProfile, self).get_queryset(request)
-        filtered_query = Profile.objects.none()
-        profile = Profile.objects.get(user=request.user)
-        filtered_query |= query.filter(user=profile.user)
-        return filtered_query
+        if not request.user.is_superuser:
+            filtered_query = Profile.objects.none()
+            profile = Profile.objects.get(user=request.user)
+            query = query.filter(user=profile.user)
+        return query
     list_filter = ('user',)
-
-
 admin.site.register(Site, classSite)
 admin.site.register(Resp, RespAdmin)
 admin.site.register(Comment, PostAdmin)

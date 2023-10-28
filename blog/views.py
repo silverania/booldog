@@ -26,7 +26,9 @@ formatted_datetime = formats.date_format(
 
 class Homepage(View):
     def get(self, request):
-        booldogHtml = "index.html"
+        if 'page5' in request.path:
+            booldogHtml = "prova.html"
+        else: booldogHtml = "index.html"
         thissession = request.session.session_key
         response = render(request, "booldog.html")
         response.set_cookie('thissess', thissession)

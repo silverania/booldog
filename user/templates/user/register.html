@@ -30,13 +30,13 @@
           {{field.errors}}
           {% if 'password1' in field.label_tag %}
           <li class="list-group-item">
-            <input class="form-control" placeholder="{{repeat}}" type="password" name="password2" required
-              id="id_password2">
+            <input class="form-control" placeholder="password" type="password" name="password1" required
+              id="id_password1">
           </li>
           {% elif 'password2' in field.label_tag %}
           <li class="list-group-item">
-            <input class="form-control" placeholder="password" type="password" name="password1" required
-              id="id_password1">
+            <input class="form-control" placeholder="{{repeat}}" type="password" name="password2" required
+              id="id_password2">
           </li>
           {% elif 'website' in field.label_tag %}
           <li class="list-group-item mb-3">
@@ -83,7 +83,7 @@
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" value="remember-me">
         <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">Ricordami !</span>
+        <span class="custom-control-description">{% trans 'remember me' %}</span>
       </label>
 
 

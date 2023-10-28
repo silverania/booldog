@@ -209,7 +209,7 @@ msgstr ""
 msgid "Send e-mail"
 msgstr ""
 
-#: user/templates/user/register.html:14 user/templates/user/register.html:70
+#: user/templates/user/register.html:14 user/templates/user/register.html:73
 msgid "signup"
 msgstr ""
 
@@ -221,15 +221,19 @@ msgstr ""
 msgid "repeat password"
 msgstr ""
 
-#: user/templates/user/register.html:49
+#: user/templates/user/register.html:48
 msgid "optional photo"
 msgstr ""
 
-#: user/templates/user/register.html:51
+#: user/templates/user/register.html:50
 msgid "choose photo"
 msgstr ""
 
-#: user/templates/user/register.html:90
+#: user/templates/user/register.html:86
+msgid "remember me"
+msgstr ""
+
+#: user/templates/user/register.html:93
 msgid "Password forgot ?"
 msgstr ""
 
@@ -237,11 +241,11 @@ msgstr ""
 msgid "wrong data !"
 msgstr ""
 
-#: user/views.py:227
+#: user/views.py:226
 msgid "you are authorized to use booldog ."
 msgstr ""
 
-#: user/views.py:229
+#: user/views.py:228
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"

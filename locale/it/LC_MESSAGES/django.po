@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 15:02+0200\n"
+"POT-Creation-Date: 2023-10-26 20:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,7 +250,7 @@ msgstr "Inserisci email"
 msgid "Send e-mail"
 msgstr "Invia"
 
-#: user/templates/user/register.html:14 user/templates/user/register.html:70
+#: user/templates/user/register.html:14 user/templates/user/register.html:73
 #, fuzzy
 #| msgid "Signup"
 msgid "signup"
@@ -268,17 +268,23 @@ msgstr "Vedi Sito"
 msgid "repeat password"
 msgstr "ripeti la Password :"
 
-#: user/templates/user/register.html:49
+#: user/templates/user/register.html:48
 #, fuzzy
 #| msgid "Optional:"
 msgid "optional photo"
 msgstr "foto opzionale"
 
-#: user/templates/user/register.html:51
+#: user/templates/user/register.html:50
 msgid "choose photo"
 msgstr "scegli una foto"
 
-#: user/templates/user/register.html:90
+#: user/templates/user/register.html:86
+#, fuzzy
+#| msgid "Remember me"
+msgid "remember me"
+msgstr "Ricordami"
+
+#: user/templates/user/register.html:93
 #, fuzzy
 #| msgid "Password Forgot ?"
 msgid "Password forgot ?"
@@ -288,11 +294,11 @@ msgstr "Password Dimenticata ?"
 msgid "wrong data !"
 msgstr "Dati non corretti !"
 
-#: user/views.py:227
+#: user/views.py:226
 msgid "you are authorized to use booldog ."
 msgstr "Sei autorizzato ad usare Booldog ."
 
-#: user/views.py:229
+#: user/views.py:228
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"
@@ -351,9 +357,6 @@ msgstr ""
 
 #~ msgid "Signup me"
 #~ msgstr "Registrami"
-
-#~ msgid "Remember me"
-#~ msgstr "Ricordami"
 
 #, fuzzy
 #~| msgid "Password recover"

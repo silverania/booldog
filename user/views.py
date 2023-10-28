@@ -53,7 +53,6 @@ def checkUser(request):
             if 'currentUrl' in key:
                 currentUrl = value
         if not isinstance(myuser, User):
-            breakpoint()
             try:
                 myuser = authenticate(username=myuser, password=password)
                 if myuser is not None:
