@@ -29,7 +29,6 @@ var isChanged = false;
 window.buttonLinkComment = document.createElement("BUTTON");
 var H1Welcome = document.createElement("H6");
 var bbutton = document.createElement("Button");
-var user, password;
 var resps;
 var tagTitle;
 var globDivContainerHead;
@@ -73,9 +72,10 @@ var re, keytoken;
 var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
-  '<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
+  //'<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
+  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="static/images/booldog2.png">'
 $(bIcon).append(logo);
-
+var rooturl;
 
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
@@ -96,7 +96,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     buttonLinkComment.setAttribute("class", "mybut mybut-outline-info");
     divExitLogin.setAttribute("style", "width:45%;display:inline-block;");
     bdiv.setAttribute("id", "bdiv");
-    bIcon.setAttribute("style", "text-align:left;font-weight:bold;text-align: start;position: relative;font-weight:bold;width:20%; ");
+    bIcon.setAttribute("style", "text-align:left;font-weight:bold;text-align: start;position: relative;font-weight:bold;width:100%; ");
     bIcon.setAttribute("id", "blog_icon");
 
     bSection.setAttribute("id", "blog");
@@ -104,7 +104,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "style",
       "display:block;width:auto;text-align:right;"
     );
-    aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN);
+    aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN + "&user=" + user + "&password=" + password);
     aBlogEntra.setAttribute("id", "id_entra");
     aBlogCambiaPassword.setAttribute(
       "style",
@@ -116,11 +116,11 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "display:block;width:auto;text-align:right;z-index:200"
     );
     aBlogReg.setAttribute("href", XMLHTTPURL_REGISTER);
-    aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD);
+    aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD + "&user=" + user + "&password=" + password);
     aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
     aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
-    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
+    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT + "&user=" + user + "&password=" + password);
     aBlogEsci.setAttribute(
       "style",
       "display:block;width:auto;text-align:right;"
@@ -463,7 +463,6 @@ class postArea {
     var objectToAppendChild = divUserBlog.id;
     button_risposta_post.setAttribute("style", "display:block");
     form_risposta_post.appendChild(button_risposta_post);
-    var url;
     $(button_risposta_post).click(function (e) {
       if (userThatLogin.toString() !== "false") {
         e.preventDefault();
@@ -545,42 +544,47 @@ class postArea {
         $(button_risposta_post).css("box-shadow", "10px 10px 10px #719ECE");
       }
     );*/
-    switch (mess.type) {
-      case "newpost":
-      case "newresp":
-        $("#" + postarea.postarea.id).ready(function () {
-          $("#" + postarea.postarea.id).focus();
-          postarea.postarea.classList.add("form-control");
-          //css("border","1px solid green")
-        });
-        button_risposta_post.textContent = "Invia";
-        $(button_risposta_post).click(function () {
-          //autorizzo la creazione del nuovo post solo se è valido: contiene testo ecc..
-          let ids = "#" + postarea.postarea.id;
-          let txts = $(ids).val();
-          try {
-            if (txts == "") {
-              throw "Post Vuoto ! ";
-            }
-          } catch (err) {
-            alert("Non posso inviare un messaggio vuoto !");
-            return -1;
-          }
-          //form_risposta_post.setAttribute("action",url)
-          url = URL_NEW_POST + "?mainurl=" + currentUrl
-          mess.body = txts;
-          if (sendToServer(mess, url) == 0) {
-            isOpen = false;
-          }
-          $(postarea.postarea).css("box-shadow", "0 0 0 0");
-          mess.type == "newpost" ? button_risposta_post.textContent = postinserito : button_risposta_post.textContent = postinviato;
 
-          button_risposta_post.setAttribute("disabled", "");
-          postarea.postarea.setAttribute("disabled", "");
-          $(postarea.postarea).css("color", "rgba(0, 0, 0, 0.5)");
-          $(postarea.postarea).css("border", "1px solid green");
-          $(button_risposta_post).css("color", "black");
-        });
+    $("#" + postarea.postarea.id).ready(function () {
+      $("#" + postarea.postarea.id).focus();
+      postarea.postarea.classList.add("form-control");
+      //css("border","1px solid green")
+    });
+    $(button_risposta_post).click(function () {
+      //autorizzo la creazione del nuovo post solo se è valido: contiene testo ecc..
+      let ids = "#" + postarea.postarea.id;
+      let txts = $(ids).val();
+      try {
+        if (txts == "") {
+          throw "Post Vuoto ! ";
+        }
+      } catch (err) {
+        alert("Non posso inviare un messaggio vuoto !");
+        return -1;
+      }
+
+      //form_risposta_post.setAttribute("action",url)
+
+      var url = URL_NEW_POST + HIDDENFIELD
+      mess.body = txts;
+      if (sendToServer(mess, url) == 0) {
+        isOpen = false;
+      }
+      $(postarea.postarea).css("box-shadow", "0 0 0 0");
+      mess.type == "newpost" ? button_risposta_post.textContent = postinserito : button_risposta_post.textContent = postinviato;
+
+      button_risposta_post.setAttribute("disabled", "");
+      postarea.postarea.setAttribute("disabled", "");
+      $(postarea.postarea).css("color", "rgba(0, 0, 0, 0.5)");
+      $(postarea.postarea).css("border", "1px solid green");
+      $(button_risposta_post).css("color", "black");
+    });
+    switch (mess.type) {
+      case "newresp":
+        button_risposta_post.textContent = buttonRispo
+        break;
+      case "newpost":
+        button_risposta_post.textContent = buttonLinkComment.textContent
         break;
       case "post":
         var objectToAppendChild = divUserBlog.id;
@@ -641,31 +645,23 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function initBlogSGang(u, p, url) {
+// FUNZIONE DI ENTRATA 
+function initBlogSGang(u, p, url, authorized) {
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
-  if ((u !== "undefined" && p !== "undefined" && (url !== null || url !== "undefined")) && (u !== "" && p !== "" && url !== "")) {
-    currentUrl = url.replace(/\/$/, "");
-    password = p;
-    sessionStorage.setItem("user", user);
-    sessionStorage.setItem("password", password);
-    sessionStorage.setItem("url", currentUrl);
-  }
-  else {
-    u = sessionStorage.getItem("user");
-    p = sessionStorage.getItem("password");
-    currentUrl = sessionStorage.getItem("url");
-  }
-  user = u;
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + user + "&password=" + password + "&mainurl=" + currentUrl + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  url = url.replace(/\/$/, "");
+  rooturl = url;
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
   $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
-  HIDDENFIELD = "?mainurl=" + currentUrl;
-  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + currentUrl;
-  XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog" + HIDDENFIELD;
+  user = u;
+  password = p;
+  HIDDENFIELD = "?mainurl=" + url;
+  XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
+  XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog?mainurl=" + url;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
   /* PRIMA REQUEST PER IL TOKEN CHE AUTORIZZA LA CHIAMATA A CHECKUSER FUNCTION */
@@ -678,7 +674,8 @@ function initBlogSGang(u, p, url) {
       let s = {
         user: u,
         password: p,
-        currentUrl: currentUrl,
+        currentUrl: url,
+        authorized: authorized,
       };
       const request = {
         method: "POST",

@@ -33,6 +33,7 @@ class Homepage(View):
         response = render(request, "booldog.html")
         response.set_cookie('thissess', thissession)
         print("inviato cookie di sessione al client con ID = "+str(thissession))
+        breakpoint()
         return render(request, booldogHtml)
 
 
@@ -54,7 +55,8 @@ class Booldog(View):
         currentUrl = request.GET.get('mainurl')
         user = request.GET.get('user')
         password = request.GET.get('password')
-        return render(request, booldogHtml, {'currentUrl': currentUrl, 'u': user, 'password': password})
+        breakpoint()
+        return render(request, booldogHtml, {'currentUrl': currentUrl, 'user': user, 'password': password})
 
 
 class LazyEncoder(DjangoJSONEncoder):
@@ -148,12 +150,13 @@ def newPost(request):
     getRespOrPostToAssignResp = []
     body = request.GET.get("body")
     author = request.GET.get("username")
+    author=Profile.objects.get(first_name=author)
     pageadmin = request.GET.get("useradmin")
     myuser = Profile.objects.get(first_name=pageadmin)
     myuser.firstname = getLoginName(request)
     rootSite = request.GET.get('mainurl')
     split_url = urlsplit(rootSite)
-    site = Site.objects.get_or_create(title=rootSite, user=myuser)
+    site = Site.objects.get(title=rootSite, user=myuser)
     # check site authorization
     postType = request.GET.get("type")
     if "newpost" in postType:
@@ -177,15 +180,14 @@ def newPost(request):
             getRespOrPostToAssignResp = Comment.objects.get(
                 pk=commento)
             post.commento = getRespOrPostToAssignResp
-    post.site = Site.objects.get(title=site[0].title)
+    post.site = Site.objects.get(title=site.title)
     post.slug = post.site.title.replace("/", "")
     post.slug = post.site.title.replace(":", "")
-    post.author = myuser
+    post.author = author
     # post.site.user = myuser
     post.publish = datetime.now()
     post.created = post.publish
     post.body = body
-
     post.save()
     typeIs = str(type(getRespOrPostToAssignResp))
     if "Resp" in typeIs:

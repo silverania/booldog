@@ -18,7 +18,7 @@
   <div class="row justify-content-center">
     <div class="col-xs-12 col-sm-6 col-md-3 text-center">
 
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" autocomplete="on">
         {% csrf_token %}
         {% trans 'web site' as website %}
         {% trans 'repeat password' as repeat %}
@@ -39,6 +39,9 @@
               id="id_password2">
           </li>
           {% elif 'website' in field.label_tag %}
+          {% if 'blog' in request.get_full_path %}
+          <li class="list-group-item" lang="it"><small style="color: grey">{% trans "Website optional" %}</small>
+            {% endif %}
           <li class="list-group-item mb-3">
             <input class="form-control" placeholder="{{website}}" type="text" name="website" required=""
               id="id_website">

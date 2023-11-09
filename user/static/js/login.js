@@ -9,7 +9,7 @@ $(document).ready(function () {
         pf = document.getElementById("a_passwordforget");
         pc = document.getElementById("a_changepassword");
         r.href = "/user/register/blog?mainurl=" + valuenext;
-        pc.href = BASE_URL + "user/login/change_password?mainurl=" + valuenext;
+
         pf.href = BASE_URL + "user/login/password_reset?mainurl=" + valuenext;
         fs = document.getElementById("formlogin");
     }
@@ -32,8 +32,8 @@ $(document).ready(function () {
     (function () {
         window.top.postMessage(
             {
-                height: containerlogin.scrollHeight,
-                base: containerlogin.scrollWidth,
+                height: containerlogin.offsetHeight,
+                base: containerlogin.offsetWidth,
             },
             "*"
         );
@@ -42,6 +42,7 @@ $(document).ready(function () {
         if (valuenext.includes(event.origin)) {
             user = event.data.user;
             password = event.data.password;
+
         }
     }
     );

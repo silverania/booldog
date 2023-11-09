@@ -52,7 +52,9 @@ def checkUser(request):
                 password = value
             if 'currentUrl' in key:
                 currentUrl = value
-        if not isinstance(myuser, User):
+            if 'authorized' in key:
+                authorized=request.session['authorized']= value
+        if not isinstance(myuser, User) and request.session['authorized'] =='':
             try:
                 myuser = authenticate(username=myuser, password=password)
                 if myuser is not None:
@@ -61,17 +63,16 @@ def checkUser(request):
                     if 'blog' in request.get_full_path():
                         if str(currentUser.website) in currentUrl:
                             authorized = True
+                            request.session['authorized']=True
                 else:
                     myuser = "None"
-                if not myuser.groups.filter(name__in=['BlogAdmin']).exists():
-                    group = Group.get(name='BlogAdmin')
-                    myuser.groups.add(group)
             except Exception:
                 print("Errore nel autenticazione dell user , e/o nella sua assegnazione"
                       + "al gruppo BlogAdmin")
                 myuser = "None"
         authorized = str(authorized)
         login = str(login)
+        breakpoint()
         return JsonResponse(
             {
                 "authorized": authorized,
@@ -129,30 +130,37 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    print("auth ="+str(request.user))
-    print("token="+str(request.META.get('HTTP_AUTHORIZATION')))
+    authorized=request.session['authorized']
     if request.method == 'POST':
-        valuenext = request.POST.get('mainurl')
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            valuenext = request.POST['mainurl']
+            myusername = request.POST['admin']
+            mypassword = request.POST['password']
             user = authenticate(request, username=username,
                                 password=password)
             if user:
                 login(request, user)
                 # return redirect(valuenext)
                 # form is not valid or user is not authenticated
-                response = render(request, "booldog.html")
+                breakpoint()
+                response = render(request, "booldog.html" ,
+                                  {'user':myusername,'password':password,'authorized':authorized, 'currentUrl': valuenext})
                 return response
             else:
-                return render(request, 'wrongdati.html', {'valuenext': valuenext})
+                return render(request, 'wrongdati.html', {'currentUrl': valuenext})
     elif request.method == 'GET':
         form = LoginForm()
         if 'mainurl' in request.GET:
             valuenext = request.GET.get('mainurl')
+        if 'user' in request.GET:
+            myuser=request.GET.get('user')
+        if 'password' in request.GET:
+            mypassword=request.GET.get('password')
             return render(request, 'registration/login.html',
-                          {'form': form, 'valuenext': valuenext})
+                          {'form': form, 'valuenext': valuenext,'u':myuser,'password':mypassword})
         else:
             return render(request, 'registration/login.html')
 
@@ -184,17 +192,21 @@ def dashboard(request):
 
 class Logout(View):
     def get(self, request):
+        authorized=request.session['authorized']
         mainurl = ""
         logout(request)
         userLoggedIN = None
         if 'mainurl' in request.GET:
             mainurl = request.GET.get('mainurl')
+            myuser=Profile.objects.get(website=mainurl)
+            breakpoint()
             # return render(request, "seiuscito.html", {'valuenext': mainurl})
-        return render(request, "booldog.html",  {'valuenext': mainurl})
+        return render(request, "booldog.html",  {"user":myuser,'currentUrl': mainurl, 'authorized':authorized })
 
 
 def user_register(request):
     valuenext = ""
+    authorized=request.session['authorized']
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
@@ -234,6 +246,13 @@ def user_register(request):
                 else:
                     user.save()
                     return redirect('/user/login')
+            if 'next' in request.GET:
+                valuenext = request.GET.get('next')+scrollTo
+                subject = "booldog"
+                message = 'user e password'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = ["info.strabbit@gmail.com", ]
+                send_mail(subject, message, email_from, recipient_list)
         else:
             response = render(request, "user/register.html", {'form': form})
             return response
@@ -253,20 +272,34 @@ def user_register(request):
 
 
 def change_password(request):
+    authorized=request.session['authorized']
     if request.method == 'POST':
         valuenext = ""
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            if 'mainurl' in request.GET:
-                valuenext = request.GET.get('mainurl')
-                return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext})
+            authorized=request.session['authorized']
+            breakpoint()
+            if 'mainurl' in request.POST:
+                valuenext = request.POST.get('mainurl')
+                if 'user' in request.POST:
+                    myuser = request.POST.get('user')
+                if 'password' in request.POST:
+                    mypassword = request.POST['password']
+                return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext,'user':myuser,'password':mypassword,'authorized':authorized})
         else:
             return render(request, "wrongdati.html", {'valuenext': valuenext})
     else:
+        if 'mainurl' in request.GET:
+            valuenext = request.GET.get('mainurl')
+            if 'user' in request.GET:
+                myuser=request.GET.get('user')
+            if 'password' in request.GET:
+                mypassword=request.GET.get('password')
         form = PasswordChangeForm(request.user)
-    return render(request, 'change_password.html', {'form': form})
+        breakpoint()
+        return render(request, 'change_password.html', {'form': form,'valuenext': valuenext,'user':myuser,'password':mypassword,'authorized':authorized})
 
 
 @ login_required

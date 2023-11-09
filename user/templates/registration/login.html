@@ -2,14 +2,17 @@
 {% load i18n %}
 {% load static %}
 {% block title %}
-  Log-in
+Log-in
 {% endblock %}
 
 {% block content %}
-  <script>
-    var login = '{{request.user.is_authenticated}}'
-  </script>
-  <div id="containerlogin" class="container">
+<script>
+  var login = '{{request.user.is_authenticated}}'
+  var authorized = "{{authorized}}";
+  var user="{{user}}";
+  var password="{{password}}";
+</script>
+<div id="containerlogin" class="container">
     <h3 align="center">{% trans 'Login' %}</h3>
     <!--  div class="row justify-content-center">
           <div class=" facebook col-md-1 col-1 col-sm-1 ">
@@ -29,63 +32,104 @@
             </a>
             </div>
             </div  -->
-    <br />
-
+    <br>
     <div class="row justify-content-center">
-      <div class="text-center" style="margin-bottom:5%;">
-        <!-- hr class="kpx_hrOr" -->
-        <h5 class="h5 text-center">
-          {% trans "If you don't have User and Password" %}
-          <a id="a_reg"><span style="color:green;">{% trans ' SignUp' %}</span></a>
-        </h5>
-      </div>
+        <div class="text-center" style="margin-bottom:5%;">
+            <!-- hr class="kpx_hrOr" -->
+            <h5 class="h5 text-center">
+                {% trans "If you don't have User and Password" %}
+                <a id="a_reg">
+                    <span style="color:green;">{% trans ' SignUp' %}</span>
+                </a>
+            </h5>
+        </div>
     </div>
-
     <div class="row justify-content-center">
-      <div class="col-md-5 col-lg-4 col-sm-6 col-8">
-        <form id="formlogin" autocomplete="on" method="post" action="" />
-        {% csrf_token %}
-        <div class="input-group">
-          <span class="input-group-addon"><span class="fas fa-user"></span></span>
-          <label for="{{ form.username.id_for_label }}"></label>
-          <input type="input" class="form-control" name="username" id="inputUsername" placeholder="Username" required />
-          <input id="next" type="hidden" name="mainurl" value="{{ valuenext }}" />
-          {{ form.username.errors }}
+        <div class="col-md-5 col-lg-4 col-sm-6 col-8">
+            <form
+                id="formlogin"
+                autocomplete="on"
+                method="post"
+                action=""
+            />
+            {% csrf_token %}
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="fas fa-user"></span>
+                </span>
+                <label for="{{ form.username.id_for_label }}"></label>
+                <input
+                    type="input"
+                    class="form-control"
+                    name="username"
+                    id="inputUsername"
+                    placeholder="Username"
+                    required
+                >
+                <input
+                    type="hidden"
+                    class="form-control"
+                    name="mainurl"
+                    value="{{valuenext}}"
+                >
+                <input
+                    type="hidden"
+                    class="form-control"
+                    name="admin"
+                    value="{{u}}"
+                >
+                <input type="hidden" name="password" value="{{password}}">
+                {{ form.username.errors }}
+            </div>
+            <hr>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="fa fa-key"></span>
+                </span>
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    id="inputEmail"
+                    placeholder="Password"
+                    required
+                >
+                {{ form.password.errors }}
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+                <br>
+                <br>
+                <ul class="form-errors">
+                    <li style="display:block;color:red;">
+                        <mark style="color:red;">{{ error }}</mark>
+                    </li>
+                </ul>
+                {% endfor %}
+        {% endif %}
+            </div>
+            <hr>
+            <button id="id_login" class="btn btn-outline-primary" type="submit">{% trans 'Login' %}</button>
         </div>
-        <hr />
-
-        <div class="input-group">
-          <span class="input-group-addon"><span class="fa fa-key"></span></span>
-          <input type="password" class="form-control" name="password" id="inputEmail" placeholder="Password" required />
-          {{ form.password.errors }}
-
-          {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-              <br /><br /><ul class="form-errors">
-                <li style="display:block;color:red;">
-                  <mark style="color:red;">{{ error }}</mark>
-                </li>
-              </ul>
-            {% endfor %}
-          {% endif %}
-        </div>
-
-        <hr />
-        <button id="id_login" class="btn btn-outline-primary" type="submit">{% trans 'Login' %}</button>
-      </div>
     </div>
     <div class="row kpx_row-sm-offset-3">
-      <div class="col-xs-12 offset-sm-3 col-sm-3">
-        <p></p>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <p class="kpx_forgotPwd">
-          <small><a href="#" id="a_passwordforget">{% trans 'Password Forgot ?' %}</a></small>
-        </p>
-        <p class="kpx_forgotPwd">
-          <small><a id="a_changepassword">{% trans 'Do you want to change your password?' %}</a></small>
-        </p>
-      </div>
+        <div class="col-xs-12 offset-sm-3 col-sm-3">
+            <p></p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <p class="kpx_forgotPwd">
+                <small>
+                    <a href="#" id="a_passwordforget">{% trans 'Password Forgot ?' %}</a>
+                </small>
+            </p>
+            <p class="kpx_forgotPwd">
+                <small>
+                    <a id="a_changepassword" href="change_password?mainurl={{valuenext}}&user={{user}}&password={{password}}">
+                        {% trans 'Do you want to change your password?' %}
+                    </a>
+                </small>
+            </p>
+        </div>
     </div>
-  </div>
+</div>
 {% endblock %}

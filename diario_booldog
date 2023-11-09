@@ -1,7 +1,21 @@
 tradurre pagina "modifica della password"
 aggiungere l ' informazione "controlla email per ripristinare pasword" nel template "ripristina password"
 si devono tradurre le date nei post
-nella comparazione url vien4e considerata ola query : ..../?site=https://  .... e non dovrebbe esserlo 
+nella comparazione url vien4e considerata ola query : ..../?site=https:// .... e non dovrebbe esserlo
 inviare user e password nei cookie , invece di usare il localstorage ( per problemi di autorizzazioni )
 rivedi la gestione degli errori nel template di registrazione
 devo creare l' email per l user in registrazione
+quando clikko fuori dal post dovrebbe scomparire il post
+
+subito dopo che la pagina di registrazione reinvia al pagina login devo riempire automaticamete i campi user e password
+mandare email dopo registrazione
+controlla l' url "next" ritornato dall view login !
+rivedere la variabile url in javascript , che prende l' url del blog invece che quello della root page... impostarla globale se possibiole
+
+rimuovere booldog dal server e installare una versione funzionale
+diminuire width nella textarea commenti per endere le righe
+nascondere user e password in tag hidden
+in booldog.js non ho varibile user
+inserire user e password qui : pc.href = BASE_URL + "user/login/change_password?mainurl=" + valuenext;
+pf.href = BASE_URL + "user/login/password_reset?mainurl=" + valuenext;
+sto cambiando la struttura di autenticazione per non inviare password in giro

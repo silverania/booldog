@@ -1,53 +1,53 @@
 {% load static %}
 {% load i18n %}
 <html lang="en">
-  <head>
-    <title>booldog</title>
-    <meta name="author" content="silverania" />
-    <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/all.min.js' %}"></script>
-    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
-    <script src="{% static 'js/blog.js' %}" id="s_blog"></script>
-  </head>
-  <body>
-    <script>
-        var spanBlogEntra = document.createElement("SPAN");
-    var currentUrl="{{currentUrl}}";
-var user="{{u}}";
-var password="{{password}}";
-var buttonRispo="{% trans "Reply" %}"
-window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
-var ablogescitext="{% trans 'Logout' %}";
-var bbuttontext="{% trans "Comment" %}";
-var ablogcambiapasswordtext="{% trans 'edit' %}";
-var spanusernametext="{% trans 'answers to ' %}";
-var _spanusernametext="{% trans 'alle ' %}";
-var postinserito="{% trans "Entered" %}";
-var postinviato="{% trans "Sent" %}";
-spanBlogEntra.textContent = "{% trans 'Login' %}";
-sessionStorage.setItem('buttonRispondi',buttonRispo)</script>
-    <script defer>
-    var thisurl=location.href;
-window.addEventListener("message", function (event) {
-    if (!(currentUrl.includes(event.origin))) {
+    <head>
+        <title>booldog</title>
+        <meta name="author" content="silverania">
+        <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/all.min.js' %}"></script>
+        <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+        <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <script src="{% static 'js/blog.js' %}" id="s_blog"></script>
+    </head>
+    <body>
+        <script>
+    var spanBlogEntra = document.createElement("SPAN");
+    var currentUrl = "{{currentUrl}}";
+    var user = "{{user}}";
+    var password = "{{password}}";
+    var authorized = "{{ authorized }}";
+    var buttonRispo = "{% trans "Reply" %}"
+    window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
+    var ablogescitext = "{% trans 'Logout' %}";
+    var bbuttontext = "{% trans "Comment" %}";
+    var ablogcambiapasswordtext = "{% trans 'edit' %}";
+    var spanusernametext = "{% trans 'answers to ' %}";
+    var _spanusernametext = "{% trans 'alle ' %}";
+    var postinserito = "{% trans "Entered" %}";
+    var postinviato = "{% trans "Sent" %}";
+    spanBlogEntra.textContent = "{% trans 'Login' %}";
+        </script>
+        <script defer>
+    var thisurl = location.href;
+    window.addEventListener("message", function (event) {
+      if (!(currentUrl.includes(event.origin))) {
         console.log("messaggio ignorato");
         return -1;
         ("mancata autorizzazione!")
-    }
-    else {
+      }
+      else {
         /* PIGLI I MESSAGG RU GESUCRIST RU CLIENT
          user = event.data.user;
          password=event.data.password;
          */
         console.log("link autorizzato a invio messaggi !")
-    }
-});
-initBlogSGang(user,password,currentUrl);
-</script>
-  </body>
+      }
+    });
+    initBlogSGang(user, password, currentUrl, authorized);
+        </script>
+    </body>
 </html>
