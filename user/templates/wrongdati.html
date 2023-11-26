@@ -1,4 +1,3 @@
-{% extends 'base_password.html' %}
 {% load i18n %}
 {% load static %}
 <html>
@@ -12,8 +11,20 @@
     <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
     </head>
   <body>
-  <h1 align=center>"{% trans "wrong data !" %}"<a class="badge badge-info"  onclick='window.top.postMessage({reload: true,},"*");'>
-  <span style="font-size:3rem;color:green;"> < Torna </span></a></h1>
-  
+    <script>
+  window.top.postMessage(
+    {
+      height: 650,
+      base: 350,
+    },
+    "*"
+  );
+</script>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-3 text-center">
+  <h1 align=center>"{% trans "wrong data !" %}"</h1>
+  <a href="{% url 'login' %}?mainurl={{currentUrl}}"><div><span style="font-size:3rem;color:green;"> < Torna </span></div></a>
+      </div>
+    </div>
   </body>
 </html>

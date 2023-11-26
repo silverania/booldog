@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-07 09:50+0100\n"
+"POT-Creation-Date: 2023-11-23 18:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,41 +18,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/templates/booldog.html:26
+#: blog/templates/booldog.html:21
 msgid "Reply"
 msgstr "Rispondi"
 
-#: blog/templates/booldog.html:27 blog/templates/booldog.html:29
+#: blog/templates/booldog.html:22 blog/templates/booldog.html:24
 msgid "Comment"
 msgstr "Commenta"
 
-#: blog/templates/booldog.html:28
+#: blog/templates/booldog.html:23
 msgid "Logout"
 msgstr "Esci"
 
-#: blog/templates/booldog.html:30
+#: blog/templates/booldog.html:25
 msgid "edit"
 msgstr "modifica"
 
-#: blog/templates/booldog.html:31
+#: blog/templates/booldog.html:26
 msgid "answers to "
 msgstr "risponde a "
 
-#: blog/templates/booldog.html:32
-msgid "alle "
-msgstr ""
 
-#: blog/templates/booldog.html:33
+#: blog/templates/booldog.html:28
 msgid "Entered"
 msgstr "Inserito"
 
-#: blog/templates/booldog.html:34
+#: blog/templates/booldog.html:29
 msgid "Sent"
 msgstr "Inviato"
 
-#: blog/templates/booldog.html:35 blog/templates/index.html:44
-#: user/templates/registration/login.html:14
-#: user/templates/registration/login.html:109
+#: blog/templates/booldog.html:30
+msgid "today at"
+msgstr "oggi alle "
+
+#: blog/templates/booldog.html:31
+msgid "at"
+msgstr "alle"
+
+#: blog/templates/booldog.html:32 blog/templates/index.html:44
+#: user/templates/registration/login.html:17
+#: user/templates/registration/login.html:106
 msgid "Login"
 msgstr "Entra"
 
@@ -158,47 +163,43 @@ msgstr "Sito Di Amministrazione Django"
 msgid "Django administration"
 msgstr "Amministrazione django"
 
-#: user/templates/change_password.html:9
+#: user/templates/change_password.html:7
 msgid "Password change for"
 msgstr "Modifica password per "
 
-#: user/templates/change_password.html:24
+#: user/templates/change_password.html:31
 #, fuzzy
 #| msgid "Current password"
 msgid " current password "
 msgstr "password corrente"
 
-#: user/templates/change_password.html:37
+#: user/templates/change_password.html:44
 #, fuzzy
 #| msgid "new password:"
 msgid " new password "
 msgstr "nuova password:"
 
-#: user/templates/change_password.html:50
+#: user/templates/change_password.html:57
 #, fuzzy
 #| msgid "repeat Password:"
 msgid " repeat password "
 msgstr "ripeti la Password :"
 
-#: user/templates/change_password.html:60
-msgid "Save"
-msgstr "Salva"
-
-#: user/templates/registration/login.html:38
+#: user/templates/registration/login.html:41
 msgid "If you don't have User and Password"
 msgstr "Se non hai User e Password"
 
-#: user/templates/registration/login.html:40
+#: user/templates/registration/login.html:43
 #, fuzzy
 #| msgid "SignUp"
 msgid " SignUp"
 msgstr "Registrazione"
 
-#: user/templates/registration/login.html:119
+#: user/templates/registration/login.html:116
 msgid "Password Forgot ?"
 msgstr "Password Dimenticata ?"
 
-#: user/templates/registration/login.html:125
+#: user/templates/registration/login.html:122
 msgid "Do you want to change your password?"
 msgstr "Vuoi cambiare la Password ?"
 
@@ -296,17 +297,20 @@ msgstr "Password Dimenticata ?"
 msgid "wrong data !"
 msgstr "Dati non corretti !"
 
-#: user/views.py:232
+#: user/views.py:223
 msgid "you are authorized to use booldog ."
 msgstr "Sei autorizzato ad usare Booldog ."
 
-#: user/views.py:234
+#: user/views.py:225
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"
 msgstr ""
 "Inserisci user e password nel file bldg.js e sei pronto ad usare booldog sul "
 "tuo sito web"
+
+#~ msgid "Save"
+#~ msgstr "Salva"
 
 #~ msgid "Confirm password:"
 #~ msgstr "conferma password"

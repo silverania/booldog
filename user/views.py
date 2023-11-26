@@ -23,7 +23,8 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
-scrollTo = ''
+
+scrollTo = ""
 Group = Group.objects.all()
 
 
@@ -32,53 +33,33 @@ def getUser(user):
     firstName = str(user)
     current_user = Profile.objects.filter(first_name=firstName)
     list_current_user = list(current_user)
-    list_current_user = serializers.serialize(
-        "json", list_current_user)
+    list_current_user = serializers.serialize("json", list_current_user)
     return list_current_user
 
 
 @csrf_exempt
 def checkUser(request):
-    if request.method == 'POST':
-        login = getUser(
-            request.user) if request.user.is_authenticated else "false"
+    if request.method == "POST":
+        login = getUser(request.user) if request.user.is_authenticated else "false"
         myuser = object()
         authorized = False
         list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
-            if 'user' in key:
-                myuser = value
-            if 'password' in key:
-                password = value
-            if 'currentUrl' in key:
+            if "currentUrl" in key:
                 currentUrl = value
-            if 'authorized' in key:
-                authorized=request.session['authorized']= value
-        if not isinstance(myuser, User) and request.session['authorized'] =='':
-            try:
-                myuser = authenticate(username=myuser, password=password)
-                if myuser is not None:
-                    firstName = str(myuser)
-                    currentUser = Profile.objects.get(first_name=firstName)
-                    if 'blog' in request.get_full_path():
-                        if str(currentUser.website) in currentUrl:
-                            authorized = True
-                            request.session['authorized']=True
+                mydomain = urlsplit(currentUrl)
+                mydomain = mydomain.scheme + "://" + mydomain.netloc
+            if "authorized" in key:
+                if authorized is True or Site.objects.get(title=mydomain):
+                    request.session["authorized"] = True
+                    authorized = "True"
+                    login = str(login)
+                    return JsonResponse(
+                        {"authorized": authorized, "authenticated": login}
+                    )
                 else:
-                    myuser = "None"
-            except Exception:
-                print("Errore nel autenticazione dell user , e/o nella sua assegnazione"
-                      + "al gruppo BlogAdmin")
-                myuser = "None"
-        authorized = str(authorized)
-        login = str(login)
-        breakpoint()
-        return JsonResponse(
-            {
-                "authorized": authorized,
-                "authenticated": login
-            }
-        )
+                    return HttpResponse("you are not authorized to use Booldog !")
+
     """
     def get(self, request):
         print("view checuser GET request.user & session is =" +
@@ -116,11 +97,11 @@ def checkUser(request):
 
 
 def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
     if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
+        ip = x_forwarded_for.split(",")[0]
     else:
-        ip = request.META.get('REMOTE_ADDR')
+        ip = request.META.get("REMOTE_ADDR")
     return ip
 
 
@@ -130,39 +111,45 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    authorized=request.session['authorized']
-    if request.method == 'POST':
+    authorized = request.session["authorized"]
+    if request.method == "POST":
         form = LoginForm(request.POST)
+        breakpoint()
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            valuenext = request.POST['mainurl']
-            myusername = request.POST['admin']
-            mypassword = request.POST['password']
-            user = authenticate(request, username=username,
-                                password=password)
+            username = request.POST["username"]
+            password = request.POST["password"]
+            currentUrl = request.POST["mainurl"]
+            user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
                 # return redirect(valuenext)
                 # form is not valid or user is not authenticated
-                breakpoint()
-                response = render(request, "booldog.html" ,
-                                  {'user':myusername,'password':password,'authorized':authorized, 'currentUrl': valuenext})
+                response = render(
+                    request,
+                    "booldog.html",
+                    {
+                        "authorized": authorized,
+                        "currentUrl": currentUrl,
+                    },
+                )
                 return response
             else:
-                return render(request, 'wrongdati.html', {'currentUrl': valuenext})
-    elif request.method == 'GET':
+                breakpoint()
+                return render(request, "wrongdati.html", {"currentUrl": currentUrl})
+    elif request.method == "GET":
         form = LoginForm()
-        if 'mainurl' in request.GET:
-            valuenext = request.GET.get('mainurl')
-        if 'user' in request.GET:
-            myuser=request.GET.get('user')
-        if 'password' in request.GET:
-            mypassword=request.GET.get('password')
-            return render(request, 'registration/login.html',
-                          {'form': form, 'valuenext': valuenext,'u':myuser,'password':mypassword})
+        if "mainurl" in request.GET:
+            currentUrl = request.GET.get("mainurl")
+            return render(
+                request,
+                "registration/login.html",
+                {
+                    "form": form,
+                    "currentUrl": currentUrl,
+                },
+            )
         else:
-            return render(request, 'registration/login.html')
+            return render(request, "registration/login.html")
 
     """ per cambiare password """
     """
@@ -180,141 +167,158 @@ def user_login(request):
             """
 
 
-@ login_required
+@login_required
 def home(request):
-    return render(request, 'compilare_il_kernel.html')
+    return render(request, "compilare_il_kernel.html")
 
 
-@ login_required
+@login_required
 def dashboard(request):
-    return render(request, ' user/dashboard.html', {'section': 'dashboard'})
+    return render(request, " user/dashboard.html", {"section": "dashboard"})
 
 
 class Logout(View):
     def get(self, request):
-        authorized=request.session['authorized']
         mainurl = ""
         logout(request)
         userLoggedIN = None
-        if 'mainurl' in request.GET:
+        if "mainurl" in request.GET:
             mainurl = request.GET.get('mainurl')
-            myuser=Profile.objects.get(website=mainurl)
-            breakpoint()
+            mydomain=urlsplit(mainurl)
+            mydomain= mydomain.scheme+"://"+mydomain.netloc
+            myuser=Profile.objects.get(website=mydomain)
             # return render(request, "seiuscito.html", {'valuenext': mainurl})
-        return render(request, "booldog.html",  {"user":myuser,'currentUrl': mainurl, 'authorized':authorized })
+        return render(
+            request,
+            "booldog.html",
+            {"user": myuser, "currentUrl": mainurl, "authorized": "True"},
+        )
 
 
 def user_register(request):
     valuenext = ""
-    authorized=request.session['authorized']
-    if request.method == 'POST':
+    if request.method == "POST":
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            username = form.cleaned_data.get('username')
-            user.profile.photo = form.cleaned_data.get('photo')
+            username = form.cleaned_data.get("username")
+            user.profile.photo = form.cleaned_data.get("photo")
             user.profile.first_name = username
-            user.profile.email = form.cleaned_data.get('email')
-            titleSite = urlsplit(form.cleaned_data.get('website'))
-            user.profile.website = titleSite.scheme+"://"+titleSite.netloc
-            if 'blog' in request.path:
-                valuenext = request.GET.get('mainurl')
+            user.profile.email = form.cleaned_data.get("email")
+            user.profile.website = form.cleaned_data.get("website")
+            # user.profile.website = titleSite.scheme + "://" + titleSite.netloc
+            if "blog" in request.path:
+                valuenext = request.GET.get("mainurl")
                 # agiungere i permessi per leggere i propri post dall adminpage
                 user.save()
-                return redirect('/user/login/blog?mainurl='+valuenext)
-            elif 'booldog' in request.path:
+                return redirect("/user/login/blog?mainurl=" + valuenext)
+            elif "booldog" in request.path:
                 site = Site.objects.create(
-                    title=user.profile.website, user=user.profile)
+                    title=user.profile.website, user=user.profile
+                )
                 site.save()
-                group = Group.get(name='BlogAdmin')
+                group = Group.get(name="BlogAdmin")
                 user.groups.add(group)
-                print('myuser'+str(user)
-                      + "aggiunto al gruppo blogadmin ")
+                print("myuser" + str(user) + "aggiunto al gruppo blogadmin ")
                 user.is_staff = True
                 user.save()
                 # mostra messaggio e esci
-                responsetext = _("you are authorized to use booldog .")
-                responsetext2 = _(
-                    "Enter your username and password in the bldg.js file and you are ready to use booldog on your site")
-                return HttpResponse("<h1>"+responsetext+"</h1><h2>"+responsetext2+"</h2>")
+                # responsetext = _("you are authorized to use booldog .")
+                # responsetext2 = _(
+                #   "Enter your username and password in the bldg.js file and you are ready to use booldog on your site"
+                # )
+                # return HttpResponse(
+                #   "<h1>" + responsetext + "</h1><h2>" + responsetext2 + "</h2>"
+                # )
+                return render(request,"register_done.html",{"new_user":user.profile.first_name })
+                #   "<h1>" + responsetext + "</h1><h2>" + responsetext2 + "</h2>"
+                # )
             else:
-                if 'next' in request.GET:
-                    valuenext = request.GET.get('mainurl')
+                if "next" in request.GET:
+                    valuenext = request.GET.get("mainurl")
                     user.save()
-                    return redirect('/user/login?mainurl='+valuenext)
+                    return redirect("/user/login?mainurl=" + valuenext)
                 else:
                     user.save()
-                    return redirect('/user/login')
-            if 'next' in request.GET:
-                valuenext = request.GET.get('next')+scrollTo
+                    return redirect("/user/login")
+            if "next" in request.GET:
+                valuenext = request.GET.get("next") + scrollTo
                 subject = "booldog"
-                message = 'user e password'
+                message = "user e password"
                 email_from = settings.EMAIL_HOST_USER
-                recipient_list = ["info.strabbit@gmail.com", ]
+                recipient_list = [
+                    "info.strabbit@gmail.com",
+                ]
                 send_mail(subject, message, email_from, recipient_list)
         else:
-            response = render(request, "user/register.html", {'form': form})
+            response = render(request, "user/register.html", {"form": form})
             return response
     else:
         # in base alla presenza della variabile next capisco
         # se la richiesta di registrazione è per installare il Blog
         # oppure per usarlo
         form = SignUpForm()
-        if 'mainurl' in request.GET:
-            valuenext = request.GET.get('mainurl')
-            response = render(request, "user/register.html", {
-                'form': form, 'mainurl': valuenext})
+        if "mainurl" in request.GET:
+            valuenext = request.GET.get("mainurl")
+            response = render(
+                request, "user/register.html", {"form": form, "mainurl": valuenext}
+            )
         else:
-            response = render(request, "user/register.html", {'form': form})
+            response = render(request, "user/register.html", {"form": form})
         return response
-    
 
 
 def change_password(request):
-    authorized=request.session['authorized']
-    if request.method == 'POST':
+    authorized = request.session["authorized"]
+    if request.method == "POST":
         valuenext = ""
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            authorized=request.session['authorized']
-            breakpoint()
-            if 'mainurl' in request.POST:
-                valuenext = request.POST.get('mainurl')
-                if 'user' in request.POST:
-                    myuser = request.POST.get('user')
-                if 'password' in request.POST:
-                    mypassword = request.POST['password']
-                return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext,'user':myuser,'password':mypassword,'authorized':authorized})
+            authorized = request.session["authorized"]
+            if "mainurl" in request.POST:
+                mainurl = request.POST.get("mainurl")
+                return render(
+                    request,
+                    "registration/pass_changed_done.html",
+                    {
+                        "valuenext": mainurl,
+                        "authorized": authorized,
+                    },
+                )
         else:
-            return render(request, "wrongdati.html", {'valuenext': valuenext})
+            return render(request, "wrongdati.html", {"valuenext": mainurl})
     else:
-        if 'mainurl' in request.GET:
-            valuenext = request.GET.get('mainurl')
-            if 'user' in request.GET:
-                myuser=request.GET.get('user')
-            if 'password' in request.GET:
-                mypassword=request.GET.get('password')
+        if "mainurl" in request.GET:
+            mainurl = request.GET.get("mainurl")
         form = PasswordChangeForm(request.user)
-        breakpoint()
-        return render(request, 'change_password.html', {'form': form,'valuenext': valuenext,'user':myuser,'password':mypassword,'authorized':authorized})
+        return render(
+            request,
+            "change_password.html",
+            {
+                "form": form,
+                "valuenext": mainurl,
+                "authorized": authorized,
+            },
+        )
 
 
-@ login_required
+@login_required
 def edit(request):
-    print("request="+str(request))
-    if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user,
-                                 data=request.POST)
+    print("request=" + str(request))
+    if request.method == "POST":
+        user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
-            instance=request.user.profile, data=request.POST, files=request.FILES)
+            instance=request.user.profile, data=request.POST, files=request.FILES
+        )
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(
-            instance=request.user.profile)
-    return render(request, 'edit.html', {'user_form': user_form, 'profile_form': profile_form})
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(
+        request, "edit.html", {"user_form": user_form, "profile_form": profile_form}
+    )

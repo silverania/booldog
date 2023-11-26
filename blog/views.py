@@ -12,39 +12,39 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
 from urllib.parse import urlsplit
 import blog
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+
 # from django.views.decorators.clickjacking import xframe_options_exempt
-from django.utils.translation import gettext_lazy as _
+
 photo = ""
 message = ""
 
-formatted_datetime = formats.date_format(
-    datetime.now(), "SHORT_DATETIME_FORMAT")
+formatted_datetime = formats.date_format(datetime.now(), "SHORT_DATETIME_FORMAT")
 
 # @xframe_options_exempt
 
 
 class Homepage(View):
     def get(self, request):
-        if 'page5' in request.path:
+        if "page5" in request.path:
             booldogHtml = "prova.html"
-        else: booldogHtml = "index.html"
+        else:
+            booldogHtml = "index.html"
         thissession = request.session.session_key
         response = render(request, "booldog.html")
-        response.set_cookie('thissess', thissession)
-        print("inviato cookie di sessione al client con ID = "+str(thissession))
-        breakpoint()
+        response.set_cookie("thissess", thissession)
+        print("inviato cookie di sessione al client con ID = " + str(thissession))
         return render(request, booldogHtml)
 
 
 def files(request, arg):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     filename = arg
-    filepath = BASE_DIR + '/static/client/' + filename
-    path = open(filepath, 'r')
+    filepath = BASE_DIR + "/static/client/" + filename
+    path = open(filepath, "r")
     mime_type, _ = mimetypes.guess_type(filepath)
     response = HttpResponse(path, content_type=mime_type)
-    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    response["Content-Disposition"] = "attachment; filename=%s" % filename
     return response
 
 
@@ -52,11 +52,8 @@ class Booldog(View):
     def get(self, request):
         print("entry in booldog vieew")
         booldogHtml = "booldog.html"
-        currentUrl = request.GET.get('mainurl')
-        user = request.GET.get('user')
-        password = request.GET.get('password')
-        breakpoint()
-        return render(request, booldogHtml, {'currentUrl': currentUrl, 'user': user, 'password': password})
+        currentUrl = request.GET.get("mainurl")
+        return render(request, booldogHtml, {"currentUrl": currentUrl})
 
 
 class LazyEncoder(DjangoJSONEncoder):
@@ -101,10 +98,11 @@ def getPost(request):
     t2 = []
     if "mainurl" in request.GET and request.GET["mainurl"]:
         tagTitle = str(request.GET.get("mainurl"))
-        print("tagTitle="+tagTitle)
+        print("tagTitle=" + tagTitle)
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
-                site__title=tagTitle).order_by('-publish')
+                site__title=tagTitle
+            ).order_by("-publish")
             datac = list(all_comments_for_page)
             data_comm = serializer(datac)
             if datac:
@@ -112,7 +110,7 @@ def getPost(request):
                     try:
                         if tagTitle in str(comment.site.title):
                             comments.append(comment)
-                            t_order = comment.risposte.all().order_by('-publish')
+                            t_order = comment.risposte.all().order_by("-publish")
                             t = list(t_order)
                     except Exception:
                         continue
@@ -150,13 +148,12 @@ def newPost(request):
     getRespOrPostToAssignResp = []
     body = request.GET.get("body")
     author = request.GET.get("username")
-    author=Profile.objects.get(first_name=author)
-    pageadmin = request.GET.get("useradmin")
-    myuser = Profile.objects.get(first_name=pageadmin)
-    myuser.firstname = getLoginName(request)
-    rootSite = request.GET.get('mainurl')
+    author = Profile.objects.get(first_name=author)
+    rootSite = request.GET.get("mainurl")
     split_url = urlsplit(rootSite)
-    site = Site.objects.get(title=rootSite, user=myuser)
+    basesite=split_url.scheme+"://"+split_url.netloc
+    siteadminuser=Site.objects.get(title=basesite)
+    site,created = Site.objects.get_or_create(title=rootSite,user=Profile.objects.get(first_name=siteadminuser.user))
     # check site authorization
     postType = request.GET.get("type")
     if "newpost" in postType:
@@ -171,16 +168,14 @@ def newPost(request):
         commento = request.GET.get("commento")
         comment = Comment.objects.get(pk=commento)
         post.commento = comment
-        respToType = request.GET.get('respToType')
-        if 'respToResp' in respToType:
+        respToType = request.GET.get("respToType")
+        if "respToResp" in respToType:
             post.postType = "respToResp"
-            getRespOrPostToAssignResp = Resp.objects.get(
-                pk=post.idRespTo)
-        elif 'respToPost' in respToType:
-            getRespOrPostToAssignResp = Comment.objects.get(
-                pk=commento)
+            getRespOrPostToAssignResp = Resp.objects.get(pk=post.idRespTo)
+        elif "respToPost" in respToType:
+            getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
             post.commento = getRespOrPostToAssignResp
-    post.site = Site.objects.get(title=site.title)
+    post.site = site
     post.slug = post.site.title.replace("/", "")
     post.slug = post.site.title.replace(":", "")
     post.author = author

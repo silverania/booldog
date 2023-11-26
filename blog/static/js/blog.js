@@ -76,10 +76,12 @@ var logo =
   '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog2.png">'
 $(bIcon).append(logo);
 var rooturl;
+var authorized;
 
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
+  authorized=userAdmin;
   if (userAdmin.toString() === "True") {
     bForm.setAttribute("action", BASE_URL + "post/getpost");
     bForm.setAttribute("class", "form_comment");
@@ -104,7 +106,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "style",
       "display:block;width:auto;text-align:right;"
     );
-    aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN + "&user=" + user + "&password=" + password);
+    aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN);
     aBlogEntra.setAttribute("id", "id_entra");
     aBlogCambiaPassword.setAttribute(
       "style",
@@ -116,11 +118,11 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "display:block;width:auto;text-align:right;z-index:200"
     );
     aBlogReg.setAttribute("href", XMLHTTPURL_REGISTER);
-    aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD + "&user=" + user + "&password=" + password);
+    aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD);
     aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
     aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
-    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT + "&user=" + user + "&password=" + password);
+    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
     aBlogEsci.setAttribute(
       "style",
       "display:block;width:auto;text-align:right;"
@@ -646,19 +648,17 @@ function getCookie(name) {
 }
 
 // FUNZIONE DI ENTRATA 
-function initBlogSGang(u, p, url, authorized) {
+function initBlogSGang(url, authorized) {
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
   url = url.replace(/\/$/, "");
   rooturl = url;
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + u + "&password=" + p '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?mainurl="+url+ '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
   $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
-  user = u;
-  password = p;
   HIDDENFIELD = "?mainurl=" + url;
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog?mainurl=" + url;
@@ -672,8 +672,6 @@ function initBlogSGang(u, p, url, authorized) {
     }
     (function () {
       let s = {
-        user: u,
-        password: p,
         currentUrl: url,
         authorized: authorized,
       };
@@ -981,40 +979,40 @@ function getDateFromDjangoDate(data = "") {
     var res;
     switch (month) {
       case "01":
-        res = "gennaio";
+        res = "1";
         break;
       case "02":
-        res = "febbraio";
+        res = "2";
         break;
       case "03":
-        res = "marzo";
+        res = "3";
         break;
       case "04":
-        res = "aprile";
+        res = "4";
         break;
       case "05":
-        res = "maggio";
+        res = "5";
         break;
       case "06":
-        res = "giugno";
+        res = "6";
         break;
       case "07":
-        res = "luglio";
+        res = "7";
         break;
       case "08":
-        res = "agosto";
+        res = "8";
         break;
       case "09":
-        res = "settembre";
+        res = "9";
         break;
       case "10":
-        res = "ottobre";
+        res = "10";
         break;
       case "11":
-        res = "novembre";
+        res = "11";
         break;
       case "12":
-        res = "dicembre";
+        res = "12";
         break;
     }
     return res;
@@ -1022,10 +1020,10 @@ function getDateFromDjangoDate(data = "") {
 
   function getMsg() {
     if (isNow()) {
-      data = "Oggi alle" + " " + hour;
+       data = datanow + " "+ hour;
     } else {
       day = day.replace("0", "");
-      data = day + " " + month + " " + year + " alle " + hour;
+      data = day + " " + month + " " + year +  " "+alle+   hour;
     }
     return data;
   }
@@ -1078,7 +1076,6 @@ function sendToServer(post, url) {
       commento: post.post.pk,
       type: post.type,
       username: userThatLogin[0].fields.first_name,
-      useradmin: user,
       body: post.body,
       respTo: post.respToID,
       id: post.pk,
@@ -1089,7 +1086,6 @@ function sendToServer(post, url) {
     data = {
       type: post.type,
       tutorial: post.thisTutorialTitle,
-      useradmin: user,
       username: userThatLogin[0].fields.first_name,
       body: post.body,
     };

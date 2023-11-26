@@ -73,13 +73,15 @@ var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
   //'<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
-  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="static/images/booldog2.png">'
+  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog2.png">'
 $(bIcon).append(logo);
 var rooturl;
+var authorized;
 
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
+  authorized=userAdmin;
   if (userAdmin.toString() === "True") {
     bForm.setAttribute("action", BASE_URL + "post/getpost");
     bForm.setAttribute("class", "form_comment");
@@ -104,7 +106,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "style",
       "display:block;width:auto;text-align:right;"
     );
-    aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN + "&user=" + user + "&password=" + password);
+    aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN);
     aBlogEntra.setAttribute("id", "id_entra");
     aBlogCambiaPassword.setAttribute(
       "style",
@@ -116,11 +118,11 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "display:block;width:auto;text-align:right;z-index:200"
     );
     aBlogReg.setAttribute("href", XMLHTTPURL_REGISTER);
-    aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD + "&user=" + user + "&password=" + password);
+    aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD);
     aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
     aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
-    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT + "&user=" + user + "&password=" + password);
+    aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
     aBlogEsci.setAttribute(
       "style",
       "display:block;width:auto;text-align:right;"
@@ -646,19 +648,17 @@ function getCookie(name) {
 }
 
 // FUNZIONE DI ENTRATA 
-function initBlogSGang(u, p, url, authorized) {
+function initBlogSGang(url, authorized) {
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
   url = url.replace(/\/$/, "");
   rooturl = url;
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog?user=" + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog" + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
   $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
-  user = u;
-  password = p;
   HIDDENFIELD = "?mainurl=" + url;
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog?mainurl=" + url;
@@ -672,8 +672,6 @@ function initBlogSGang(u, p, url, authorized) {
     }
     (function () {
       let s = {
-        user: u,
-        password: p,
         currentUrl: url,
         authorized: authorized,
       };

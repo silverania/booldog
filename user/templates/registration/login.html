@@ -11,8 +11,22 @@ Log-in
   var authorized = "{{authorized}}";
   var user="{{user}}";
   var password="{{password}}";
+  var currentUrl="{{currentUrl}}";
+  window.top.postMessage(
+    {
+      height: 500,
+      base: 350,
+    },
+    "*"
+  );
 </script>
 <div id="containerlogin" class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-3 text-center">
+  
+  <a href="{% url 'booldog' %}?mainurl={{currentUrl}}"><div><span style="font-size:1rem;color:green;float:left;"><i class="fas fa-arrow-left" ></i>{% trans "Home" %} </span></div></a>
+      </div>
+    </div>
     <h3 align="center">{% trans 'Login' %}</h3>
     <!--  div class="row justify-content-center">
           <div class=" facebook col-md-1 col-1 col-sm-1 ">
@@ -60,7 +74,7 @@ Log-in
                 <label for="{{ form.username.id_for_label }}"></label>
                 <input
                     type="input"
-                    class="form-control"
+                    class="form-control me-3"
                     name="username"
                     id="inputUsername"
                     placeholder="Username"
@@ -70,19 +84,8 @@ Log-in
                     type="hidden"
                     class="form-control"
                     name="mainurl"
-                    value="{{valuenext}}"
+                    value="{{currentUrl}}"
                 >
-                <input
-                    type="hidden"
-                    class="form-control"
-                    name="admin"
-                    value="{{u}}"
-                >
-                <input type="hidden" name="password" value="{{password}}">
-                {{ form.username.errors }}
-            </div>
-            <hr>
-            <div class="input-group">
                 <span class="input-group-addon">
                     <span class="fa fa-key"></span>
                 </span>
@@ -94,11 +97,17 @@ Log-in
                     placeholder="Password"
                     required
                 >
-                {{ form.password.errors }}
+                {{ form.errors }}
+            </div>
+            <div class="input-group">
+                
+               
+                
 
-        {% if form.non_field_errors %}
+        {% if form.errors %}
         {% for error in form.non_field_errors %}
                 <br>
+                {{error}}
                 <br>
                 <ul class="form-errors">
                     <li style="display:block;color:red;">
@@ -108,8 +117,7 @@ Log-in
                 {% endfor %}
         {% endif %}
             </div>
-            <hr>
-            <button id="id_login" class="btn btn-outline-primary" type="submit">{% trans 'Login' %}</button>
+            <button id="id_login" class="btn btn-outline-primary mt-5" type="submit">{% trans 'Login' %}</button>
         </div>
     </div>
     <div class="row kpx_row-sm-offset-3">

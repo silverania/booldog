@@ -1,38 +1,46 @@
-#: blog/templates/booldog.html:26
+#: blog/templates/booldog.html:21
 msgid "Reply"
 msgstr ""
 
-#: blog/templates/booldog.html:27 blog/templates/booldog.html:29
+#: blog/templates/booldog.html:22 blog/templates/booldog.html:24
 msgid "Comment"
 msgstr ""
 
-#: blog/templates/booldog.html:28
+#: blog/templates/booldog.html:23
 msgid "Logout"
 msgstr ""
 
-#: blog/templates/booldog.html:30
+#: blog/templates/booldog.html:25
 msgid "edit"
 msgstr ""
 
-#: blog/templates/booldog.html:31
+#: blog/templates/booldog.html:26
 msgid "answers to "
 msgstr ""
 
-#: blog/templates/booldog.html:32
+#: blog/templates/booldog.html:27
 msgid "alle "
-msgstr ""
+msgstr "at"
 
-#: blog/templates/booldog.html:33
+#: blog/templates/booldog.html:28
 msgid "Entered"
 msgstr ""
 
-#: blog/templates/booldog.html:34
+#: blog/templates/booldog.html:29
 msgid "Sent"
 msgstr ""
 
-#: blog/templates/booldog.html:35 blog/templates/index.html:44
-#: user/templates/registration/login.html:14
-#: user/templates/registration/login.html:109
+#: blog/templates/booldog.html:30
+msgid "today at"
+msgstr ""
+
+#: blog/templates/booldog.html:31
+msgid "alle"
+msgstr ""
+
+#: blog/templates/booldog.html:32 blog/templates/index.html:44
+#: user/templates/registration/login.html:17
+#: user/templates/registration/login.html:106
 msgid "Login"
 msgstr ""
 
@@ -131,39 +139,35 @@ msgstr ""
 msgid "Django administration"
 msgstr ""
 
-#: user/templates/change_password.html:9
+#: user/templates/change_password.html:7
 msgid "Password change for"
 msgstr ""
 
-#: user/templates/change_password.html:24
+#: user/templates/change_password.html:31
 msgid " current password "
 msgstr ""
 
-#: user/templates/change_password.html:37
+#: user/templates/change_password.html:44
 msgid " new password "
 msgstr ""
 
-#: user/templates/change_password.html:50
+#: user/templates/change_password.html:57
 msgid " repeat password "
 msgstr ""
 
-#: user/templates/change_password.html:60
-msgid "Save"
-msgstr ""
-
-#: user/templates/registration/login.html:38
+#: user/templates/registration/login.html:41
 msgid "If you don't have User and Password"
 msgstr ""
 
-#: user/templates/registration/login.html:40
+#: user/templates/registration/login.html:43
 msgid " SignUp"
 msgstr ""
 
-#: user/templates/registration/login.html:119
+#: user/templates/registration/login.html:116
 msgid "Password Forgot ?"
 msgstr ""
 
-#: user/templates/registration/login.html:125
+#: user/templates/registration/login.html:122
 msgid "Do you want to change your password?"
 msgstr ""
 
@@ -239,12 +243,15 @@ msgstr ""
 msgid "wrong data !"
 msgstr ""
 
-#: user/views.py:232
+#: user/views.py:223
 msgid "you are authorized to use booldog ."
 msgstr ""
 
-#: user/views.py:234
+#: user/views.py:225
 msgid ""
 "Enter your username and password in the bldg.js file and you are ready to "
 "use booldog on your site"
 msgstr ""
+
+#~ msgid "Oggi alle"
+#~ msgstr "today at"

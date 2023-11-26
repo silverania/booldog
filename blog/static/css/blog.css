@@ -263,6 +263,9 @@ a#a_download {
   border-style: none;
   background-color: transparent;
 }
+#inputEmail,#inputUsername{
+  display:inline;
+}
 
 #formEsci {
   width: 100%;

@@ -17,8 +17,6 @@
         <script>
     var spanBlogEntra = document.createElement("SPAN");
     var currentUrl = "{{currentUrl}}";
-    var user = "{{user}}";
-    var password = "{{password}}";
     var authorized = "{{ authorized }}";
     var buttonRispo = "{% trans "Reply" %}"
     window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
@@ -29,6 +27,8 @@
     var _spanusernametext = "{% trans 'alle ' %}";
     var postinserito = "{% trans "Entered" %}";
     var postinviato = "{% trans "Sent" %}";
+    var datanow = "{% trans "today at" %}";
+    var alle= "{% trans "alle" %}";
     spanBlogEntra.textContent = "{% trans 'Login' %}";
         </script>
         <script defer>
@@ -47,7 +47,7 @@
         console.log("link autorizzato a invio messaggi !")
       }
     });
-    initBlogSGang(user, password, currentUrl, authorized);
+    initBlogSGang(currentUrl, authorized);
         </script>
     </body>
 </html>
