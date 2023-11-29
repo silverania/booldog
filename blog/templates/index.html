@@ -38,7 +38,7 @@
                   </li>
                 {% else %}
                   <li class="nav-item" id="liRegistrati_booldog" style="text-align:right;">
-                    <a id="aRegistrati_booldog" class="nav-link" href="{% url 'register' %}booldog"><span id="spanRegistrati_booldog"><b>{% trans 'SignUp' %}</b></span></a>
+                    <a id="aRegistrati_booldog"  class="nav-link" href="{% url 'register' %}booldog"><span id="spanRegistrati_booldog"><b>{% trans 'SignUp' %}</b></span></a>
                   </li>
                   <!--       li class="nav-item" style="float:right!important;">
                     <a id="aEntra_booldog" class="nav-link"><span id="spanEntra_booldog"><b>{% trans 'Login' %}</b></span></a>
@@ -71,12 +71,11 @@
             </p>
             <p class="text-start">
               1) Download <a href="{% url 'files' 'booldog.js' %}"><span>booldog.js</span></a><span>
-                |
-                <a href="{% url 'files' 'bldg.js' %}"><span>bldg.js</span></a>{% trans 'and put them in your root web folder' %}
+               {% trans 'and put it in your root web folder' %}
               </span>
             </p>
             <p class="text-start">
-              2){% trans 'SignUp' %} <a href="{% url 'register' %}booldog">{% trans 'here' %}</a> {% trans 'to obtain user and password' %}
+              2){% trans 'SignUp' %} <a target="_blank" href="{% url 'register' %}booldog">{% trans 'here' %}</a> {% trans 'to obtain user and password' %}
             </p>
             <p class="text-start">
               3){% trans 'link booldog files in your head !' %}
@@ -85,9 +84,6 @@
               &lt;script src="bldg.js">&lt;/script><br />
               &lt;script src="booldog.js" defer>&lt;/script>
             </code>
-            <p class="text-start mt-3">
-              4){% trans 'edit the bldg.js file by inserting the username and password chosen to register , in quotes !' %}
-            </p>
           </div>
         </div>
       </div>

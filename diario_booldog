@@ -15,4 +15,3 @@ sto cambiando la struttura di autenticazione per non inviare password in giro
 errore se la user e passwor sono sbagliati nel login viene mostrata la pagina sbagliata
 devo togliere la possibilità si registrarsi inserendo website a utenti non admin di sito . quelli che devono solo commentare 
 a register_done  inserire le istruzioni su ciò che resta fare 
-inviare cookie samesite=none o lax o altro al browser

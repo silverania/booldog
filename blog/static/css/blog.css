@@ -235,14 +235,15 @@ a#a_download {
 }
 
 [id^="but_"] {
-  font-family: "Montserrat-Regular";
-  width: 35%;
+  font-family: "Open-Sans";
+  /* width: 35%; */
   height: auto;
-  border-style: none;
+  border: 1px solid grey;
+  border-radius: 0;
   margin: 15px auto;
   color: #660000;
-  padding: 2%;
-  box-shadow: -4px -4px 10px #719ece;
+  /* padding: 2%; */
+  /* box-shadow: -4px -4px 10px #719ece; */
 }
 
 [id^="img_user"] {
@@ -284,18 +285,18 @@ a#a_download {
 textarea {
   background-color: transparent;
   font-family: "Montserrat-Regular";
-  /*font-size:1rem!important;*/
+  font-size:1rem!important;
   line-height: 1.6;
   color: black;
-  width: 100%;
   outline: none !important;
   /* border: none; */
-  background-color: transparent;
+  /* background-color: transparent; */
   resize: none;
   border-bottom: none;
+  border-right: none;
   outline: none;
-  box-shadow: -2px -2px 2px #719ece;
-  border-radius: 4px;
+  /* box-shadow: -2px -2px 2px #719ece; */
+  /* border-radius: 4px; */
   overflow: hidden;
   padding: 10px !important;
 }
@@ -452,7 +453,9 @@ span[id^="post_title"] {
   .fa-arrow-left {
     font-size: 3rem;
   }
-
+textarea {
+    width: 65%;
+  }
   #p_text {
     width: 100% !important;
   }
@@ -468,10 +471,7 @@ span[id^="post_title"] {
 }
 
 @media screen and (max-width: 780px) {
-  textarea {
-    font-size: 0.6rem !important;
-  }
-
+  
   #blog {
     width: 80% !important;
   }
@@ -479,8 +479,10 @@ span[id^="post_title"] {
     width: 55% !important; /* Could be more or less, depending on screen size */
   }
   textarea {
+    width:30%;
     font-size: 0.8rem !important;
   }
+  
 }
 
 @media screen and (max-width: 560px) {
@@ -513,6 +515,9 @@ span[id^="post_title"] {
   .fa-house,
   .fa-arrow-left {
     font-size: 3rem;
+  }
+  textarea {
+    width:30%;
   }
 }
 
@@ -557,21 +562,21 @@ span[id^="post_title"] {
 
 .mybut {
   display: block;
-  width: 100%;
+  /* width: 100%; */
   padding: 0.2rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: 0.3rem;
+  /* border-radius: 0.3rem; */
   font-weight: 400;
   text-align: center;
   vertical-align: middle;
   background-color: transparent;
-  color: purple;
-  border-color: cyan !important;
-  box-shadow: 10px 10px 10px #719ece;
+  color: black;
+  border-color: #00ffff21 !important;
+  box-shadow: 0px 0px 5px black;
 }
 .mybut:hover {
-  border: 3px solid orange;
+  border: 3px solid black;
 }
 
 button:focus {

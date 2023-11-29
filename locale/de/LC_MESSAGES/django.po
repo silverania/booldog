@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-23 18:04+0100\n"
+"POT-Creation-Date: 2023-11-29 19:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,13 +59,13 @@ msgid "alle"
 msgstr ""
 
 #: blog/templates/booldog.html:32 blog/templates/index.html:44
-#: user/templates/registration/login.html:17
-#: user/templates/registration/login.html:106
+#: user/templates/registration/login.html:30
+#: user/templates/registration/login.html:120
 msgid "Login"
 msgstr "Login"
 
 #: blog/templates/index.html:34 blog/templates/index.html:41
-#: blog/templates/index.html:79
+#: blog/templates/index.html:78
 msgid "SignUp"
 msgstr "Anmeldung"
 
@@ -98,31 +98,23 @@ msgstr "Boolddog wird auch auf dieser Seite verwendet ! im Fußbereich."
 msgid "How use it ? "
 msgstr "wie benutze es"
 
-#: blog/templates/index.html:75
-msgid "and put them in your root web folder"
-msgstr "und legen Sie sie im Stammordner ab"
+#: blog/templates/index.html:74
+msgid "and put it in your root web folder"
+msgstr "und legen Sie es in Ihr js-Ordner"
 
-#: blog/templates/index.html:79
+#: blog/templates/index.html:78
 msgid "here"
 msgstr "who"
 
-#: blog/templates/index.html:79
+#: blog/templates/index.html:78
 msgid "to obtain user and password"
 msgstr "um Benutzer und Passwort zu erhalten"
 
-#: blog/templates/index.html:82
+#: blog/templates/index.html:81
 msgid "link booldog files in your head !"
 msgstr "Verknüpfen Sie Booldog-Dateien in Ihrem Kopf !"
 
-#: blog/templates/index.html:89
-msgid ""
-"edit the bldg.js file by inserting the username and password chosen to "
-"register , in quotes !"
-msgstr ""
-"Bearbeiten Sie die Datei bldg.js, indem Sie den zur Registrierung gewählten "
-"Benutzernamen und das Kennwort in Anführungszeichen einfügen"
-
-#: blog/templates/index.html:103
+#: blog/templates/index.html:99
 msgid "with ADV"
 msgstr ""
 
@@ -146,7 +138,7 @@ msgstr "Passwort vergessen?"
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: user/templates/admin/base.html:72
+#: user/templates/admin/base.html:72 user/templates/registration/login.html:27
 msgid "Home"
 msgstr "Home"
 
@@ -182,27 +174,43 @@ msgstr "Passwort vergessen?"
 msgid " repeat password "
 msgstr "Aktuelles Passwort"
 
-#: user/templates/registration/login.html:41
+#: user/templates/registration/login.html:54
 msgid "If you don't have User and Password"
 msgstr "um Benutzer und Passwort zu erhalten"
 
-#: user/templates/registration/login.html:43
+#: user/templates/registration/login.html:56
 msgid " SignUp"
 msgstr "Anmeldung"
 
-#: user/templates/registration/login.html:116
+#: user/templates/registration/login.html:130
 msgid "Password Forgot ?"
 msgstr "Passwort wiederherstellen"
 
-#: user/templates/registration/login.html:122
+#: user/templates/registration/login.html:136
 msgid "Do you want to change your password?"
 msgstr "Möchten Sie Ihr Passwort ändern ?"
+
+
+msgid "password reset complete"
+msgstr "Passwort-Reset abgeschlossen !"
+
+#: user/templates/registration/password_reset_complete.html:12
+#, fuzzy
+#| msgid "Login"
+msgid "login"
+msgstr "Login"
+
+#: user/templates/registration/password_reset_confirm.html:25
+#, fuzzy
+#| msgid "Password recover"
+msgid "Password reset"
+msgstr "Passwort wiederherstellen"
 
 #: user/templates/registration/password_reset_done.html:5
 msgid "Done !"
 msgstr "Gut gemacht !"
 
-#: user/templates/registration/password_reset_done.html:11
+#: user/templates/registration/password_reset_done.html:20
 msgid ""
 "Recovery link sent to your email We have sent instructions to set your "
 "password, if there is a valid account at the email address you provided. You "
@@ -216,21 +224,19 @@ msgstr ""
 "ein, mit der Sie sich registriert haben, und überprüfen Sie Ihren Spam-"
 "Ordner."
 
-#: user/templates/registration/password_reset_email.html:7
+#: user/templates/registration/password_reset_email.html:3
 msgid "Someone asked for password recovery for the user with email :"
 msgstr ""
 "Jemand hat per E-Mail um die Wiederherstellung des Passworts für den "
 "Benutzer gebeten:"
 
-#: user/templates/registration/password_reset_email.html:7
+#: user/templates/registration/password_reset_email.html:3
 msgid "Go to:"
 msgstr "gehe zu"
 
-#: user/templates/registration/password_reset_email.html:8
-#, fuzzy
-#| msgid "Your username, in case you have forgotten it is: "
+
 msgid "Your username, in case you have forgotten it is:"
-msgstr "Ihr Benutzername, falls Sie ihn vergessen haben, lautet:"
+msgstr "Ihr Benutzername, falls Sie ihn vergessen haben"
 
 #: user/templates/registration/password_reset_form.html:8
 #, fuzzy
@@ -246,67 +252,78 @@ msgstr "E-Mail"
 msgid "Send e-mail"
 msgstr "E-mail senden"
 
-#: user/templates/user/register.html:14 user/templates/user/register.html:76
+#: user/templates/user/register.html:23 user/templates/user/register.html:85
 #, fuzzy
 #| msgid "Signup"
 msgid "signup"
 msgstr "Anmeldung"
 
-#: user/templates/user/register.html:23
+#: user/templates/user/register.html:32
 #, fuzzy
 #| msgid "View site"
 msgid "web site"
 msgstr "View site"
 
-#: user/templates/user/register.html:24
+#: user/templates/user/register.html:33
 #, fuzzy
 #| msgid "Current password"
 msgid "repeat password"
 msgstr "Aktuelles Passwort"
 
-#: user/templates/user/register.html:43
+#: user/templates/user/register.html:52
 msgid "Website optional"
 msgstr ""
 
-#: user/templates/user/register.html:51
+#: user/templates/user/register.html:60
 #, fuzzy
 #| msgid "Optional:"
 msgid "optional photo"
 msgstr "Fakultativ"
 
-#: user/templates/user/register.html:53
+#: user/templates/user/register.html:62
 msgid "choose photo"
 msgstr "Wähle ein Foto aus"
 
-#: user/templates/user/register.html:89
+#: user/templates/user/register.html:98
 #, fuzzy
 #| msgid "Remember me"
 msgid "remember me"
 msgstr "mich erinnern"
 
-#: user/templates/user/register.html:96
+#: user/templates/user/register.html:105
 msgid "Password forgot ?"
 msgstr "Passwort wiederherstellen"
 
-#: user/templates/wrongdati.html:15
+#: user/templates/user/register_done.html:7
+msgid ""
+"Account created . To use Booldog put script tag in head section of your "
+"website"
+msgstr ""
+
+#: user/templates/wrongdati.html:25
 msgid "wrong data !"
 msgstr "falschen Daten !"
 
-#: user/views.py:223
-msgid "you are authorized to use booldog ."
-msgstr "Sie sind berechtigt, booldog zu verwenden."
+#~ msgid ""
+#~ "edit the bldg.js file by inserting the username and password chosen to "
+#~ "register , in quotes !"
+#~ msgstr ""
+#~ "Bearbeiten Sie die Datei bldg.js, indem Sie den zur Registrierung "
+#~ "gewählten Benutzernamen und das Kennwort in Anführungszeichen einfügen"
 
-#: user/views.py:225
+#~ msgid "you are authorized to use booldog ."
+#~ msgstr "Sie sind berechtigt, booldog zu verwenden."
+
 #, fuzzy
-#| msgid ""
-#| "Enter your username and password in the bldg.js file and you're ready to "
-#| "use booldog on your site"
-msgid ""
-"Enter your username and password in the bldg.js file and you are ready to "
-"use booldog on your site"
-msgstr ""
-"Geben Sie Ihren Benutzernamen und Ihr Passwort in die Datei bldg.js ein.und "
-"schon sind Sie einsatzbereit booldog auf Ihrer Website"
+#~| msgid ""
+#~| "Enter your username and password in the bldg.js file and you're ready to "
+#~| "use booldog on your site"
+#~ msgid ""
+#~ "Enter your username and password in the bldg.js file and you are ready to "
+#~ "use booldog on your site"
+#~ msgstr ""
+#~ "Geben Sie Ihren Benutzernamen und Ihr Passwort in die Datei bldg.js ein."
+#~ "und schon sind Sie einsatzbereit booldog auf Ihrer Website"
 
 #~ msgid "at"
 #~ msgstr "um"

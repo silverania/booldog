@@ -26,7 +26,7 @@ $(document).ready(function () {
             }
         }
         var containerlogin = document.getElementsByTagName("body")[0];
-        htmlIframeWidthHeight(containerlogin);
+        
     }
     /* RELOAD IFRAME TO  SEND DATA */
     (function () {

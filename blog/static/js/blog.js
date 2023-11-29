@@ -89,7 +89,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     firstDivHead.setAttribute("id", "firstDivHead");
     divExitLogin.setAttribute("style", "width:45%;display:inline;");
     divCommentIcon.setAttribute("id", "div_comment_icon");
-    divCommentIcon.setAttribute("style", "margin: 0 auto 10% auto;width:100%; ");
+    divCommentIcon.setAttribute("style", "margin: 0 auto 0 auto;width:100%; ");
     divRespTitle.setAttribute("class", "div_resp");
     buttonLinkComment.setAttribute("id", "id_link_comment");
     divFormChild.setAttribute("id", "multiarea");
@@ -281,7 +281,6 @@ class postArea {
         "style",
         "height:" + this.scrollHeight + "px;overflow-y:hidden;"
       );
-      this.setAttribute("class", "form-control");
       this.style.height = "auto";
       this.style.height = this.scrollHeight + "px";
       isChanged = true;
@@ -463,7 +462,7 @@ class postArea {
     var button_risposta_post = document.createElement("BUTTON");
     var form_risposta_post = document.createElement("FORM");
     var objectToAppendChild = divUserBlog.id;
-    button_risposta_post.setAttribute("style", "display:block");
+    button_risposta_post.setAttribute("style", "display:block;margin:10px auto;");
     form_risposta_post.appendChild(button_risposta_post);
     $(button_risposta_post).click(function (e) {
       if (userThatLogin.toString() !== "false") {
@@ -549,7 +548,6 @@ class postArea {
 
     $("#" + postarea.postarea.id).ready(function () {
       $("#" + postarea.postarea.id).focus();
-      postarea.postarea.classList.add("form-control");
       //css("border","1px solid green")
     });
     $(button_risposta_post).click(function () {
@@ -577,8 +575,6 @@ class postArea {
 
       button_risposta_post.setAttribute("disabled", "");
       postarea.postarea.setAttribute("disabled", "");
-      $(postarea.postarea).css("color", "rgba(0, 0, 0, 0.5)");
-      $(postarea.postarea).css("border", "1px solid green");
       $(button_risposta_post).css("color", "black");
     });
     switch (mess.type) {
@@ -611,6 +607,7 @@ class postArea {
       form_risposta_post.setAttribute("id", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("class", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("action", "javascript:void(0)");
+       form_risposta_post.setAttribute("style", "width:65%");
     }
   }
 
@@ -620,13 +617,10 @@ class postArea {
 
   create() {
     $(this.postarea).animate({
-      width: "100%",
-    }, 800); // nu second e dui 1,2sec
-    //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
-    //this.postarea.setAttribute("rows", "3");
+      width: "65%",
+    }, 1000); 
     this.postarea.setAttribute("name", "messaggio");
     $(this.postarea).css("border", borderPost);
-    //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
     return this.postarea;
   }
 }
@@ -740,7 +734,7 @@ function getComment() {
       $(".mybut").css("box-shadow", "0 0 0 white");
     },
     function () {
-      $(".mybut").css("box-shadow", "10px 10px 10px #719ECE");
+      $(".mybut").css("box-shadow", "0 0 10px black");
     }
   );
   $.ajax({

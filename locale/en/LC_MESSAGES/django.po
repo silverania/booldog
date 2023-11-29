@@ -39,13 +39,13 @@ msgid "alle"
 msgstr ""
 
 #: blog/templates/booldog.html:32 blog/templates/index.html:44
-#: user/templates/registration/login.html:17
-#: user/templates/registration/login.html:106
+#: user/templates/registration/login.html:30
+#: user/templates/registration/login.html:120
 msgid "Login"
 msgstr ""
 
 #: blog/templates/index.html:34 blog/templates/index.html:41
-#: blog/templates/index.html:79
+#: blog/templates/index.html:78
 msgid "SignUp"
 msgstr ""
 
@@ -73,29 +73,23 @@ msgstr ""
 msgid "How use it ? "
 msgstr ""
 
-#: blog/templates/index.html:75
-msgid "and put them in your root web folder"
+#: blog/templates/index.html:74
+msgid "and put it in your root web folder"
 msgstr ""
 
-#: blog/templates/index.html:79
+#: blog/templates/index.html:78
 msgid "here"
 msgstr ""
 
-#: blog/templates/index.html:79
+#: blog/templates/index.html:78
 msgid "to obtain user and password"
 msgstr ""
 
-#: blog/templates/index.html:82
+#: blog/templates/index.html:81
 msgid "link booldog files in your head !"
 msgstr ""
 
-#: blog/templates/index.html:89
-msgid ""
-"edit the bldg.js file by inserting the username and password chosen to "
-"register , in quotes !"
-msgstr ""
-
-#: blog/templates/index.html:103
+#: blog/templates/index.html:99
 msgid "with ADV"
 msgstr ""
 
@@ -119,7 +113,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: user/templates/admin/base.html:72
+#: user/templates/admin/base.html:72 user/templates/registration/login.html:27
 msgid "Home"
 msgstr ""
 
@@ -155,27 +149,39 @@ msgstr ""
 msgid " repeat password "
 msgstr ""
 
-#: user/templates/registration/login.html:41
+#: user/templates/registration/login.html:54
 msgid "If you don't have User and Password"
 msgstr ""
 
-#: user/templates/registration/login.html:43
+#: user/templates/registration/login.html:56
 msgid " SignUp"
 msgstr ""
 
-#: user/templates/registration/login.html:116
+#: user/templates/registration/login.html:130
 msgid "Password Forgot ?"
 msgstr ""
 
-#: user/templates/registration/login.html:122
+#: user/templates/registration/login.html:136
 msgid "Do you want to change your password?"
+msgstr ""
+
+#: user/templates/registration/password_reset_complete.html:10
+msgid "password reset complete"
+msgstr ""
+
+#: user/templates/registration/password_reset_complete.html:12
+msgid "login"
+msgstr ""
+
+#: user/templates/registration/password_reset_confirm.html:25
+msgid "Password reset"
 msgstr ""
 
 #: user/templates/registration/password_reset_done.html:5
 msgid "Done !"
 msgstr ""
 
-#: user/templates/registration/password_reset_done.html:11
+#: user/templates/registration/password_reset_done.html:20
 msgid ""
 "Recovery link sent to your email We have sent instructions to set your "
 "password, if there is a valid account at the email address you provided. You "
@@ -183,15 +189,15 @@ msgid ""
 "enter the address you registered with, and check your spam folder."
 msgstr ""
 
-#: user/templates/registration/password_reset_email.html:7
+#: user/templates/registration/password_reset_email.html:3
 msgid "Someone asked for password recovery for the user with email :"
 msgstr ""
 
-#: user/templates/registration/password_reset_email.html:7
+#: user/templates/registration/password_reset_email.html:3
 msgid "Go to:"
 msgstr ""
 
-#: user/templates/registration/password_reset_email.html:8
+#: user/templates/registration/password_reset_email.html:4
 msgid "Your username, in case you have forgotten it is:"
 msgstr ""
 
@@ -207,50 +213,46 @@ msgstr ""
 msgid "Send e-mail"
 msgstr ""
 
-#: user/templates/user/register.html:14 user/templates/user/register.html:76
+#: user/templates/user/register.html:23 user/templates/user/register.html:85
 msgid "signup"
 msgstr ""
 
-#: user/templates/user/register.html:23
+#: user/templates/user/register.html:32
 msgid "web site"
 msgstr ""
 
-#: user/templates/user/register.html:24
+#: user/templates/user/register.html:33
 msgid "repeat password"
 msgstr ""
 
-#: user/templates/user/register.html:43
+#: user/templates/user/register.html:52
 msgid "Website optional"
 msgstr ""
 
-#: user/templates/user/register.html:51
+#: user/templates/user/register.html:60
 msgid "optional photo"
 msgstr ""
 
-#: user/templates/user/register.html:53
+#: user/templates/user/register.html:62
 msgid "choose photo"
 msgstr ""
 
-#: user/templates/user/register.html:89
+#: user/templates/user/register.html:98
 msgid "remember me"
 msgstr ""
 
-#: user/templates/user/register.html:96
+#: user/templates/user/register.html:105
 msgid "Password forgot ?"
 msgstr ""
 
-#: user/templates/wrongdati.html:15
-msgid "wrong data !"
-msgstr ""
-
-#: user/views.py:223
-msgid "you are authorized to use booldog ."
-msgstr ""
-
-#: user/views.py:225
+#: user/templates/user/register_done.html:7
 msgid ""
-"Enter your username and password in the bldg.js file and you are ready to "
-"use booldog on your site"
+"Account created . To use Booldog put script tag in head section of your "
+"website"
+msgstr ""
+
+#: user/templates/wrongdati.html:25
+msgid "wrong data !"
 msgstr ""
 
 #~ msgid "Oggi alle"
