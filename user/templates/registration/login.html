@@ -20,13 +20,13 @@ Log-in
     "*"
   );
 </script>
-<div id="containerlogin" class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-3 text-center">
+<div class="row justify-content-center">
+      <div class="col-12 col-md-3 text-start">
   
   <a href="{% url 'booldog' %}?mainurl={{currentUrl}}"><div><span style="font-size:1rem;color:green;float:left;"><i class="fas fa-arrow-left" ></i>{% trans "Home" %} </span></div></a>
       </div>
     </div>
+<div id="containerlogin" class="container">
     <h3 align="center">{% trans 'Login' %}</h3>
     <!--  div class="row justify-content-center">
           <div class=" facebook col-md-1 col-1 col-sm-1 ">
@@ -132,7 +132,7 @@ Log-in
             </p>
             <p class="kpx_forgotPwd">
                 <small>
-                    <a id="a_changepassword" href="change_password?mainurl={{valuenext}}&user={{user}}&password={{password}}">
+                    <a id="a_changepassword" href="change_password?mainurl={{currentUrl}}">
                         {% trans 'Do you want to change your password?' %}
                     </a>
                 </small>

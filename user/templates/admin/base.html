@@ -20,18 +20,59 @@
     {% if LANGUAGE_BIDI %}<link rel="stylesheet" href="{% static "admin/css/responsive_rtl.css" %}">{% endif %}
 {% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+<script src="{% static 'js/all.min.js' %}"></script>
+<script src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
+<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
   data-admin-utc-offset="{% now "Z" %}">
+  <script>
+    const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const thisurl = urlParams.get('mainurl')
+      if(sessionStorage.getItem("mainurl")===null){
+        sessionStorage.setItem("mainurl",thisurl)
+      }
+    $(document).ready(function () {
+      
+      var main="{% url 'booldog' %}";
+    var backurl=document.getElementById('id_home');
+      backurl.href=main+"?mainurl="+sessionStorage.getItem("mainurl");
+    var elmain= document.getElementById("container");
+        window.top.postMessage(
+            {
+                height:elmain.offsetHeight+100,
+                base:elmain.offsetWidth,
+                mainurl:sessionStorage.getItem("mainurl"),
+            },
+            "*"
+        );
+    
+  window.addEventListener("message", function (event) {
+            mainurl = event.data.mainurl;
+    });
+  });
+  </script>
 
 <!-- Container -->
-<div id="container">
-
+<div id="container" class="mycontainer">
+<div class="row justify-content-center">
+    <div class="col-12 col-md-3 text-center">
+      <a id="id_home" href=""><div>
+          <span style="padding:15px;font-size:1rem; float: left"
+            ><i class="fas fa-arrow-left"></i>{% trans " Booldog Home" %}
+          </span>
+        </div></a
+      >
+    </div>
+  </div>
     {% if not is_popup %}
     <!-- Header -->
     {% block header %}
-    <div id="header">
+    <div id="header" >
         <div id="branding">
         booldog
         </div>
@@ -55,7 +96,7 @@
                 {% if user.has_usable_password %}
                 <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
                 {% endif %}
-                <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                <form id="logout-form" method="post" action='{% url "booldog"  %}?mainurl='window.location.href>
                     {% csrf_token %}
                     <button type="submit">{% translate 'Log out' %}</button>
                 </form>

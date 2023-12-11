@@ -37,8 +37,6 @@ class RespAdmin(admin.ModelAdmin):
                 filtered_query |= mysite.all_resps.all()
             query = filtered_query
         return query
-
-        return query
     search_fields = ('commento', 'body')
     list_display = ('id', 'site', 'commento', 'body', 'created',
                     'publish', 'author', 'respToUser', 'idRespTo', 'postType')

@@ -19,7 +19,7 @@
 
   <div class="row justify-content-center">
     <div class="col-xs-12 col-sm-6 col-md-3 text-center">
-      <span class="badge bg-info spanreg title" style="display:inline-block;text-align:center">
+      <span class="spanreg title" style="display:inline-block;text-align:center">
         {% trans 'signup' %}</span>
     </div>
   </div>
@@ -48,7 +48,7 @@
               id="id_password2">
           </li>
           {% elif 'website' in field.label_tag %}
-          {% if 'booldog' in request.get_full_path %}
+          {% if 'blog' in request.get_full_path %}
           <li class="list-group-item" lang="it"><small style="color: grey">{% trans "Website optional" %}</small>
             {% endif %}
           <li class="list-group-item mb-3">

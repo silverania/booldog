@@ -98,17 +98,18 @@ def getPost(request):
     t2 = []
     if "mainurl" in request.GET and request.GET["mainurl"]:
         tagTitle = str(request.GET.get("mainurl"))
-        print("tagTitle=" + tagTitle)
+        split_url = urlsplit(tagTitle)
+        basesite=split_url.hostname+split_url.path
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
-                site__title=tagTitle
+                site__title=basesite
             ).order_by("-publish")
             datac = list(all_comments_for_page)
             data_comm = serializer(datac)
             if datac:
                 for comment in all_comments_for_page:
                     try:
-                        if tagTitle in str(comment.site.title):
+                        if basesite in str(comment.site.title):
                             comments.append(comment)
                             t_order = comment.risposte.all().order_by("-publish")
                             t = list(t_order)
@@ -151,9 +152,9 @@ def newPost(request):
     author = Profile.objects.get(first_name=author)
     rootSite = request.GET.get("mainurl")
     split_url = urlsplit(rootSite)
-    basesite=split_url.scheme+"://"+split_url.netloc
+    basesite=split_url.hostname+split_url.path
     siteadminuser=Site.objects.get(title=basesite)
-    site,created = Site.objects.get_or_create(title=rootSite,user=Profile.objects.get(first_name=siteadminuser.user))
+    site,created = Site.objects.get_or_create(title=basesite,user=Profile.objects.get(first_name=siteadminuser.user))
     # check site authorization
     postType = request.GET.get("type")
     if "newpost" in postType:

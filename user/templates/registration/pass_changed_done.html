@@ -3,6 +3,7 @@
             {% extends "base.html" %}
 {% load i18n %} {% load static %} 
   {% block content %}
+  <script>var currentUrl="{{currentUrl}}";</script>
             <div class="container">
                 <div id="id_row_title" class="row justify-content-center">
                     <div class="col-4">
@@ -11,7 +12,7 @@
                                 <div style="width:100%!important;min-width:100%!important">
                                     <span style="margin-bottom:70px;font-weight:heavy;font-size:1vw">Password Modificata !</span>
                                 </div>
-                                <a id="passwordchanged" href="/booldog?user={{user}}&password={{password}}&mainurl={{valuenext|safe}}&authorized=True"">Home</a>
+                                <a id="passwordchanged" href="/booldog?mainurl={{currentUrl|safe}}&authorized=True"">Home</a>
                             </script>
                         </div>
                     </div>

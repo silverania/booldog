@@ -1,17 +1,3 @@
-tradurre pagina "modifica della password"
-aggiungere l ' informazione "controlla email per ripristinare pasword" nel template "ripristina password"
-si devono tradurre le date nei post
-
-subito dopo che la pagina di registrazione reinvia al pagina login devo riempire automaticamete i campi user e password
-mandare email dopo registrazione
-
-
-rimuovere booldog dal server e installare una versione funzionale
-diminuire width nella textarea commenti per endere le righe
-nascondere user e password in tag hidden
-in booldog.js non ho varibile user
-
-sto cambiando la struttura di autenticazione per non inviare password in giro
-errore se la user e passwor sono sbagliati nel login viene mostrata la pagina sbagliata
-devo togliere la possibilità si registrarsi inserendo website a utenti non admin di sito . quelli che devono solo commentare 
-a register_done  inserire le istruzioni su ciò che resta fare 
+devo fare in modo che la textarea scompaia quando l' user fa click fuori di essa
+toglirere il link di login nella pagina registerdone
+impostare un altezza minima alla pagina admin 

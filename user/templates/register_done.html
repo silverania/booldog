@@ -1,7 +1,7 @@
-{% extends "base.html" %}
-{% block title %}Welcome{% endblock %}
-{% block content %}
-<h1>Welcome {{ new_user.first_name }}!</h1>
-<p>Your account has been successfully created. Now you can <a href="{% url
-"login" %}">log in</a>.</p>
-{% endblock %}
+{% load i18n %}
+<div class="row justify-content-center">
+    <div class="col-12 text-center">
+<p>{% trans 'Welcome. Your account has been successfully created . Add the path to the <b>booldog.js</b> files in the Head section of your site' %}
+<script src="booldog.js" defer></script></p>
+    </div>
+</div>

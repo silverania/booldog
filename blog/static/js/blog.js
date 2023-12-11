@@ -7,6 +7,7 @@ var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
 var XMLHTTPURL_LOGIN; //="user/login/blog" + HIDDENFIELD;
+var XMLHTTPURL_ADMIN=BASE_URL+"/booldog/admin"; //="user/login/blog" + HIDDENFIELD;
 var XMLHTTPURL_REGISTER;
 var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
@@ -46,9 +47,12 @@ var ulBlogReg = document.createElement("UL");
 var liBlogReg = document.createElement("LI");
 var aBlogReg = document.createElement("A");
 var spanBlogReg = document.createElement("SPAN");
+var spanBlogAdmin = document.createElement("SPAN");
 var liBlogEntra = document.createElement("LI");
+var liBlogAdmin = document.createElement("LI");
 var liBlogCambiaPassword = document.createElement("LI");
 var aBlogEntra = document.createElement("A");
+var aBlogAdmin = document.createElement("A");
 var aBlogCambiaPassword = document.createElement("A");
 
 var liBlogEsci = document.createElement("LI");
@@ -73,7 +77,7 @@ var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
   //'<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
-  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog2.png">'
+  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog3.png">'
 $(bIcon).append(logo);
 var rooturl;
 var authorized;
@@ -106,8 +110,14 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "style",
       "display:block;width:auto;text-align:right;"
     );
+    aBlogAdmin.setAttribute(
+      "style",
+      "display:block;width:auto;text-align:right;"
+    );
     aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN);
     aBlogEntra.setAttribute("id", "id_entra");
+    aBlogAdmin.setAttribute("href", XMLHTTPURL_ADMIN);
+    aBlogAdmin.setAttribute("id", "id_admin");
     aBlogCambiaPassword.setAttribute(
       "style",
       "display:block;width:auto;text-align:right;"
@@ -122,6 +132,8 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
     aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
+    aBlogAdmin.setAttribute("class", "nav-link");
+    aBlogAdmin.textContent = aBlogAdminText;
     aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
     aBlogEsci.setAttribute(
       "style",
@@ -134,6 +146,13 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     );
     liBlogEntra.setAttribute("class", "nav-item");
     liBlogEntra.setAttribute("id", "li_login");
+    
+    liBlogAdmin.setAttribute(
+      "style",
+      "display:inline;width:auto;margin-right:0px;"
+    );
+    liBlogAdmin.setAttribute("class", "nav-item");
+    liBlogAdmin.setAttribute("id", "li_login");
     liBlogCambiaPassword.setAttribute("id", "li_cambiaPassword");
     liBlogReg.setAttribute("id", "li_reg");
     //bSpanChild.setAttribute("id","s_blog_text");
@@ -142,6 +161,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     bbutton.setAttribute("type", "button");
     bbutton.setAttribute("class", "mybut mybut-outline-info ");
     spanBlogEntra.setAttribute("id", "span_entra");
+    spanBlogAdmin.setAttribute("id", "span_admin");
     spanBlogReg.setAttribute("id", "span_reg");
     divBlogReg.setAttribute("id", "div_blog_reg");
     //bbutton.textContent = "Commenta";
@@ -163,9 +183,11 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       divExitLogin.appendChild(ulBlogReg);
     } else {
       liBlogEsci.appendChild(aBlogEsci);
+      liBlogAdmin.appendChild(aBlogAdmin);
       liBlogCambiaPassword.appendChild(aBlogCambiaPassword);
       ulBlogReg.appendChild(liBlogEsci);
       ulBlogReg.appendChild(liBlogCambiaPassword);
+      ulBlogReg.appendChild(liBlogAdmin);
       divExitLogin.appendChild(ulBlogReg);
       bSection.appendChild(divBlogReg);
       inputHidden.setAttribute("name", "next");
@@ -275,7 +297,6 @@ class postArea {
       this.postarea.setAttribute('rows', 3);
     }
     this.isActive = false;
-    this.isChanged = isChanged;
     this.postarea.onkeyup = function () {
       this.setAttribute(
         "style",
@@ -283,8 +304,7 @@ class postArea {
       );
       this.style.height = "auto";
       this.style.height = this.scrollHeight + "px";
-      isChanged = true;
-      this.isChanged = true;
+      
       var callcount = 0;
       var action = function () { };
       var delayAction = function (action, time) {
@@ -379,7 +399,7 @@ class postArea {
               $(e.target).closest('*[id^="id_link_comment"]').length === 0 &&
               $(e.target).closest('*[id^="button_post"]').length === 0
             ) {
-              if (isChanged == false) {
+              if(postarea.postarea.value===""){
                 $("#new_divuserblog_" + id).remove();
                 isOpen = false;
               }
@@ -421,9 +441,8 @@ class postArea {
             mess.type + userThatLogin[0].fields.first_name + "_" + id_newresp
           );
           $(document).on("click", function (e) {
-            //if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
             if ($(e.target).closest('*[id^="divuserblog"]').length === 0) {
-              if (isChanged == false) {
+              if (postarea.postarea.value === "") {
                 $("#divuserblog_" + id_newresp).remove();
                 isOpen = false;
               }
@@ -559,7 +578,7 @@ class postArea {
           throw "Post Vuoto ! ";
         }
       } catch (err) {
-        alert("Non posso inviare un messaggio vuoto !");
+        alert(err);
         return -1;
       }
 
@@ -567,15 +586,19 @@ class postArea {
 
       var url = URL_NEW_POST + HIDDENFIELD
       mess.body = txts;
-      if (sendToServer(mess, url) == 0) {
-        isOpen = false;
-      }
+      
       $(postarea.postarea).css("box-shadow", "0 0 0 0");
-      mess.type == "newpost" ? button_risposta_post.textContent = postinserito : button_risposta_post.textContent = postinviato;
-
-      button_risposta_post.setAttribute("disabled", "");
+      if (mess.type == "newpost" || mess.type == "newresp") {
+        
+        if (sendToServer(mess, url) == 0) {
+        isOpen = false;
+        button_risposta_post.setAttribute("disabled", "");
       postarea.postarea.setAttribute("disabled", "");
+          button_risposta_post.textContent = postinserito
       $(button_risposta_post).css("color", "black");
+      }
+      } 
+      
     });
     switch (mess.type) {
       case "newresp":
@@ -616,8 +639,10 @@ class postArea {
   }
 
   create() {
+    var width;
+    this.postarea.id.startsWith("resp") ? width = "85%": width = "85%";
     $(this.postarea).animate({
-      width: "65%",
+      width: width,
     }, 1000); 
     this.postarea.setAttribute("name", "messaggio");
     $(this.postarea).css("border", borderPost);
@@ -655,6 +680,7 @@ function initBlogSGang(url, authorized) {
   var blog;
   HIDDENFIELD = "?mainurl=" + url;
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
+  XMLHTTPURL_ADMIN = XMLHTTPURL_ADMIN +"?mainurl="+url;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog?mainurl=" + url;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
@@ -677,20 +703,25 @@ function initBlogSGang(url, authorized) {
         },
         body: JSON.stringify(s),
       };
-      fetch(XMLHTTPURL_GETUSER, request)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (json) {
-          //response=JSON.stringify(json)
-          authorized = json.authorized;
-          authenticated = json.authenticated;
-          if (authorized.toString() === "true") {
-            if (authenticated !== "false")
-              authenticated = JSON.parse(json.authenticated);
-          }
-          return createSectionDivSpan(authorized, authenticated);
-        });
+      try {
+        fetch(XMLHTTPURL_GETUSER, request)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            //response=JSON.stringify(json)
+            authorized = json.authorized;
+            authenticated = json.authenticated;
+            if (authorized.toString() === "true") {
+              if (authenticated !== "false")
+                authenticated = JSON.parse(json.authenticated);
+            }
+            return createSectionDivSpan(authorized, authenticated);
+          });
+      }
+      catch (SyntaxError) {
+        console.log("sintaxERROR");
+      }
     })();
   }
 
@@ -872,6 +903,7 @@ function htmlIframeWidthHeight(elem) {
     {
       height: height,
       base: width,
+      mainurl:rooturl,
     },
     "*"
   );

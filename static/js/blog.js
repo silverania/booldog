@@ -7,6 +7,7 @@ var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
 var XMLHTTPURL_LOGIN; //="user/login/blog" + HIDDENFIELD;
+var XMLHTTPURL_ADMIN=BASE_URL+"/booldog/admin"; //="user/login/blog" + HIDDENFIELD;
 var XMLHTTPURL_REGISTER;
 var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
@@ -46,9 +47,12 @@ var ulBlogReg = document.createElement("UL");
 var liBlogReg = document.createElement("LI");
 var aBlogReg = document.createElement("A");
 var spanBlogReg = document.createElement("SPAN");
+var spanBlogAdmin = document.createElement("SPAN");
 var liBlogEntra = document.createElement("LI");
+var liBlogAdmin = document.createElement("LI");
 var liBlogCambiaPassword = document.createElement("LI");
 var aBlogEntra = document.createElement("A");
+var aBlogAdmin = document.createElement("A");
 var aBlogCambiaPassword = document.createElement("A");
 
 var liBlogEsci = document.createElement("LI");
@@ -73,7 +77,7 @@ var inputHidden = document.createElement("INPUT");
 var inputSubmit = document.createElement("INPUT");
 var logo =
   //'<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
-  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog2.png">'
+  '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog3.png">'
 $(bIcon).append(logo);
 var rooturl;
 var authorized;
@@ -89,7 +93,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     firstDivHead.setAttribute("id", "firstDivHead");
     divExitLogin.setAttribute("style", "width:45%;display:inline;");
     divCommentIcon.setAttribute("id", "div_comment_icon");
-    divCommentIcon.setAttribute("style", "margin: 0 auto 10% auto;width:100%; ");
+    divCommentIcon.setAttribute("style", "margin: 0 auto 0 auto;width:100%; ");
     divRespTitle.setAttribute("class", "div_resp");
     buttonLinkComment.setAttribute("id", "id_link_comment");
     divFormChild.setAttribute("id", "multiarea");
@@ -106,8 +110,14 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "style",
       "display:block;width:auto;text-align:right;"
     );
+    aBlogAdmin.setAttribute(
+      "style",
+      "display:block;width:auto;text-align:right;"
+    );
     aBlogEntra.setAttribute("href", XMLHTTPURL_LOGIN);
     aBlogEntra.setAttribute("id", "id_entra");
+    aBlogAdmin.setAttribute("href", XMLHTTPURL_ADMIN);
+    aBlogAdmin.setAttribute("id", "id_admin");
     aBlogCambiaPassword.setAttribute(
       "style",
       "display:block;width:auto;text-align:right;"
@@ -122,6 +132,8 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
     aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
+    aBlogAdmin.setAttribute("class", "nav-link");
+    aBlogAdmin.textContent = aBlogAdminText;
     aBlogEsci.setAttribute("href", XMLHTTPURL_LOGOUT);
     aBlogEsci.setAttribute(
       "style",
@@ -134,6 +146,13 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     );
     liBlogEntra.setAttribute("class", "nav-item");
     liBlogEntra.setAttribute("id", "li_login");
+    
+    liBlogAdmin.setAttribute(
+      "style",
+      "display:inline;width:auto;margin-right:0px;"
+    );
+    liBlogAdmin.setAttribute("class", "nav-item");
+    liBlogAdmin.setAttribute("id", "li_login");
     liBlogCambiaPassword.setAttribute("id", "li_cambiaPassword");
     liBlogReg.setAttribute("id", "li_reg");
     //bSpanChild.setAttribute("id","s_blog_text");
@@ -142,6 +161,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     bbutton.setAttribute("type", "button");
     bbutton.setAttribute("class", "mybut mybut-outline-info ");
     spanBlogEntra.setAttribute("id", "span_entra");
+    spanBlogAdmin.setAttribute("id", "span_admin");
     spanBlogReg.setAttribute("id", "span_reg");
     divBlogReg.setAttribute("id", "div_blog_reg");
     //bbutton.textContent = "Commenta";
@@ -163,9 +183,11 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       divExitLogin.appendChild(ulBlogReg);
     } else {
       liBlogEsci.appendChild(aBlogEsci);
+      liBlogAdmin.appendChild(aBlogAdmin);
       liBlogCambiaPassword.appendChild(aBlogCambiaPassword);
       ulBlogReg.appendChild(liBlogEsci);
       ulBlogReg.appendChild(liBlogCambiaPassword);
+      ulBlogReg.appendChild(liBlogAdmin);
       divExitLogin.appendChild(ulBlogReg);
       bSection.appendChild(divBlogReg);
       inputHidden.setAttribute("name", "next");
@@ -275,17 +297,14 @@ class postArea {
       this.postarea.setAttribute('rows', 3);
     }
     this.isActive = false;
-    this.isChanged = isChanged;
     this.postarea.onkeyup = function () {
       this.setAttribute(
         "style",
         "height:" + this.scrollHeight + "px;overflow-y:hidden;"
       );
-      this.setAttribute("class", "form-control");
       this.style.height = "auto";
       this.style.height = this.scrollHeight + "px";
-      isChanged = true;
-      this.isChanged = true;
+      
       var callcount = 0;
       var action = function () { };
       var delayAction = function (action, time) {
@@ -380,7 +399,7 @@ class postArea {
               $(e.target).closest('*[id^="id_link_comment"]').length === 0 &&
               $(e.target).closest('*[id^="button_post"]').length === 0
             ) {
-              if (isChanged == false) {
+              if(postarea.postarea.value===""){
                 $("#new_divuserblog_" + id).remove();
                 isOpen = false;
               }
@@ -422,9 +441,8 @@ class postArea {
             mess.type + userThatLogin[0].fields.first_name + "_" + id_newresp
           );
           $(document).on("click", function (e) {
-            //if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
             if ($(e.target).closest('*[id^="divuserblog"]').length === 0) {
-              if (isChanged == false) {
+              if (postarea.postarea.value === "") {
                 $("#divuserblog_" + id_newresp).remove();
                 isOpen = false;
               }
@@ -463,7 +481,7 @@ class postArea {
     var button_risposta_post = document.createElement("BUTTON");
     var form_risposta_post = document.createElement("FORM");
     var objectToAppendChild = divUserBlog.id;
-    button_risposta_post.setAttribute("style", "display:block");
+    button_risposta_post.setAttribute("style", "display:block;margin:10px auto;");
     form_risposta_post.appendChild(button_risposta_post);
     $(button_risposta_post).click(function (e) {
       if (userThatLogin.toString() !== "false") {
@@ -549,7 +567,6 @@ class postArea {
 
     $("#" + postarea.postarea.id).ready(function () {
       $("#" + postarea.postarea.id).focus();
-      postarea.postarea.classList.add("form-control");
       //css("border","1px solid green")
     });
     $(button_risposta_post).click(function () {
@@ -561,7 +578,7 @@ class postArea {
           throw "Post Vuoto ! ";
         }
       } catch (err) {
-        alert("Non posso inviare un messaggio vuoto !");
+        alert(err);
         return -1;
       }
 
@@ -569,17 +586,19 @@ class postArea {
 
       var url = URL_NEW_POST + HIDDENFIELD
       mess.body = txts;
-      if (sendToServer(mess, url) == 0) {
-        isOpen = false;
-      }
+      
       $(postarea.postarea).css("box-shadow", "0 0 0 0");
-      mess.type == "newpost" ? button_risposta_post.textContent = postinserito : button_risposta_post.textContent = postinviato;
-
-      button_risposta_post.setAttribute("disabled", "");
+      if (mess.type == "newpost" || mess.type == "newresp") {
+        
+        if (sendToServer(mess, url) == 0) {
+        isOpen = false;
+        button_risposta_post.setAttribute("disabled", "");
       postarea.postarea.setAttribute("disabled", "");
-      $(postarea.postarea).css("color", "rgba(0, 0, 0, 0.5)");
-      $(postarea.postarea).css("border", "1px solid green");
+          button_risposta_post.textContent = postinserito
       $(button_risposta_post).css("color", "black");
+      }
+      } 
+      
     });
     switch (mess.type) {
       case "newresp":
@@ -611,6 +630,7 @@ class postArea {
       form_risposta_post.setAttribute("id", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("class", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("action", "javascript:void(0)");
+       form_risposta_post.setAttribute("style", "width:65%");
     }
   }
 
@@ -619,14 +639,13 @@ class postArea {
   }
 
   create() {
+    var width;
+    this.postarea.id.startsWith("resp") ? width = "85%": width = "65%";
     $(this.postarea).animate({
-      width: "100%",
-    }, 800); // nu second e dui 1,2sec
-    //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
-    //this.postarea.setAttribute("rows", "3");
+      width: width,
+    }, 1000); 
     this.postarea.setAttribute("name", "messaggio");
     $(this.postarea).css("border", borderPost);
-    //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
     return this.postarea;
   }
 }
@@ -654,7 +673,7 @@ function initBlogSGang(url, authorized) {
   var blog;
   url = url.replace(/\/$/, "");
   rooturl = url;
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog" + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?mainurl="+url+ '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
   $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
@@ -683,20 +702,25 @@ function initBlogSGang(url, authorized) {
         },
         body: JSON.stringify(s),
       };
-      fetch(XMLHTTPURL_GETUSER, request)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (json) {
-          //response=JSON.stringify(json)
-          authorized = json.authorized;
-          authenticated = json.authenticated;
-          if (authorized.toString() === "true") {
-            if (authenticated !== "false")
-              authenticated = JSON.parse(json.authenticated);
-          }
-          return createSectionDivSpan(authorized, authenticated);
-        });
+      try {
+        fetch(XMLHTTPURL_GETUSER, request)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            //response=JSON.stringify(json)
+            authorized = json.authorized;
+            authenticated = json.authenticated;
+            if (authorized.toString() === "true") {
+              if (authenticated !== "false")
+                authenticated = JSON.parse(json.authenticated);
+            }
+            return createSectionDivSpan(authorized, authenticated);
+          });
+      }
+      catch (SyntaxError) {
+        console.log("sintaxERROR");
+      }
     })();
   }
 
@@ -740,7 +764,7 @@ function getComment() {
       $(".mybut").css("box-shadow", "0 0 0 white");
     },
     function () {
-      $(".mybut").css("box-shadow", "10px 10px 10px #719ECE");
+      $(".mybut").css("box-shadow", "0 0 10px black");
     }
   );
   $.ajax({
@@ -979,40 +1003,40 @@ function getDateFromDjangoDate(data = "") {
     var res;
     switch (month) {
       case "01":
-        res = "gennaio";
+        res = "1";
         break;
       case "02":
-        res = "febbraio";
+        res = "2";
         break;
       case "03":
-        res = "marzo";
+        res = "3";
         break;
       case "04":
-        res = "aprile";
+        res = "4";
         break;
       case "05":
-        res = "maggio";
+        res = "5";
         break;
       case "06":
-        res = "giugno";
+        res = "6";
         break;
       case "07":
-        res = "luglio";
+        res = "7";
         break;
       case "08":
-        res = "agosto";
+        res = "8";
         break;
       case "09":
-        res = "settembre";
+        res = "9";
         break;
       case "10":
-        res = "ottobre";
+        res = "10";
         break;
       case "11":
-        res = "novembre";
+        res = "11";
         break;
       case "12":
-        res = "dicembre";
+        res = "12";
         break;
     }
     return res;
@@ -1020,10 +1044,10 @@ function getDateFromDjangoDate(data = "") {
 
   function getMsg() {
     if (isNow()) {
-      data = "Oggi alle" + " " + hour;
+       data = datanow + " "+ hour;
     } else {
       day = day.replace("0", "");
-      data = day + " " + month + " " + year + " alle " + hour;
+      data = day + " " + month + " " + year +  " "+alle+   hour;
     }
     return data;
   }
@@ -1076,7 +1100,6 @@ function sendToServer(post, url) {
       commento: post.post.pk,
       type: post.type,
       username: userThatLogin[0].fields.first_name,
-      useradmin: user,
       body: post.body,
       respTo: post.respToID,
       id: post.pk,
@@ -1087,7 +1110,6 @@ function sendToServer(post, url) {
     data = {
       type: post.type,
       tutorial: post.thisTutorialTitle,
-      useradmin: user,
       username: userThatLogin[0].fields.first_name,
       body: post.body,
     };

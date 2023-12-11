@@ -1,5 +1,6 @@
 {
     "pythonIndent.keepHangingBracketOnLine": true,
     "pythonIndent.trimLinesWithOnlyWhitespace": true,
-    "pythonIndent.useTabOnHangingIndent": true
+    "pythonIndent.useTabOnHangingIndent": true,
+    "css.styleSheets": []
 }

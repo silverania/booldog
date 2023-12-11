@@ -1,6 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
+from django.conf import settings
 from django.template import RequestContext
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import UserEditForm, ProfileEditForm
 from .models import Profile
 from blog.models import Site
@@ -23,6 +25,7 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
+import os
 
 scrollTo = ""
 Group = Group.objects.all()
@@ -47,18 +50,23 @@ def checkUser(request):
         for key, value in list_json_user_data.items():
             if "currentUrl" in key:
                 currentUrl = value
-                mydomain = urlsplit(currentUrl)
-                mydomain = mydomain.scheme + "://" + mydomain.netloc
+                mydomain = urlsplit(currentUrl, allow_fragments=True)
+                mydomain = mydomain.hostname
             if "authorized" in key:
-                if authorized is True or Site.objects.get(title=mydomain):
-                    request.session["authorized"] = True
-                    authorized = "True"
-                    login = str(login)
-                    return JsonResponse(
-                        {"authorized": authorized, "authenticated": login}
-                    )
-                else:
-                    return HttpResponse("you are not authorized to use Booldog !")
+                try:
+                    if authorized is True or Site.objects.filter(
+                        title__icontains=mydomain
+                    ):
+                        request.session["authorized"] = True
+                        authorized = "True"
+                        login = str(login)
+                        return JsonResponse(
+                            {"authorized": authorized, "authenticated": login}
+                        )
+                    else:
+                        return HttpResponse("you are not authorized to use Booldog !")
+                except ObjectDoesNotExist:
+                    return render(request, "wrongdati.html")
 
     """
     def get(self, request):
@@ -114,7 +122,6 @@ def user_login(request):
     authorized = request.session["authorized"]
     if request.method == "POST":
         form = LoginForm(request.POST)
-        breakpoint()
         if form.is_valid():
             username = request.POST["username"]
             password = request.POST["password"]
@@ -134,7 +141,6 @@ def user_login(request):
                 )
                 return response
             else:
-                breakpoint()
                 return render(request, "wrongdati.html", {"currentUrl": currentUrl})
     elif request.method == "GET":
         form = LoginForm()
@@ -181,17 +187,15 @@ class Logout(View):
     def get(self, request):
         mainurl = ""
         logout(request)
-        userLoggedIN = None
         if "mainurl" in request.GET:
-            mainurl = request.GET.get('mainurl')
-            mydomain=urlsplit(mainurl)
-            mydomain= mydomain.scheme+"://"+mydomain.netloc
-            myuser=Profile.objects.get(website=mydomain)
+            mainurl = request.GET.get("mainurl")
+            mydomain = urlsplit(mainurl)
+            mydomain = mydomain.netloc
             # return render(request, "seiuscito.html", {'valuenext': mainurl})
         return render(
             request,
             "booldog.html",
-            {"user": myuser, "currentUrl": mainurl, "authorized": "True"},
+            {"currentUrl": mainurl, "authorized": "True"},
         )
 
 
@@ -203,10 +207,12 @@ def user_register(request):
             user = form.save()
             user.refresh_from_db()
             username = form.cleaned_data.get("username")
-            user.profile.photo = form.cleaned_data.get("photo")
+            user.profile.photo = request.FILES["photo"]
             user.profile.first_name = username
             user.profile.email = form.cleaned_data.get("email")
             user.profile.website = form.cleaned_data.get("website")
+            split_url = urlsplit(user.profile.website)
+            basesite=split_url.hostname+split_url.path
             # user.profile.website = titleSite.scheme + "://" + titleSite.netloc
             if "blog" in request.path:
                 valuenext = request.GET.get("mainurl")
@@ -215,7 +221,7 @@ def user_register(request):
                 return redirect("/user/login/blog?mainurl=" + valuenext)
             elif "booldog" in request.path:
                 site = Site.objects.create(
-                    title=user.profile.website, user=user.profile
+                    title=basesite, user=user.profile
                 )
                 site.save()
                 group = Group.get(name="BlogAdmin")
@@ -231,7 +237,9 @@ def user_register(request):
                 # return HttpResponse(
                 #   "<h1>" + responsetext + "</h1><h2>" + responsetext2 + "</h2>"
                 # )
-                return render(request,"register_done.html",{"new_user":user.profile.first_name })
+                return render(
+                    request, "register_done.html", {"new_user": user.profile.first_name}
+                )
                 #   "<h1>" + responsetext + "</h1><h2>" + responsetext2 + "</h2>"
                 # )
             else:
@@ -272,7 +280,6 @@ def user_register(request):
 def change_password(request):
     authorized = request.session["authorized"]
     if request.method == "POST":
-        valuenext = ""
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
@@ -284,12 +291,12 @@ def change_password(request):
                     request,
                     "registration/pass_changed_done.html",
                     {
-                        "valuenext": mainurl,
+                        "currentUrl": mainurl,
                         "authorized": authorized,
                     },
                 )
         else:
-            return render(request, "wrongdati.html", {"valuenext": mainurl})
+            return render(request, "wrongdati.html", {"currentUrl": mainurl})
     else:
         if "mainurl" in request.GET:
             mainurl = request.GET.get("mainurl")
@@ -299,7 +306,7 @@ def change_password(request):
             "change_password.html",
             {
                 "form": form,
-                "valuenext": mainurl,
+                "currentUrl": mainurl,
                 "authorized": authorized,
             },
         )

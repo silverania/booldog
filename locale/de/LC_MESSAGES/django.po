@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-29 19:05+0100\n"
+"POT-Creation-Date: 2023-12-09 13:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,62 +22,70 @@ msgstr ""
 msgid "Reply"
 msgstr "Replik"
 
-#: blog/templates/booldog.html:22 blog/templates/booldog.html:24
+#: blog/templates/booldog.html:22 user/templates/base.html:11
+msgid "Signup"
+msgstr "Anmeldung"
+
+#: blog/templates/booldog.html:23 blog/templates/booldog.html:25
 msgid "Comment"
 msgstr "Kommentar"
 
-#: blog/templates/booldog.html:23
+#: blog/templates/booldog.html:24
 msgid "Logout"
 msgstr "Ausloggen"
 
-#: blog/templates/booldog.html:25
-msgid "edit"
+#: blog/templates/booldog.html:26
+msgid "Edit"
 msgstr "bearbeiten"
 
-#: blog/templates/booldog.html:26
+#: blog/templates/booldog.html:27
+msgid "settings"
+msgstr "rahmen"
+
+#: blog/templates/booldog.html:28
 msgid "answers to "
 msgstr "antworten auf "
 
-#: blog/templates/booldog.html:27
+#: blog/templates/booldog.html:29
 msgid "alle "
 msgstr ""
 
-#: blog/templates/booldog.html:28
+#: blog/templates/booldog.html:30
 msgid "Entered"
 msgstr "Eingegeben"
 
-#: blog/templates/booldog.html:29
+#: blog/templates/booldog.html:31
 msgid "Sent"
 msgstr "Gesendet"
 
-#: blog/templates/booldog.html:30
+#: blog/templates/booldog.html:32
 msgid "today at"
 msgstr "heute um"
 
-#: blog/templates/booldog.html:31
+#: blog/templates/booldog.html:33
 msgid "alle"
 msgstr ""
 
-#: blog/templates/booldog.html:32 blog/templates/index.html:44
+#: blog/templates/booldog.html:34 blog/templates/index.html:43
 #: user/templates/registration/login.html:30
 #: user/templates/registration/login.html:120
 msgid "Login"
 msgstr "Login"
 
-#: blog/templates/index.html:34 blog/templates/index.html:41
-#: blog/templates/index.html:78
+#: blog/templates/index.html:33 blog/templates/index.html:40
+#: blog/templates/index.html:77
 msgid "SignUp"
 msgstr "Anmeldung"
 
-#: blog/templates/index.html:37
+#: blog/templates/index.html:36
 msgid "Exit"
 msgstr "Verlassen"
 
-#: blog/templates/index.html:58
+#: blog/templates/index.html:57
 msgid "What is Booldog ? "
 msgstr "Was ist Booldog?"
 
-#: blog/templates/index.html:61
+#: blog/templates/index.html:60
 msgid ""
 "Booldog is a message hosting service for websites. Install it on your site "
 "to allow your visitors to comment. Registering will give you access to the "
@@ -90,61 +98,65 @@ msgstr ""
 "zu moderieren und die Kontrolle darüber zu haben, was auf Ihrer Website "
 "gepostet wird."
 
-#: blog/templates/index.html:64
+#: blog/templates/index.html:63
 msgid "Boolddog is also used on this page ! in the footer section."
 msgstr "Boolddog wird auch auf dieser Seite verwendet ! im Fußbereich."
 
-#: blog/templates/index.html:70
+#: blog/templates/index.html:69
 msgid "How use it ? "
 msgstr "wie benutze es"
 
-#: blog/templates/index.html:74
+#: blog/templates/index.html:73
 msgid "and put it in your root web folder"
 msgstr "und legen Sie es in Ihr js-Ordner"
 
-#: blog/templates/index.html:78
+#: blog/templates/index.html:77
 msgid "here"
 msgstr "who"
 
-#: blog/templates/index.html:78
-msgid "to obtain user and password"
-msgstr "um Benutzer und Passwort zu erhalten"
+#: blog/templates/index.html:77
+msgid ""
+"to obtain a user and password to access the message management dashboard"
+msgstr ""
+"um einen Benutzer und ein Passwort für den Zugriff auf das "
+"Nachrichtenverwaltungs-Dashboard zu erhalten"
 
-#: blog/templates/index.html:81
+#: blog/templates/index.html:80
 msgid "link booldog files in your head !"
 msgstr "Verknüpfen Sie Booldog-Dateien in Ihrem Kopf !"
 
-#: blog/templates/index.html:99
+#: blog/templates/index.html:97
 msgid "with ADV"
 msgstr ""
 
-#: user/templates/admin/base.html:42
+#: user/templates/admin/base.html:66
+msgid " Booldog Home"
+msgstr ""
+
+#: user/templates/admin/base.html:83
 msgid "Welcome,"
 msgstr "Welcome"
 
-#: user/templates/admin/base.html:47
+#: user/templates/admin/base.html:88
 msgid "View site"
 msgstr "View site"
 
-#: user/templates/admin/base.html:52
+#: user/templates/admin/base.html:93
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: user/templates/admin/base.html:56
+#: user/templates/admin/base.html:97
 msgid "Change password"
 msgstr "Passwort vergessen?"
 
-#: user/templates/admin/base.html:60
+#: user/templates/admin/base.html:101
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: user/templates/admin/base.html:72 user/templates/registration/login.html:27
+#: user/templates/admin/base.html:113 user/templates/change_password.html:12
+#: user/templates/registration/login.html:26
 msgid "Home"
 msgstr "Home"
-
-#: user/templates/base.html:11
-msgid "Signup"
-msgstr "Anmeldung"
 
 #: user/templates/base_password.html:24
 msgid "Password recover"
@@ -158,21 +170,39 @@ msgstr "Django site admin"
 msgid "Django administration"
 msgstr "Django administration"
 
-#: user/templates/change_password.html:7
+#: user/templates/change_password.html:20
 msgid "Password change for"
 msgstr "Passwort wiederherstellen"
 
-#: user/templates/change_password.html:31
+#: user/templates/change_password.html:42
 msgid " current password "
 msgstr "Aktuelles Passwort"
 
-#: user/templates/change_password.html:44
+#: user/templates/change_password.html:55
 msgid " new password "
 msgstr "Passwort vergessen?"
 
-#: user/templates/change_password.html:57
+#: user/templates/change_password.html:68
 msgid " repeat password "
 msgstr "Aktuelles Passwort"
+
+#: user/templates/change_password.html:102
+#, fuzzy
+#| msgid ""
+#| "To change your password, you must first log in! If you don't remember "
+#| "your password, you need to recover it"
+msgid ""
+"To change your password, you must first log in! If you don t remember your "
+"password, you need to recover it"
+msgstr ""
+"Um Ihr Passwort zu ändern, müssen Sie sich zuerst anmelden! Wenn Sie sich "
+"nicht an Ihre Passwort, Sie müssen es wiederherstellen"
+
+#: user/templates/register_done.html:4
+msgid ""
+"Welcome. Your account has been successfully created . Add the path to the "
+"<b>booldog.js</b> files in the Head section of your site"
+msgstr ""
 
 #: user/templates/registration/login.html:54
 msgid "If you don't have User and Password"
@@ -190,15 +220,9 @@ msgstr "Passwort wiederherstellen"
 msgid "Do you want to change your password?"
 msgstr "Möchten Sie Ihr Passwort ändern ?"
 
-
+#: user/templates/registration/password_reset_complete.html:10
 msgid "password reset complete"
 msgstr "Passwort-Reset abgeschlossen !"
-
-#: user/templates/registration/password_reset_complete.html:12
-#, fuzzy
-#| msgid "Login"
-msgid "login"
-msgstr "Login"
 
 #: user/templates/registration/password_reset_confirm.html:25
 #, fuzzy
@@ -234,7 +258,7 @@ msgstr ""
 msgid "Go to:"
 msgstr "gehe zu"
 
-
+#: user/templates/registration/password_reset_email.html:4
 msgid "Your username, in case you have forgotten it is:"
 msgstr "Ihr Benutzername, falls Sie ihn vergessen haben"
 
@@ -285,8 +309,6 @@ msgid "choose photo"
 msgstr "Wähle ein Foto aus"
 
 #: user/templates/user/register.html:98
-#, fuzzy
-#| msgid "Remember me"
 msgid "remember me"
 msgstr "mich erinnern"
 
@@ -294,15 +316,17 @@ msgstr "mich erinnern"
 msgid "Password forgot ?"
 msgstr "Passwort wiederherstellen"
 
-#: user/templates/user/register_done.html:7
-msgid ""
-"Account created . To use Booldog put script tag in head section of your "
-"website"
-msgstr ""
-
 #: user/templates/wrongdati.html:25
 msgid "wrong data !"
 msgstr "falschen Daten !"
+
+#~ msgid "to obtain user and password"
+#~ msgstr "um Benutzer und Passwort zu erhalten"
+
+#, fuzzy
+#~| msgid "Login"
+#~ msgid "login"
+#~ msgstr "Login"
 
 #~ msgid ""
 #~ "edit the bldg.js file by inserting the username and password chosen to "
@@ -335,13 +359,6 @@ msgstr "falschen Daten !"
 #~| msgid "lose password ?"
 #~ msgid "Confirm password:"
 #~ msgstr "Passwort vergessen?"
-
-#~ msgid ""
-#~ "To change your password, you must first log in! If you don't remember "
-#~ "your password, you need to recover it"
-#~ msgstr ""
-#~ "Um Ihr Passwort zu ändern, müssen Sie sich zuerst anmelden! Wenn Sie sich "
-#~ "nicht an Ihre Passwort, Sie müssen es wiederherstellen"
 
 #, fuzzy
 #~| msgid "lose password ?"
@@ -390,9 +407,6 @@ msgstr "falschen Daten !"
 #~| msgid "lose password ?"
 #~ msgid "Vuoi Cambiare Password ?"
 #~ msgstr "Passwort vergessen?"
-
-#~ msgid "Admin Settings"
-#~ msgstr "Admin Settings"
 
 #~ msgid "SignUp To Use Booldog on your website !"
 #~ msgstr "Melden Sie sich an, um Booldog auf Ihrer Website zu verwenden !"
