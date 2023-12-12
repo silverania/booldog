@@ -96,8 +96,22 @@
                 {% if user.has_usable_password %}
                 <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
                 {% endif %}
-                <form id="logout-form" method="post" action='{% url "booldog"  %}?mainurl='window.location.href>
+                <script defer>
+                   $(document).ready(function () {
+      
+    var backurlform=document.getElementById('mainurl');
+      backurlform.value=sessionStorage.getItem("mainurl")
+    var elmain= document.getElementById("container")});
+                   </script>
+                <form id="logout-form" method="POST" action="/user/logout/blog">
                     {% csrf_token %}
+                     <input
+                     id="mainurl"
+                    type="hidden"
+                    class="form-control"
+                    name="mainurl"
+                    value=""
+                >
                     <button type="submit">{% translate 'Log out' %}</button>
                 </form>
             {% endblock %}

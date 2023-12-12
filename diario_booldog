@@ -1,3 +1,6 @@
 devo fare in modo che la textarea scompaia quando l' user fa click fuori di essa
 toglirere il link di login nella pagina registerdone
 impostare un altezza minima alla pagina admin 
+a bassa risoluzione cell ....non si vedono le textarea per il login , perchè stanno in line e non c' è spazio
+fare il logout dalla voce esci in admin dashboard
+quando clicco su "vedi sito" da dashboard mi rimanda a pagina sbagliata(mainurl)

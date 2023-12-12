@@ -2,7 +2,7 @@
 
 /* By Mario , superior code */
 
-const BASE_URL = "https://localtutorial.com:9000/"; // URL del server
+const BASE_URL = "https://localtutorial:9000"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
@@ -129,6 +129,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     );
     aBlogReg.setAttribute("href", XMLHTTPURL_REGISTER);
     aBlogCambiaPassword.setAttribute("href", HTTPURL_CHANGEPASSWORD);
+    aBlogCambiaPassword.setAttribute("class", "nav-link");
     aBlogCambiaPassword.textContent = ablogcambiapasswordtext;
     aBlogEsci.textContent = ablogescitext;
     aBlogEntra.setAttribute("class", "nav-link");
@@ -140,6 +141,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       "display:block;width:auto;text-align:right;"
     );
     aBlogEsci.setAttribute("id", "aEsci");
+    aBlogEsci.setAttribute("class", "nav-link");
     liBlogEntra.setAttribute(
       "style",
       "display:inline;width:auto;margin-right:0px;"
@@ -154,6 +156,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     liBlogAdmin.setAttribute("class", "nav-item");
     liBlogAdmin.setAttribute("id", "li_login");
     liBlogCambiaPassword.setAttribute("id", "li_cambiaPassword");
+    liBlogCambiaPassword.setAttribute("class", "nav-item");
     liBlogReg.setAttribute("id", "li_reg");
     //bSpanChild.setAttribute("id","s_blog_text");
     bbutton.setAttribute("id", "button_post");
@@ -182,6 +185,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
       ulBlogReg.appendChild(liBlogEntra);
       divExitLogin.appendChild(ulBlogReg);
     } else {
+      liBlogEsci.setAttribute("class", "nav-item");
       liBlogEsci.appendChild(aBlogEsci);
       liBlogAdmin.appendChild(aBlogAdmin);
       liBlogCambiaPassword.appendChild(aBlogCambiaPassword);
@@ -300,7 +304,7 @@ class postArea {
     this.postarea.onkeyup = function () {
       this.setAttribute(
         "style",
-        "height:" + this.scrollHeight + "px;overflow-y:hidden;"
+        "height:" + this.scrollHeight + "px;overflow-y:hidden;width:100%;"
       );
       this.style.height = "auto";
       this.style.height = this.scrollHeight + "px";
@@ -630,7 +634,6 @@ class postArea {
       form_risposta_post.setAttribute("id", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("class", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("action", "javascript:void(0)");
-       form_risposta_post.setAttribute("style", "width:65%");
     }
   }
 
@@ -639,8 +642,7 @@ class postArea {
   }
 
   create() {
-    var width;
-    this.postarea.id.startsWith("resp") ? width = "85%": width = "65%";
+    var width="100%";
     $(this.postarea).animate({
       width: width,
     }, 1000); 
@@ -680,6 +682,7 @@ function initBlogSGang(url, authorized) {
   var blog;
   HIDDENFIELD = "?mainurl=" + url;
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
+  XMLHTTPURL_ADMIN = XMLHTTPURL_ADMIN +"?mainurl="+url;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog?mainurl=" + url;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
@@ -902,6 +905,7 @@ function htmlIframeWidthHeight(elem) {
     {
       height: height,
       base: width,
+      mainurl:rooturl,
     },
     "*"
   );

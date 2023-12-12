@@ -5,9 +5,9 @@ $(document).ready(function () {
         r = document.getElementById("a_reg");
         pf = document.getElementById("a_passwordforget");
         pc = document.getElementById("a_changepassword");
-        r.href = "/user/register/blog?mainurl=" + "{{ currentUrl }}";
+        r.href = "/user/register/blog?mainurl=" + currentUrl;
 
-        pf.href = BASE_URL + "user/login/password_reset?mainurl=" + "{{ currentUrl }}";
+        pf.href = BASE_URL + "user/login/password_reset?mainurl=" + currentUrl;
         fs = document.getElementById("formlogin");
     }
     catch (TypeError) {
@@ -16,7 +16,7 @@ $(document).ready(function () {
     finally {
         if (currentUrl) {
             try {
-                document.getElementById('next').setAttribute("value", "{{ currentUrl }}");
+                document.getElementById('next').setAttribute("value", currentUrl);
             }
             catch (TypeError) {
                 console.log("element with id next absent !");
@@ -31,7 +31,6 @@ $(document).ready(function () {
             {
                 height: containerlogin.offsetHeight,
                 base: containerlogin.offsetWidth,
-                mainurl: "{{ currentUrl }}",
             },
             "*"
         );

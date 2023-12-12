@@ -6,14 +6,17 @@ $(document).ready(function () {
         pf = document.getElementById("a_passwordforget");
         pc = document.getElementById("a_changepassword");
         r.href = "/user/register/blog?mainurl=" + currentUrl;
-
-        pf.href = BASE_URL + "user/login/password_reset?mainurl=" + currentUrl;
+        if (currentUrl) {
+            sessionStorage.setItem("mainurl", currentUrl);
+        }
+        pf.href = BASE_URL + "user/login/password_reset?mainurl=" + sessionStorage.getItem("mainurl");
         fs = document.getElementById("formlogin");
     }
     catch (TypeError) {
         r = pf = pc = tokenhtml = "null";
     }
     finally {
+        currentUrl=sessionStorage.getItem("mainurl")
         if (currentUrl) {
             try {
                 document.getElementById('next').setAttribute("value", currentUrl);

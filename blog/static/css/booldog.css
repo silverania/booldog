@@ -103,6 +103,7 @@ a#a_download.title {
 input[id^=id_]{
   padding:5px;
 }
+}
 @media screen and (min-width: 1024px) {
   .badgebooldog.title {
     font-size: 0.8em;
@@ -142,6 +143,13 @@ input[id^=id_]{
 @media screen and (max-width: 576px) {
   .badgebooldog.title {
     font-size: 0.6em;
+  }
+  #booldogtitle,.badgebooldog{
+    font-size: x-large;
+    font-weight: bolder;
+  }
+  [id$=_booldog]{
+    font-size: small;
   }
   .booldoginfo.title {
     font-size: 0.4em;

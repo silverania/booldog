@@ -1,5 +1,4 @@
 const iframe = document.createElement("IFRAME");
-var mainurl;
 let f = function () {
     var rootbooldog = "https://localtutorial.com:9000";
     var height = "";
@@ -10,7 +9,6 @@ let f = function () {
             width = event.data.base;
             iframe.setAttribute('height', height);
             iframe.setAttribute('width', width);
-            mainurl = event.data.mainurl;
             if (event.data.reload === "true") {
                 document.getElementById('booldogFrame').src = rootbooldog + "/booldog?mainurl=" + this.location.href.toString();
                 console.log("iframe reload !");
@@ -31,11 +29,6 @@ let f = function () {
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(iframe);
     }
+    
 
-}
-window.parent.postMessage(
-    {
-        mainurl: mainurl,
-    },
-    "*"
-)()
+}();

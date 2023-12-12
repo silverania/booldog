@@ -48,7 +48,7 @@ def checkUser(request):
         authorized = False
         list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
-            if "currentUrl" in key:
+            if "mainurl" in key:
                 currentUrl = value
                 mydomain = urlsplit(currentUrl, allow_fragments=True)
                 mydomain = mydomain.hostname
@@ -184,14 +184,19 @@ def dashboard(request):
 
 
 class Logout(View):
-    def get(self, request):
-        mainurl = ""
+    def post(self, request, *args, **kwargs):
+        currentUrl = request.POST["mainurl"]
         logout(request)
+        return render(
+            request,
+            "booldog.html",
+            {"currentUrl": currentUrl, "authorized": "True"},
+        )
+    def get(self, request, *args, **kwargs):
         if "mainurl" in request.GET:
             mainurl = request.GET.get("mainurl")
-            mydomain = urlsplit(mainurl)
-            mydomain = mydomain.netloc
             # return render(request, "seiuscito.html", {'valuenext': mainurl})
+        logout(request)
         return render(
             request,
             "booldog.html",
@@ -212,7 +217,18 @@ def user_register(request):
             user.profile.email = form.cleaned_data.get("email")
             user.profile.website = form.cleaned_data.get("website")
             split_url = urlsplit(user.profile.website)
-            basesite=split_url.hostname+split_url.path
+            try:
+                if split_url.hostname:
+                    myhostname = split_url.hostname
+                else:
+                    myhostname = ""
+                if split_url.path:
+                    mypath = split_url.path
+                else:
+                    mypath = ""
+                basesite = myhostname + mypath
+            except TypeError:
+                print(" ERRORE : non è possibile creare basesite")
             # user.profile.website = titleSite.scheme + "://" + titleSite.netloc
             if "blog" in request.path:
                 valuenext = request.GET.get("mainurl")
@@ -220,9 +236,7 @@ def user_register(request):
                 user.save()
                 return redirect("/user/login/blog?mainurl=" + valuenext)
             elif "booldog" in request.path:
-                site = Site.objects.create(
-                    title=basesite, user=user.profile
-                )
+                site = Site.objects.create(title=basesite, user=user.profile)
                 site.save()
                 group = Group.get(name="BlogAdmin")
                 user.groups.add(group)

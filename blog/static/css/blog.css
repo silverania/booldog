@@ -1,13 +1,4 @@
 @font-face {
-  font-family: "Alpha Slab One";
-  src: url("../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf");
-}
-@font-face {
-  font-family: "Montserrat-Bold";
-  src: url("../Fonts/Montserrat/Montserrat-Bold.ttf");
-}
-
-@font-face {
   font-family: "Montserrat-Regular";
   src: url("../Fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
 }
@@ -43,8 +34,7 @@ body {
   /* font-size: 16px; */
   line-height: 22px;
   color: #333;
-  margin: 20px;
-  width: 85% !important;
+  padding:30px;
 }
 
 span#spanrefresh.badgebooldog {
@@ -81,12 +71,11 @@ div.breadcrumbs {
 }
 
 #bdiv {
-  width: 90%;
   margin: 0 auto !important;
 }
 
 #button_post {
-  width: 40% !important;
+  /* width: 41% !important; */
   box-shadow: -5px -5px 5px #719ece;
 }
 
@@ -208,7 +197,7 @@ a#a_download {
 
 #id_link_comment {
   margin: 3% auto;
-  width: 40%;
+  /* width: 40%; */
 }
 
 [id^="d_head_blog"] {
@@ -217,8 +206,8 @@ a#a_download {
 }
 
 [id^="span_in"] {
-  font-family: "Montserrat-Bold";
-  font-weight: 800;
+  font-family: "Montserrat-Regular";
+  font-weight: 900;
   color: orange;
 }
 
@@ -395,7 +384,7 @@ span[id^="post_title"] {
 @media screen and (max-width: 1280px) {
   #blog {
     margin: 0 auto;
-    width: 40% !important;
+    width: 50% !important;
   }
   #p_text {
     width: 100% !important;
@@ -404,7 +393,6 @@ span[id^="post_title"] {
   #liBlogEsci > a#aEsci,
   #li_login > #id_entra > #span_entra {
     text-decoration: none;
-    font-size: 0.5rem;
   }
   #dataSetup {
     font-size: 1.7rem;
@@ -447,7 +435,7 @@ span[id^="post_title"] {
   }
   textarea {
   font-size: 1rem;
-  width: 85%;
+  /* width: 85%; */
   }
 }
 
@@ -464,7 +452,7 @@ span[id^="post_title"] {
   }
 textarea {
   font-size: 1rem;
-    width: 85%;
+  /* width: 85%; */
   }
   #p_text {
     width: 100% !important;
@@ -481,30 +469,44 @@ textarea {
 }
 
 @media screen and (max-width: 780px) {
-  
+  #id_link_comment {
+    font-size: 8px;
+  }
   #blog {
-    width: 80% !important;
+    width: 75% !important;
   }
   .modal-content {
     width: 55% !important; /* Could be more or less, depending on screen size */
   }
   textarea {
     width:30%;
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
   
 }
 
 @media screen and (max-width: 560px) {
   #blog {
-    width: 90% !important;
+    width: 75% !important;
   }
   button {
-    max-width: 80%;
+    /* max-width: 80%; */
     margin: 0 auto;
   }
   .spanuser {
     font-size: 0.5em;
+  }
+  #li_reg > a,
+#liBlogEsci > #aEsci,
+#li_cambiaPassword > a#id_cambia_password,a#id_admin {
+  font-size:10px;
+}
+#mybut{
+  width:100%;
+}
+   textarea {
+    width:30%;
+    font-size: 0.6rem !important;
   }
 }
 @media screen and (max-width: 414px) {
@@ -533,8 +535,9 @@ textarea {
 
 @media screen and (max-width: 800px) {
   #blog {
-    width: 39%;
+    width: 100%;
   }
+  
   .spanbooldog {
     font-size: 1.1rem;
   }
