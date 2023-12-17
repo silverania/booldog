@@ -9,7 +9,7 @@ a{
 }
 
 a{
-    color:blue;
+    color: #188e98;
     font-size: 1rem;
 }
 
@@ -35,6 +35,14 @@ a:hover {
 
 .facebook,.social{
     width:auto;
+}
+input{
+    border-radius:0!important;
+}
+@media (max-width: 576px) {
+    input::placeholder {
+    font: 10px sans-serif;
+}
 }
 
 @media (max-width: 990px) {

@@ -38,6 +38,8 @@ var divFormChild = document.createElement("DIV");
 var bdiv = document.createElement("DIV");
 var divUserBlog = document.createElement("DIV");
 var divCommentIcon = document.createElement("DIV");
+var inputCommentLike = document.createElement("INPUT");
+var iconCommentLike = document.createElement("I");
 var firstDivHead = document.createElement("DIV");
 var divRespTitle = document.createElement("DIV");
 var divExitLogin = document.createElement("DIV");
@@ -444,6 +446,8 @@ class postArea {
             "id",
             mess.type + userThatLogin[0].fields.first_name + "_" + id_newresp
           );
+          
+            
           $(document).on("click", function (e) {
             if ($(e.target).closest('*[id^="divuserblog"]').length === 0) {
               if (postarea.postarea.value === "") {
@@ -479,6 +483,20 @@ class postArea {
   createButtonRispostaPost(mess, postarea) {
     var r;
     var id;
+    var colsandrows = '<div id="colsandrows_'+mess.pk+"\""+ 'class="row justify-content-start">'+
+      '<div id="colup_' + mess.pk + "\"" +'class="col-1">' +
+      '<span id="up_'+mess.pk+"\""+'class="position-relative top-100  fa-solid fa-thumbs-up"></span>' +
+      '<span id="numberup_'+ mess.pk+"\""+  
+      'class="position-relative top-0  badge rounded-pill bg-warning"> +99 </span> ' +
+      '</div>' +
+      '<div class="col-1">' +
+      '<span  id="down_' + mess.pk +"\""+' class="position-relative top-100 fa-solid fa-thumbs-down"></span>' +
+      '<span  id="numberdown' + mess.pk +"\""+'class="position-relative top-0 badge rounded-pill bg-danger"> -3 </span> ' +
+      '</div>'+
+      '</div >';
+    var divgrid = document.createElement("div");
+    divgrid.innerHTML = colsandrows;
+    var result=divgrid.childNodes[0];
     mess.type == "resp" || mess.type == "newresp"
       ? (id = mess.post.pk + "_" + mess.pk)
       : (id = mess.pk);
@@ -486,7 +504,49 @@ class postArea {
     var form_risposta_post = document.createElement("FORM");
     var objectToAppendChild = divUserBlog.id;
     button_risposta_post.setAttribute("style", "display:block;margin:10px auto;");
+    /*var inputCommentLike = document.createElement("DIV");
+    var iconCommentLikeUp = document.createElement("I");
+    var iconCommentLikeDown = document.createElement("I");
+    var divCommentLikeUp = document.createElement("DIV");
+    var divCommentLikeDown = document.createElement("DIV");
+    divCommentLikeUp.id = "numberup_" + mess.type;
+    divCommentLikeDown.id = "numberdown_" + mess.type;
+    divCommentLikeUp.innerHTML = "9";
+    divCommentLikeDown.innerHTML = "3";
+    divCommentLikeUp.setAttribute("style", "display:inline;);
+    divCommentLikeDown.setAttribute("style", "display:inline;);
+    iconCommentLikeUp.setAttribute("class", "fa-solid fa-thumbs-up")
+    iconCommentLikeUp.setAttribute("id", "up_" + mess.type + mess.pk);
+    iconCommentLikeDown.setAttribute("class", "fa-solid fa-thumbs-down")
+    iconCommentLikeDown.setAttribute("id", "down_" + mess.type+mess.pk);
+    inputCommentLike.setAttribute("id", "divup_" + mess.type);
+    inputCommentLike.setAttribute("style", "padding: 10px;text-align:center;margin-bottom:3px;");
+    inputCommentLike.insertBefore(divCommentLikeUp, inputCommentLike.children[0]);
+    inputCommentLike.insertBefore(iconCommentLikeUp, inputCommentLike.children[1]);
+    inputCommentLike.insertBefore(iconCommentLikeDown, inputCommentLike.children[2]);
+    inputCommentLike.insertBefore(divCommentLikeDown, inputCommentLike.children[3]);*/
+    
+    form_risposta_post.appendChild(result);
     form_risposta_post.appendChild(button_risposta_post);
+    var el1= result.childNodes[0]
+    $(el1).click(function (e) {
+      const iconSpinning = [
+        { transform: "rotate(0) scale(1)" },
+        { transform: "rotate(360deg) scale(0)" },
+      ];
+      const iconTiming = {
+        duration: 2000,
+        iterations: 1,
+      };
+
+      const rotate = result.childNodes[0].childNodes[0];
+
+        rotate.animate(iconSpinning, iconTiming);
+      
+    
+     
+     
+    });
     $(button_risposta_post).click(function (e) {
       if (userThatLogin.toString() !== "false") {
         e.preventDefault();
@@ -620,9 +680,7 @@ class postArea {
         button_risposta_post.textContent = buttonRispo;
         break;
     }
-    var elementToAppendButton = document.getElementById(objectToAppendChild);
-    elementToAppendButton.appendChild(form_risposta_post);
-    setButtonAndFormAttribute(id);
+    
 
     function setButtonAndFormAttribute(type) {
       let buttonID = "but_" + mess.type + "_" + type;
@@ -635,6 +693,9 @@ class postArea {
       form_risposta_post.setAttribute("class", "form_" + mess.type + "_" + id);
       form_risposta_post.setAttribute("action", "javascript:void(0)");
     }
+    var elementToAppendButton = document.getElementById(objectToAppendChild);
+    elementToAppendButton.appendChild(form_risposta_post);
+    setButtonAndFormAttribute(id);
   }
 
   disableButton(button) {

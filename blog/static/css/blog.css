@@ -2,6 +2,10 @@
   font-family: "Montserrat-Regular";
   src: url("../Fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
 }
+@font-face {
+  font-family: "bungee";
+  src: url("../Fonts/Bungee_Spice/BungeeSpice-Regular.ttf");
+}
 
 @font-face {
   font-family: "Open-Sans-Bold";
@@ -137,7 +141,7 @@ div.modal-content {
   align-items: start;
 }
 #div_comment_icon {
-  width: fit-content;
+  width: moz-fit-content;
 }
 .fa-house {
   margin-right: 1%;
@@ -254,7 +258,7 @@ a#a_download {
   background-color: transparent;
 }
 #inputEmail,#inputUsername{
-  display:inline;
+  /* display:inline; */
 }
 
 #formEsci {
@@ -444,12 +448,40 @@ span[id^="post_title"] {
     margin: 0 auto;
     width: 30% !important;
   }
-
+form[id^=form]{
+}
   .fa-comment-dots,
   .fa-house,
-  .fa-arrow-left {
+  .fa-arrow-left
+   {
     font-size: 3rem;
   }
+  [id^=up_]{
+    font-size:large;
+    color:rgb(10, 237, 218);
+  }
+  [id^=up_]:hover{
+  color:mediumspringgreen;
+  }
+   [id^=down_]:hover{
+    color:mediumspringgreen;
+  }
+  div[id^=numberup]{
+    font-family: bungee;
+    font-size: small;
+    /* display: inline-block; */
+  }
+  div[id^=numberdown]{
+    font-family: bungee;
+    font-size: small;
+  }
+  
+  [id^=down_]{
+    font-size:large;
+    /* margin-left:10%; */
+    color:rgb(73, 199, 216);
+  }
+  
 textarea {
   font-size: 1rem;
   /* width: 85%; */
@@ -492,6 +524,9 @@ textarea {
   button {
     /* max-width: 80%; */
     margin: 0 auto;
+  }
+  i[id^=up_]{
+    font-size:medium;
   }
   .spanuser {
     font-size: 0.5em;

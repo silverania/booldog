@@ -2,7 +2,7 @@
 
 /* By Mario , superior code */
 
-const BASE_URL = "https://localtutorial:9000"; // URL del server
+const BASE_URL = "https://localtutorial.com:9000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
 var URL_NEW_POST = BASE_URL + "post/sendpost";
@@ -38,6 +38,8 @@ var divFormChild = document.createElement("DIV");
 var bdiv = document.createElement("DIV");
 var divUserBlog = document.createElement("DIV");
 var divCommentIcon = document.createElement("DIV");
+var inputCommentLike = document.createElement("INPUT");
+var iconCommentLike = document.createElement("I");
 var firstDivHead = document.createElement("DIV");
 var divRespTitle = document.createElement("DIV");
 var divExitLogin = document.createElement("DIV");
@@ -99,7 +101,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     divFormChild.setAttribute("id", "multiarea");
     divExitLogin.setAttribute("id", "d_blog_reg");
 
-    buttonLinkComment.setAttribute("class", "mybut mybut-outline-info");
+    buttonLinkComment.setAttribute("class", "mybut");
     divExitLogin.setAttribute("style", "width:45%;display:inline-block;");
     bdiv.setAttribute("id", "bdiv");
     bIcon.setAttribute("style", "text-align:left;font-weight:bold;text-align: start;position: relative;font-weight:bold;width:100%; ");
@@ -444,6 +446,8 @@ class postArea {
             "id",
             mess.type + userThatLogin[0].fields.first_name + "_" + id_newresp
           );
+          
+            
           $(document).on("click", function (e) {
             if ($(e.target).closest('*[id^="divuserblog"]').length === 0) {
               if (postarea.postarea.value === "") {
@@ -486,6 +490,25 @@ class postArea {
     var form_risposta_post = document.createElement("FORM");
     var objectToAppendChild = divUserBlog.id;
     button_risposta_post.setAttribute("style", "display:block;margin:10px auto;");
+    var inputCommentLike = document.createElement("DIV");
+    var iconCommentLikeUp = document.createElement("I");
+    var iconCommentLikeDown = document.createElement("I");
+    var divCommentLikeUp = document.createElement("DIV");
+    var divCommentLikeDown = document.createElement("DIV");
+    divCommentLikeUp.id = "numberup_" + mess.type;
+    divCommentLikeUp.innerHTML = "1";
+    divCommentLikeUp.setAttribute("style", "display:inline;margin-right:3px;");
+    iconCommentLikeUp.setAttribute("class", "fa-solid fa-thumbs-up")
+    iconCommentLikeUp.setAttribute("id", "up_" + mess.type+mess.pk);
+    iconCommentLikeDown.setAttribute("class", "fa-solid fa-thumbs-down")
+    iconCommentLikeDown.setAttribute("id", "down_" + mess.type+mess.pk);
+    inputCommentLike.setAttribute("id", "divup_" + mess.type);
+    inputCommentLike.setAttribute("style", "padding: 10px;text - align: center;margin - bottom: 3px;");
+    inputCommentLike.type = "number";
+    inputCommentLike.insertBefore(divCommentLikeUp, inputCommentLike.children[0]);
+    inputCommentLike.insertBefore(iconCommentLikeUp, inputCommentLike.children[1]);
+    inputCommentLike.appendChild(iconCommentLikeDown);
+    form_risposta_post.appendChild(inputCommentLike);
     form_risposta_post.appendChild(button_risposta_post);
     $(button_risposta_post).click(function (e) {
       if (userThatLogin.toString() !== "false") {
@@ -694,7 +717,7 @@ function initBlogSGang(url, authorized) {
     }
     (function () {
       let s = {
-        currentUrl: url,
+        mainurl: url,
         authorized: authorized,
       };
       const request = {
