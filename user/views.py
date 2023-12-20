@@ -119,7 +119,6 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    authorized = request.session["authorized"]
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -135,7 +134,7 @@ def user_login(request):
                     request,
                     "booldog.html",
                     {
-                        "authorized": authorized,
+                        "authorized": "true",
                         "currentUrl": currentUrl,
                     },
                 )

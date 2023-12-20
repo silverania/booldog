@@ -17,10 +17,10 @@ class Site(models.Model):
     slug = models.SlugField(max_length=250, null=True, blank=True)
     # def save(self, *args, **kwargs):
     #    super(Site, self).save(*args, **kwargs)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE,
-                             related_name="sites", null=True, blank=True)
-    titleTagContent = models.CharField(
-        max_length=200, default="empty")
+    user = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="sites", null=True, blank=True
+    )
+    titleTagContent = models.CharField(max_length=200, default="empty")
 
     def __str__(self):
         return self.title
@@ -31,16 +31,13 @@ class Comment(models.Model):
         ("rigettato", "Rigettato"),
         ("publicato", "Publicato"),
     )
+    postok = models.PositiveSmallIntegerField(default=0)
+    postno = models.PositiveSmallIntegerField(default=0)
     site = models.ForeignKey(
-        Site,
-        related_name="all_comments",
-        on_delete=models.CASCADE
+        Site, related_name="all_comments", on_delete=models.CASCADE
     )
-    title = models.CharField(
-        max_length=100, default="...", null=True, blank=True)
-    slug = models.SlugField(
-        max_length=250, blank=True, null=True
-    )
+    title = models.CharField(max_length=100, default="...", null=True, blank=True)
+    slug = models.SlugField(max_length=250, blank=True, null=True)
     author = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
@@ -53,8 +50,7 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     postType = models.CharField(max_length=10, default="post")
-    status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default="bozza")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="bozza")
     tagTitleInPage = models.CharField(max_length=100, default="tag_value")
     """
     def get_absolute_url(self):
@@ -71,7 +67,7 @@ class Comment(models.Model):
     objects = PersonManager()
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(str(self.site)+str(self.publish))
+        self.slug = slugify(str(self.site) + str(self.publish))
         super(Comment, self).save(*args, **kwargs)
 
     class Meta:
@@ -87,10 +83,12 @@ class Resp(models.Model):
         ("respToPost", "respToPost"),
         ("respToResp", "respToResp"),
     )
-    author = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name="resps")
+    postok = models.PositiveSmallIntegerField(default=0)
+    postno = models.PositiveSmallIntegerField(default=0)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="resps")
     respToUser = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name="userResps")
+        Profile, on_delete=models.CASCADE, related_name="userResps"
+    )
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -104,8 +102,7 @@ class Resp(models.Model):
     )
     resps = models.ManyToManyField("Resp", blank=True)
     idRespTo = models.CharField(max_length=50, default="0_0")
-    postType = models.CharField(
-        max_length=10, default="respToPost", choices=MESS_TYPE)
+    postType = models.CharField(max_length=10, default="respToPost", choices=MESS_TYPE)
     site = models.ForeignKey(
         Site,
         related_name="all_resps",
@@ -116,4 +113,6 @@ class Resp(models.Model):
         ordering = ("publish",)
 
     def __str__(self):
-        return '{} - {} ({})'.format('id:'+str(self.pk), ':'+str(self.idRespTo), 'tipo:'+str(self.postType))
+        return "{} - {} ({})".format(
+            "id:" + str(self.pk), ":" + str(self.idRespTo), "tipo:" + str(self.postType)
+        )

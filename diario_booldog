@@ -4,3 +4,5 @@ fare il logout dalla voce esci in admin dashboard
 quando clicco su "vedi sito" da dashboard mi rimanda a pagina sbagliata(mainurl)
 fare un sito con domande e risposte in modo che gooilgle mi indicizzi meglio
 RENDERE IL COLORE DEL TTASTO REGISTER più visibile prima del click
+sto a riga 492 postok ( variabilie int)
+creare il token per post voto 

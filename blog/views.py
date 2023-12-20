@@ -15,6 +15,7 @@ import blog
 from django.shortcuts import render
 
 # from django.views.decorators.clickjacking import xframe_options_exempt
+from django.template.context_processors import csrf
 
 photo = ""
 message = ""
@@ -99,7 +100,7 @@ def getPost(request):
     if "mainurl" in request.GET and request.GET["mainurl"]:
         tagTitle = str(request.GET.get("mainurl"))
         split_url = urlsplit(tagTitle)
-        basesite=split_url.hostname+split_url.path
+        basesite = split_url.hostname + split_url.path
         if comments_in_database.exists():
             all_comments_for_page = Comment.objects.filter(
                 site__title=basesite
@@ -143,6 +144,29 @@ def getPost(request):
     return JsonResponse(data, safe=False)
 
 
+class votePost(View):
+    def post(self, request):
+        if request.method == "POST":
+            list_json_user_data = json.loads(request.body)
+            for key, value in list_json_user_data.items():
+                if "postype" in key:
+                    postype = value
+                if "postid" in key:
+                    postid = value
+                if "postok" in key:
+                    postok = value
+                if "postno" in key:
+                    postno = value
+            if postype == "post" or type == "newpost":
+                comment = Comment.objects.filter(pk=postid)
+                if comment.update(postok=postok, postno=postno):
+                    return JsonResponse({"res": 0}, safe=False)
+            elif postype == "resp" or type == "newresp":
+                comment = Resp.objects.filter(pk=postid)
+                if comment.update(postok=postok, postno=postno):
+                    return JsonResponse({"res": 0}, safe=False)
+
+
 def newPost(request):
     postType = ""
     post = []
@@ -152,9 +176,11 @@ def newPost(request):
     author = Profile.objects.get(first_name=author)
     rootSite = request.GET.get("mainurl")
     split_url = urlsplit(rootSite)
-    basesite=split_url.hostname+split_url.path
-    siteadminuser=Site.objects.get(title=basesite)
-    site,created = Site.objects.get_or_create(title=basesite,user=Profile.objects.get(first_name=siteadminuser.user))
+    basesite = split_url.hostname + split_url.path
+    siteadminuser = Site.objects.get(title=basesite)
+    site, created = Site.objects.get_or_create(
+        title=basesite, user=Profile.objects.get(first_name=siteadminuser.user)
+    )
     # check site authorization
     postType = request.GET.get("type")
     if "newpost" in postType:

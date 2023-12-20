@@ -4,6 +4,7 @@
     <head>
         <title>booldog</title>
         <meta name="author" content="silverania">
+         
         <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
         <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -14,6 +15,7 @@
         <script src="{% static 'js/blog.js' %}" id="s_blog"></script>
     </head>
     <body>
+      {% csrf_token %}
         <script>
     var spanBlogEntra = document.createElement("SPAN");
     var currentUrl = "{{currentUrl}}";

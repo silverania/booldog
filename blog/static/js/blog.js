@@ -5,9 +5,10 @@
 const BASE_URL = "https://localtutorial.com:9000/"; // URL del server
 var HIDDENFIELD;
 const XMLHTTPURL_GETUSER = BASE_URL + "user/blog/getuser";
-var URL_NEW_POST = BASE_URL + "post/sendpost";
+const XMLHTTPURL_VOTE = BASE_URL + "post/vote";
+const URL_NEW_POST = BASE_URL + "post/sendpost";
 var XMLHTTPURL_LOGIN; //="user/login/blog" + HIDDENFIELD;
-var XMLHTTPURL_ADMIN=BASE_URL+"/booldog/admin"; //="user/login/blog" + HIDDENFIELD;
+var XMLHTTPURL_ADMIN = BASE_URL + "/booldog/admin"; //="user/login/blog" + HIDDENFIELD;
 var XMLHTTPURL_REGISTER;
 var XMLHTTPURL_LOGOUT;
 const MAX_TEXTAREA_NUMBER = 21;
@@ -87,7 +88,7 @@ var authorized;
 
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
-  authorized=userAdmin;
+  authorized = userAdmin;
   if (userAdmin.toString() === "True") {
     bForm.setAttribute("action", BASE_URL + "post/getpost");
     bForm.setAttribute("class", "form_comment");
@@ -150,7 +151,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     );
     liBlogEntra.setAttribute("class", "nav-item");
     liBlogEntra.setAttribute("id", "li_login");
-    
+
     liBlogAdmin.setAttribute(
       "style",
       "display:inline;width:auto;margin-right:0px;"
@@ -239,7 +240,9 @@ class Resp {
     resptype,
     respTo,
     respToType,
-    respToUser
+    respToUser,
+    postok,
+    postno
   ) {
     this.sent = false;
     this.author = author;
@@ -252,6 +255,9 @@ class Resp {
     this.respToType = respToType;
     this.resps = Array();
     this.respToUser = respToUser;
+    this.postok = postok;
+    this.postno = postno;
+    this.voted = false;
     if (resptype == "newresp") {
       this.pk = parseInt(pk, "10");
       this.pk = this.pk + 1;
@@ -276,7 +282,9 @@ class Post {
     comment,
     date = "nowday",
     photo,
-    pk
+    pk,
+    postok,
+    postno
   ) {
     this.sent = false;
     this.type = type;
@@ -287,7 +295,10 @@ class Post {
     this.photo = photo;
     this.publish = date;
     this.pk = pk;
+    this.postok = postok;
+    this.postno = postno;
     this.thisTutorialTitle = tutorial;
+    this.voted = false;
   }
 }
 
@@ -310,7 +321,7 @@ class postArea {
       );
       this.style.height = "auto";
       this.style.height = this.scrollHeight + "px";
-      
+
       var callcount = 0;
       var action = function () { };
       var delayAction = function (action, time) {
@@ -405,7 +416,7 @@ class postArea {
               $(e.target).closest('*[id^="id_link_comment"]').length === 0 &&
               $(e.target).closest('*[id^="button_post"]').length === 0
             ) {
-              if(postarea.postarea.value===""){
+              if (postarea.postarea.value === "") {
                 $("#new_divuserblog_" + id).remove();
                 isOpen = false;
               }
@@ -446,8 +457,8 @@ class postArea {
             "id",
             mess.type + userThatLogin[0].fields.first_name + "_" + id_newresp
           );
-          
-            
+
+
           $(document).on("click", function (e) {
             if ($(e.target).closest('*[id^="divuserblog"]').length === 0) {
               if (postarea.postarea.value === "") {
@@ -483,20 +494,23 @@ class postArea {
   createButtonRispostaPost(mess, postarea) {
     var r;
     var id;
-    var colsandrows = '<div id="colsandrows_'+mess.pk+"\""+ 'class="row justify-content-start">'+
-      '<div id="colup_' + mess.pk + "\"" +'class="col-1">' +
-      '<span id="up_'+mess.pk+"\""+'class="position-relative top-100  fa-solid fa-thumbs-up"></span>' +
-      '<span id="numberup_'+ mess.pk+"\""+  
-      'class="position-relative top-0  badge rounded-pill bg-warning"> +99 </span> ' +
+    var colsandrows = '<div id="colsandrows_' + mess.pk + "\"" + 'class="row justify-content-start">' +
+      '<div id="colup_' + mess.pk + "\"" + 'class="col-1">' +
+      '<span id="up_' + mess.pk + "\"" + 'class="position-relative top-100  fa-solid fa-thumbs-up"></span>' +
+      '<span id="numberup_' + mess.pk + "\"" +
+      'class="position-relative top-0  badge rounded-pill bg-warning">' + mess.postok + ' </span> ' +
       '</div>' +
       '<div class="col-1">' +
-      '<span  id="down_' + mess.pk +"\""+' class="position-relative top-100 fa-solid fa-thumbs-down"></span>' +
-      '<span  id="numberdown' + mess.pk +"\""+'class="position-relative top-0 badge rounded-pill bg-danger"> -3 </span> ' +
-      '</div>'+
+      '<span  id="down_' + mess.pk + "\"" + ' class="position-relative top-100 fa-solid fa-thumbs-down"></span>' +
+      '<span  id="numberdown_' + mess.pk + "\"" + 'class="position-relative top-0 badge bg-danger rounded-pill bg-danger">' + mess.postno + ' </span> ' +
+      '</div>' +
       '</div >';
     var divgrid = document.createElement("div");
     divgrid.innerHTML = colsandrows;
-    var result=divgrid.childNodes[0];
+    var result = divgrid.childNodes[0];
+
+
+
     mess.type == "resp" || mess.type == "newresp"
       ? (id = mess.post.pk + "_" + mess.pk)
       : (id = mess.pk);
@@ -525,82 +539,171 @@ class postArea {
     inputCommentLike.insertBefore(iconCommentLikeUp, inputCommentLike.children[1]);
     inputCommentLike.insertBefore(iconCommentLikeDown, inputCommentLike.children[2]);
     inputCommentLike.insertBefore(divCommentLikeDown, inputCommentLike.children[3]);*/
-    
+
     form_risposta_post.appendChild(result);
     form_risposta_post.appendChild(button_risposta_post);
-    var el1= result.childNodes[0]
-    $(el1).click(function (e) {
-      const iconSpinning = [
-        { transform: "rotate(0) scale(1)" },
-        { transform: "rotate(360deg) scale(0)" },
-      ];
-      const iconTiming = {
-        duration: 2000,
-        iterations: 1,
-      };
-
-      const rotate = result.childNodes[0].childNodes[0];
-
-        rotate.animate(iconSpinning, iconTiming);
-      
-    
-     
-     
-    });
-    $(button_risposta_post).click(function (e) {
-      if (userThatLogin.toString() !== "false") {
-        e.preventDefault();
-        e.stopPropagation();
-        if (mess.type == "resp" || mess.type == "post") {
-          if (isOpen == false) {
-            var className = "";
-            var respToPk = mess.pk;
-            var respToType =
-              "resp" + "To" + mess.type[0].toUpperCase() + mess.type.slice(1);
-            for (var z2 = 0; z2 <= profiles_json.length - 1; z2 = z2 + 1) {
-              if (profiles_json[z2].fields.first_name == mess.author) {
-                var respToUser = profiles_json[z2].fields.first_name;
-              }
-            }
-            mess instanceof Resp ? (className = "resp") : (className = "post");
-            elementToAppendPostArea = document.getElementById(
-              "divuserblog_" + id
-            );
-            if (mess instanceof Resp) {
-              var post = mess.post;
-            } else if (mess instanceof Post) {
-              var post = mess;
-            }
-            var ids = resps.length;
-            ids = ids + 1;
-            createPostArea(
-              (r = new Resp(
-                userThatLogin[0].fields.first_name,
-                "",
-                new Date().toLocaleString(),
-                post,
-                BASE_PHOTO_DIR + userThatLogin[0].fields.photo,
-                ids,
-                "newresp",
-                respToPk,
-                respToType,
-                respToUser
-              )),
-              elementToAppendPostArea
-            );
-            htmlIframeWidthHeight(document.getElementById("blog"));
-            resps.push(r);
-          } else if (
-            button_risposta_post.textContent == "Rispondi" &&
-            isOpen == true
-          ) {
-            msgIsTexareaOpen();
-          }
+    var el1 = result.childNodes[0]
+    var el2 = result.childNodes[1]
+    $(document).ready(function () {
+      var childel1 = document.getElementById('numberup_' + mess.pk)
+      var childel2 = document.getElementById('numberdown_' + mess.pk)
+      mess.postok > 0 ? childel1.hidden = false : childel1.hidden = true;
+      mess.postno > 0 ? childel2.hidden = false : childel2.hidden = true;
+      $(el1).click(function (e) {
+        if (mess.voted === false) {
+          iconanimate(el1);
+          var childnum = childel1.innerHTML;
+          var unitadivoto1 = parseInt(childnum.replace(/\D/g, ''));
+          unitadivoto1 = unitadivoto1 + 1;
+          childel1.innerHTML = unitadivoto1;
+          childel1.hidden = false;
+          mess.voted = true;
+          mess.postok = unitadivoto1
+          sendVotePost(mess);
         }
-      } else {
-        window.location.href = (BASE_URL + "user/login/blog" + HIDDENFIELD);
-        //window.location.href = XMLHTTPURL_LOGIN;
       }
+      );
+      $(el2).click(function (e) {
+        if (mess.voted === false) {
+          iconanimate(el2);
+          var childnum2 = childel2.innerHTML;
+          var unitadivoto = parseInt(childnum2.replace(/\D/g, ''));
+          unitadivoto = unitadivoto + 1;
+          childel2.innerHTML = unitadivoto;
+          childel2.hidden = false;
+          mess.voted = true;
+          mess.postno = unitadivoto
+          sendVotePost(mess);
+        }
+      }
+      );
+      function sendVotePost(mess) {
+        var booldogtoken = document.getElementsByName("csrfmiddlewaretoken");
+        booldogtoken = booldogtoken[0].value;
+        (function () {
+          /*const requestGet = {
+            method: "GET",
+          };
+          try {
+            fetch(XMLHTTPURL_VOTE, requestGet)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (json) {
+                //response=JSON.stringify(json)
+                
+              });
+          }
+          catch (SyntaxError) {
+            console.log("sintaxERROR");
+          }*/
+          let s = {
+            postype:mess.type,
+            postid:mess.pk,
+            postok: mess.postok,
+            postno: mess.postno,
+            csrfmiddlewaretoken: booldogtoken,
+          };
+          const requestPost = {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": booldogtoken,
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(s),
+          };
+          try {
+            fetch(XMLHTTPURL_VOTE, requestPost)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (json) {
+                //response=JSON.stringify(json)
+               let res = json.response;
+                console.log("risposta del server al voto:"+res)
+              }).catch(err => {
+                // Do something for an error here
+                console.log("Error Reading data " + err);
+              });
+          }
+          catch (SyntaxError) {
+            console.log("sintaxERROR");
+          }
+        })();
+      }
+      function iconanimate(e) {
+        const iconSpinning = [
+          { transform: "rotate(0) scale(1)" },
+          { transform: "rotate(360deg) scale(0)" },
+        ];
+        const iconTiming = {
+          duration:500,
+          iterations: 1,
+        };
+
+        //const eltorotate = result.childNodes[0].childNodes[0];
+
+        e.animate(iconSpinning, iconTiming);
+      }
+      $(button_risposta_post).click(function (e) {
+        if (userThatLogin.toString() !== "false") {
+          e.preventDefault();
+          e.stopPropagation();
+          if (mess.type == "resp" || mess.type == "post") {
+            if (isOpen == false) {
+              var className = "";
+              var respToPk = mess.pk;
+              var respToType =
+                "resp" + "To" + mess.type[0].toUpperCase() + mess.type.slice(1);
+              for (var z2 = 0; z2 <= profiles_json.length - 1; z2 = z2 + 1) {
+                if (profiles_json[z2].fields.first_name == mess.author) {
+                  var respToUser = profiles_json[z2].fields.first_name;
+                }
+              }
+              mess instanceof Resp ? (className = "resp") : (className = "post");
+              elementToAppendPostArea = document.getElementById(
+                "divuserblog_" + id
+              );
+              if (mess instanceof Resp) {
+                var post = mess.post;
+              } else if (mess instanceof Post) {
+                var post = mess;
+              }
+              var ids = resps.length;
+              ids = ids + 1;
+              createPostArea(
+                (r = new Resp(
+                  userThatLogin[0].fields.first_name,
+                  "",
+                  new Date().toLocaleString(),
+                  post,
+                  BASE_PHOTO_DIR + userThatLogin[0].fields.photo,
+                  ids,
+                  "newresp",
+                  respToPk,
+                  respToType,
+                  respToUser,
+                  0,
+                  0
+                )),
+                elementToAppendPostArea
+              );
+              htmlIframeWidthHeight(document.getElementById("blog"));
+              resps.push(r);
+            } else if (
+              button_risposta_post.textContent == "Rispondi" &&
+              isOpen == true
+            ) {
+              msgIsTexareaOpen();
+            }
+          }
+        } else {
+          window.location.href = (BASE_URL + "user/login/blog" + HIDDENFIELD);
+          //window.location.href = XMLHTTPURL_LOGIN;
+        }
+      });
     });
     /*$(button_risposta_post).hover(
       function () {
@@ -650,19 +753,19 @@ class postArea {
 
       var url = URL_NEW_POST + HIDDENFIELD
       mess.body = txts;
-      
+
       $(postarea.postarea).css("box-shadow", "0 0 0 0");
       if (mess.type == "newpost" || mess.type == "newresp") {
-        
+
         if (sendToServer(mess, url) == 0) {
-        isOpen = false;
-        button_risposta_post.setAttribute("disabled", "");
-      postarea.postarea.setAttribute("disabled", "");
+          isOpen = false;
+          button_risposta_post.setAttribute("disabled", "");
+          postarea.postarea.setAttribute("disabled", "");
           button_risposta_post.textContent = postinserito
-      $(button_risposta_post).css("color", "black");
+          $(button_risposta_post).css("color", "black");
+        }
       }
-      } 
-      
+
     });
     switch (mess.type) {
       case "newresp":
@@ -680,7 +783,7 @@ class postArea {
         button_risposta_post.textContent = buttonRispo;
         break;
     }
-    
+
 
     function setButtonAndFormAttribute(type) {
       let buttonID = "but_" + mess.type + "_" + type;
@@ -703,10 +806,10 @@ class postArea {
   }
 
   create() {
-    var width="100%";
+    var width = "100%";
     $(this.postarea).animate({
       width: width,
-    }, 1000); 
+    }, 1000);
     this.postarea.setAttribute("name", "messaggio");
     $(this.postarea).css("border", borderPost);
     return this.postarea;
@@ -736,14 +839,14 @@ function initBlogSGang(url, authorized) {
   var blog;
   url = url.replace(/\/$/, "");
   rooturl = url;
-  var iconRefresh = '<a  href="' + BASE_URL + "booldog?mainurl="+url+ '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
+  var iconRefresh = '<a  href="' + BASE_URL + "booldog?mainurl=" + url + '"  id="a_refresh"><div class="booldog"><span id="spanrefresh" class="badgebooldog"><i class="fa fa-refresh" aria-hidden="true"></i></span></div></a>';
   $(bdiv).append(iconRefresh);
   var xhttp2 = new XMLHttpRequest();
   var requestPostKey;
   var blog;
   HIDDENFIELD = "?mainurl=" + url;
   XMLHTTPURL_LOGIN = BASE_URL + "user/login/blog?mainurl=" + url;
-  XMLHTTPURL_ADMIN = XMLHTTPURL_ADMIN +"?mainurl="+url;
+  XMLHTTPURL_ADMIN = XMLHTTPURL_ADMIN + "?mainurl=" + url;
   XMLHTTPURL_LOGOUT = BASE_URL + "user/logout/blog?mainurl=" + url;
   XMLHTTPURL_REGISTER = BASE_URL + "user/register/bloguser" + HIDDENFIELD;
   HTTPURL_CHANGEPASSWORD = BASE_URL + "user/login/change_password" + HIDDENFIELD;
@@ -874,7 +977,9 @@ function getComment() {
                   comments_json[i].fields.body,
                   getDateFromDjangoDate(comments_json[i].fields.publish),
                   BASE_PHOTO_DIR + profiles_json[z].fields.photo,
-                  comments_json[i].pk
+                  comments_json[i].pk,
+                  comments_json[i].fields.postok,
+                  comments_json[i].fields.postno,
                 )
               );
               createPostArea(mess[indexX]);
@@ -908,7 +1013,9 @@ function getComment() {
                   "resp",
                   resps_json[y].fields.idRespTo,
                   resps_json[y].fields.postType,
-                  respToUser
+                  respToUser,
+                  resps_json[i].fields.postok,
+                  resps_json[i].fields.postno,
                 )
               );
               mess[indexX].risposte.push(resps.at(-1));
@@ -966,7 +1073,7 @@ function htmlIframeWidthHeight(elem) {
     {
       height: height,
       base: width,
-      mainurl:rooturl,
+      mainurl: rooturl,
     },
     "*"
   );
@@ -1016,6 +1123,8 @@ function createNewComment(mess) {
   mess.titled = "nuovo";
   newPostId = newPostId + 1;
   mess.type = "newpost";
+  mess.postno = 0;
+  mess.postok = 0;
   mess.publish = getDateFromDjangoDate();
   mess.author = userThatLogin[0].fields.first_name;
   userThatLogin[0].fields.photo == "undefined"
@@ -1109,10 +1218,10 @@ function getDateFromDjangoDate(data = "") {
 
   function getMsg() {
     if (isNow()) {
-       data = datanow + " "+ hour;
+      data = datanow + " " + hour;
     } else {
       day = day.replace("0", "");
-      data = day + " " + month + " " + year +  " "+alle+   hour;
+      data = day + " " + month + " " + year + " " + alle + hour;
     }
     return data;
   }

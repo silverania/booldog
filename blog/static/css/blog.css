@@ -448,8 +448,7 @@ span[id^="post_title"] {
     margin: 0 auto;
     width: 30% !important;
   }
-form[id^=form]{
-}
+
   .fa-comment-dots,
   .fa-house,
   .fa-arrow-left
@@ -458,7 +457,8 @@ form[id^=form]{
   }
   [id^=up_]{
     font-size:large;
-    color:rgb(10, 237, 218);
+    opacity: 0.5;
+    color:green;
   }
   [id^=up_]:hover{
   color:mediumspringgreen;
@@ -466,20 +466,23 @@ form[id^=form]{
    [id^=down_]:hover{
     color:mediumspringgreen;
   }
-  div[id^=numberup]{
-    font-family: bungee;
-    font-size: small;
-    /* display: inline-block; */
+  [id^=numberup]{
+    /* font-family: bungee; */
+    font-size: smaller;
+    display: inline-block;
   }
-  div[id^=numberdown]{
-    font-family: bungee;
-    font-size: small;
+  [id^=numberdown]{
+    /* font-family: bungee; */
+    color: antiquewhite;
+    opacity: 0.7;
+    font-size: smaller;
   }
   
   [id^=down_]{
     font-size:large;
     /* margin-left:10%; */
-    color:rgb(73, 199, 216);
+    opacity: 0.5;
+    color:lightcoral;
   }
   
 textarea {

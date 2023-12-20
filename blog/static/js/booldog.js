@@ -18,14 +18,14 @@ let f = function () {
 
     if (height == "") {
         let mainurl = location.href.toString();
-        iframe.sandbox = 'allow-scripts allow-same-origin allow-forms allow-modals';
         iframe.setAttribute("id", "booldogFrame");
         iframe.setAttribute("scrolling", "no");
         iframe.setAttribute("data-auth", "");
         iframe.setAttribute("style", "display:block;margin:100px auto;width:100%;");
-        iframe.setAttribute("credentialles","false");
-        iframe.setAttribute("SameSite","None");
-        iframe.setAttribute('src',  rootbooldog+'/booldog?mainurl=' + mainurl);
+        //iframe.setAttribute("credentialles","false");
+        //iframe.setAttribute("SameSite","None");
+        iframe.setAttribute('src', rootbooldog + '/booldog?mainurl=' + mainurl);
+        iframe.id = "iframe_booldog";
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(iframe);
     }
