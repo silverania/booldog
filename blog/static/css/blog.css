@@ -7,13 +7,10 @@
   src: url("../Fonts/Bungee_Spice/BungeeSpice-Regular.ttf");
 }
 
+
 @font-face {
-  font-family: "Open-Sans-Bold";
-  src: url("../Fonts/Open-Sans-Bold.ttf");
-}
-@font-face {
-  font-family: "Open-Sans";
-  src: url("../Fonts/OpenSans-VariableFont_wdth,wght.ttf");
+  font-family: "Permanent";
+  src: url("../Fonts/Permanent/regular.ttf");
 }
 @font-face {
   font-family: "WorkSans-Regular";
@@ -47,6 +44,7 @@ span#spanrefresh.badgebooldog {
   margin: 0 auto;
 }
 
+
 #dataSetup {
   width: 100%;
   height: auto;
@@ -56,10 +54,18 @@ span#spanrefresh.badgebooldog {
 a.badge.badge-info > span:hover {
   cursor: pointer;
 }
-
+#fbshare {
+  background-color:white;
+  
+  width:auto;
+}
 #blogBackHome:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+ [id^="span_inuser"] {
+  /* width: 30px !important; */
+    font-family:Permanent;
 }
 #blogBackHome {
   display: inline;
@@ -210,9 +216,9 @@ a#a_download {
 }
 
 [id^="span_in"] {
-  font-family: "Montserrat-Regular";
+  /* font-family: "Montserrat-Regular"; */
   font-weight: 900;
-  color: orange;
+  /* color: orange; */
 }
 
 [id^="spanBar"] {
@@ -223,14 +229,13 @@ a#a_download {
 [id^="bh5_span"] {
   width: 100% !important;
   min-width: 100% !important;
-  font-size: 1rem;
   color: grey;
 }
 
 [id^="but_"] {
-  font-family: "Open-Sans";
-  /* width: 35%; */
+  /* font-family: Montserrat-Regular; */
   height: auto;
+  line-height: normal;
   border: 1px solid grey;
   border-radius: 0;
   margin: 15px auto;
@@ -239,10 +244,7 @@ a#a_download {
   /* box-shadow: -4px -4px 10px #719ece; */
 }
 
-[id^="img_user"] {
-  width: 30px !important;
-  height: 30px !important;
-}
+
 
 #H1Welcome {
   display: none;
@@ -422,11 +424,7 @@ span[id^="post_title"] {
   font-size: 0.7rem !important;
 }
 
-[id^="bh5_span"] {
-  width: 100%;
-  height: auto;
-  font-size: 0.6rem !important;
-}
+
 .modal-content {
   width: 33% !important; /* Could be more or less, depending on screen size */
 }
@@ -441,6 +439,10 @@ span[id^="post_title"] {
   font-size: 1rem;
   /* width: 85%; */
   }
+  [id^="img_user"] {
+  width: 40px !important;
+  height: auto;
+}
 }
 
 @media screen and (min-width: 1280px) {
@@ -448,6 +450,18 @@ span[id^="post_title"] {
     margin: 0 auto;
     width: 30% !important;
   }
+  [id^="bh5_span"] {
+  font-size:1rem;
+  color: grey;
+}
+  [id^="img_user"] {
+  width: 30px !important;
+  height: auto;
+}
+  [id^="span_inuser"] {
+  /* width: 30px !important; */
+  font-size: 1rem;
+}
 
   .fa-comment-dots,
   .fa-house,
@@ -551,6 +565,10 @@ textarea {
   .modal-content {
     width: 100% !important; /* Could be more or less, depending on screen size */
   }
+  [id^="img_user"] {
+  /* width: 30px !important; */
+  height: 20px !important;
+}
 }
 
 @media screen and (max-width: 1024px) {
@@ -561,6 +579,10 @@ textarea {
     font-size: 0.9rem;
     /* border: 1px solid; */
   }
+  [id^="img_user"] {
+  width: 30px !important;
+  height: auto;
+}
   .fa-comment-dots,
   .fa-house,
   .fa-arrow-left {

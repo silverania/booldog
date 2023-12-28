@@ -22,6 +22,7 @@ var postarea;
 var el;
 var mess;
 var padre;
+ var colsandrows ;
 var lastUpdate;
 var postAuthor;
 var userAuth;
@@ -81,6 +82,11 @@ var inputSubmit = document.createElement("INPUT");
 var logo =
   //'<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
   '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog3.png">'
+colsandrows =
+      '<div id="divshare" class="row justify-content-end">' +
+      '<div class="col-1">' +      
+      '<div class="fb-share-button offset-9 col-1" style="background-color:white;"data-href="https://localtutorial.com:9000/booldog" data-layout="icon_link" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>' +
+      '</div>'+'</div>';
 $(bIcon).append(logo);
 var rooturl;
 var authorized;
@@ -89,6 +95,9 @@ var authorized;
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
   authorized = userAdmin;
+   var divshare = document.createElement("div");
+   divshare.innerHTML = colsandrows;
+    var share = divshare.childNodes[0];
   if (userAdmin.toString() === "True") {
     bForm.setAttribute("action", BASE_URL + "post/getpost");
     bForm.setAttribute("class", "form_comment");
@@ -214,6 +223,7 @@ function createSectionDivSpan(userAdmin, _userThatLogin) {
     bdiv.appendChild(divCommentIcon);
     bdiv.appendChild(divExitLogin);
     divCommentIcon.appendChild(bIcon);
+    bIcon.appendChild(divshare);
     //divUserBlog.appendChild(bSpan)
     //bSpan.appendChild(bSpanChild)
     bSection.appendChild(bForm);
@@ -386,7 +396,8 @@ class postArea {
       var tagUserImg = document.createElement("IMG");
       divContainerHead.setAttribute("id", "d_head_blog_" + id);
       divContainerHead.setAttribute("style", "width:100%");
-      tagUserImg.setAttribute("style", "border-radius:5%");
+      tagUserImg.setAttribute("style", "border-radius:100%");
+      tagUserImg.setAttribute("class", "img border img-fluid");
       tagUserImg.setAttribute("src", mess.photo);
       divUserBlog.appendChild(divContainerHead);
       divContainerHead.appendChild(tagUserImg);
@@ -426,8 +437,8 @@ class postArea {
         case "resp":
           this.appendPostArea(mess, divUserBlog, elementToAppendPostArea);
           divUserBlog.setAttribute("id", "divuserblog_" + id);
-          spanUserBar.textContent = " | ";
-          spanUserBar_2.textContent = " | " + mess.publish;
+          spanUserBar.textContent = " ";
+          spanUserBar_2.textContent = " " + mess.publish;
           spanInUserName.textContent =
             mess.author[0].toUpperCase() + mess.author.slice("1");
           spanInUserName.appendChild(spanUserBar);
@@ -494,7 +505,8 @@ class postArea {
   createButtonRispostaPost(mess, postarea) {
     var r;
     var id;
-    var colsandrows = '<div id="colsandrows_' + mess.pk + "\"" + 'class="row justify-content-start">' +
+    colsandrows =
+     '<div id="colsandrows_' + mess.pk + "\"" + 'class="row justify-content-start">' +
       '<div id="colup_' + mess.pk + "\"" + 'class="col-1">' +
       '<span id="up_' + mess.pk + "\"" + 'class="position-relative top-100  fa-solid fa-thumbs-up"></span>' +
       '<span id="numberup_' + mess.pk + "\"" +
@@ -504,13 +516,10 @@ class postArea {
       '<span  id="down_' + mess.pk + "\"" + ' class="position-relative top-100 fa-solid fa-thumbs-down"></span>' +
       '<span  id="numberdown_' + mess.pk + "\"" + 'class="position-relative top-0 badge bg-danger rounded-pill bg-danger">' + mess.postno + ' </span> ' +
       '</div>' +
-      '</div >';
+      '</div>';
     var divgrid = document.createElement("div");
     divgrid.innerHTML = colsandrows;
     var result = divgrid.childNodes[0];
-
-
-
     mess.type == "resp" || mess.type == "newresp"
       ? (id = mess.post.pk + "_" + mess.pk)
       : (id = mess.pk);
@@ -539,11 +548,19 @@ class postArea {
     inputCommentLike.insertBefore(iconCommentLikeUp, inputCommentLike.children[1]);
     inputCommentLike.insertBefore(iconCommentLikeDown, inputCommentLike.children[2]);
     inputCommentLike.insertBefore(divCommentLikeDown, inputCommentLike.children[3]);*/
-
-    form_risposta_post.appendChild(result);
+  
+     form_risposta_post.appendChild(result);  
     form_risposta_post.appendChild(button_risposta_post);
     var el1 = result.childNodes[0]
     var el2 = result.childNodes[1]
+    
+   
+    window.addEventListener("message", function (event) {
+      if (event.origin.includes(rooturl)) {
+        alert("messaggio ricevuto !");
+      }
+    });
+    
     $(document).ready(function () {
       var childel1 = document.getElementById('numberup_' + mess.pk)
       var childel2 = document.getElementById('numberdown_' + mess.pk)
@@ -598,8 +615,8 @@ class postArea {
             console.log("sintaxERROR");
           }*/
           let s = {
-            postype:mess.type,
-            postid:mess.pk,
+            postype: mess.type,
+            postid: mess.pk,
             postok: mess.postok,
             postno: mess.postno,
             csrfmiddlewaretoken: booldogtoken,
@@ -621,8 +638,8 @@ class postArea {
               })
               .then(function (json) {
                 //response=JSON.stringify(json)
-               let res = json.response;
-                console.log("risposta del server al voto:"+res)
+                let res = json.response;
+                console.log("risposta del server al voto:" + res)
               }).catch(err => {
                 // Do something for an error here
                 console.log("Error Reading data " + err);
@@ -639,7 +656,7 @@ class postArea {
           { transform: "rotate(360deg) scale(0)" },
         ];
         const iconTiming = {
-          duration:500,
+          duration: 500,
           iterations: 1,
         };
 
@@ -789,7 +806,7 @@ class postArea {
       let buttonID = "but_" + mess.type + "_" + type;
       button_risposta_post.setAttribute("type", "button");
       button_risposta_post.setAttribute("id", buttonID);
-      button_risposta_post.setAttribute("class", "btn btn-light");
+      button_risposta_post.setAttribute("class", "button btn-sm btn-light");
       if (mess.body === ".....")
         button_risposta_post.setAttribute("disabled", "true");
       form_risposta_post.setAttribute("id", "form_" + mess.type + "_" + id);
@@ -1054,7 +1071,7 @@ function getComment() {
             ".....",
             "",
             BASE_URL + "static/images/user-secret-solid.gif",
-            "0"
+            "0","100","0"
           )
         );
         createPostArea(mess[0]);
@@ -1071,7 +1088,7 @@ function htmlIframeWidthHeight(elem) {
   width = elem.scrollWidth;
   window.top.postMessage(
     {
-      height: height,
+      height: height+100,
       base: width,
       mainurl: rooturl,
     },

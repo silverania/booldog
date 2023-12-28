@@ -1,6 +1,6 @@
 const iframe = document.createElement("IFRAME");
 let f = function () {
-    var rootbooldog = "https://breakstore.it";
+    var rootbooldog = "https://localtutorial.com:9000";
     var height = "";
     var width = "";
     window.addEventListener("message", function (event) {
@@ -24,7 +24,7 @@ let f = function () {
         iframe.setAttribute("data-auth", "");
         iframe.setAttribute("style", "display:block;margin:100px auto;width:100%;");
         iframe.setAttribute("credentialles","false");
-        iframe.setAttribute("SameSite","None");
+        // iframe.setAttribute("SameSite","None");  Non posso prendere cookies dal iframe così 
         iframe.setAttribute('src',  rootbooldog+'/booldog?mainurl=' + mainurl);
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(iframe);

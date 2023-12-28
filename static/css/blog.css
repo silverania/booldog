@@ -3,8 +3,8 @@
   src: url("../Fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
 }
 @font-face {
-  font-family: "bungie";
-  src: url("../Fonts/Bungee_Spice/bungieSpice-Regular.ttf");
+  font-family: "bungee";
+  src: url("../Fonts/Bungee_Spice/BungeeSpice-Regular.ttf");
 }
 
 @font-face {
@@ -47,6 +47,7 @@ span#spanrefresh.badgebooldog {
   margin: 0 auto;
 }
 
+
 #dataSetup {
   width: 100%;
   height: auto;
@@ -56,7 +57,11 @@ span#spanrefresh.badgebooldog {
 a.badge.badge-info > span:hover {
   cursor: pointer;
 }
-
+#fbshare {
+  background-color:white;
+  
+  width:auto;
+}
 #blogBackHome:hover {
   opacity: 0.5;
   cursor: pointer;
@@ -141,7 +146,7 @@ div.modal-content {
   align-items: start;
 }
 #div_comment_icon {
-  width: fit-content;
+  width: moz-fit-content;
 }
 .fa-house {
   margin-right: 1%;
@@ -451,25 +456,40 @@ span[id^="post_title"] {
 
   .fa-comment-dots,
   .fa-house,
-  .fa-arrow-left {
+  .fa-arrow-left
+   {
     font-size: 3rem;
   }
   [id^=up_]{
-    padding:0px;
-    font-size:x-large;
-    color:rgb(10, 237, 218);
+    font-size:large;
+    opacity: 0.5;
+    color:green;
   }
-  div[id^=numberup]{
-    font-family: bungie;
+  [id^=up_]:hover{
+  color:mediumspringgreen;
   }
+   [id^=down_]:hover{
+    color:mediumspringgreen;
+  }
+  [id^=numberup]{
+    /* font-family: bungee; */
+    font-size: smaller;
+    display: inline-block;
+  }
+  [id^=numberdown]{
+    /* font-family: bungee; */
+    color: antiquewhite;
+    opacity: 0.7;
+    font-size: smaller;
+  }
+  
   [id^=down_]{
-    padding:5px;
-    font-size:x-large;
-    color:rgb(73, 199, 216);
+    font-size:large;
+    /* margin-left:10%; */
+    opacity: 0.5;
+    color:lightcoral;
   }
-  [id^=up_]:hover,[id^=down_]:hover{
-  font-size:40px;
-  }
+  
 textarea {
   font-size: 1rem;
   /* width: 85%; */

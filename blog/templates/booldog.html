@@ -1,57 +1,85 @@
-{% load static %}
-{% load i18n %}
+{% load static %} {% load i18n %}
 <html lang="en">
-    <head>
-        <title>booldog</title>
-        <meta name="author" content="silverania">
-         
-        <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}">
-        <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-        <script src="{% static 'js/all.min.js' %}"></script>
-        <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
-        <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <script src="{% static 'js/blog.js' %}" id="s_blog"></script>
-    </head>
-    <body>
-      {% csrf_token %}
-        <script>
-    var spanBlogEntra = document.createElement("SPAN");
-    var currentUrl = "{{currentUrl}}";
-    var authorized = "{{ authorized }}";
-    var buttonRispo = "{% trans "Reply" %}"
-    var signup="{% trans "Signup" %}"
-    window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
-    var ablogescitext = "{% trans 'Logout' %}";
-    var bbuttontext = "{% trans "Comment" %}";
-    var ablogcambiapasswordtext = "{% trans 'Edit' %}";
-    var aBlogAdminText = "{% trans 'settings' %}";
-    var spanusernametext = "{% trans 'answers to ' %}";
-    var _spanusernametext = "{% trans 'alle ' %}";
-    var postinserito = "{% trans "Entered" %}";
-    var postinviato = "{% trans "Sent" %}";
-    var datanow = "{% trans "today at" %}";
-    var alle= "{% trans "alle" %}";
-    spanBlogEntra.textContent = "{% trans 'Login' %}";
-        </script>
-        <script defer>
-    var thisurl = location.href;
-    window.addEventListener("message", function (event) {
-      if (!(currentUrl.includes(event.origin))) {
-        console.log("messaggio ignorato");
-        return -1;
-        ("mancata autorizzazione!")
-      }
-      else {
-        /* PIGLI I MESSAGG RU GESUCRIST RU CLIENT
+  <head>
+    <title>booldog</title>
+    <meta name="author" content="silverania" />
+    <link
+      rel="stylesheet"
+      href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
+    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+    <script src="{% static 'js/blog.js' %}" id="s_blog"></script>
+    <meta property="og:url" content="https://localtutorial.com:9000/booldog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="booldog" />
+    <meta property="og:description" content="Host comments on your website !" />
+    <meta property="og:image" content="https://localtutorial.com:9000/media/media/booldog_facebook.png" />
+    <meta property="og:image:secure_url" content="https://localtutorial.com:9000/media/media/booldog_facebook.png"  />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="A shiny red apple with a bite taken out" />
+  </head>
+  <body>
+    {% csrf_token %}
+    <script>
+      var spanBlogEntra = document.createElement("SPAN");
+      var currentUrl = "{{currentUrl}}";
+      var authorized = "{{ authorized }}";
+      var buttonRispo = "{% trans "Reply" %}";
+      var signup="{% trans "Signup" %}";
+      window.buttonLinkComment.textContent = "{% trans 'Comment' %}";
+      var ablogescitext = "{% trans 'Logout' %}";
+      var bbuttontext = "{% trans "Comment" %}";
+      var ablogcambiapasswordtext = "{% trans 'Edit' %}";
+      var aBlogAdminText = "{% trans 'settings' %}";
+      var spanusernametext = "{% trans 'answers to ' %}";
+      var _spanusernametext = "{% trans 'alle ' %}";
+      var postinserito = "{% trans "Entered" %}";
+      var postinviato = "{% trans "Sent" %}";
+      var datanow = "{% trans "today at" %}";
+      var alle= "{% trans "alle" %}";
+      spanBlogEntra.textContent = "{% trans 'Login' %}";
+    </script>
+    <script defer>
+      var thisurl = location.href;
+      window.addEventListener("message", function (event) {
+        if (!currentUrl.includes(event.origin)) {
+          console.log("messaggio ignorato");
+          return -1;
+          ("mancata autorizzazione!");
+        } else {
+          /* PIGLI I MESSAGG RU GESUCRIST RU CLIENT
          user = event.data.user;
          password=event.data.password;
          */
-        console.log("link autorizzato a invio messaggi !")
-      }
-    });
-    initBlogSGang(currentUrl, authorized);
-        </script>
-    </body>
+          console.log("link autorizzato a invio messaggi !");
+        }
+      });
+      initBlogSGang(currentUrl, authorized);
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=810115799892623"
+      nonce="hZzrIis3"
+    >
+    <div id="fb-root"></div>
+       (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+     <div id="divshare" class="row justify-content-end">
+      <div class="col-1"></div>
+      <div class="fb-share-button offset-9 col-1" style="background-color:white;"data-href="https://localtutorial.com:9000/booldog" data-layout="icon_link" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+      </div></div>
+  </body>
 </html>
