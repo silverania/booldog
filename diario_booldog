@@ -7,3 +7,6 @@ RENDERE IL COLORE DEL TTASTO REGISTER più visibile prima del click
 sto a riga 492 postok ( variabilie int)
 creare il token per post voto 
 provare con il breakstore.it il debug buton fb, 
+-fare bordi di collegamento dei post  ( evidenzia solo bordo sinistra ! )
+-FARE UN APP CHE CONTI I CLICK SUGLI RELEMETI IN UNA PAGINA PER COMPARARE IL PIÙ ÀCLICCKKATO ECC...
+- la request post checkuser non va ( rivedere fetch)

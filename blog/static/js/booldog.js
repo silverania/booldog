@@ -24,7 +24,6 @@ let f = function () {
         iframe.setAttribute("scrolling", "no");
         iframe.setAttribute("data-auth", "");
         iframe.setAttribute("style", "display:block;margin:100px auto;width:100%;");
-        iframe.credentialless="true";
         iframe.setAttribute("SameSite","None");
         iframe.setAttribute('src', rootbooldog + '/booldog?mainurl=' + mainurl);
         iframe.id = "iframe_booldog";

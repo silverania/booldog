@@ -22,7 +22,7 @@ var postarea;
 var el;
 var mess;
 var padre;
- var colsandrows ;
+var colsandrows;
 var lastUpdate;
 var postAuthor;
 var userAuth;
@@ -83,10 +83,10 @@ var logo =
   //'<div class="booldog" style="border:1px solid red;height:24px;width:60%;border-bottom: none;border-right: none;border-top:none"><span style="margin-left:5px;display: inline-block;height:16px;opacity:0.5"class="spanbooldog" > booldog</span ></div > ';
   '<img class="img img-fluid" style="display:block;margin:0 auto;" src="/static/images/booldog3.png">'
 colsandrows =
-      '<div id="divshare" class="row justify-content-end">' +
-      '<div class="col-1">' +      
-      '<div class="fb-share-button offset-9 col-1" style="background-color:white;"data-href="https://localtutorial.com:9000/booldog" data-layout="icon_link" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>' +
-      '</div>'+'</div>';
+  '<div id="divshare" class="row justify-content-end">' +
+  '<div class="col-1">' +
+  '<div class="fb-share-button offset-9 col-1" style="background-color:white;"data-href="https://localtutorial.com:9000/booldog" data-layout="icon_link" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>' +
+  '</div>' + '</div>';
 $(bIcon).append(logo);
 var rooturl;
 var authorized;
@@ -95,9 +95,9 @@ var authorized;
 function createSectionDivSpan(userAdmin, _userThatLogin) {
   userThatLogin = _userThatLogin;
   authorized = userAdmin;
-   var divshare = document.createElement("div");
-   divshare.innerHTML = colsandrows;
-    var share = divshare.childNodes[0];
+  var divshare = document.createElement("div");
+  divshare.innerHTML = colsandrows;
+  var share = divshare.childNodes[0];
   if (userAdmin.toString() === "True") {
     bForm.setAttribute("action", BASE_URL + "post/getpost");
     bForm.setAttribute("class", "form_comment");
@@ -506,7 +506,7 @@ class postArea {
     var r;
     var id;
     colsandrows =
-     '<div id="colsandrows_' + mess.pk + "\"" + 'class="row justify-content-start">' +
+      '<div id="colsandrows_' + mess.pk + "\"" + 'class="row justify-content-start">' +
       '<div id="colup_' + mess.pk + "\"" + 'class="col-1">' +
       '<span id="up_' + mess.pk + "\"" + 'class="position-relative top-100  fa-solid fa-thumbs-up"></span>' +
       '<span id="numberup_' + mess.pk + "\"" +
@@ -548,19 +548,19 @@ class postArea {
     inputCommentLike.insertBefore(iconCommentLikeUp, inputCommentLike.children[1]);
     inputCommentLike.insertBefore(iconCommentLikeDown, inputCommentLike.children[2]);
     inputCommentLike.insertBefore(divCommentLikeDown, inputCommentLike.children[3]);*/
-  
-     form_risposta_post.appendChild(result);  
+
+    form_risposta_post.appendChild(result);
     form_risposta_post.appendChild(button_risposta_post);
     var el1 = result.childNodes[0]
     var el2 = result.childNodes[1]
-    
-   
+
+
     window.addEventListener("message", function (event) {
       if (event.origin.includes(rooturl)) {
         alert("messaggio ricevuto !");
       }
     });
-    
+
     $(document).ready(function () {
       var childel1 = document.getElementById('numberup_' + mess.pk)
       var childel2 = document.getElementById('numberdown_' + mess.pk)
@@ -873,40 +873,21 @@ function initBlogSGang(url, authorized) {
     if (blog !== null) {
       document.getElementById("s_blog").remove();
     }
-    (function () {
-      let s = {
-        mainurl: url,
-        authorized: authorized,
-      };
-      const request = {
+    fetch (XMLHTTPURL_GETUSER, {
+      body: JSON.stringify({ mainurl: url,
+        authorized: authorized}),
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json / charset=UTF-8",
         },
-        body: JSON.stringify(s),
-      };
-      try {
-        fetch(XMLHTTPURL_GETUSER, request)
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (json) {
-            //response=JSON.stringify(json)
-            authorized = json.authorized;
-            authenticated = json.authenticated;
-            if (authorized.toString() === "true") {
-              if (authenticated !== "false")
-                authenticated = JSON.parse(json.authenticated);
-            }
-            return createSectionDivSpan(authorized, authenticated);
-          });
-      }
-      catch (SyntaxError) {
-        console.log("sintaxERROR");
-      }
-    })();
+        
+      }).then((response) => response.json())
+  .then((json) => console.log(json)) ;
+      
+         
   }
+ 
+
 
   function getToken() {
     xhttp2.open("GET", XMLHTTPURL_GETUSER, true);
@@ -928,7 +909,7 @@ function initBlogSGang(url, authorized) {
   }
 
   sendTokenPost();
-
+ return createSectionDivSpan(authorized, authenticated);
 }
 
 function getComment() {
@@ -1071,7 +1052,7 @@ function getComment() {
             ".....",
             "",
             BASE_URL + "static/images/user-secret-solid.gif",
-            "0","100","0"
+            "0", "100", "0"
           )
         );
         createPostArea(mess[0]);
@@ -1088,7 +1069,7 @@ function htmlIframeWidthHeight(elem) {
   width = elem.scrollWidth;
   window.top.postMessage(
     {
-      height: height+100,
+      height: height + 100,
       base: width,
       mainurl: rooturl,
     },

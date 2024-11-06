@@ -44,7 +44,6 @@ def getUser(user):
 def checkUser(request):
     if request.method == "POST":
         login = getUser(request.user) if request.user.is_authenticated else "false"
-        myuser = object()
         authorized = False
         list_json_user_data = json.loads(request.body)
         for key, value in list_json_user_data.items():
@@ -52,21 +51,11 @@ def checkUser(request):
                 currentUrl = value
                 mydomain = urlsplit(currentUrl, allow_fragments=True)
                 mydomain = mydomain.hostname
-            if "authorized" in key:
-                try:
-                    if authorized is True or Site.objects.filter(
-                        title__icontains=mydomain
-                    ):
-                        request.session["authorized"] = True
-                        authorized = "True"
-                        login = str(login)
-                        return JsonResponse(
-                            {"authorized": authorized, "authenticated": login}
-                        )
-                    else:
-                        return HttpResponse("you are not authorized to use Booldog !")
-                except ObjectDoesNotExist:
-                    return render(request, "wrongdati.html")
+                if Site.objects.filter(title__icontains=mydomain):
+                    login = str(login)
+                    return JsonResponse({"authorized": authorized, "authenticated": login})
+                else:
+                    return HttpResponse("you are not authorized to use Booldog !")
 
     """
     def get(self, request):

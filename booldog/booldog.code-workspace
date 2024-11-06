@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../../../opt/dev/booldog"
+		},
+		{
+			"path": "../../tutorial"
+		}
+	],
+	"settings": {
+		"pythonIndent.keepHangingBracketOnLine": true,
+		"pythonIndent.trimLinesWithOnlyWhitespace": false,
+		"pythonIndent.useTabOnHangingIndent": true
+	}
+}
